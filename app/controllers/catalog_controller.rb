@@ -3,25 +3,32 @@ class CatalogController < ApplicationController
 
   include Blacklight::Catalog
   include Blacklight::Marc::Catalog
+  # include Harvard::LibraryCloud
 
 
   configure_blacklight do |config|
     ## Class for sending and receiving requests from a search index
     # config.repository_class = Blacklight::Solr::Repository
+    config.repository_class = Harvard::LibraryCloud::Repository
     #
     ## Class for converting Blacklight's url parameters to into request parameters for the search index
     # config.search_builder_class = ::SearchBuilder
     #
     ## Model that maps search index responses to the blacklight response model
-    # config.response_model = Blacklight::Solr::Response
+    config.response_model = Harvard::LibraryCloud::Response
 
     ## Default parameters to send to solr for all search-like requests. See also SearchBuilder#processed_parameters
     config.default_solr_params = {
       rows: 10
     }
 
+    # JL : Remove bookmarks
+    config.index.document_actions.delete(:bookmark)
+    config.show.document_actions.delete(:bookmark)
+    config.navbar.partials.delete(:bookmark)
+
     # solr path which will be added to solr base url before the other solr params.
-    #config.solr_path = 'select'
+    #config.solr_path = 'items'
 
     # items to show per page, each number in the array represent another option to choose from.
     #config.per_page = [10,20,50,100]
