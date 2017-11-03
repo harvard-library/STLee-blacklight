@@ -38,11 +38,11 @@ module Harvard::LibraryCloud
         key = blacklight_config.http_method == :post ? :data : :params
         res = connection.send_and_receive(path, {key=>solr_params.to_hash, method: blacklight_config.http_method})
 
-        solr_response = blacklight_config.response_model.new(res, solr_params, document_model: blacklight_config.document_model, blacklight_config: blacklight_config)
+        api_response = blacklight_config.response_model.new(res, solr_params, document_model: blacklight_config.document_model, blacklight_config: blacklight_config)
 
         Blacklight.logger.debug("Solr query: #{blacklight_config.http_method} #{path} #{solr_params.to_hash.inspect}")
-        Blacklight.logger.debug("Solr response: #{solr_response.inspect}") if defined?(::BLACKLIGHT_VERBOSE_LOGGING) and ::BLACKLIGHT_VERBOSE_LOGGING
-        solr_response
+        Blacklight.logger.debug("Solr response: #{api_response.inspect}") if defined?(::BLACKLIGHT_VERBOSE_LOGGING) and ::BLACKLIGHT_VERBOSE_LOGGING
+        api_response
       end
 
       rescue Errno::ECONNREFUSED => e
@@ -54,7 +54,6 @@ module Harvard::LibraryCloud
     protected
 
     def build_connection
-      # RSolr.connect(connection_config.merge(adapter: connection_config[:http_adapter]))
       Harvard::LibraryCloud::API.new
     end
 
