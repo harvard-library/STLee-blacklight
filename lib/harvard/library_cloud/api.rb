@@ -31,7 +31,6 @@ module Harvard::LibraryCloud
     def build_request path, opts
       raise "path must be a string or symbol, not #{path.inspect}" unless [String,Symbol].include?(path.class)
       path = path.to_s
-      # path = 'items.dc.json' #TODO: JL: Set this properly
       opts[:method] ||= :get
       raise "The :data option can only be used if :method => :post" if opts[:method] != :post and opts[:data]
       # opts[:params] = params_with_wt(opts[:params])
@@ -66,6 +65,8 @@ module Harvard::LibraryCloud
     def params_to_lc params
       results = {}
       results[:q] = params[:q] if params[:q]
+      results[:start] = params[:start] if params[:start]
+      results[:limit] = params[:rows] if params[:rows]
       results
     end
 
