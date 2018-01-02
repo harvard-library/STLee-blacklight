@@ -2,6 +2,9 @@ module Harvard::LibraryCloud
 
   class Response < Blacklight::Solr::Response
 
+    # require_dependency 'blacklight/solr/response/facets'
+    include Harvard::LibraryCloud::Facets
+
     # def initialize(data, request_params, options = {})
     #   # super(data, request_params, options)
     #   self
@@ -13,7 +16,7 @@ module Harvard::LibraryCloud
 
     # short cut to response['numFound']
     def total
-      self[:pagination][:numFound].to_s.to_i
+        self[:pagination][:numFound].to_s.to_i
     end
 
     def start

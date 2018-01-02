@@ -67,6 +67,8 @@ module Harvard::LibraryCloud
       results[:q] = params[:q] if params[:q]
       results[:start] = params[:start] if params[:start]
       results[:limit] = params[:rows] if params[:rows]
+      results[:facets] = params['facet.field'].join(",") if params['facet.field']
+
       results
     end
 
