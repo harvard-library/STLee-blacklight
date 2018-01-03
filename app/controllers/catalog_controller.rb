@@ -12,7 +12,7 @@ class CatalogController < ApplicationController
     config.repository_class = Harvard::LibraryCloud::Repository
     #
     ## Class for converting Blacklight's url parameters to into request parameters for the search index
-    # config.search_builder_class = Harvard::LibraryCloud::SearchBuilder
+    config.search_builder_class = Harvard::LibraryCloud::SearchBuilder
     #
     ## Model that maps search index responses to the blacklight response model
     config.response_model = Harvard::LibraryCloud::Response
@@ -95,8 +95,8 @@ class CatalogController < ApplicationController
     # }
 
     # JL
-    config.add_facet_field 'genre', label: 'Genre', limit: 20, single: true
-    config.add_facet_field 'subject', label: 'Subject', limit: 20, single: true
+    config.add_facet_field 'genre', label: 'Genre', single: true
+    config.add_facet_field 'subject', label: 'Subject',  single: true
 
 
 
@@ -176,25 +176,25 @@ class CatalogController < ApplicationController
     #   }
     # end
 
-    config.add_search_field('author') do |field|
-      field.solr_parameters = { :'spellcheck.dictionary' => 'author' }
-      field.solr_local_parameters = {
-        qf: '$author_qf',
-        pf: '$author_pf'
-      }
-    end
-
-    # Specifying a :qt only to show it's possible, and so our internal automated
-    # tests can test it. In this case it's the same as
-    # config[:default_solr_parameters][:qt], so isn't actually neccesary.
-    config.add_search_field('subject') do |field|
-      field.solr_parameters = { :'spellcheck.dictionary' => 'subject' }
-      field.qt = 'search'
-      field.solr_local_parameters = {
-        qf: '$subject_qf',
-        pf: '$subject_pf'
-      }
-    end
+    # config.add_search_field('author') do |field|
+    #   field.solr_parameters = { :'spellcheck.dictionary' => 'author' }
+    #   field.solr_local_parameters = {
+    #     qf: '$author_qf',
+    #     pf: '$author_pf'
+    #   }
+    # end
+    #
+    # # Specifying a :qt only to show it's possible, and so our internal automated
+    # # tests can test it. In this case it's the same as
+    # # config[:default_solr_parameters][:qt], so isn't actually neccesary.
+    # config.add_search_field('subject') do |field|
+    #   field.solr_parameters = { :'spellcheck.dictionary' => 'subject' }
+    #   field.qt = 'search'
+    #   field.solr_local_parameters = {
+    #     qf: '$subject_qf',
+    #     pf: '$subject_pf'
+    #   }
+    # end
 
     # "sort results by" select (pulldown)
     # label in pulldown is followed by the name of the SOLR field to sort by and

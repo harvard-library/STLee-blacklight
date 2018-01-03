@@ -64,12 +64,15 @@ module Harvard::LibraryCloud
 
     def params_to_lc params
       results = {}
-      results[:q] = params[:q] if params[:q]
+      if params[:search_field] == 'all_fields'
+        results[:q] = params[:q] if params[:q]
+      else
+        results[params[:search_field]] = params[:q] if params[:q]
+      end
       results[:start] = params[:start] if params[:start]
       results[:limit] = params[:rows] if params[:rows]
       results[:facets] = params['facet.field'].join(",") if params['facet.field']
-      a = facet_query_params_to_lc(params[:fq])
-      results.merge!(a)
+      results.merge!(facet_query_params_to_lc(params[:fq]))
       results
     end
 
