@@ -15,8 +15,8 @@ module Harvard::LibraryCloud::Formats
     def mods_to_doc doc
       result = {}
       if !doc.empty?
-        # result[:title] = Array(doc[:titleInfo]).map {|x| x[:title]}.join
         result[:title] = self.extract_title doc
+        result[:title_alternative] = self.extract_alternative_title doc
         result[:format] = 'text'
         result[:identifier] = doc[:recordInfo][:recordIdentifier]['#text']
       end
@@ -26,14 +26,33 @@ module Harvard::LibraryCloud::Formats
 
     def extract_title val
       if val[:titleInfo].kind_of?(Array)
-        result = {}
-        val[:titleInfo].each {|x| result.merge!(x.to_h)}
-        result['title']
+        val[:titleInfo].each do |x|
+          unless x['@type']
+            return x[:title] + subtitle_to_add(x)
+          end
+        end
       else
         val[:titleInfo][:title]
       end
     end
 
+    def extract_alternative_title val
+      if val[:titleInfo].kind_of?(Array)
+        val[:titleInfo].each do |x|
+          if x['@type'] == 'alternative'
+            return x[:title] + subtitle_to_add(x)
+          end
+        end
+      end
+    end
+
+    def subtitle_to_add titleInfo
+      if titleInfo[:subTitle]
+        '; ' + titleInfo[:subTitle]
+      else
+        ''
+      end
+    end
   end
 
 end
