@@ -112,7 +112,7 @@ module Harvard::LibraryCloud::Facets
         f[:facet].each do |v|
           val[f[:facetName]] << v[:term]
           val[f[:facetName]] << v[:count]
-        end
+        end if f[:facet]
       end
       val
     end

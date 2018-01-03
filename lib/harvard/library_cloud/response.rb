@@ -4,6 +4,7 @@ module Harvard::LibraryCloud
 
     # require_dependency 'blacklight/solr/response/facets'
     include Harvard::LibraryCloud::Facets
+    include Harvard::LibraryCloud
 
     # def initialize(data, request_params, options = {})
     #   # super(data, request_params, options)
@@ -11,7 +12,7 @@ module Harvard::LibraryCloud
     # end
 
     def response
-      self[:items][:dc] || {}
+      self[:items][:mods] || {}
     end
 
     # short cut to response['numFound']
@@ -28,7 +29,7 @@ module Harvard::LibraryCloud
     end
 
     def documents
-      @documents ||= (response || []).collect{|doc| document_model.new(doc, self) }
+      @documents ||= (response || []).collect{|doc| document_model.new(Mods.new(doc), self) }
     end
     alias_method :docs, :documents
 

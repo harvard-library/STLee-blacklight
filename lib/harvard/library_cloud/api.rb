@@ -72,6 +72,7 @@ module Harvard::LibraryCloud
       results[:start] = params[:start] if params[:start]
       results[:limit] = params[:rows] if params[:rows]
       results[:facets] = params['facet.field'].join(",") if params['facet.field']
+      results[:recordIdentifier] = params['recordIdentifier'] if params['recordIdentifier']
       results.merge!(facet_query_params_to_lc(params[:fq]))
       results
     end
@@ -81,8 +82,7 @@ module Harvard::LibraryCloud
       fq.each do |x|
         m = /\{!term f=(\S*).*\}(.*)$/.match(x)
         results[m[1] + '_exact'] = m[2]
-      end
-
+      end if fq
       results
     end
 
