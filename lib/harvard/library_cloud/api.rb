@@ -68,6 +68,17 @@ module Harvard::LibraryCloud
       results[:start] = params[:start] if params[:start]
       results[:limit] = params[:rows] if params[:rows]
       results[:facets] = params['facet.field'].join(",") if params['facet.field']
+      a = facet_query_params_to_lc(params[:fq])
+      results.merge!(a)
+      results
+    end
+
+    def facet_query_params_to_lc fq
+      results = {}
+      fq.each do |x|
+        m = /\{!term f=(\S*).*\}(.*)$/.match(x)
+        results[m[1] + '_exact'] = m[2]
+      end
 
       results
     end
@@ -82,3 +93,4 @@ module Harvard::LibraryCloud
 end
 
 
+#"{!term f=subject}United States"

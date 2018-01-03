@@ -95,8 +95,8 @@ class CatalogController < ApplicationController
     # }
 
     # JL
-    config.add_facet_field 'genre', label: 'Genre', limit: 20
-    config.add_facet_field 'subject', label: 'Subject', limit: 20
+    config.add_facet_field 'genre', label: 'Genre', limit: 20, single: true
+    config.add_facet_field 'subject', label: 'Subject', limit: 20, single: true
 
 
 
