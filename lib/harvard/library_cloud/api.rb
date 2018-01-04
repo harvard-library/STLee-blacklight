@@ -71,10 +71,18 @@ module Harvard::LibraryCloud
       end
       results[:start] = params[:start] if params[:start]
       results[:limit] = params[:rows] if params[:rows]
-      results[:facets] = params['facet.field'].join(",") if params['facet.field']
+      results[:facets] = facet_params_to_lc(params['facet.field']) if params['facet.field']
       results[:recordIdentifier] = params['recordIdentifier'] if params['recordIdentifier']
-      results.merge!(facet_query_params_to_lc(params[:fq]))
+      results.merge!(facet_query_params_to_lc(params[:fq])) if params[:fq]
       results
+    end
+
+    def facet_params_to_lc facet_field
+      facet_field.map do |x|
+        # "{!ex=genre_single}genre"
+        m = /\{.*\}(\S+)$/.match(x)
+        m[1] if m
+      end.join(',')
     end
 
     def facet_query_params_to_lc fq

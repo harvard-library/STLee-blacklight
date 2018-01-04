@@ -109,13 +109,17 @@ module Harvard::LibraryCloud::Facets
       val = {}
       facet_counts['facetField'].each do |f|
         val[f[:facetName]] = []
-        f[:facet].each do |v|
+        hash_as_list(f[:facet]).each do |v|
           val[f[:facetName]] << v[:term]
           val[f[:facetName]] << v[:count]
         end if f[:facet]
       end
       val
     end
+  end
+
+  def hash_as_list val
+    val.kind_of?(Hash) ? [val] : val
   end
 
   # Returns all of the facet queries
