@@ -15,43 +15,62 @@ module Harvard::LibraryCloud::Formats
     def mods_to_doc doc
       result = {}
       if !doc.empty?
-        result[:title] = self.extract_title doc
-        result[:title_alternative] = self.extract_alternative_title doc
+        result[:title] = self.title_from_doc doc
+        result[:title_alternative] = self.alternative_title_from_doc doc
+        result[:abstract] = self.abstract_from_doc doc
         result[:format] = 'text'
-        result[:identifier] = doc[:recordInfo][:recordIdentifier]['#text']
+        result[:identifier] = identifier_from_doc doc
       end
 
       result
     end
 
-    def extract_title val
-      if val[:titleInfo].kind_of?(Array)
-        val[:titleInfo].each do |x|
-          unless x['@type']
-            return x[:title] + subtitle_to_add(x)
+    def abstract_from_doc doc
+      if doc[:abstract].kind_of?(Array)
+        doc[:abstract].each do |x|
+          if x['@type'] == 'Summary'
+            return x['#text']
           end
         end
-      else
-        val[:titleInfo][:title]
-      end
-    end
-
-    def extract_alternative_title val
-      if val[:titleInfo].kind_of?(Array)
-        val[:titleInfo].each do |x|
-          if x['@type'] == 'alternative'
-            return x[:title] + subtitle_to_add(x)
-          end
-        end
-      end
-    end
-
-    def subtitle_to_add titleInfo
-      if titleInfo[:subTitle]
-        '; ' + titleInfo[:subTitle]
-      else
         ''
+      else
+        doc[:abstract]['#text'] if doc[:abstract]
       end
+    end
+
+    def identifier_from_doc doc
+      doc[:recordInfo][:recordIdentifier]['#text']
+    end
+
+    def title_from_doc doc
+      if doc[:titleInfo].kind_of?(Array)
+        doc[:titleInfo].each do |x|
+          unless x['@type']
+            return nonsort_from_node(x) + x[:title] + subtitle_from_node(x)
+          end
+        end
+      else
+        nonsort_from_node(doc[:titleInfo]) + doc[:titleInfo][:title]
+      end
+    end
+
+    def alternative_title_from_doc doc
+      if doc[:titleInfo].kind_of?(Array)
+        doc[:titleInfo].each do |x|
+          if x['@type'] == 'alternative'
+            return x[:title] + subtitle_from_node(x)
+          end
+        end
+      end
+      ''
+    end
+
+    def subtitle_from_node node
+      node[:subTitle] ?  '; ' + node[:subTitle] : ''
+    end
+
+    def nonsort_from_node node
+      node[:nonSort] ? node[:nonSort] : ''
     end
   end
 

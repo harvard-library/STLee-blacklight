@@ -112,6 +112,8 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     config.add_index_field 'title_display', label: 'Title'
     config.add_index_field 'title_alternative', label: 'Alternative Title'
+    config.add_index_field 'abstract', label: 'Abstract'
+
     config.add_index_field 'author_display', label: 'Author'
     config.add_index_field 'contributor', label: 'Contributor'
     config.add_index_field 'creator', label: 'Creator'
@@ -126,6 +128,8 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     config.add_show_field 'title_display', label: 'Title'
     config.add_show_field 'title_alternative', label: 'Alternative Title'
+    config.add_show_field 'abstract', label: 'Abstract'
+
     config.add_show_field 'title_vern_display', label: 'Title'
     config.add_show_field 'subtitle_display', label: 'Subtitle'
     config.add_show_field 'subtitle_vern_display', label: 'Subtitle'
