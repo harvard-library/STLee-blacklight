@@ -101,7 +101,7 @@ class CatalogController < ApplicationController
 
     # JL
     config.add_facet_field 'resourceType', label: 'Format', single: true
-    config.add_facet_field 'subject', label: 'Subject',  single: true
+    config.add_facet_field 'ownerCodeDisplayName', label: 'Harvard Repository',  single: true
 
 
 
@@ -114,7 +114,8 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     config.add_index_field 'title_display', label: 'Title'
     config.add_index_field 'title_alternative', label: 'Alternative Title'
-    config.add_index_field 'resourceType', label: 'Format'
+    config.add_index_field 'resource_type', label: 'Format'
+    config.add_index_field 'owner_display', label: 'Harvard Repository'
     config.add_index_field 'abstract', label: 'Abstract'
 
     config.add_index_field 'author_display', label: 'Author'
@@ -131,7 +132,9 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     config.add_show_field 'title_display', label: 'Title'
     config.add_show_field 'title_alternative', label: 'Alternative Title'
-    config.add_show_field 'resourceType', label: 'Format'
+    config.add_show_field 'resource_type', label: 'Format'
+    config.add_show_field 'owner_display', label: 'Harvard Repository'
+    config.add_show_field 'owner_code', label: 'Harvard Repository Code'
     config.add_show_field 'abstract', label: 'Abstract'
 
     config.add_show_field 'title_vern_display', label: 'Title'

@@ -18,7 +18,9 @@ module Harvard::LibraryCloud::Formats
         result[:title] = self.title_from_doc doc
         result[:title_alternative] = alternative_title_from_doc doc
         result[:abstract] = abstract_from_doc doc
-        result[:resourceType] = resource_type_from_doc doc
+        result[:resource_type] = resource_type_from_doc doc
+        result[:owner_code] = owner_code_from_doc doc
+        result[:owner_display] = owner_display_from_doc doc
         result[:identifier] = identifier_from_doc doc
       end
 
@@ -74,7 +76,27 @@ module Harvard::LibraryCloud::Formats
     end
 
     def resource_type_from_doc doc
-      doc[:typeOfResource]
+      type_of_resource = doc[:typeOfResource]
+      result = []
+      if type_of_resource.kind_of?(Hash)
+        result << type_of_resource['#text']
+        result << 'manuscript' if type_of_resource.key?('@manuscript')
+        result << 'collection' if type_of_resource.key?('@collection')
+      else
+        result << type_of_resource
+      end
+      result
+    end
+
+    def owner_code_from_doc doc
+      x = doc[:extension].detect { |x| x.key?(:DRSMetadata) }
+      x[:DRSMetadata][:ownerCode] if x
+    end
+
+    def owner_display_from_doc doc
+      x = doc[:extension].detect { |x| x.key?(:DRSMetadata) }
+      x[:DRSMetadata][:ownerCodeDisplayName] if x
+      # doc[:extension][:DRSMetadata][:ownerCodeDisplayName]
     end
 
   end
