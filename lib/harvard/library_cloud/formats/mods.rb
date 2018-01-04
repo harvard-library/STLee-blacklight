@@ -2,6 +2,8 @@ module Harvard::LibraryCloud::Formats
 
   class Mods < Harvard::LibraryCloud::Response
 
+    include ApplicationHelper
+
     def response
       result = self[:items] ? self[:items][:mods] || {} : {}
       result.is_a?(Hash) ? [result] : result
@@ -21,6 +23,8 @@ module Harvard::LibraryCloud::Formats
         result[:resource_type] = resource_type_from_doc doc
         result[:owner_code] = owner_code_from_doc doc
         result[:owner_display] = owner_display_from_doc doc
+        result[:collection_title] = collection_title_from_doc doc
+        result[:preview] = preview_from_doc doc
         result[:identifier] = identifier_from_doc doc
       end
 
@@ -83,20 +87,40 @@ module Harvard::LibraryCloud::Formats
         result << 'manuscript' if type_of_resource.key?('@manuscript')
         result << 'collection' if type_of_resource.key?('@collection')
       else
-        result << type_of_resource
+        type_of_resource
       end
       result
     end
 
     def owner_code_from_doc doc
-      x = doc[:extension].detect { |x| x.key?(:DRSMetadata) }
+      x = doc[:extension].detect { |x| x.is_a?(Hash) and x.key?(:DRSMetadata) }
       x[:DRSMetadata][:ownerCode] if x
     end
 
     def owner_display_from_doc doc
-      x = doc[:extension].detect { |x| x.key?(:DRSMetadata) }
+      x = doc[:extension].detect { |x| x.is_a?(Hash) and x.key?(:DRSMetadata) }
       x[:DRSMetadata][:ownerCodeDisplayName] if x
-      # doc[:extension][:DRSMetadata][:ownerCodeDisplayName]
+    end
+
+    def collection_title_from_doc doc
+      result = []
+      x = doc[:extension].detect { |x| x.is_a?(Hash) and x.key?(:collections) }
+      hash_as_list(x[:collections]).map do |y|
+        hash_as_list(y[:collection]).map do |z|
+          result << z[:title]
+        end if y[:collection]
+      end if x and x[:collections]
+      result
+    end
+
+    def preview_from_doc doc
+      location = hash_as_list(doc[:location] || []).detect{ |x| x.key?(:url) }
+      hash_as_list(location[:url]).each do |x|
+        if x['@access'] == 'preview'
+          return x['#text']
+        end
+      end if location
+      nil
     end
 
   end

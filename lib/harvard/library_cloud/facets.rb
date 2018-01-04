@@ -3,6 +3,8 @@ require 'ostruct'
 
 module Harvard::LibraryCloud::Facets
 
+  include ApplicationHelper
+
   # represents a facet value; which is a field value and its hit count
   class FacetItem < OpenStruct
     def initialize *args
@@ -116,10 +118,6 @@ module Harvard::LibraryCloud::Facets
       end
       val
     end
-  end
-
-  def hash_as_list val
-    val.kind_of?(Hash) ? [val] : val
   end
 
   # Returns all of the facet queries

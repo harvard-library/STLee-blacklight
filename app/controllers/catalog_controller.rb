@@ -52,7 +52,7 @@ class CatalogController < ApplicationController
     # solr field configuration for search results/index views
     config.index.title_field = 'title'
     # config.index.display_type_field = 'format'
-    #config.index.thumbnail_field = 'thumbnail_path_ss'
+    config.index.thumbnail_field = 'preview'
 
     # solr field configuration for document/show views
     config.show.title_field = 'title'
@@ -102,6 +102,7 @@ class CatalogController < ApplicationController
     # JL
     config.add_facet_field 'resourceType', label: 'Format', single: true
     config.add_facet_field 'ownerCodeDisplayName', label: 'Harvard Repository',  single: true
+    config.add_facet_field 'collectionTitle', label: 'Collections',  single: true
 
 
 
@@ -134,7 +135,8 @@ class CatalogController < ApplicationController
     config.add_show_field 'title_alternative', label: 'Alternative Title'
     config.add_show_field 'resource_type', label: 'Format'
     config.add_show_field 'owner_display', label: 'Harvard Repository'
-    config.add_show_field 'owner_code', label: 'Harvard Repository Code'
+    config.add_show_field 'owner_code', label: 'Repository Code'
+    config.add_show_field 'collection_title', label: 'Collection'
     config.add_show_field 'abstract', label: 'Abstract'
 
     config.add_show_field 'title_vern_display', label: 'Title'
