@@ -11,10 +11,6 @@ module Harvard::LibraryCloud
     #   self
     # end
 
-    def response
-      self[:items][:mods] || {}
-    end
-
     # short cut to response['numFound']
     def total
         self[:pagination][:numFound].to_s.to_i
@@ -28,9 +24,6 @@ module Harvard::LibraryCloud
       total.zero?
     end
 
-    def documents
-      @documents ||= (response || []).collect{|doc| document_model.new(Mods.new(doc), self) }
-    end
     alias_method :docs, :documents
 
   end
