@@ -64,6 +64,9 @@ module Harvard::LibraryCloud
 
     def params_to_lc params
       results = {}
+      # Restrict all results
+      results[:inDRS] = 'true'
+      results[:accessFlag] = 'P'
       if params[:search_field] == 'all_fields'
         results[:q] = params[:q] if params[:q]
       else
