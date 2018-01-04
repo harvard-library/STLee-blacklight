@@ -25,6 +25,8 @@ class CatalogController < ApplicationController
     # The name of the query paramater to request an item by unique ID through LibraryCloud
     config.document_unique_id_param = 'recordIdentifier'
 
+    # config.document_model = Harvard::LibraryCloud::APIDocument
+
     # JL : Remove bookmarks
     config.index.document_actions.delete(:bookmark)
     config.show.document_actions.delete(:bookmark)
@@ -49,7 +51,7 @@ class CatalogController < ApplicationController
 
     # solr field configuration for search results/index views
     config.index.title_field = 'title'
-    config.index.display_type_field = 'format'
+    # config.index.display_type_field = 'format'
     #config.index.thumbnail_field = 'thumbnail_path_ss'
 
     # solr field configuration for document/show views
@@ -98,7 +100,7 @@ class CatalogController < ApplicationController
     # }
 
     # JL
-    config.add_facet_field 'genre', label: 'Genre', single: true
+    config.add_facet_field 'resourceType', label: 'Format', single: true
     config.add_facet_field 'subject', label: 'Subject',  single: true
 
 
@@ -112,6 +114,7 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     config.add_index_field 'title_display', label: 'Title'
     config.add_index_field 'title_alternative', label: 'Alternative Title'
+    config.add_index_field 'resourceType', label: 'Format'
     config.add_index_field 'abstract', label: 'Abstract'
 
     config.add_index_field 'author_display', label: 'Author'
@@ -128,6 +131,7 @@ class CatalogController < ApplicationController
     #   The ordering of the field names is the order of the display
     config.add_show_field 'title_display', label: 'Title'
     config.add_show_field 'title_alternative', label: 'Alternative Title'
+    config.add_show_field 'resourceType', label: 'Format'
     config.add_show_field 'abstract', label: 'Abstract'
 
     config.add_show_field 'title_vern_display', label: 'Title'

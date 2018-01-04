@@ -16,26 +16,13 @@ module Harvard::LibraryCloud::Formats
       result = {}
       if !doc.empty?
         result[:title] = self.title_from_doc doc
-        result[:title_alternative] = self.alternative_title_from_doc doc
-        result[:abstract] = self.abstract_from_doc doc
-        result[:format] = 'text'
+        result[:title_alternative] = alternative_title_from_doc doc
+        result[:abstract] = abstract_from_doc doc
+        result[:resourceType] = resource_type_from_doc doc
         result[:identifier] = identifier_from_doc doc
       end
 
       result
-    end
-
-    def abstract_from_doc doc
-      if doc[:abstract].kind_of?(Array)
-        doc[:abstract].each do |x|
-          if x['@type'] == 'Summary'
-            return x['#text']
-          end
-        end
-        ''
-      else
-        doc[:abstract]['#text'] if doc[:abstract]
-      end
     end
 
     def identifier_from_doc doc
@@ -72,6 +59,24 @@ module Harvard::LibraryCloud::Formats
     def nonsort_from_node node
       node[:nonSort] ? node[:nonSort] : ''
     end
+
+    def abstract_from_doc doc
+      if doc[:abstract].kind_of?(Array)
+        doc[:abstract].each do |x|
+          if x['@type'] == 'Summary'
+            return x['#text']
+          end
+        end
+        ''
+      else
+        doc[:abstract]['#text'] if doc[:abstract]
+      end
+    end
+
+    def resource_type_from_doc doc
+      doc[:typeOfResource]
+    end
+
   end
 
 end
