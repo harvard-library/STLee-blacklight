@@ -5,7 +5,7 @@ module Harvard::LibraryCloud
 
   class API
 
-    def initialize base_uri = 'https://api-beta.lib.harvard.edu/v2/'
+    def initialize base_uri = 'https://api.lib.harvard.edu/v2/'
       @base_uri = base_uri
     end
 
