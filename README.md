@@ -6,6 +6,9 @@ Demo: https://ancient-peak-25869.herokuapp.com
 
 ## Known Issues
 
+* **Resources with ID's that contains a period cannot be displayed, and show an error page**
+    * Reason: Blacklight assumes that ID's do not contain a period
+    * Fix: Configure Blacklight to accept ID's with a period
 * Not possible to select multiple choices within a single facet.
     * Workaround: set “single: true” on the facet_field configuration
     * Reason: LC API doesn’t handle queries on the same field correctly)
