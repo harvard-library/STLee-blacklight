@@ -57,7 +57,7 @@ class CatalogController < ApplicationController
     # solr field configuration for document/show views
     config.show.title_field = 'title'
     #config.show.display_type_field = 'format'
-    #config.show.thumbnail_field = 'thumbnail_path_ss'
+    config.show.thumbnail_field = 'preview'
 
     # solr fields that will be treated as facets by the blacklight application
     #   The ordering of the field names is the order of the display
@@ -138,6 +138,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'owner_code', label: 'Repository Code'
     config.add_show_field 'collection_title', label: 'Collection'
     config.add_show_field 'abstract', label: 'Abstract'
+    config.add_show_field 'preview', label: 'Thumbnail'
 
     config.add_show_field 'title_vern_display', label: 'Title'
     config.add_show_field 'subtitle_display', label: 'Subtitle'
@@ -217,10 +218,8 @@ class CatalogController < ApplicationController
     # label in pulldown is followed by the name of the SOLR field to sort by and
     # whether the sort is ascending or descending (it must be asc or desc
     # except in the relevancy case).
-    config.add_sort_field 'score desc, pub_date_sort desc, title_sort asc', label: 'relevance'
-    config.add_sort_field 'pub_date_sort desc, title_sort asc', label: 'year'
-    config.add_sort_field 'author_sort asc, title_sort asc', label: 'author'
-    config.add_sort_field 'title_sort asc, pub_date_sort desc', label: 'title'
+    config.add_sort_field '', label: 'relevance'
+    # config.add_sort_field 'dateCreated', label: 'date'
 
     # If there are more than this many search results, no spelling ("did you
     # mean") suggestion is offered.
