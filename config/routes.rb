@@ -12,9 +12,17 @@ Rails.application.routes.draw do
   devise_for :users
   concern :exportable, Blacklight::Routes::Exportable.new
 
-  resources :solr_documents, only: [:show], path: '/catalog', controller: 'catalog' do
+  resources :solr_documents, only: [:show], path: '/catalog', controller: 'catalog', constraints: { id: /[^\/]+/ } do
     concerns :exportable
   end
+
+  # Add an additional route for the "Track" action which allows IDs to contains periods
+  Blacklight::Engine.routes.draw do
+    post "/catalog/:id/track", to: 'catalog#track', as: 'track_search_context_override', constraints: { id: /[^\/]+/ }
+
+    resources :suggest, only: :index, defaults: { format: 'json' }
+  end
+
 
   resources :bookmarks do
     concerns :exportable
