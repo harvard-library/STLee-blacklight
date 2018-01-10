@@ -46,7 +46,6 @@ module Harvard::LibraryCloud
         faraday.adapter Faraday.default_adapter
         faraday.ssl[:verify] = false
         faraday.params = params ||= {}
-        faraday.proxy = ENV["FIXIE_URL"] if ENV["FIXIE_URL"]
       end
     end
 
