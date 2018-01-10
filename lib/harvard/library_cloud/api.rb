@@ -106,6 +106,3 @@ module Harvard::LibraryCloud
   end
 
 end
-
-
-#"{!term f=subject}United States"

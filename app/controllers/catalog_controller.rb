@@ -15,7 +15,7 @@ class CatalogController < ApplicationController
     config.search_builder_class = Harvard::LibraryCloud::SearchBuilder
     #
     ## Model that maps search index responses to the blacklight response model
-    config.response_model = Harvard::LibraryCloud::Formats::Mods
+    config.response_model = Harvard::LibraryCloud::Response
 
     ## Default parameters to send to solr for all search-like requests. See also SearchBuilder#processed_parameters
     config.default_solr_params = {
@@ -25,7 +25,7 @@ class CatalogController < ApplicationController
     # The name of the query paramater to request an item by unique ID through LibraryCloud
     config.document_unique_id_param = 'recordIdentifier'
 
-    # config.document_model = Harvard::LibraryCloud::APIDocument
+    # config.document_model = SolrDocument
 
     # JL : Remove bookmarks
     config.index.document_actions.delete(:bookmark)
