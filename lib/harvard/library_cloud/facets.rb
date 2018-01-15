@@ -115,7 +115,7 @@ module Harvard::LibraryCloud::Facets
           val[f[:facetName]] << v[:term]
           val[f[:facetName]] << v[:count]
         end if f[:facet]
-      end
+      end if facet_counts and facet_counts['facetField']
       val
     end
   end
