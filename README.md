@@ -19,6 +19,3 @@ Demo: https://ancient-peak-25869.herokuapp.com
     * Workaround: Use “relevance” as the only sort option
     * Reason: Sorting by date not supported by LibraryCloud API
     
-## Technical Design issues
-
-It would be more consistent with the BlackLight architecture to replace the SolrDocument being used for the response with our own document. Our current approach is to massage the data in a custom Response before creating a SolrDocument. 
