@@ -18,3 +18,7 @@
 //= require blacklight/blacklight
 
 //= require_tree .
+
+//= require foundation
+
+$(document).foundation();

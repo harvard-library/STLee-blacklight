@@ -1,0 +1,17 @@
+@import "settings";
+
+.header__navbar {
+  height: 117px;
+}
+
+.header__logo {
+  margin-top: 23px;
+}
+
+.header__navbar nav {
+  padding: 45px 0 35px;
+}
+
+.header__navbar a {
+  color: $rouge;
+}

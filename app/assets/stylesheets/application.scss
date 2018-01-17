@@ -11,5 +11,13 @@
  * It is generally better to create a new file per style scope.
  *
  *= require_tree .
+ *= require foundation
  *= require_self
- */
+*/
+
+@import "settings";
+@import "util";
+@import "facets";
+@import "header";
+@import "searchbar";
+@import "foundation";

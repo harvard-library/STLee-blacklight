@@ -1,0 +1,25 @@
+.searchbar__wrapper {
+  width: 100%;
+  height: 68px;
+  padding: 12px 0;
+  background-color: black;
+}
+
+input.searchbar__text[type=text] {
+  color: #1e1e1e;
+  font-size: rem-calc(16);
+  height: 44px;
+}
+
+.searchbar__advanced {
+  color: white;
+  font-size: rem-calc(14);
+  font-weight: lighter;
+  letter-spacing: 0.1em;
+  line-height: 44px;
+  text-transform: uppercase;
+  &:hover {
+    color: white;
+    font-weight: bold;
+  }
+}

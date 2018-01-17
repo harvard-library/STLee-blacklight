@@ -1,0 +1,17 @@
+@import "settings";
+
+.facets__container {
+  background-color: $background-gray;
+}
+
+h2.facets__heading {
+  background-color: black;
+  color: white;
+  font-size: rem-calc(22);
+  line-height: rem-calc(60);
+  padding-left: 15px;
+}
+
+.facets__container a {
+  color: $rouge;
+}
