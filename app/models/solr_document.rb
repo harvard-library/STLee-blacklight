@@ -93,18 +93,18 @@ class SolrDocument
   end
 
   def owner_code_from_doc doc
-    x = doc[:extension].detect { |x| x.is_a?(Hash) and x.key?(:DRSMetadata) }
+    x = hash_as_list(doc[:extension]).detect { |x| x.is_a?(Hash) and x.key?(:DRSMetadata) }
     x[:DRSMetadata][:ownerCode] if x
   end
 
   def owner_display_from_doc doc
-    x = doc[:extension].detect { |x| x.is_a?(Hash) and x.key?(:DRSMetadata) }
+    x = hash_as_list(doc[:extension]).detect { |x| x.is_a?(Hash) and x.key?(:DRSMetadata) }
     x[:DRSMetadata][:ownerCodeDisplayName] if x
   end
 
   def collection_title_from_doc doc
     result = []
-    x = doc[:extension].detect { |x| x.is_a?(Hash) and x.key?(:collections) }
+    x = hash_as_list(doc[:extension]).detect { |x| x.is_a?(Hash) and x.key?(:collections) }
     hash_as_list(x[:collections]).map do |y|
       hash_as_list(y[:collection]).map do |z|
         result << z[:title]
