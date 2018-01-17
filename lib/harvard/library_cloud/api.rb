@@ -66,8 +66,9 @@ module Harvard::LibraryCloud
       results = {}
       # Restrict all results
       results[:inDRS] = 'true'
-      results[:accessFlag] = 'P'
-      results[:sort] = params[:sort] if params[:sort]
+      results[:accessFlag] = 'P OR R'
+      # Don't support sort parameters for now
+      # results[:sort] = sort_params_to_lc(params[:sort]) if params[:sort]
       if params[:search_field] == 'all_fields'
         results[:q] = params[:q] if params[:q]
       else
@@ -96,6 +97,10 @@ module Harvard::LibraryCloud
         results[m[1] + '_exact'] = m[2]
       end if fq
       results
+    end
+
+    def sort_params_to_lc sort
+      sort
     end
 
     def adapt_response connection, raw_response
