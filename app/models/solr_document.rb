@@ -19,6 +19,7 @@ class SolrDocument
       result[:collection_title] = collection_title_from_doc doc
       result[:preview] = preview_from_doc doc
       result[:identifier] = identifier_from_doc doc
+      result[:id] = result[:identifier]
     end
 
     result
