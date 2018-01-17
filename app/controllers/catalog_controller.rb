@@ -101,6 +101,7 @@ class CatalogController < ApplicationController
 
     # JL
     config.add_facet_field 'resourceType', label: 'Format', single: true
+    config.add_facet_field 'contentModel', label: 'Type', single: true
     config.add_facet_field 'ownerCodeDisplayName', label: 'Harvard Repository',  single: true
     config.add_facet_field 'collectionTitle', label: 'Collections',  single: true
 
@@ -116,6 +117,7 @@ class CatalogController < ApplicationController
     config.add_index_field 'title_display', label: 'Title'
     config.add_index_field 'title_alternative', label: 'Alternative Title'
     config.add_index_field 'resource_type', label: 'Format'
+    config.add_index_field 'content_model', label: 'Type'
     config.add_index_field 'owner_display', label: 'Harvard Repository'
     config.add_index_field 'abstract', label: 'Abstract'
 
@@ -134,6 +136,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'title_display', label: 'Title'
     config.add_show_field 'title_alternative', label: 'Alternative Title'
     config.add_show_field 'resource_type', label: 'Format'
+    config.add_show_field 'content_model', label: 'Type'
     config.add_show_field 'owner_display', label: 'Harvard Repository'
     config.add_show_field 'owner_code', label: 'Repository Code'
     config.add_show_field 'collection_title', label: 'Collection'

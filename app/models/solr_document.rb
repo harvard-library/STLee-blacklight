@@ -14,6 +14,7 @@ class SolrDocument
       result[:title_alternative] = alternative_title_from_doc doc
       result[:abstract] = abstract_from_doc doc
       result[:resource_type] = resource_type_from_doc doc
+      result[:content_model] = content_model_from_doc doc
       result[:owner_code] = owner_code_from_doc doc
       result[:owner_display] = owner_display_from_doc doc
       result[:collection_title] = collection_title_from_doc doc
@@ -84,6 +85,11 @@ class SolrDocument
       type_of_resource
     end
     result
+  end
+
+  def content_model_from_doc doc
+    x = hash_as_list(doc[:extension]).detect { |x| x.is_a?(Hash) and x.key?(:DRSMetadata) }
+    x[:DRSMetadata][:contentModel] if x
   end
 
   def owner_code_from_doc doc
