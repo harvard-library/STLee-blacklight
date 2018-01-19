@@ -10,8 +10,43 @@ h2.facets__heading {
   font-size: rem-calc(22);
   line-height: rem-calc(60);
   padding-left: 15px;
+  margin-bottom: 0;
 }
 
 .facets__container a {
   color: $rouge;
+}
+
+.facet-content {
+  overflow: hidden;
+}
+
+.facet__title {
+  text-transform: uppercase;
+}
+
+.facet_select,
+.selected,
+.facet-count {
+  font-size: rem-calc(14);
+  color: $rouge;
+}
+
+.facet-count:before {
+  content: ' (';
+}
+.facet-count:after {
+  content: ')';
+}
+
+a.remove {
+  width: 10px;
+  display: inline-block;
+  background-color: green;
+}
+
+.facet-values.list-unstyled {
+  margin-bottom: 0;
+  margin-left: 0;
+  list-style: none;
 }
