@@ -10,7 +10,7 @@ end
 gem 'rails', '~> 5.1.4'
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
-gem 'pg'
+gem 'pg', '~> 0.20'
 # Use Puma as the app server
 gem 'puma', '~> 3.7'
 # Use SCSS for stylesheets
@@ -66,3 +66,4 @@ gem 'devise'
 gem 'devise-guests', '~> 0.6'
 gem 'blacklight-marc', '~> 6.1'
 gem 'foundation-rails'
+gem 'font-awesome-sass'

@@ -1,0 +1,22 @@
+
+/* include variables */
+//$fa-var-ambulance: "\f0f9";
+/* [...] */
+@import "font-awesome-sprockets";
+@import "font-awesome";
+
+/* include mixins */
+@mixin fa-icon() {
+  display: inline-block;
+  font: normal normal normal 14px/1 FontAwesome; // shortening font declaration
+  font-size: inherit; // can't have font-size inherit on line above, so need to override
+  text-rendering: auto; // optimizelegibility throws things off #1094
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+/* [...] */
+
+/* Custom mixin */
+@mixin fa-icon-content($fa-icon) {
+  &:before { content: $fa-icon; }
+}
