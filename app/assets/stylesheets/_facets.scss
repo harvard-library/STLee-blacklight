@@ -11,7 +11,7 @@ h2.facets__heading {
   font-size: rem-calc(22);
   line-height: rem-calc(60);
   padding-left: 15px;
-  margin-bottom: 0;
+  margin-bottom: 24px;
 }
 
 .facets__container a {
@@ -22,8 +22,21 @@ h2.facets__heading {
   overflow: hidden;
 }
 
-.facet__title {
+ul.facet-values {
+  margin-bottom: 10px;
+}
+
+ul.facet-values li {
+  margin-bottom: 6px;
+  display: block;
+  &:last-child {
+    margin-bottom: 0;
+  }
+}
+
+a.facet__title.facet__title.facet__title.facet__title {
   text-transform: uppercase;
+  font-family: "Benton Sans Med", Helvetica, Roboto, Arial, sans-serif;
 }
 
 .facet_select,
@@ -40,12 +53,38 @@ h2.facets__heading {
   content: ')';
 }
 
-a.remove {
+.facets__container a.remove {
   width: 20px;
   display: inline-block;
+  float: left;
+
 }
 
 .glyphicon-remove  {
   @include fa-icon;
   @include fa-icon-content($fa-var-times);
+}
+
+.facets__clearall {
+  border-top: 1px solid #D4D1D1;
+  display: block;
+  text-transform: uppercase;
+  margin: 8px 15px 15px;
+  padding: 15px 0;
+  font-size: rem-calc(14);
+}
+
+
+.facet__title span.toggle {
+  @include fa-icon;
+  @include fa-icon-content($fa-var-plus);
+  color: $rouge;
+  font-size: rem-calc(14);
+  position: relative;
+  top: 4px;
+  float: right;
+}
+
+dd.accordion-navigation.active .facet__title span.toggle {
+  @include fa-icon-content($fa-var-minus);
 }

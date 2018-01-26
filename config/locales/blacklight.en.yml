@@ -4,3 +4,9 @@ en:
     search:
       facets:
         title: 'Filter'
+      pagination_info:
+        no_items_found: 'No %{entry_name} found'
+        single_item_found: '<strong>1</strong> %{entry_name} found'
+        pages:
+          one: 'Showing %{start_num} to %{end_num} of %{total_num} results'
+          other: 'Showing %{start_num} to %{end_num} of %{total_num} results'

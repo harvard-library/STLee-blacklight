@@ -1,0 +1,46 @@
+@import "icons";
+@import "settings";
+
+.search-header.search-header.search-header {
+  font-size: rem-calc(18);
+  padding-bottom: 30px;
+  border-bottom: 1px solid #D4D1D1;
+  margin-bottom: 30px;
+}
+
+.constraint.filter {
+  white-space: nowrap;
+  font-size: rem-calc(14);
+  .filterName {
+    text-transform: uppercase;
+    font-size: rem-calc(13);
+    font-family: "Benton Sans Med", Helvetica, Roboto, Arial, sans-serif;
+    &:after {
+      content: ": ";
+    }
+  }
+}
+
+#per-page-dropdown > a {
+  color: #222;
+  span.caret {
+    @include fa-icon;
+    @include fa-icon-content($fa-var-chevron-down);
+    color: $rouge;
+    font-size: rem-calc(14);
+    position: relative;
+    top: 7px;
+    margin-left: 6px;
+  }
+}
+
+.f-dropdown.open {
+  max-width: 100px;
+  &:before,
+  &:after {
+    display: none;
+    width: 0;
+    height: 0;
+    content: "";
+  }
+}

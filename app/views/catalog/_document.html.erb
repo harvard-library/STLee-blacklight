@@ -1,0 +1,6 @@
+<% # container for a single doc -%>
+<li class="document <%= render_document_class document %> document-position-<%= document_counter%> " data-document-counter="<%= document_counter %>" itemscope itemtype="<%= document.itemtype %>">
+  <% # Replace Blacklicht functionality that dynamically identifies the partials to display with our list. We -%>
+  <% # want to display the Thumbnail ABOVE the title -%>
+  <%= render_document_partials document, [:thumbnail, :index_header, :index], :document_counter => document_counter %>
+</li>

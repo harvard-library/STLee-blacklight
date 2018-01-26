@@ -36,7 +36,7 @@ class CatalogController < ApplicationController
     config.solr_path = 'items.json'
 
     # items to show per page, each number in the array represent another option to choose from.
-    #config.per_page = [10,20,50,100]
+    config.per_page = [12,24,48,96]
 
     ## Default parameters to send on single-document requests to Solr. These settings are the Blackligt defaults (see SearchHelper#solr_doc_params) or
     ## parameters included in the Blacklight-jetty document requestHandler.
@@ -115,21 +115,12 @@ class CatalogController < ApplicationController
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
     config.add_index_field 'title_display', label: 'Title'
-    config.add_index_field 'title_alternative', label: 'Alternative Title'
+    # config.add_index_field 'title_alternative', label: 'Alternative Title'
     config.add_index_field 'resource_type', label: 'Format'
     config.add_index_field 'content_model', label: 'Type'
     config.add_index_field 'owner_display', label: 'Harvard Repository'
-    config.add_index_field 'abstract', label: 'Abstract'
+    # config.add_index_field 'abstract', label: 'Abstract'
 
-    config.add_index_field 'author_display', label: 'Author'
-    config.add_index_field 'contributor', label: 'Contributor'
-    config.add_index_field 'creator', label: 'Creator'
-    config.add_index_field 'format', label: 'Format'
-    config.add_index_field 'language_facet', label: 'Language'
-    config.add_index_field 'language', label: 'Language'
-    config.add_index_field 'published_display', label: 'Published'
-    config.add_index_field 'published_vern_display', label: 'Published'
-    config.add_index_field 'lc_callnum_display', label: 'Call number'
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display

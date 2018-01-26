@@ -1,0 +1,50 @@
+@import "foundation/components/block-grid";
+@import "settings";
+
+#documents {
+  @include block-grid(3);
+}
+
+.document-thumbnail {
+  background-color: #f7f7f7;
+  height: 252px;
+}
+
+.document-thumbnail a {
+  display: block;
+  text-align: center;
+  top: 50%;
+  position: relative;
+  img {
+    margin-top: -25%;
+  }
+}
+.documentHeader {
+  margin: 0;
+}
+
+h3.document-title-heading {
+  line-height: rem-calc(16);
+  margin-bottom: 12px;
+}
+
+h3.document-title-heading a {
+  color: $rouge;
+  font-size: rem-calc(15);
+  line-height: rem-calc(16);
+  font-weight: normal;
+}
+
+dl.document-metadata {
+  line-height: 1;
+}
+
+dl.document-metadata > dd {
+  display: inline;
+  font-size: rem-calc(14);
+  line-height: 1;
+  &:first-child:after {
+    content: " - ";
+  }
+}
+
