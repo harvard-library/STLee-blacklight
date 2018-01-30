@@ -19,6 +19,7 @@ class SolrDocument
       result[:owner_display] = owner_display_from_doc doc
       result[:collection_title] = collection_title_from_doc doc
       result[:preview] = preview_from_doc doc
+      result[:raw_object] = raw_object_from_doc doc
       result[:identifier] = identifier_from_doc doc
       result[:id] = result[:identifier]
     end
@@ -117,6 +118,16 @@ class SolrDocument
     location = hash_as_list(doc[:location] || []).detect{ |x| x.key?(:url) }
     hash_as_list(location[:url]).each do |x|
       if x['@access'] == 'preview'
+        return x['#text']
+      end
+    end if location
+    nil
+  end
+
+  def raw_object_from_doc doc
+    location = hash_as_list(doc[:location] || []).detect{ |x| x.key?(:url) }
+    hash_as_list(location[:url]).each do |x|
+      if x['@access'] == 'raw object'
         return x['#text']
       end
     end if location

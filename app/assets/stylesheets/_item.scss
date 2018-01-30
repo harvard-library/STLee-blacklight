@@ -1,0 +1,15 @@
+@import "util";
+
+.page-header-page-links-column .page-links {
+  float: right;
+}
+
+// Only show H1 to screen readers
+#document h1 {
+  @include sr-only();
+}
+
+.original-document-wrapper iframe {
+  width: 100%;
+  height: 540px;
+}

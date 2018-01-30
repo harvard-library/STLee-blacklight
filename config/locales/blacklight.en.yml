@@ -10,3 +10,4 @@ en:
         pages:
           one: 'Showing %{start_num} to %{end_num} of %{total_num} results'
           other: 'Showing %{start_num} to %{end_num} of %{total_num} results'
+    back_to_search: 'Back to Search Results'

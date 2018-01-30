@@ -28,9 +28,15 @@ class CatalogController < ApplicationController
     # config.document_model = SolrDocument
 
     # JL : Remove bookmarks
-    config.index.document_actions.delete(:bookmark)
+    # config.index.document_actions.delete(:bookmark)
     config.show.document_actions.delete(:bookmark)
     config.navbar.partials.delete(:bookmark)
+
+    # JL : This is where we can define the partials to be displayed!
+    config.index.partials = [:thumbnail, :index_header, :index]
+    config.show.partials = [:show_header, :show_original, :show]
+
+    # JL : Configure
 
     # solr path which will be added to solr base url before the other solr params.
     config.solr_path = 'items.json'

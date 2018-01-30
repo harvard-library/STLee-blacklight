@@ -4,4 +4,8 @@ class ApplicationController < ActionController::Base
   layout 'blacklight'
 
   protect_from_forgery with: :exception
+
+  def home
+
+  end
 end
