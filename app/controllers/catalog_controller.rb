@@ -120,17 +120,19 @@ class CatalogController < ApplicationController
 
     # solr fields to be displayed in the index (search results) view
     #   The ordering of the field names is the order of the display
-    config.add_index_field 'title_display', label: 'Title'
+    # config.add_index_field 'title', label: 'Title'
+    # config.add_index_field 'title_display', label: 'Title'
     # config.add_index_field 'title_alternative', label: 'Alternative Title'
-    config.add_index_field 'resource_type', label: 'Format'
+    # config.add_index_field 'resource_type', label: 'Format'
     config.add_index_field 'content_model', label: 'Type'
     config.add_index_field 'owner_display', label: 'Harvard Repository'
-    # config.add_index_field 'abstract', label: 'Abstract'
+    config.add_index_field 'abstract', label: 'Abstract'
 
 
     # solr fields to be displayed in the show (single result) view
     #   The ordering of the field names is the order of the display
     config.add_show_field 'title_display', label: 'Title'
+    config.add_show_field 'title', label: 'Title'
     config.add_show_field 'title_alternative', label: 'Alternative Title'
     config.add_show_field 'resource_type', label: 'Format'
     config.add_show_field 'content_model', label: 'Type'
@@ -138,7 +140,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'owner_code', label: 'Repository Code'
     config.add_show_field 'collection_title', label: 'Collection'
     config.add_show_field 'abstract', label: 'Abstract'
-    config.add_show_field 'preview', label: 'Thumbnail'
+    # config.add_show_field 'preview', label: 'Thumbnail'
 
     config.add_show_field 'title_vern_display', label: 'Title'
     config.add_show_field 'subtitle_display', label: 'Subtitle'

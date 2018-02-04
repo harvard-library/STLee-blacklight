@@ -1,16 +1,27 @@
 @import "foundation/components/block-grid";
 @import "settings";
 
-#documents {
+#documents:not(.list-mode) {
   @include block-grid(3);
 }
 
-.document-thumbnail {
+#documents.list-mode li.document {
+  float: left;
+  clear: both;
+  padding: 30px 0 30px 10px;
+  border-bottom: 1px solid #D4D1D1;
+  &:first-child {
+    padding-top: 0;
+  }
+}
+
+#documents:not(.list-mode) .document-thumbnail {
   background-color: #f7f7f7;
   height: 252px;
 }
 
-.document-thumbnail a {
+
+#documents:not(.list-mode) .document-thumbnail a {
   display: block;
   text-align: center;
   top: 50%;
@@ -19,8 +30,25 @@
     margin-top: -25%;
   }
 }
+
+#documents.list-mode .document-thumbnail {
+  width: 230px;
+  clear: left;
+  float: left;
+}
+
+#documents.list-mode .document-thumbnail a {
+  float: left;
+}
+
 .documentHeader {
   margin: 0;
+}
+
+#documents.list-mode dl.document-metadata,
+#documents.list-mode .documentHeader {
+  margin-left: 230px;
+
 }
 
 h3.document-title-heading {
@@ -33,6 +61,11 @@ h3.document-title-heading a {
   font-size: rem-calc(15);
   line-height: rem-calc(16);
   font-weight: normal;
+}
+
+#documents.list-mode h3.document-title-heading a {
+  font-size: rem-calc(20);
+  line-height: rem-calc(24);
 }
 
 dl.document-metadata {
@@ -48,3 +81,16 @@ dl.document-metadata > dd {
   }
 }
 
+#documents.list-mode dd {
+  line-height: 1.45;
+  margin-bottom: 6px;
+  display: inline-block;
+}
+
+#documents.list-mode dd.blacklight-abstract {
+  display: block;
+}
+
+#documents:not(.list-mode) dd.blacklight-abstract {
+  display: none;
+}

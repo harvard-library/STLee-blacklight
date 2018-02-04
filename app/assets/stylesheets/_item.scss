@@ -1,15 +1,92 @@
+@import "settings";
 @import "util";
+@import "icons";
 
-.page-header-page-links-column .page-links {
-  float: right;
+body.blacklight-catalog-show .searchbar__wrapper {
+  margin-bottom: 20px;
 }
 
+.page-header-page-links-column {
+  margin-bottom: 20px;
+  a {
+    color: $rouge;
+  }
+  .page_links {
+    float: right;
+  }
+}
+
+
 // Only show H1 to screen readers
-#document h1 {
+body.blacklight-catalog-show #document h1 {
   @include sr-only();
 }
 
 .original-document-wrapper iframe {
   width: 100%;
   height: 540px;
+  border: none;
+  margin-bottom: 50px;
 }
+
+
+.accordion.record-details .accordion-navigation > a {
+  padding: 0;
+}
+
+.record-details h3 {
+  background-color: $rouge;
+  color: white;
+  font-size: rem-calc(18);
+  padding: 23px 25px;
+  margin: 0;
+}
+
+.record-details span.toggle {
+  @include fa-icon;
+  @include fa-icon-content($fa-var-plus);
+  color: white;
+  font-size: rem-calc(18);
+  position: relative;
+  top: 6px;
+  float: right;
+}
+
+dd.accordion-navigation.active span.toggle {
+  @include fa-icon-content($fa-var-minus);
+}
+
+.record-details dd.accordion-navigation:not(:first-child) {
+  border-top: 2px solid white;
+}
+
+.record-details dl {
+  padding: 20px 20px 50px;
+  margin-bottom: 0;
+}
+
+.record-details dl dt {
+  width: 25%;
+  float: left;
+  text-align: right;
+  font-family: "Benton Sans Bd", Helvetica, Roboto, Arial, sans-serif;;
+  font-size: rem-calc(14);
+  clear: left;
+  padding-right: 20px;
+  vertical-align: top;
+}
+
+.record-details dl dd {
+  width: 75%;
+  float: right;
+  text-align: left;
+  font-size: rem-calc(14);
+  vertical-align: top;
+  &:after {
+    content: " ";
+    height: 0;
+    width: 0;
+    clear: both;
+  }
+}
+

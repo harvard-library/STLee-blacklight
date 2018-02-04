@@ -85,6 +85,10 @@ a.facet__title.facet__title.facet__title.facet__title {
   float: right;
 }
 
+.accordion dd {
+  padding: 0 10px;
+}
+
 dd.accordion-navigation.active .facet__title span.toggle {
   @include fa-icon-content($fa-var-minus);
 }

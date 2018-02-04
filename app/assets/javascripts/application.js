@@ -30,5 +30,22 @@ $(document).on('turbolinks:load', function() {
             // setting to false only closes accordion panels when another is opened
             toggleable: true
         }
-    }, 'reflow'); });
+        
+        }, 'reflow');
+    });
+
+    $(".view-mode__list").click(function() {
+        $('#documents').toggleClass('list-mode', true);
+        $(this).toggleClass('active', true);
+        $(".view-mode__grid").toggleClass('active', false);
+        return false;
+    });
+    $(".view-mode__grid").click(function() {
+        $('#documents').toggleClass('list-mode', false);
+        $(this).toggleClass('active', true);
+        $(".view-mode__list").toggleClass('active', false);
+        return false;
+    });
+
 });
+

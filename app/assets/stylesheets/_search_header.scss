@@ -8,6 +8,28 @@
   margin-bottom: 30px;
 }
 
+.search-header .view-mode {
+  float: left;
+}
+
+.view-mode__grid,
+.view-mode__list {
+  padding: 5px;
+  &.active {
+    color: #222;
+  }
+}
+
+.view-mode__list {
+  @include fa-icon;
+  @include fa-icon-content($fa-var-list-ul);
+}
+
+.view-mode__grid {
+  @include fa-icon;
+  @include fa-icon-content($fa-var-th);
+}
+
 .constraint.filter {
   white-space: nowrap;
   font-size: rem-calc(14);
