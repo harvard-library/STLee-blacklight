@@ -20,3 +20,40 @@
 @mixin fa-icon-content($fa-icon) {
   &:before { content: $fa-icon; }
 }
+
+dl.audio {
+  background-image: image-url('icons/Audio.svg')
+}
+dl.archival-items {
+  background-image: image-url('icons/ArchivalItems.svg')
+}
+dl.audio {
+  background-image: image-url('icons/Audio.svg')
+}
+dl.books {
+  background-image: image-url('icons/Books.svg')
+}
+dl.drawings---illustrations {
+  background-image: image-url('icons/DrawingsIllustrations.svg')
+}
+dl.manuscripts {
+  background-image: image-url('icons/Manuscripts.svg')
+}
+dl.maps {
+  background-image: image-url('icons/Maps.svg')
+}
+dl.objects {
+  background-image: image-url('icons/Objects.svg')
+}
+dl.periodicals {
+  background-image: image-url('icons/Periodicals.svg')
+}
+dl.photographs {
+  background-image: image-url('icons/Photographs.svg')
+}
+dl.posters {
+  background-image: image-url('icons/Posters.svg')
+}
+dl.video---moving-images {
+  background-image: image-url('icons/VideoMovingImages.svg')
+}

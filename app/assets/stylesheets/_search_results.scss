@@ -94,3 +94,20 @@ dl.document-metadata > dd {
 #documents:not(.list-mode) dd.blacklight-abstract {
   display: none;
 }
+
+dl.audio,
+dl.archival-items,
+dl.audio,
+dl.books,
+dl.drawings---illustrations,
+dl.manuscripts,
+dl.maps,
+dl.objects,
+dl.periodicals,
+dl.photographs,
+dl.posters,
+dl.video---moving-images {
+  padding-left: 30px;
+  background-position: 0 0;
+  background-repeat: no-repeat;
+}
