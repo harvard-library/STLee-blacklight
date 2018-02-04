@@ -1,3 +1,61 @@
+@import "settings";
+
 #main-container {
   margin-bottom: 80px;
+}
+
+.top-bar.footer,
+.contain-to-grid.footer {
+  background-color: black;
+  height: 65px;
+}
+
+.top-bar.footer li {
+  color: white;
+  font-size: rem-calc(14);
+  font-weight: bold;
+  line-height: 65px;
+}
+
+.top-bar.footer input {
+  display: inline-block;
+}
+
+.top-bar.footer input {
+  top: 0;
+  -webkit-border-radius: 3px;
+  -moz-border-radius: 3px;
+  border-radius: 3px;
+  border: 0;
+}
+
+.top-bar.footer input[type=text] {
+  width: 200px;
+  margin: 0 10px;
+  font-weight: normal;
+  padding: 20px 15px;
+  color: #9B9B9B;
+}
+
+.top-bar.footer input[type=submit] {
+  background-color: $rouge;
+  text-transform: uppercase;
+  color: white;
+  font-size: rem-calc(16);
+  height:42px;
+  top: 2px;
+  font-weight: bold;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+.contain-to-grid.footer__navbar {
+  padding: 25px 0 7px;
+  background-color: #F7F7F7;
+  font-size: rem-calc(16);
+  line-height: 16px;
+}
+
+.contain-to-grid.footer__navbar .left a {
+  font-weight: bold;
 }
