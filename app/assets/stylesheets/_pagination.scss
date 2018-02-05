@@ -29,3 +29,13 @@
   font-size: rem-calc(16);
   font-weight: bold;
 }
+
+ul.pagination.pagination {
+  margin: 40px auto 0;
+  padding-top: 20px;
+  width: 190px;
+  & > li {
+    width: 90px;
+    display: inline-block;
+  }
+}

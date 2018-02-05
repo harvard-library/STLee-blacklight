@@ -11,3 +11,10 @@
 <div class="jump-pagination">
 <input type="text" value="<%= current_page %>"> of <%= number_with_delimiter total_pages %> <input type="submit" value=">"/>
 </div>
+
+<%= paginator.render do -%>
+  <ul class="pagination">
+    <%= prev_page_tag %>
+    <%= next_page_tag  %>
+  </ul>
+<% end -%>
