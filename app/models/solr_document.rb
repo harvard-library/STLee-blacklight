@@ -118,7 +118,7 @@ class SolrDocument
     location = hash_as_list(doc[:location] || []).detect{ |x| x.key?(:url) }
     hash_as_list(location[:url]).each do |x|
       if x['@access'] == 'raw object'
-        return x['#text']
+        return x['#text'].gsub(/http:/,'https:')
       end
     end if location
     nil
