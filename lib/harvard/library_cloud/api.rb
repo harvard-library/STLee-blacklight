@@ -66,7 +66,7 @@ module Harvard::LibraryCloud
       results = {}
       # Restrict all results
       results[:inDRS] = 'true'
-      results[:accessFlag] = 'P OR R'
+      results[:accessFlag] = 'P'
       # Don't support sort parameters for now
       # results[:sort] = sort_params_to_lc(params[:sort]) if params[:sort]
       if params[:search_field] == 'all_fields'
