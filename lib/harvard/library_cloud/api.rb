@@ -5,7 +5,7 @@ module Harvard::LibraryCloud
 
   class API
 
-    def initialize base_uri = 'https://api-beta.lib.harvard.edu/v2/'
+    def initialize base_uri = 'https://api.lib.harvard.edu/v2/'
       @base_uri = base_uri
     end
 
@@ -44,7 +44,6 @@ module Harvard::LibraryCloud
         faraday.request  :url_encoded
         faraday.response :logger
         faraday.adapter Faraday.default_adapter
-        faraday.ssl[:verify] = false
         faraday.params = params ||= {}
       end
     end
