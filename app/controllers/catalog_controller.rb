@@ -27,14 +27,17 @@ class CatalogController < ApplicationController
 
     # config.document_model = SolrDocument
 
-    # JL : Remove bookmarks
-    # config.index.document_actions.delete(:bookmark)
+    # Actions
     config.show.document_actions.delete(:bookmark)
-    config.navbar.partials.delete(:bookmark)
+    config.show.document_actions.delete(:sms)
+    config.show.document_actions.delete(:citation)
+
+    add_show_tools_partial(:add_to_collection, callback: :add_to_collection_action)
+
 
     # JL : This is where we can define the partials to be displayed!
     config.index.partials = [:thumbnail, :index_header, :index]
-    config.show.partials = [:show_header, :show_original, :show]
+    config.show.partials = [ :show_header, :show_original, :show]
 
     # JL : Configure
 
