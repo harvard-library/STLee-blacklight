@@ -32,8 +32,8 @@ class CatalogController < ApplicationController
     config.show.document_actions.delete(:sms)
     config.show.document_actions.delete(:citation)
 
-    add_show_tools_partial(:add_to_collection, callback: :add_to_collection_action)
-
+    # Add the "Add to collection" action to the individual document page
+    add_show_tools_partial(:add_to_collection, define_method: false)
 
     # JL : This is where we can define the partials to be displayed!
     config.index.partials = [:thumbnail, :index_header, :index]
@@ -234,4 +234,26 @@ class CatalogController < ApplicationController
     config.autocomplete_enabled = false
     config.autocomplete_path = 'suggest'
   end
+
+  # Add to Collection Action  - this would be called by the DEFAULT action to process a list of documents
+  def add_to_collection_action documents
+    params[:id]
+    documents
+    #TODO: Add teh thing here!
+  end
+
+  # This is the action that displays the contents of the "Add to Collection" dialog
+  def add_to_collection
+
+    if request.post?
+      # Actually add the item to the collection
+      self.add_to_collection_action request.params[:id]
+
+      # Don't render the default "Add to Collection" dialog - render the "Success!" dialog contents
+      flash[:success] ||= "Item added to collection"
+      render 'catalog/add_to_collection_success'
+    end
+
+  end
+
 end
