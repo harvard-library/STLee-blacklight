@@ -3,7 +3,7 @@
     <%= render :partial=>'/flash_msg' %>
     <div class="form-group">
       <label class="control-label col-sm-2" for="collection">
-        Select collection
+        Select the collection to add this item to
       </label>
       <div class="col-sm-10">
         <%= select_tag(:collection, options_for_select(available_collections), class: 'form-control') %><br/>

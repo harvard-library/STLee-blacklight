@@ -31,6 +31,7 @@ class CatalogController < ApplicationController
     config.show.document_actions.delete(:bookmark)
     config.show.document_actions.delete(:sms)
     config.show.document_actions.delete(:citation)
+    config.show.document_actions.delete(:email)
 
     # Add the "Add to collection" action to the individual document page
     add_show_tools_partial(:add_to_collection, define_method: false)
@@ -235,11 +236,34 @@ class CatalogController < ApplicationController
     config.autocomplete_path = 'suggest'
   end
 
-  # Add to Collection Action  - this would be called by the DEFAULT action to process a list of documents
-  def add_to_collection_action documents
-    params[:id]
-    documents
-    #TODO: Add teh thing here!
+  # Logic for adding an item to a collection,
+  def add_to_collection_action collection, item
+
+    base_uri = 'https://api.lib.harvard.edu/v2/'
+    path = 'collections/' + collection
+    params = {}
+
+    connection = Faraday.new(:url => base_uri + path) do |faraday|
+      faraday.request  :url_encoded
+      faraday.response :logger
+      faraday.adapter Faraday.default_adapter
+      faraday.params = params
+      faraday.headers['Content-Type'] = 'application/json'
+      faraday.headers['X-LibraryCloud-API-Key'] = '999999999'
+    end
+
+    raw_response = begin
+      response = connection.post do |req|
+        req.body = '[{"item_id": "' + item + '"}]'
+      end
+      { status: response.status.to_i, headers: response.headers, body: response.body.force_encoding('utf-8') }
+    rescue Errno::ECONNREFUSED, Faraday::Error::ConnectionFailed
+      raise RSolr::Error::ConnectionRefused, connection.inspect
+    rescue Faraday::Error => e
+      raise RSolr::Error::Http.new(connection, e.response)
+    end
+
+
   end
 
   # This is the action that displays the contents of the "Add to Collection" dialog
@@ -247,10 +271,10 @@ class CatalogController < ApplicationController
 
     if request.post?
       # Actually add the item to the collection
-      self.add_to_collection_action request.params[:id]
+      self.add_to_collection_action(request.params[:collection], request.params[:id])
 
       # Don't render the default "Add to Collection" dialog - render the "Success!" dialog contents
-      flash[:success] ||= "Item added to collection"
+      flash[:success] ||= "The item has been added to the collection"
       render 'catalog/add_to_collection_success'
     end
 
