@@ -249,7 +249,7 @@ class CatalogController < ApplicationController
       faraday.adapter Faraday.default_adapter
       faraday.params = params
       faraday.headers['Content-Type'] = 'application/json'
-      faraday.headers['X-LibraryCloud-API-Key'] = '999999999'
+      faraday.headers['X-LibraryCloud-API-Key'] = ENV["LC_API_KEY"]
     end
 
     raw_response = begin
