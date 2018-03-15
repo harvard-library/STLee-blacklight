@@ -3,7 +3,7 @@ class CatalogController < ApplicationController
 
   include Blacklight::Catalog
   include Blacklight::Marc::Catalog
-  # include Harvard::LibraryCloud
+  include Harvard::LibraryCloud::Collections
 
 
   configure_blacklight do |config|
@@ -236,48 +236,5 @@ class CatalogController < ApplicationController
     config.autocomplete_path = 'suggest'
   end
 
-  # Logic for adding an item to a collection,
-  def add_to_collection_action collection, item
-
-    base_uri = 'https://api.lib.harvard.edu/v2/'
-    path = 'collections/' + collection
-    params = {}
-
-    connection = Faraday.new(:url => base_uri + path) do |faraday|
-      faraday.request  :url_encoded
-      faraday.response :logger
-      faraday.adapter Faraday.default_adapter
-      faraday.params = params
-      faraday.headers['Content-Type'] = 'application/json'
-      faraday.headers['X-LibraryCloud-API-Key'] = ENV["LC_API_KEY"]
-    end
-
-    raw_response = begin
-      response = connection.post do |req|
-        req.body = '[{"item_id": "' + item + '"}]'
-      end
-      { status: response.status.to_i, headers: response.headers, body: response.body.force_encoding('utf-8') }
-    rescue Errno::ECONNREFUSED, Faraday::Error::ConnectionFailed
-      raise RSolr::Error::ConnectionRefused, connection.inspect
-    rescue Faraday::Error => e
-      raise RSolr::Error::Http.new(connection, e.response)
-    end
-
-
-  end
-
-  # This is the action that displays the contents of the "Add to Collection" dialog
-  def add_to_collection
-
-    if request.post?
-      # Actually add the item to the collection
-      self.add_to_collection_action(request.params[:collection], request.params[:id])
-
-      # Don't render the default "Add to Collection" dialog - render the "Success!" dialog contents
-      flash[:success] ||= "The item has been added to the collection"
-      render 'catalog/add_to_collection_success'
-    end
-
-  end
 
 end

@@ -9,6 +9,10 @@ module Harvard::LibraryCloud
       @base_uri = base_uri
     end
 
+    def get_base_uri
+      @base_uri
+    end
+
     def send_and_receive path, opts
       connection = build_request path, opts
       execute connection
@@ -33,12 +37,12 @@ module Harvard::LibraryCloud
       path = path.to_s
       opts[:method] ||= :get
       raise "The :data option can only be used if :method => :post" if opts[:method] != :post and opts[:data]
-      # opts[:params] = params_with_wt(opts[:params])
-      # query = RSolr::Uri.params_to_solr(opts[:params]) unless opts[:params].empty?
 
-      params = params_to_lc(opts[:params]) unless opts[:params].empty?
-
-      # opts[:query] = query
+      if opts[:params][:preserve_original]
+        params = opts[:params]
+      else
+        params = params_to_lc(opts[:params]) unless opts[:params].empty?
+      end
 
       Faraday.new(:url => @base_uri + path) do |faraday|
         faraday.request  :url_encoded
