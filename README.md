@@ -155,22 +155,31 @@ that here to add the 'search_field' parameter, which is required for the Library
 
 ## Apply custom design
 
-###`app/controllers/catalog_controller.rb`
+###Changes to `app/controllers/catalog_controller.rb`
 
 * Configure the "actions" that we want to display for items in the results by removing unwanted actions
 (`config.show.document_actions.delete()` 
-
 * Define the partials (_FILE.html.erb) that we want to include on the index and item detail pages,
 in the desired order
 ```ruby
 config.index.partials = [:thumbnail, :index_header, :index]
 config.show.partials = [ :show_header, :show_original, :show]
 ```
-
 * Set the options for the pager
 ```ruby
 config.per_page = [12,24,48,96]
 ```
+
+### Additional steps to apply the design
+
+* Install the Foundation 5 framework using the `foundation-rails` gem
+* Create a master SASS file at `app/assets/stylesheets/application.scss` and additional SASS files
+under `app/assets/stylesheets/_*.scss`
+* Add icons for the different document types at `app/assets/images/icons/*.svg`
+* Add image assets for the home page at `app/assets/images/*.png`
+* Add helper class to support displaying images using the `<picture>` element at `app/helpers/images_helper.rb`
+* Create partials under `app/views` to override the default Blacklight layout
+
 
 ## Add items to LibraryCloud Collections
 
