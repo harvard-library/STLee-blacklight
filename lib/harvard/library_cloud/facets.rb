@@ -88,10 +88,6 @@ module Harvard::LibraryCloud::Facets
       nil
     end
 
-    def url_method(f, v)
-      "hello"
-    end
-
   end
 
   ##

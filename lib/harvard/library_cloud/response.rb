@@ -6,11 +6,6 @@ module Harvard::LibraryCloud
     include Harvard::LibraryCloud::Facets
     include Harvard::LibraryCloud
 
-    # def initialize(data, request_params, options = {})
-    #   # super(data, request_params, options)
-    #   self
-    # end
-
     def response
       result = self[:items] ? self[:items][:mods] || {} : {}
       result.is_a?(Hash) ? [result] : result
