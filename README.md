@@ -170,10 +170,10 @@ config.per_page = [12,24,48,96]
 * Install the Foundation 5 framework using the `foundation-rails` gem
 * Create a master SASS file at [app/assets/stylesheets/application.scss](app/assets/stylesheets/application.scss) and additional SASS files
 under [app/assets/stylesheets/_*.scss](app/assets/stylesheets)
-* Add icons for the different document types at `app/assets/images/icons/*.svg`
-* Add image assets for the home page at `app/assets/images/*.png`
-* Add helper class to support displaying images using the `<picture>` element at `app/helpers/images_helper.rb`
-* Create partials under `app/views` to override the default Blacklight layout
+* Add icons for the different document types at [app/assets/images/icons/*.svg](app/assets/images/icons)
+* Add image assets for the home page at [app/assets/images/*.png](app/assets/images)
+* Add helper class to support displaying images using the `<picture>` element at [app/helpers/images_helper.rb](app/helpers/images_helper.rb)
+* Create partials under [app/views](app/views) to override the default Blacklight layout
 
 
 ## Add items to LibraryCloud Collections
