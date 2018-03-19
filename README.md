@@ -41,7 +41,7 @@ LibraryCloud API key. (This is only required for the "Add to Collection" functio
 
 These changes allow Blacklight to use the LibraryCloud API as the backend data store, rather than a Solr index .
 
-### [app/controllers/catalog_controller.rb](app/controllers/catalog_controller.rb
+### [app/controllers/catalog_controller.rb](app/controllers/catalog_controller.rb)
 
 This is the main configuration file for an installation of Blacklight. Changes in this file are:
 
@@ -88,7 +88,7 @@ in an error if enabled
 config.autocomplete_enabled = false
 ```
 
-### [app/models/helpers/application_helper.rb](app/models/helpers/application_helper.rb)
+### [app/helpers/application_helper.rb](app/helpers/application_helper.rb)
 
 Contains miscellaneous helper functions
  
