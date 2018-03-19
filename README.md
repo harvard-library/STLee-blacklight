@@ -39,6 +39,8 @@ LibraryCloud API key. (This is only required for the "Add to Collection" functio
 
 ## Use the LibraryCloud Item API
 
+These changes allow Blacklight to use the LibraryCloud API as the backend data store, rather than a Solr index .
+
 ### `app/controllers/catalog_controller.rb`
 
 This is the main configuration file for an installation of Blacklight. Changes in this file are:
@@ -141,14 +143,17 @@ format
 
 ### `lib/harvard/library_cloud/search_builder.rb`
 Blacklight defines a processor chain that can be used to add additional fields to the query. We use
-that here to add the 'search_field' parameter, which is required for the LibraryCloud API, not not Solr
+that here to add the 'search_field' parameter, which is required for the LibraryCloud API, but not Solr
 
 ## Apply custom design
+
+These change apply a custom design to the default Blacklight installation. The home, search,
+and item detail pages have been updated with the new design.
 
 ### Changes to `app/controllers/catalog_controller.rb`
 
 * Configure the "actions" that we want to display for items in the results by removing unwanted actions
-(`config.show.document_actions.delete()` 
+ using `config.show.document_actions.delete()` 
 * Define the partials (_FILE.html.erb) that we want to include on the index and item detail pages,
 in the desired order
 ```ruby
@@ -172,6 +177,8 @@ under `app/assets/stylesheets/_*.scss`
 
 
 ## Add items to LibraryCloud Collections
+
+Create an action that allows adding items to collections through the LibraryCloud Collections API.
 
 ### `app/controllers/catalog_controller.rb`
 
