@@ -194,7 +194,23 @@ add_show_tools_partial(:add_to_collection, define_method: false)
 
 ### [lib/harvard/library_cloud/collections.rb](lib/harvard/library_cloud/collections.rb)
 
-Add content here
+* Define method `add_to_collection` which is called by BlackLight when the 'Add to Collection' dialog is displayed
+* Define method `add_to_collection_action` which submits a single item to be added to a LibraryCloud collection
+* Define method `add_to_collection_solr_document_path` which is called by BlackLight to define the URL to invoke
+the "Add to Collection" action
+* Define methd `available_collections` which retrives a list of collections to which an item can be added 
+
+### [app/views/catalog/add_to_collection.html.erb](app/views/catalog/add_to_collection.html.erb)
+
+Modal for displaying the "Add To Collection" form
+
+### [app/views/catalog/_add_to_collection_form.html.erb](app/views/catalog/_add_to_collection_form.html.erb)
+
+Partial that renders the "Add to Collection Form"
+ 
+### [app/views/catalog/add_to_collection_success.html.erb](app/views/catalog/add_to_collection_success.html.erb)
+
+Modal for displaying the "Succes" message after an item is added to a collection
  
 ## Known Issues
 
