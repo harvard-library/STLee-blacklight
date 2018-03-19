@@ -92,7 +92,7 @@ config.autocomplete_enabled = false
 
 Contains miscellaneous helper functions
  
-### [app/models/concerns/solr_document.rb](app/models/concerns/solr_document.rb) 
+### [app/models/solr_document.rb](app/models/solr_document.rb) 
 
 Create a model for the document that will be used to display content in Blacklight on index and 
 detail pages. Takes a MODS document from LibraryCloud and returns a flat list of fields with values.
@@ -101,7 +101,7 @@ detail pages. Takes a MODS document from LibraryCloud and returns a flat list of
 
 Allow the application to find the `Harvard::LibraryCloud` package in the `lib` directory
 
-### [config/database.rb](config/database.rb), [config/environments/production.rb](config/environments/production.rb), and [db/schema.rb](db/schema.rb)
+### [config/database.yml](config/database.yml), [config/environments/production.rb](config/environments/production.rb), and [db/schema.rb](db/schema.rb)
 
 Changes to allow the site to be deployed to Heroku (use Postrgres instead of sqlite)
 
