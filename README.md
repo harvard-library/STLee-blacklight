@@ -41,7 +41,7 @@ LibraryCloud API key. (This is only required for the "Add to Collection" functio
 
 These changes allow Blacklight to use the LibraryCloud API as the backend data store, rather than a Solr index .
 
-### `app/controllers/catalog_controller.rb`
+### [app/controllers/catalog_controller.rb](app/controllers/catalog_controller.rb
 
 This is the main configuration file for an installation of Blacklight. Changes in this file are:
 
@@ -88,24 +88,24 @@ in an error if enabled
 config.autocomplete_enabled = false
 ```
 
-### `app/models/helpers/application_helper.rb`
+### [app/models/helpers/application_helper.rb](app/models/helpers/application_helper.rb)
 
 Contains miscellaneous helper functions
  
-### `app/models/concerns/solr_document.rb` 
+### [app/models/concerns/solr_document.rb](app/models/concerns/solr_document.rb) 
 
 Create a model for the document that will be used to display content in Blacklight on index and 
 detail pages. Takes a MODS document from LibraryCloud and returns a flat list of fields with values.
 
-### `config/application.rb`
+### [config/application.rb](config/application.rb)
 
 Allow the application to find the `Harvard::LibraryCloud` package in the `lib` directory
 
-### `config/database.rb`, `config/environments/production.rb`, and `db/schema.rb`
+### [config/database.rb](config/database.rb), [config/environments/production.rb](config/environments/production.rb), and [db/schema.rb](db/schema.rb)
 
 Changes to allow the site to be deployed to Heroku (use Postrgres instead of sqlite)
 
-### `lib/harvard/library_cloud/repository.rb`
+### [lib/harvard/library_cloud/repository.rb](lib/harvard/library_cloud/repository.rb)
 
 This is the primary interface through which Blacklight interacts with Solr (or in our case, the API). It replaces 
 `lib/blacklight/solr/repository.rb` which is distributed with part of the Blacklight gem. The 
@@ -115,7 +115,7 @@ code is mostly the same as that in the file it replaces, with the following chan
 * Some log statements and variable names are changed to clarify they reference the LibraryCloud API 
 rather than Solr (for example `solr_response` is renamed to `api_response`)  
 
-### `lib/harvard/library_cloud/api.rb`
+### [lib/harvard/library_cloud/api.rb](lib/harvard/library_cloud/api.rb)
 
 This class handles the actual interaction with the LibraryCloud API. This includes: 
 
@@ -125,7 +125,7 @@ to be altered to reflect the difference between Solr and LibraryCloud API syntax
 * Adding parameters to the LibraryCloud API query to limit results to public items in DRS
 * Making the actual HTTPS call to the LibraryCloud API
 
-### `lib/harvard/library_cloud/response.rb`
+### [lib/harvard/library_cloud/response.rb](lib/harvard/library_cloud/response.rb)
 Parse the response received from the LibraryCloud API. Inherit from the `response.rb` provided by
 Blacklight, and override certain functions as needed to handle differences between the responses
 provided by LibraryCloud and Solr.
@@ -133,7 +133,7 @@ provided by LibraryCloud and Solr.
 Including  `Harvard::LibraryCloud::Facets` rather than the Blacklight facet module 
 ensures that facet responses are parsed correctly based on the LibraryCloud format.
 
-### `lib/harvard/library_cloud/facets.rb`
+### [lib/harvard/library_cloud/facets.rb](lib/harvard/library_cloud/facets.rb)
 Replaces 
 `lib/blacklight/solr/response/facets.rb` which is distributed with part of the Blacklight gem. The 
 code is mostly the same as that in the file it replaces, with the following change:
@@ -141,7 +141,7 @@ code is mostly the same as that in the file it replaces, with the following chan
 * `facet_fields()` is changed to parse facets using the LibraryCloud format rather than the Solr
 format
 
-### `lib/harvard/library_cloud/search_builder.rb`
+### [lib/harvard/library_cloud/search_builder.rb](lib/harvard/library_cloud/search_builder.rb)
 Blacklight defines a processor chain that can be used to add additional fields to the query. We use
 that here to add the 'search_field' parameter, which is required for the LibraryCloud API, but not Solr
 
@@ -150,7 +150,7 @@ that here to add the 'search_field' parameter, which is required for the Library
 These change apply a custom design to the default Blacklight installation. The home, search,
 and item detail pages have been updated with the new design.
 
-### Changes to `app/controllers/catalog_controller.rb`
+### [app/controllers/catalog_controller.rb](app/controllers/catalog_controller.rb)
 
 * Configure the "actions" that we want to display for items in the results by removing unwanted actions
  using `config.show.document_actions.delete()` 
@@ -168,8 +168,8 @@ config.per_page = [12,24,48,96]
 ### Additional steps to apply the design
 
 * Install the Foundation 5 framework using the `foundation-rails` gem
-* Create a master SASS file at `app/assets/stylesheets/application.scss` and additional SASS files
-under `app/assets/stylesheets/_*.scss`
+* Create a master SASS file at [app/assets/stylesheets/application.scss](app/assets/stylesheets/application.scss) and additional SASS files
+under [app/assets/stylesheets/_*.scss](app/assets/stylesheets)
 * Add icons for the different document types at `app/assets/images/icons/*.svg`
 * Add image assets for the home page at `app/assets/images/*.png`
 * Add helper class to support displaying images using the `<picture>` element at `app/helpers/images_helper.rb`
@@ -180,7 +180,7 @@ under `app/assets/stylesheets/_*.scss`
 
 Create an action that allows adding items to collections through the LibraryCloud Collections API.
 
-### `app/controllers/catalog_controller.rb`
+### [app/controllers/catalog_controller.rb](app/controllers/catalog_controller.rb)
 
 * Include the `Harvard::LibraryCloud::Collections` module to handle the "Add to Collection" 
 functinality, so Blacklight can find it
@@ -192,7 +192,7 @@ include Harvard::LibraryCloud::Collections
 add_show_tools_partial(:add_to_collection, define_method: false)
 ```
 
-### `lib/harvard/library_cloud/collections.rb`
+### [lib/harvard/library_cloud/collections.rb](lib/harvard/library_cloud/collections.rb)
 
 Add content here
  
