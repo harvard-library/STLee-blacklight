@@ -10,10 +10,6 @@ Demo site: https://ancient-peak-25869.herokuapp.com
 
 # Deployment
 
-## Red Hat
-
-TK
-
 ## Heroku
 
 * Create a new application on Heroku
