@@ -34,7 +34,10 @@ module Harvard::LibraryCloud::Collections
 
     if request.post?
       # Actually add the item to the collection
-      add_to_collection_action(request.params[:collection], request.params[:id])
+      ids = request.params[:id].split(',')
+      ids.each do |id|
+        add_to_collection_action(request.params[:collection], id)
+      end
 
       # Don't render the default "Add to Collection" dialog - render the "Success!" dialog contents
       flash[:success] ||= "The item has been added to the collection"

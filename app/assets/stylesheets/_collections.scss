@@ -1,0 +1,23 @@
+@import "settings";
+
+h2.collections__heading {
+  background-color: black;
+  color: white;
+  font-size: rem-calc(22);
+  line-height: rem-calc(60);
+  padding-left: 15px;
+  margin-bottom: 0;
+}
+
+.collections__container {
+  background-color: $background-gray;
+  padding: 24px 20px;
+}
+
+a#add_multiple_to_collectionLink {
+  display: none;
+}
+
+a#add_multiple_to_collectionPlaceholder {
+  display: inline;
+}
