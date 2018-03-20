@@ -176,7 +176,7 @@ under [app/assets/stylesheets/_*.scss](app/assets/stylesheets)
 * Create partials under [app/views](app/views) to override the default Blacklight layout
 
 
-## Add items to LibraryCloud Collections
+## Add items to LibraryCloud Collections (Item Detail Page)
 
 Create an action that allows adding items to collections through the LibraryCloud Collections API.
 
@@ -195,7 +195,7 @@ add_show_tools_partial(:add_to_collection, define_method: false)
 ### [lib/harvard/library_cloud/collections.rb](lib/harvard/library_cloud/collections.rb)
 
 * Define method `add_to_collection` which is called by BlackLight when the 'Add to Collection' dialog is displayed
-* Define method `add_to_collection_action` which submits a single item to be added to a LibraryCloud collection
+* Define method `add_to_collection_action` which submits one or more items to be added to a LibraryCloud collection
 * Define method `add_to_collection_solr_document_path` which is called by BlackLight to define the URL to invoke
 the "Add to Collection" action
 * Define methd `available_collections` which retrives a list of collections to which an item can be added 
@@ -211,6 +211,44 @@ Partial that renders the "Add to Collection Form"
 ### [app/views/catalog/add_to_collection_success.html.erb](app/views/catalog/add_to_collection_success.html.erb)
 
 Modal for displaying the "Succes" message after an item is added to a collection
+ 
+## Add items to LibraryCloud Collections (Search Results Page) 
+
+Allow users to add items to the collections in bulk from the search results page.
+ 
+### [app/controllers/catalog_controller.rb](app/controllers/catalog_controller.rb)
+
+ * Add the "Add to Collection" action to items in the search results
+ ```ruby
+ add_results_document_tool(:add_to_collection, define_method: false)
+ ```
+
+### [app/views/catalog/_index_default.html.erb](app/views/catalog/_index_default.html.erb)
+
+Add display of document actions to the bottom of each individual item in the search results
+
+### [app/views/catalog/_add_to_collection_index.html.erb](app/views/catalog/_add_to_collection_index.html.erb)
+
+Define a partial for the 'add to collection on the index page' action, that will be included 
+from [app/views/catalog/_index_default.html.erb](app/views/catalog/_index_default.html.erb).   
+
+This is basically just a checkbox with no smarts.
+
+### [app/views/catalog/_add_to_collection_index_action.html.erb](app/views/catalog/_add_to_collection_index_action.html.erb)
+
+Define a partial that can include the actual "Add to Collection" button for the search results page, along with a 
+"Select all" checkbox. This partial is included in the search results sidebar 
+([app/views/catalog/_search_sidebar.html.erb](app/views/catalog/_search_sidebar.html.erb))
+ 
+### CSS and Javascript to handle selecting checkboxes
+
+We use Javascript to dynamically update the form submit URL for the "Add to Collection" action in the
+[app/views/catalog/_add_to_collection_index_action.html.erb](app/views/catalog/_add_to_collection_index_action.html.erb)
+partial. And a bit of CSS to make it look better. The relevant files are:
+
+* [app/assets/javascripts/add_multiple.js](app/assets/javascripts/add_multiple.js)
+* [app/assets/stylesheets/_collections.scss](app/assets/stylesheets/_collections.scss)
+  
  
 ## Known Issues
 
