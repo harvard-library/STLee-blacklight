@@ -19,14 +19,14 @@ per https://devcenter.heroku.com/articles/heroku-command-line and login to your 
 * Clone this repository
 * Add the Heroku repository as a remote
 
-``
+```
 heroku git:remote -a [MY APPLICATION NAME]
-``
+```
 * Push the code to Heroku
 
-``
+```
 git push heroku master
-``
+```
 * On the "Settings" tab add a new Config Variable named `LC_API_KEY` with the value of your 
 LibraryCloud API key. (This is only required for the "Add to Collection" functionality)
    
@@ -34,7 +34,6 @@ LibraryCloud API key. (This is only required for the "Add to Collection" functio
 
 * Install Ruby following these instructions: https://gorails.com/setup/ubuntu/17.10#ruby-rbenv
 
-````
 cd
 git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
@@ -51,8 +50,12 @@ ruby -v
 
 gem install bundler
 rbenv rehash
-```
 
+* Install Rails
+
+```gem install rails -v 5.1.4
+rbenv rehash
+```
 
 # Documentation of Code Changes
 
