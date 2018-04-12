@@ -30,6 +30,29 @@ git push heroku master
 * On the "Settings" tab add a new Config Variable named `LC_API_KEY` with the value of your 
 LibraryCloud API key. (This is only required for the "Add to Collection" functionality)
    
+## Ubuntu
+
+* Install Ruby following these instructions: https://gorails.com/setup/ubuntu/17.10#ruby-rbenv
+
+````
+cd
+git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+exec $SHELL
+
+git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
+exec $SHELL
+
+rbenv install 2.5.0
+rbenv global 2.5.0
+ruby -v
+
+gem install bundler
+rbenv rehash
+```
+
 
 # Documentation of Code Changes
 
