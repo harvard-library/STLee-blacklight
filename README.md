@@ -62,7 +62,7 @@ rbenv rehash
 
 * Install Solr for Blacklight
 
-(This may not actually be necessary, since we're not using Solr_
+(This may not actually be necessary, since we're not using Solr)
 
 ```sh
 gem install solr_wrapper
