@@ -34,6 +34,7 @@ LibraryCloud API key. (This is only required for the "Add to Collection" functio
 
 * Install Ruby following these instructions: https://gorails.com/setup/ubuntu/17.10#ruby-rbenv
 
+```sh
 cd
 git clone https://github.com/rbenv/rbenv.git ~/.rbenv
 echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
@@ -50,11 +51,30 @@ ruby -v
 
 gem install bundler
 rbenv rehash
+```
 
 * Install Rails
 
-```gem install rails -v 5.1.4
+```sh
+gem install rails -v 5.1.4
 rbenv rehash
+```
+
+* Install Solr for Blacklight
+
+(This may not actually be necessary, since we're not using Solr_
+
+```sh
+gem install solr_wrapper
+rbenv rehash
+```
+
+* Install the Application
+
+```sh
+git clone https://github.com/harvard-library/STLee-blacklight.git
+cd STLee-blacklight/
+bundle install
 ```
 
 # Documentation of Code Changes
