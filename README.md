@@ -19,17 +19,90 @@ per https://devcenter.heroku.com/articles/heroku-command-line and login to your 
 * Clone this repository
 * Add the Heroku repository as a remote
 
-``
+```
 heroku git:remote -a [MY APPLICATION NAME]
-``
+```
 * Push the code to Heroku
 
-``
+```
 git push heroku master
-``
+```
 * On the "Settings" tab add a new Config Variable named `LC_API_KEY` with the value of your 
 LibraryCloud API key. (This is only required for the "Add to Collection" functionality)
    
+## Ubuntu
+
+* Install Postgres and the Postgres development libraries, if not already installed. Make sure the database is running
+
+* Install Ruby following these instructions: https://gorails.com/setup/ubuntu/17.10#ruby-rbenv
+
+```sh
+cd
+git clone https://github.com/rbenv/rbenv.git ~/.rbenv
+echo 'export PATH="$HOME/.rbenv/bin:$PATH"' >> ~/.bashrc
+echo 'eval "$(rbenv init -)"' >> ~/.bashrc
+exec $SHELL
+
+git clone https://github.com/rbenv/ruby-build.git ~/.rbenv/plugins/ruby-build
+echo 'export PATH="$HOME/.rbenv/plugins/ruby-build/bin:$PATH"' >> ~/.bashrc
+exec $SHELL
+
+rbenv install 2.5.0
+rbenv global 2.5.0
+ruby -v
+
+gem install bundler
+rbenv rehash
+```
+
+* Install Rails
+
+```sh
+gem install rails -v 5.1.4
+rbenv rehash
+```
+
+* Install Solr for Blacklight
+
+(This may not actually be necessary, since we're not using Solr)
+
+```sh
+gem install solr_wrapper
+rbenv rehash
+```
+
+* Install the Application
+
+```sh
+git clone https://github.com/harvard-library/STLee-blacklight.git
+cd STLee-blacklight/
+bundle install
+```
+
+* Configure the database connection
+
+Edit `config/database.yml` with credentials that match the Postgres user and database that you are using. For example, change the 'development' section as follows, to add `username` and `password` configuration keys:
+
+```yml
+development:
+  <<: *default
+  database: mydatabase
+  username: myusername
+  password: mypassword
+```
+
+* Initialize the database
+
+```
+bundle exec rake db:migrate
+```
+
+* Start the application
+
+```
+rails server
+```
+
 
 # Documentation of Code Changes
 
