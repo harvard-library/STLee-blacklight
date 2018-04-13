@@ -32,6 +32,8 @@ LibraryCloud API key. (This is only required for the "Add to Collection" functio
    
 ## Ubuntu
 
+* Install postgres development libraries, if not already installed
+
 * Install Ruby following these instructions: https://gorails.com/setup/ubuntu/17.10#ruby-rbenv
 
 ```sh
@@ -76,6 +78,7 @@ git clone https://github.com/harvard-library/STLee-blacklight.git
 cd STLee-blacklight/
 bundle install
 ```
+
 
 # Documentation of Code Changes
 
