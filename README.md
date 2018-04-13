@@ -97,6 +97,12 @@ development:
 bundle exec rake db:migrate
 ```
 
+* Start the application
+
+```
+rails server
+```
+
 
 # Documentation of Code Changes
 
