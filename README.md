@@ -32,7 +32,7 @@ LibraryCloud API key. (This is only required for the "Add to Collection" functio
    
 ## Ubuntu
 
-* Install postgres development libraries, if not already installed
+* Install Postgres and the Postgres development libraries, if not already installed. Make sure the database is running
 
 * Install Ruby following these instructions: https://gorails.com/setup/ubuntu/17.10#ruby-rbenv
 
@@ -77,6 +77,24 @@ rbenv rehash
 git clone https://github.com/harvard-library/STLee-blacklight.git
 cd STLee-blacklight/
 bundle install
+```
+
+* Configure the database connection
+
+Edit `config/database.yml` with credentials that match the Postgres user and database that you are using. For example, change the 'development' section as follows, to add `username` and `password` configuration keys:
+
+```yml
+development:
+  <<: *default
+  database: mydatabase
+  username: myusername
+  password: mypassword
+```
+
+* Initialize the database
+
+```
+bundle exec rake db:migrate
 ```
 
 
