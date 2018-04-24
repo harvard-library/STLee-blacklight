@@ -30,7 +30,7 @@ git push heroku master
 * On the "Settings" tab add a new Config Variable named `LC_API_KEY` with the value of your 
 LibraryCloud API key. (This is only required for the "Add to Collection" functionality)
    
-## Ubuntu
+## RHEL
 
 * Install Postgres and the Postgres development libraries, if not already installed. Make sure the database is running
 
