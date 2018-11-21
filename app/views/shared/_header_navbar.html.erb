@@ -1,32 +1,35 @@
-<div class="contain-to-grid">
-  <nav class="top-bar" data-topbar role="navigation">
-    <section class="top-bar-section">
-      <ul class="right">
-        <li><a href="#">Sign Up</a></li>
-        <li><a href="#">Login</a></li>
-      </ul>
-    </section>
-  </nav>
-</div>
-
-<div class="row header__navbar">
-  <div class="small-4 large-4 columns">
-    <a href="/"><%= image_set_tag_3x 'logo@1x.png', alt: 'Logo', class: 'header__logo' %></a>
-  </div>
-  <div class="small-8 large-8 columns">
-    <nav>
-      <ul class="right inline-list">
-        <li><a href="#">Browse</a></li>
-        <li><a href="#">Resources</a></li>
-        <li><a href="#">About</a></li>
-        <li><a href="#">Connect</a></li>
-      </ul>
-    </nav>
-  </div>
-</div>
-
-<div class="searchbar__wrapper">
-<%= render_search_bar  %>
-</div>
-
-      <!--  render :partial=>'/user_util_links' -->
+<header class="hl__topHeader">
+	<div class="hl__topHeader__left">
+		<ul class="hl__topHeaderNav">
+			<li class="hl__topHeaderTitle__harvard"><a class="hl__topHeader__link" href="/">Harvard</a></li>
+			<li class="hl__topHeaderTitle__collections"><a class="hl__topHeader__link" href="/">Digital Collections</a></li>
+		</ul>
+	</div>
+	<div>
+		<div id="" class="bm-menu-wrap" style="position: fixed; right: 0px; z-index: 1100; width: 300px; height: 100%; transform: translate3d(100%, 0px, 0px); transition: all 0.5s ease 0s;">
+			<div class="bm-menu" style="height: 100%; box-sizing: border-box; overflow: auto;">
+				<nav class="bm-item-list" style="height: 100%;">
+					<ul class="bm-item" style="display: block; outline: none;">
+						<li role="button" aria-expanded="false" class="hl__fixedNav__navLink navLinkBrowse ">
+							<span>Browse</span><i class="mdi mdi-chevron-down"></i><!-- react-empty: 38 -->
+						</li>
+						<li class="hl__fixedNav__navLink navLinkAbout"><a href="/about"><span>About</span></a></li>
+					</ul>
+					<div>
+						<div class="hl__searchContainer mobileSearch">
+							<div class="hl__searchInputOuter"><i class="mdi mdi-magnify mdi-24px hl__searchIcon"></i><input type="text" placeholder="Search across all digital collections" size="35" value=""></div>
+						</div>
+					</div>
+				</nav>
+			</div>
+		</div>
+		<div>
+			<div class="bm-burger-button" style="z-index: 1000;"><span><span class="bm-burger-bars" style="position: absolute; height: 20%; left: 0px; right: 0px; top: 0%; opacity: 1;"></span><span class="bm-burger-bars" style="position: absolute; height: 20%; left: 0px; right: 0px; top: 40%; opacity: 1;"></span><span class="bm-burger-bars" style="position: absolute; height: 20%; left: 0px; right: 0px; top: 80%; opacity: 1;"></span></span><button style="position: absolute; left: 0px; top: 0px; width: 100%; height: 100%; margin: 0px; padding: 0px; border: none; opacity: 0; font-size: 8px; cursor: pointer;">Open Menu</button></div>
+		</div>
+	</div>
+	<div class="hl__topHeader__right">
+		<a href="https://library.harvard.edu">
+			<div class="hl__headerLogo"><img src="https://s3.amazonaws.com/archimedes-data001/hul/images/hl_header-logo.svg" alt="Harvard logo"></div>
+		</a>
+	</div>
+</header>

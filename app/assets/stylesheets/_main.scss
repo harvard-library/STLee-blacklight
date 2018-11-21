@@ -1,0 +1,4170 @@
+.slide-pane {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    background: #fff;
+    min-width: 100px;
+    height: 100%;
+    -webkit-box-shadow: 0 8px 8px rgba(0, 0, 0, .5);
+    box-shadow: 0 8px 8px rgba(0, 0, 0, .5);
+    -webkit-transition: -webkit-transform .5s;
+    transition: -webkit-transform .5s;
+    -o-transition: transform .5s;
+    transition: transform .5s;
+    transition: transform .5s, -webkit-transform .5s;
+    will-change: transform;
+}
+.slide-pane:focus {
+    outline-style: none;
+}
+.slide-pane_from_right {
+    margin-left: auto;
+    -webkit-transform: translateX(100%);
+    -ms-transform: translateX(100%);
+    transform: translateX(100%);
+}
+.slide-pane_from_right.ReactModal__Content--after-open {
+    -webkit-transform: translateX(0);
+    -ms-transform: translateX(0);
+    transform: translateX(0);
+}
+.slide-pane_from_right.ReactModal__Content--before-close {
+    -webkit-transform: translateX(100%);
+    -ms-transform: translateX(100%);
+    transform: translateX(100%);
+}
+.slide-pane_from_left {
+    margin-right: auto;
+    -webkit-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    transform: translateX(-100%);
+}
+.slide-pane_from_left.ReactModal__Content--after-open {
+    -webkit-transform: translateX(0);
+    -ms-transform: translateX(0);
+    transform: translateX(0);
+}
+.slide-pane_from_left.ReactModal__Content--before-close {
+    -webkit-transform: translateX(-100%);
+    -ms-transform: translateX(-100%);
+    transform: translateX(-100%);
+}
+.slide-pane__overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: transparent;
+}
+.slide-pane__overlay.ReactModal__Overlay--after-open {
+    background-color: rgba(0, 0, 0, .3);
+    -webkit-transition: background-color .5s;
+    -o-transition: background-color .5s;
+    transition: background-color .5s;
+}
+.slide-pane__overlay.ReactModal__Overlay--before-close {
+    background-color: transparent;
+}
+.slide-pane__header {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex: 0 0 64px;
+    flex: 0 0 64px;
+    -ms-flex-align: center;
+    align-items: center;
+    background: #ebebeb;
+    height: 64px;
+    border-bottom: 1px solid rgba(0, 0, 0, .1);
+}
+.slide-pane__title-wrapper {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex: 1 1;
+    flex: 1 1;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    margin-left: 32px;
+    min-width: 0;
+}
+.slide-pane .slide-pane__title {
+    font-size: 18px;
+    font-weight: 400;
+    max-width: 80%;
+    white-space: nowrap;
+    overflow: hidden;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    margin: 0;
+    padding: 0;
+}
+.slide-pane__close {
+    margin-left: 24px;
+    padding: 16px;
+    opacity: .7;
+    cursor: pointer;
+}
+.slide-pane__close svg {
+    width: 12px;
+    padding: 0;
+}
+.slide-pane__content {
+    position: relative;
+    overflow-y: auto;
+    padding: 24px 32px;
+    -ms-flex: 1 1 auto;
+    flex: 1 1 auto;
+}
+.slide-pane__subtitle {
+    font-size: 12px;
+    margin-top: 2px;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.hl__searchContainer {
+    height: 60px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.hl__searchContainer.mobileSearch {
+    width: 320px;
+}
+.hl__searchContainer.mobileSearch input {
+    padding-left: 0;
+}
+.hl__searchContainer.mobileSearch .hl__searchIcon {
+    display: none;
+}
+.hl__searchInputOuter {
+    background: #fff;
+    border-radius: 6px;
+    height: 45px;
+    width: 100%;
+    max-width: 580px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 0 10px;
+    -o-transition: all .1s ease-in-out;
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+}
+.hl__searchInputOuter i {
+    color: #222;
+    width: 30px;
+}
+.hl__searchInputOuter input {
+    color: #6c6c6c;
+    font-size: 16px;
+    font-family: TruenoRg;
+    background: transparent;
+    border: none;
+    outline: none;
+    padding: 13px;
+    width: 100%}
+.hl__searchInputOuter input:focus {
+    color: #222;
+    outline: none;
+}
+.hl__searchIconContainer {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 60px;
+    cursor: pointer;
+    -o-transition: all .1s ease-in-out;
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+    background: hsla(0, 0%, 100%, 0);
+}
+.hl__searchIconContainer:hover {
+    background: hsla(0, 0%, 100%, .1);
+}
+.hl__searchIcon {
+    display: -ms-flexbox;
+    display: flex;
+    padding: 13px 20px;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.hl__topHeader {
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    background-image: -webkit-linear-gradient(203deg, #52757e, #335c67);
+    background-image: -o-linear-gradient(203deg, #52757e, #335c67);
+    background-image: linear-gradient(247deg, #52757e, #335c67);
+    padding: 0;
+}
+@media (max-width:620px) {
+    .hl__topHeader {
+    position: fixed;
+    z-index: 11;
+}
+}
+.hl__topHeader .hl__topHeader__left {
+    width: 75%}
+@media (max-width:620px) {
+    .hl__topHeader .hl__topHeader__left {
+    width: 80%}
+}
+.hl__topHeader .hl__topHeader__right {
+    width: 25%}
+@media (max-width:620px) {
+    .hl__topHeader .hl__topHeader__right {
+    display: none;
+}
+}
+.hl__topHeader .hl__topHeaderNav {
+    display: -ms-flexbox;
+    display: flex;
+    height: 60px;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-left: 25px;
+    margin-bottom: 0;
+}
+@media (max-width:620px) {
+    .hl__topHeader .hl__topHeaderNav {
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+}
+.hl__topHeader .hl__topHeaderNav a {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    cursor: pointer;
+}
+.hl__topHeader__link:hover {
+    color: #fff;
+}
+.hl__topHeaderTitle__harvard a {
+    font-family: TruenoBd;
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.67;
+    letter-spacing: 1.1px;
+    color: #fff;
+}
+@media (max-width:620px) {
+    .hl__topHeaderTitle__harvard a {
+    font-size: 1.5rem;
+}
+}
+.hl__topHeaderTitle__collections a {
+    font-family: Lora;
+    font-size: 28px;
+    font-style: italic;
+    color: #fff;
+    padding-left: 30px;
+}
+@media (max-width:620px) {
+    .hl__topHeaderTitle__collections a {
+    font-size: 1.3rem;
+    padding: 0;
+}
+}
+.hl__fixedNav {
+    background: #1e1e1e;
+    height: 60px;
+    z-index: 101;
+    width: 100%;
+    max-width: 2200px;
+    display: -ms-flexbox;
+    display: flex;
+}
+.hl__headerSticky.active .sticky-inner-wrapper {
+    z-index: 3;
+}
+.hl__headerSticky .sticky-inner-wrapper {
+    z-index: 2;
+}
+@media (max-width:620px) {
+    .sticky-outer-wrapper.hl__headerSticky {
+    display: none;
+}
+}
+.hl__headerLogo {
+    height: 60px;
+    -o-object-fit: contain;
+    object-fit: contain;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    background: #1e1e1e;
+}
+.hl__headerLogo img {
+    width: 80%}
+.hl__fixedNav__navLinkContainer {
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    padding: 0;
+    margin: 0;
+}
+.hl__fixedNav__navLink, .hl__fixedNav__navLinkContainer {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.hl__fixedNav__navLink {
+    text-align: left;
+    height: 60px;
+    color: #fff;
+    font-family: TruenoLight;
+    font-size: 18px;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: normal;
+    cursor: pointer;
+    padding: 9px 15px;
+    -o-transition: all .1s ease-in-out;
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+    background: hsla(0, 0%, 100%, 0);
+    position: relative;
+}
+.hl__fixedNav__navLink.navLinkHome {
+    padding: 9px 20px 9px 25px;
+}
+.hl__fixedNav__navLink.navLinkBrowse .mdi-chevron-down {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+    -webkit-transition: -webkit-transform .05s linear;
+    transition: -webkit-transform .05s linear;
+    -o-transition: transform .05s linear;
+    transition: transform .05s linear;
+    transition: transform .05s linear, -webkit-transform .05s linear;
+    margin: 5px 5px 5px 10px;
+}
+.hl__fixedNav__navLink:hover {
+    color: #fff;
+    background: hsla(0, 0%, 100%, .1);
+}
+.hl__fixedNav__navLink a, .hl__fixedNav__navLink span {
+    color: #fff;
+    font-family: TruenoLight;
+    text-align: left;
+    width: 100%;
+    display: block;
+}
+.hl__fixedNav__navLink.active {
+    background: #424242;
+}
+.hl__navLink__dropdown {
+    position: absolute;
+    width: 300px;
+    top: 60px;
+    left: 0;
+    z-index: 2;
+    background: #424242;
+    -webkit-box-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 3px 6px rgba(0, 0, 0, .23);
+    box-shadow: 0 3px 6px rgba(0, 0, 0, .16), 0 3px 6px rgba(0, 0, 0, .23);
+}
+.hl__navLink__dropdown-container {
+    padding: 0;
+}
+.hl__navLink__dropdown-item {
+    height: 50px;
+    padding: 20px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    border-bottom: 1px solid #f3f3f3;
+    font-size: 16px;
+}
+.hl__navLink__dropdown-item:hover {
+    background: #fff;
+    color: #414141;
+}
+.hl__navLink__dropdown-item.repoItem {
+    border-bottom: none;
+}
+.hl__fixedNav__navLink.navLinkBrowse.active .mdi-chevron-down {
+    -webkit-transform: rotate(180deg);
+    -ms-transform: rotate(180deg);
+    transform: rotate(180deg);
+    -webkit-transition: -webkit-transform .05s linear;
+    transition: -webkit-transform .05s linear;
+    -o-transition: transform .05s linear;
+    transition: transform .05s linear;
+    transition: transform .05s linear, -webkit-transform .05s linear;
+}
+.hl__mobileMenu .hl__navLink__dropdown-item {
+    height: 40px;
+}
+.bm-menu-wrap, .hl__mobileMenu .hl__fixedNav__navLink.navLinkBrowse.active, .hl__mobileMenu .hl__navLink__dropdown-container {
+    background: -webkit-linear-gradient(203deg, #52757e, #335c67);
+    background: -o-linear-gradient(203deg, #52757e, #335c67);
+    background: linear-gradient(247deg, #52757e, #335c67);
+}
+.bm-menu-wrap {
+    position: absolute!important;
+    top: 58px;
+    height: 200px!important;
+}
+.bm-menu-wrap .navLinkBrowse i {
+    -webkit-transform: rotate(-90deg)!important;
+    -ms-transform: rotate(-90deg)!important;
+    transform: rotate(-90deg)!important;
+    margin: 5px 0 0!important;
+}
+.bm-menu {
+    overflow: hidden!important;
+}
+.bm-item-list {
+    width: 40%}
+.bm-item {
+    padding-left: 0;
+}
+.bm-burger-button {
+    display: none;
+    position: absolute;
+    width: 22px;
+    height: 15px;
+    right: 20px;
+    top: 22px;
+}
+@media (max-width:620px) {
+    .bm-burger-button {
+    display: block;
+}
+}
+.bm-burger-button span:first-child {
+    top: 0;
+}
+.bm-burger-button span:first-child, .bm-burger-button span:nth-child(2) {
+    height: 10%!important;
+    -webkit-transform-origin: left center;
+    -ms-transform-origin: left center;
+    transform-origin: left center;
+    -webkit-transition: -webkit-transform .5s ease;
+    transition: -webkit-transform .5s ease;
+    -o-transition: transform .5s ease;
+    transition: transform .5s ease;
+    transition: transform .5s ease, -webkit-transform .5s ease;
+}
+.bm-burger-button span:nth-child(2) {
+    top: 18px;
+}
+.bm-burger-button span:nth-child(3) {
+    top: 36px;
+    height: 10%!important;
+    -webkit-transform-origin: left center;
+    -ms-transform-origin: left center;
+    transform-origin: left center;
+    -webkit-transition: -webkit-transform .5s ease;
+    transition: -webkit-transform .5s ease;
+    -o-transition: transform .5s ease;
+    transition: transform .5s ease;
+    transition: transform .5s ease, -webkit-transform .5s ease;
+}
+.bm-burger-button.isOpen span:first-child {
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+    top: 0!important;
+    left: 8px;
+}
+.bm-burger-button.isOpen span:nth-child(2) {
+    width: 0;
+    opacity: 0;
+}
+.bm-burger-button.isOpen span:nth-child(3) {
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+    top: 100%!important;
+    left: 8px;
+}
+.bm-burger-bars {
+    background: #fff;
+}
+.bm-cross-button {
+    height: 24px;
+    width: 24px;
+}
+.bm-cross {
+    background: #bdc3c7;
+}
+.mobileBrowsePaneOverlay {
+    z-index: 11;
+    height: 200px;
+    margin-top: 60px;
+}
+.slide-pane__overlay.ReactModal__Overlay--after-open {
+    background-color: transparent;
+}
+.mobileBrowsePane {
+    background: -webkit-linear-gradient(203deg, #52757e, #335c67);
+    background: -o-linear-gradient(203deg, #52757e, #335c67);
+    background: linear-gradient(247deg, #52757e, #335c67);
+}
+.slide-pane__header {
+    display: none;
+}
+.slide-pane__content {
+    padding: 0;
+}
+.slide-pane__content .hl__navLink__dropdown-item {
+    height: 100%;
+    font-size: 18px;
+    font-family: TruenoLight;
+    color: #fff;
+    background: none;
+    padding: 15px 22px;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.menuItem {
+    padding: 15px 20px;
+    display: block;
+    text-align: left;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-family: TruenoRg;
+    cursor: pointer;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.menuSubItem {
+    padding: 0 25px;
+    display: block;
+    text-align: left;
+    font-size: 12px;
+    text-transform: uppercase;
+    font-family: TruenoRg;
+    cursor: pointer;
+}
+.menuSubItem.menuSubItemLast {
+    margin-bottom: 15px;
+}
+.menuSubItem span {
+    padding: 10px 15px;
+    border-left: 2px solid #eee;
+    color: #222;
+    display: block;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.sidebarUserAvatarImage {
+    width: 50px;
+    height: 50px;
+    margin: 12px 0;
+    display: block;
+    border-radius: 100%;
+    border: 1px solid #eee;
+}
+.sidebarUserName {
+    font-size: 16px;
+    font-family: TruenoRg;
+    font-weight: 700;
+    line-height: 1.3em;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.leftMenuHead {
+    background: #f6f6f6;
+    min-height: 120px;
+    padding: 60px 20px 30px;
+    text-align: left;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.leftMenu {
+    background: #fff;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+#hl__footer {
+    display: -ms-flexbox;
+    display: flex;
+    min-height: 320px;
+    -ms-flex-align: start;
+    align-items: flex-start;
+    padding-top: 60px;
+    padding-bottom: 60px;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    background: #1e1e1e;
+}
+.hl__footer__container {
+    max-width: 1450px;
+    margin: 0 auto;
+    padding: 0 20px;
+    display: -ms-flexbox;
+    display: flex;
+}
+@media (max-width:620px) {
+    .hl__footer__container {
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+}
+.hl__footerColOne {
+    display: -ms-flexbox;
+    display: flex;
+    padding-left: 0;
+    width: 20%}
+@media (max-width:620px) {
+    .hl__footerColOne {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    width: 100%}
+}
+.hl__footerColTwo {
+    display: -ms-flexbox;
+    display: flex;
+    text-align: left;
+    width: 20%}
+@media (max-width:620px) {
+    .hl__footerColTwo {
+    width: 100%;
+    padding-top: 25px;
+}
+.hl__footerColTwo ul {
+    padding-left: 0;
+}
+}
+.hl__footerColThree {
+    width: 20%;
+    display: -ms-flexbox;
+    display: flex;
+}
+.hl__footerColThree ul {
+    padding: 0;
+}
+.hl__footerColThree li {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+.hl__footerColThree .hl__footerLink {
+    padding-right: 12px;
+}
+@media (max-width:620px) {
+    .hl__footerColThree {
+    width: 100%}
+}
+.hl__footerColFour {
+    display: -ms-flexbox;
+    display: flex;
+    width: 30%;
+    height: 100%;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-flow: wrap;
+    flex-flow: wrap;
+}
+@media (max-width:620px) {
+    .hl__footerColFour {
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 100%}
+}
+.hl__footerLogo {
+    width: 180px;
+    height: 140px;
+    background-image: url("https://s3.amazonaws.com/archimedes-data001/hul/images/hl-logo.png");
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.hl__footerLink {
+    font-family: TruenoLight;
+    font-weight: 100;
+    color: #fff;
+    font-size: 14px;
+    line-height: 1.93;
+    letter-spacing: 1.9px;
+    text-transform: uppercase;
+}
+.hl__footerLink:hover {
+    text-decoration: none;
+    color: #fff;
+}
+.hl__footerLinkRight {
+    padding-right: 30px;
+}
+.hl__footerLinkRight a {
+    font-family: TruenoLight;
+    font-weight: 100;
+    color: #fff;
+    font-size: 14px;
+    line-height: 1.87;
+    text-align: right;
+}
+.hl__footerLinkRight a:hover {
+    text-decoration: none;
+    color: #fff;
+}
+.hl__footerCopyright {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    color: silver;
+    margin: 10px 0;
+    font-size: 14px;
+    font-weight: 100;
+    font-family: TruenoLight;
+}
+.hl__footerCopyrightContainer {
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    width: 230px;
+    padding-left: 35px;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 35%}
+@media (max-width:620px) {
+    .hl__footerCopyrightContainer {
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    padding: 45px 0 0;
+}
+}
+.footerBuiltBy {
+    color: #727272;
+}
+.hl__footerSocialLinks {
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 35%;
+    width: 145px;
+    border-right: 1px solid #424242;
+}
+@media (max-width:620px) {
+    .hl__footerSocialLinks {
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    border-right: none;
+}
+}
+.hl__footerTwitterLogo {
+    margin-right: 30px;
+}
+.hl__footerFacebookLogo, .hl__footerTwitterLogo {
+    width: 40px;
+    height: 42px;
+    background-size: contain;
+    background-repeat: no-repeat;
+}
+.hl__ccContainer {
+    min-height: 150px;
+    padding-top: 30px;
+    -ms-flex: 1 1 100%;
+    flex: 1 1 100%;
+    -ms-flex-align: center;
+    align-items: center;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: wrap;
+    flex-flow: wrap;
+}
+.hl__ccContainer svg {
+    margin-right: 10px;
+}
+.hl__ccContainer p {
+    font-family: TruenoLight;
+    font-size: 15px;
+    color: silver;
+    margin: 0;
+    -ms-flex: 1 1 90%;
+    flex: 1 1 90%}
+.hl__ccContainer .hl__ccText {
+    font-size: 11px;
+}
+.hl__ccContainer .hl__ccLearnLink {
+    color: silver;
+    text-decoration: underline;
+    -webkit-text-decoration-color: #0579b8;
+    text-decoration-color: #0579b8;
+}
+.hl__dcpLayout {
+    overflow-x: hidden;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.releaseMessage {
+    position: fixed;
+    bottom: 0;
+    left: 0;
+    width: 100vw;
+    background: hsla(0, 0%, 100%, .9);
+    border-top: 1px solid #eee;
+    z-index: 100;
+    padding: 30px;
+    text-align: center;
+}
+.releaseMessage span {
+    font-family: TruenoRg;
+    font-size: 18px;
+    color: #222;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.noResults {
+    text-align: left;
+}
+.noResults p {
+    width: 90%;
+    max-width: 720px;
+    font-size: 22px;
+    font-family: Lora, Georgia, serif;
+    font-weight: 100;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.container {
+    max-width: 2200px;
+    margin: 0;
+    padding: 0;
+}
+.hl__filter-results-row {
+    max-width: 1450px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.hl__filter-results-row .searchInner {
+    margin: 20px auto 60px;
+}
+@media (max-width:620px) {
+    .hl__filter-results-row .searchInner {
+    margin: 20px 0 60px 30px;
+}
+}
+.hl__itemGridView {
+    width: 30%;
+    max-width: 310px;
+    margin: 20px 1%}
+@media (max-width:620px) {
+    .hl__itemGridView {
+    width: 100%;
+    display: -ms-flexbox;
+    display: flex;
+}
+}
+.hl__itemGridViewContainer {
+    display: inline-block;
+    position: relative;
+    text-align: left;
+    vertical-align: top;
+}
+.hl__itemGridViewImageContainer {
+    width: 100%;
+    height: 150px;
+    display: block;
+    margin: 0 0 10px;
+}
+.hl__itemGridViewImageContainer>div {
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: 50%;
+    width: 100%;
+    height: 100%}
+.hl__itemGridViewMetaContainer {
+    padding: 5px 10px;
+}
+.hl__itemGridViewMetaContainer a {
+    width: 100%;
+    display: block;
+}
+.hl__itemGridViewTitle {
+    font-family: TruenoSBd;
+    font-size: 18px;
+    color: #0579b8;
+    cursor: pointer;
+    word-wrap: break-word;
+    padding: 0;
+}
+.hl__itemListView {
+    width: 100%;
+    display: -ms-flexbox;
+    display: flex;
+}
+.hl__itemListView .hl__itemListViewImageContainer {
+    width: 200px;
+    height: 150px;
+}
+.hl__itemListView .hl__itemListViewImageContainer>div {
+    height: 100%;
+    width: 100%}
+.hl__itemListView .hl__itemListViewImageContainer img {
+    width: 100%;
+    -o-object-fit: contain;
+    object-fit: contain;
+    height: 100%}
+.hl__itemListView .hl__itemListViewContainer {
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    margin-bottom: 80px;
+}
+.hl__itemListView .hl__itemListViewMetaContainer {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: wrap;
+    flex-flow: wrap;
+    width: 100%;
+    min-width: 0;
+    -ms-flex-pack: left;
+    justify-content: left;
+    padding-left: 25px;
+}
+.hl__itemListView .hl__itemListViewMetaContainer .hl__itemListViewTitleLink {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: wrap;
+    flex-flow: wrap;
+    overflow: hidden;
+}
+.hl__itemListView .hl__itemListViewMetaContainer .hl__itemListViewDate, .hl__itemListView .hl__itemListViewMetaContainer .hl__itemListViewNote, .hl__itemListView .hl__itemListViewMetaContainer .hl__itemListViewTitle {
+    height: 25px;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+}
+.hl__itemListView .hl__itemListViewMetaContainer .hl__dateLabel, .hl__itemListView .hl__itemListViewMetaContainer .hl__itemListViewDate {
+    font-family: Lora, Georgia, serif;
+    font-size: 14px;
+    font-color: #414141;
+}
+.hl__itemListView .hl__itemListViewMetaContainer .hl__dateLabel .hl__dateLabel, .hl__itemListView .hl__itemListViewMetaContainer .hl__itemListViewDate .hl__dateLabel {
+    font-weight: 700;
+    margin-right: 5px;
+}
+.hl__itemListView .hl__itemListViewMetaContainer .hl__itemListViewCitation, .hl__itemListView .hl__itemListViewMetaContainer .hl__itemListViewDesc, .hl__itemListView .hl__itemListViewMetaContainer .hl__itemListViewNote {
+    overflow: hidden;
+    font-family: Lora, Georgia, serif;
+    font-size: 14px;
+}
+.hl__itemListView .hl__itemListViewMetaContainer .hl__itemListViewDesc {
+    max-height: 40px;
+}
+.hl__itemListView .hl__itemListViewMetaContainer .hl__itemListViewTitle {
+    width: 100%;
+    -ms-flex-pack: left;
+    justify-content: left;
+    height: 25px;
+    margin-bottom: 0;
+    font-family: TruenoSBd;
+    color: #0579b8;
+    font-size: 18px;
+    cursor: pointer;
+    padding: 0;
+}
+.hl__itemListView .hl__itemListViewMetaContainer p {
+    text-align: left;
+    margin-bottom: 0;
+    width: 100%}
+.hl__itemViewMasonry {
+    margin-top: 90px;
+}
+.hl__itemViewMasonry li {
+    width: 200px;
+}
+.hl__itemViewMasonry img {
+    width: 200px;
+    padding: 10px;
+}
+.hl__itemMasonryViewMetaContainer {
+    display: none!important;
+    -ms-flex-flow: wrap;
+    flex-flow: wrap;
+    position: absolute;
+    bottom: 14px;
+    display: list-item;
+    padding: 20px 25px;
+    width: 100%}
+.hl__itemMasonryViewMetaContainer h3, .hl__itemMasonryViewMetaContainer p {
+    font-family: TruenoLight;
+    margin: 0;
+    line-height: 1.2;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    word-wrap: break-word;
+}
+.hl__itemMasonryViewMetaContainer h3 {
+    font-family: TruenoSBd;
+    font-size: 14px;
+    color: #1e1e1e;
+    padding: 5px 0;
+}
+.hl__itemMasonryViewMetaContainer p {
+    font-family: TruenoRg;
+    font-size: 14px;
+    color: #5f5f5f;
+}
+.hl__itemMasonryViewContainer.isActive li img {
+    opacity: .4;
+}
+.hl__itemMasonryViewContainer.isActive .hl__itemMasonryViewMetaContainer {
+    display: list-item!important;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.itemList {
+    padding: 20px 0;
+    margin: 0 auto;
+    width: 95%;
+    text-align: center;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+.itemList, .itemList.grid-view {
+    -ms-flex-align: start;
+    align-items: flex-start;
+}
+.itemList.itemListHorizontal {
+    width: auto;
+    max-height: 720px;
+    overflow-y: hidden;
+    overflow-x: scroll;
+}
+.itemList.itemListHorizontal .itemListItem {
+    display: inline-block;
+    vertical-align: top;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.searchFilter {
+    max-width: 990px;
+    width: 100%;
+    margin: 0 auto 60px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+}
+.searchFilterField {
+    background: #f6f6f6;
+    padding: 10px 20px 7px;
+    margin: 2px 4px 2px 0;
+}
+.searchFilterField label {
+    color: #727272;
+    font-size: 12px;
+    font-family: TruenoBd;
+    text-transform: uppercase;
+    padding-right: 5px;
+}
+.searchFilterField span {
+    color: #212121;
+    font-size: 16px;
+    font-family: TruenoRg;
+    padding-left: 5px;
+}
+.searchFilterField i {
+    padding-left: 10px;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.searchFiltersWithLabel {
+    width: 100%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+}
+.searchFiltersWithLabel .searchFiltersLabel {
+    display: block;
+    color: #222;
+    min-width: 125px;
+}
+.searchFiltersWithLabel .searchFilter {
+    margin: 0 10px;
+}
+.searchPaginationAndTotalLabel span {
+    color: #222;
+    padding: 25px 0;
+    display: block;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.miradorItemViewer {
+    background: #424242;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.hl__blacklightHome .hl__page-header__container {
+    padding: 0 5%;
+    margin-top: -60px;
+}
+@media (max-width:620px) {
+    .hl__blacklightHome .hl__page-header__container {
+    margin-top: 60px;
+}
+}
+.hl__blacklightHome .hl__page-header__container .hl__page-subtext, .hl__blacklightHome .hl__page-header__container .hl__page-title {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    padding-bottom: 0;
+}
+.hl__blacklightHome .hl__page-header__container .hl__page-title {
+    font-family: TruenoBd;
+    font-size: 52px;
+    text-transform: uppercase;
+    letter-spacing: 2.5px;
+}
+@media (max-width:620px) {
+    .hl__blacklightHome .hl__page-header__container .hl__page-title {
+    font-size: 32px;
+}
+}
+.hl__blacklightHome .hl__page-header__container .hl__page-subtext {
+    font-family: Lora, Georgia, serif;
+    font-size: 64px;
+    font-style: italic;
+    margin-bottom: 30px;
+}
+@media (max-width:620px) {
+    .hl__blacklightHome .hl__page-header__container .hl__page-subtext {
+    font-size: 22px;
+}
+}
+.hl__blacklightHome .hl__page-header__container .hl__searchContainer {
+    margin-left: 0!important;
+}
+.hl__blacklightHome .hl__page-header__container .hl__searchContainer .hl__searchInputOuter {
+    height: 59px;
+}
+@media (max-width:620px) {
+    .hl__blacklightHome .hl__page-header__container .hl__searchContainer .hl__searchInputOuter {
+    width: 100%}
+}
+.hl__blacklightHome .hl__page-header__container .hl__searchContainer input {
+    width: 100%;
+    display: inline-block;
+}
+.hl__blacklightHome .hl__page-header__container .hl__searchContainer button {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    font-family: TruenoLight;
+    font-size: 13px;
+    letter-spacing: 1.1px;
+    color: #1e1e1e;
+    border: none;
+    border-left: 1px solid #1e1e1e;
+    height: 34px;
+    padding-left: 18px;
+    -o-transition: all .1s ease-in-out;
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+    text-transform: uppercase;
+    cursor: pointer;
+}
+@media (max-width:620px) {
+    .hl__blacklightHome .hl__page-header__container .hl__searchContainer button {
+    font-size: 12px;
+    padding-left: 10px;
+}
+}
+.hl__blacklightHome .hl__page-header__container .hl__searchContainer button:hover {
+    color: #0579b8;
+}
+.hl__blacklightHome .hl__page-header {
+    background-image: url("https://s3.amazonaws.com/archimedes-data001/hul/images/blacklight_landing_background.png");
+    background-size: cover;
+    height: 590px;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    position: relative;
+}
+.hl__blacklightHome .hl__overlayContainer {
+    position: absolute;
+    width: 33%;
+    padding: 40px 50px;
+    background: hsla(0, 0%, 85%, .85);
+    text-align: left;
+    z-index: 1;
+    right: 8%;
+    bottom: 0;
+}
+@media (max-width:620px) {
+    .hl__blacklightHome .hl__overlayContainer {
+    right: 0;
+    padding: 20px;
+    width: 100%}
+}
+.hl__blacklightHome .hl__overlayContainer h3 {
+    font-family: TruenoBd;
+    font-size: 26px;
+    line-height: 1.23;
+    color: #1e1e1e;
+    padding-bottom: 20px;
+}
+.hl__blacklightHome .hl__overlayContainer p {
+    font-family: TruenoLight;
+    font-size: 18px;
+    line-height: 1.89;
+    color: #1e1e1e;
+}
+.hl__blacklightHome .hl__overlayContainer p a {
+    color: #1e1e1e;
+    text-decoration: underline;
+}
+.hl__blacklightHome .hl__overlayContainer p a:hover {
+    color: none;
+}
+.hl__blacklightHome .hl__viewDetails {
+    position: absolute;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    left: 5%;
+    background-color: rgba(0, 0, 0, .5);
+    z-index: 1;
+    bottom: 0;
+    font-family: TruenoRg;
+    font-size: 13px;
+    color: #fff;
+    padding: 15px 30px;
+    -o-transition: all .1s ease-in-out;
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+}
+@media (max-width:620px) {
+    .hl__blacklightHome .hl__viewDetails {
+    display: none;
+}
+}
+.hl__blacklightHome .hl__viewDetails:hover {
+    background-color: rgba(0, 0, 0, .8);
+}
+.hl__blacklightHome .hl__viewDetails:hover span {
+    text-decoration: none;
+}
+.hl__blacklightHome .hl__viewDetails img, .hl__blacklightHome .hl__viewDetails span {
+    display: inline-block;
+}
+.hl__blacklightHome .hl__viewDetails span {
+    color: #fff;
+    text-decoration: underline;
+    -o-transition: all .1s ease-in-out;
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+}
+.hl__blacklightHome .hl__viewDetails img {
+    padding-right: 12px;
+}
+.hl__blacklightHome .hl__searchIcon {
+    margin-right: 15px;
+}
+@media (max-width:620px) {
+    .hl__blacklightHome .hl__searchIcon {
+    display: none!important;
+}
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.hl__blacklightHome__highlights {
+    margin: 85px auto 0;
+}
+.hl__blacklightHome__highlights .hl__itemMasonryViewMetaContainer {
+    width: 365px;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+}
+.hl__blacklightHome__sectionTitle {
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    font-family: TruenoBd;
+    text-transform: uppercase;
+    font-size: 32px;
+    letter-spacing: 2.4px;
+    color: #1e1e1e;
+}
+.hl__blacklightHome__moreHighlights, .hl__blacklightHome__seeAll {
+    font-family: TruenoBd;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: #0579b8;
+    text-transform: uppercase;
+    border: none;
+    padding: 0;
+    vertical-align: super;
+}
+.hl__blacklightHome__moreHighlights .moreHighlightsIcon, .hl__blacklightHome__seeAll .moreHighlightsIcon {
+    margin-left: 40px;
+    margin-right: 10px;
+}
+@media (max-width:620px) {
+    .hl__blacklightHome__moreHighlights {
+    display: none;
+}
+}
+.hl__blacklightHome__seeAllContainer {
+    height: 20px;
+    padding-bottom: 85px;
+    border-bottom: 1px solid silver;
+}
+.hl__blacklightHome__seeAll {
+    float: right;
+}
+.hl__blacklightHome__moreHighligthsFeaturedContainer {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    margin: 40px 0;
+}
+.hl__blacklightHome__moreHighligthsFeaturedContainer div {
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+@media (max-width:620px) {
+    .hl__blacklightHome__moreHighligthsFeaturedContainer div {
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+}
+.hl__blacklightHome__moreHighlightsFeatured {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: baseline;
+    align-items: baseline;
+    width: 32%;
+    overflow: hidden;
+    padding: 10%;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-decoration: none;
+    -ms-flex-pack: center;
+    justify-content: center;
+    cursor: pointer;
+    position: relative;
+    -o-transition: all .1s ease-in-out;
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+}
+@media (max-width:620px) {
+    .hl__blacklightHome__moreHighlightsFeatured {
+    margin-bottom: 30px;
+    padding: 50%;
+    width: 100%}
+}
+.hl__blacklightHome__moreHighlightsFeatured.moreHighlightsFeaturedActive .hl__blacklightHome__collectionHighlights__meta {
+    opacity: 1;
+}
+.hl__blacklightHome__moreHighlightsFeatured.bough {
+    background-image: url("https://s3.amazonaws.com/archimedes-data001/hul/images/goldenbough.jpg");
+}
+@media (max-width:620px) {
+    .hl__blacklightHome__moreHighlightsFeatured.bough {
+    background-image: -webkit-linear-gradient(hsla(0, 0%, 100%, .5), hsla(0, 0%, 100%, .5)), url("https://s3.amazonaws.com/archimedes-data001/hul/images/goldenbough.jpg");
+    background-image: -o-linear-gradient(hsla(0, 0%, 100%, .5), hsla(0, 0%, 100%, .5)), url("https://s3.amazonaws.com/archimedes-data001/hul/images/goldenbough.jpg");
+    background-image: -webkit-gradient(linear, left top, left bottom, from(hsla(0, 0%, 100%, .5)), to(hsla(0, 0%, 100%, .5))), url("https://s3.amazonaws.com/archimedes-data001/hul/images/goldenbough.jpg");
+    background-image: linear-gradient(hsla(0, 0%, 100%, .5), hsla(0, 0%, 100%, .5)), url("https://s3.amazonaws.com/archimedes-data001/hul/images/goldenbough.jpg");
+}
+}
+.hl__blacklightHome__moreHighlightsFeatured.boughActive {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(hsla(0, 0%, 100%, .8)), to(hsla(0, 0%, 100%, .8))), url("https://s3.amazonaws.com/archimedes-data001/hul/images/goldenbough.jpg");
+    background-image: -webkit-linear-gradient(hsla(0, 0%, 100%, .8), hsla(0, 0%, 100%, .8)), url("https://s3.amazonaws.com/archimedes-data001/hul/images/goldenbough.jpg");
+    background-image: -o-linear-gradient(hsla(0, 0%, 100%, .8), hsla(0, 0%, 100%, .8)), url("https://s3.amazonaws.com/archimedes-data001/hul/images/goldenbough.jpg");
+    background-image: linear-gradient(hsla(0, 0%, 100%, .8), hsla(0, 0%, 100%, .8)), url("https://s3.amazonaws.com/archimedes-data001/hul/images/goldenbough.jpg");
+}
+.hl__blacklightHome__moreHighlightsFeatured.eclogues {
+    background-image: url("https://s3.amazonaws.com/archimedes-data001/hul/images/eclogues.jpg");
+}
+@media (max-width:620px) {
+    .hl__blacklightHome__moreHighlightsFeatured.eclogues {
+    background-image: -webkit-linear-gradient(hsla(0, 0%, 100%, .5), hsla(0, 0%, 100%, .5)), url("https://s3.amazonaws.com/archimedes-data001/hul/images/eclogues.jpg");
+    background-image: -o-linear-gradient(hsla(0, 0%, 100%, .5), hsla(0, 0%, 100%, .5)), url("https://s3.amazonaws.com/archimedes-data001/hul/images/eclogues.jpg");
+    background-image: -webkit-gradient(linear, left top, left bottom, from(hsla(0, 0%, 100%, .5)), to(hsla(0, 0%, 100%, .5))), url("https://s3.amazonaws.com/archimedes-data001/hul/images/eclogues.jpg");
+    background-image: linear-gradient(hsla(0, 0%, 100%, .5), hsla(0, 0%, 100%, .5)), url("https://s3.amazonaws.com/archimedes-data001/hul/images/eclogues.jpg");
+}
+}
+.hl__blacklightHome__moreHighlightsFeatured.highlightActive {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(hsla(0, 0%, 100%, .8)), to(hsla(0, 0%, 100%, .8))), url("https://s3.amazonaws.com/archimedes-data001/hul/images/eclogues.jpg");
+    background-image: -webkit-linear-gradient(hsla(0, 0%, 100%, .8), hsla(0, 0%, 100%, .8)), url("https://s3.amazonaws.com/archimedes-data001/hul/images/eclogues.jpg");
+    background-image: -o-linear-gradient(hsla(0, 0%, 100%, .8), hsla(0, 0%, 100%, .8)), url("https://s3.amazonaws.com/archimedes-data001/hul/images/eclogues.jpg");
+    background-image: linear-gradient(hsla(0, 0%, 100%, .8), hsla(0, 0%, 100%, .8)), url("https://s3.amazonaws.com/archimedes-data001/hul/images/eclogues.jpg");
+}
+.hl__blacklightHome__moreHighlightsFeatured.colosseum {
+    background-image: url("https://s3.amazonaws.com/archimedes-data001/hul/images/colosseum.jpg");
+}
+.hl__blacklightHome__moreHighlightsFeatured.colosseumActive {
+    background-image: -webkit-gradient(linear, left top, left bottom, from(hsla(0, 0%, 100%, .8)), to(hsla(0, 0%, 100%, .8))), url("https://s3.amazonaws.com/archimedes-data001/hul/images/colosseum.jpg");
+    background-image: -webkit-linear-gradient(hsla(0, 0%, 100%, .8), hsla(0, 0%, 100%, .8)), url("https://s3.amazonaws.com/archimedes-data001/hul/images/colosseum.jpg");
+    background-image: -o-linear-gradient(hsla(0, 0%, 100%, .8), hsla(0, 0%, 100%, .8)), url("https://s3.amazonaws.com/archimedes-data001/hul/images/colosseum.jpg");
+    background-image: linear-gradient(hsla(0, 0%, 100%, .8), hsla(0, 0%, 100%, .8)), url("https://s3.amazonaws.com/archimedes-data001/hul/images/colosseum.jpg");
+}
+.hl__blacklightHome__collectionHighlights__meta {
+    position: absolute;
+    top: 0;
+    left: 0;
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    opacity: 0;
+    padding: 8%;
+    -o-transition: all .1s ease-in-out;
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+}
+@media (max-width:620px) {
+    .hl__blacklightHome__collectionHighlights__meta {
+    opacity: 1;
+}
+}
+.hl__blacklightHome__collectionHighlights__meta h3, .hl__blacklightHome__collectionHighlights__meta p {
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    width: 100%}
+.hl__blacklightHome__collectionHighlights__meta h3 {
+    font-size: 1.7vw;
+    color: #1e1e1e;
+    margin: 0;
+    padding: 10px 0;
+}
+@media (max-width:620px) {
+    .hl__blacklightHome__collectionHighlights__meta h3 {
+    font-size: 26px;
+}
+}
+.hl__blacklightHome__collectionHighlights__meta p {
+    font-size: 1.2vw;
+    color: #414141;
+    margin: 0;
+    padding: 5px 0;
+}
+@media (max-width:620px) {
+    .hl__blacklightHome__collectionHighlights__meta p {
+    font-size: 18px;
+}
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.hl__blacklightHome__related {
+    margin: 71px auto 0;
+}
+.hl__blacklightHome__related .hl__blacklightHome__sectionTitle {
+    width: 100%;
+    margin-bottom: 32px;
+}
+.hl__blacklightHome__related .hl__blacklightHome__relatedContainer {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    padding-bottom: 81px;
+    border-bottom: 1px solid silver;
+}
+.hl__blacklightHome__related .hl__blacklightHome__relatedTeaser {
+    display: block;
+    width: 32%;
+    overflow: hidden;
+    text-decoration: none;
+    background: rgba(250, 212, 96, .25);
+    -o-transition: all .1s ease-in-out;
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+}
+@media (max-width:620px) {
+    .hl__blacklightHome__related .hl__blacklightHome__relatedTeaser {
+    width: 100%;
+    margin-bottom: 30px;
+}
+}
+.hl__blacklightHome__related .hl__blacklightHome__relatedTeaser:hover {
+    background: rgba(250, 212, 96, .35);
+}
+.hl__blacklightHome__related .hl__blacklightHome__iconContainer {
+    display: inline-block;
+    width: 20%;
+    height: 100%;
+    background: #f8c21c;
+    overflow: hidden;
+}
+.hl__blacklightHome__related .hl__blacklightHome__iconContainer img {
+    margin-top: 9px;
+}
+.hl__blacklightHome__related .hl__blacklightHome__relatedTeaser__content {
+    padding: 25px;
+    display: inline-block;
+    width: 75%;
+    vertical-align: top;
+}
+.hl__blacklightHome__related .hl__blacklightHome__relatedTeaser__content .hl__blacklightHome__relatedTeaser__class {
+    font-family: TruenoBd;
+    font-size: 14px;
+    letter-spacing: 2px;
+    color: #6c6c6c;
+}
+.hl__blacklightHome__related .hl__blacklightHome__relatedTeaser__content .hl__blacklightHome__relatedTeaser__name {
+    font-family: TruenoBd;
+    font-size: 26px;
+    padding-top: 16px;
+    letter-spacing: normal;
+    color: #1e1e1e;
+}
+@media (max-width:340px) {
+    .hl__blacklightHome__related .hl__blacklightHome__relatedTeaser__content .hl__blacklightHome__relatedTeaser__name {
+    font-size: 20px;
+}
+}
+.hl__blacklightHome__related .hl__blacklightHome__relatedTeaser__content .hl__blacklightHome__relatedTeaser__desc {
+    font-family: Lora, Georgia, serif;
+    font-size: 15px;
+    letter-spacing: normal;
+    color: #414141;
+    padding-top: 16px;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.hl__blacklightHome__itemHighlights {
+    margin: 80px auto 0;
+}
+.hl__blacklightHome__itemHighlightsContainer {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    margin: 40px 0;
+}
+@media (max-width:620px) {
+    .hl__blacklightHome__itemHighlightsContainer {
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+}
+.hl__blacklightHome__itemHighlightsFeatured {
+    position: relative;
+    display: -ms-flexbox;
+    display: flex;
+    height: 125px;
+    width: 18%;
+    margin: 15px 5px;
+    text-decoration: none;
+    cursor: pointer;
+}
+@media (max-width:620px) {
+    .hl__blacklightHome__itemHighlightsFeatured {
+    width: 100%}
+}
+.hl__blacklightHome__itemHighlightsFeatured:hover .hl__itemHighlightsMetaContainer {
+    opacity: 1;
+}
+.hl__blacklightHome__itemHighlightsFeatured .hl__blacklightHome__itemHighlightsFeaturedImage {
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    height: 100%;
+    width: 100%}
+.hl__blacklightHome__itemHighlightsFeatured .hl__itemHighlightsMetaContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    height: 100%;
+    width: 100%;
+    z-index: 1;
+    display: -ms-flexbox;
+    display: flex;
+    padding: 10px;
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    -ms-flex-align: end;
+    align-items: flex-end;
+    text-align: left;
+    background-image: -webkit-gradient(linear, left top, left bottom, from(hsla(0, 0%, 100%, .8)), to(hsla(0, 0%, 100%, .8)));
+    background-image: -webkit-linear-gradient(hsla(0, 0%, 100%, .8), hsla(0, 0%, 100%, .8));
+    background-image: -o-linear-gradient(hsla(0, 0%, 100%, .8), hsla(0, 0%, 100%, .8));
+    background-image: linear-gradient(hsla(0, 0%, 100%, .8), hsla(0, 0%, 100%, .8));
+    opacity: 0;
+    -o-transition: all .1s ease-in-out;
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+}
+.hl__blacklightHome__itemHighlightsFeatured .hl__itemHighlightsMetaContainer a {
+    display: block;
+}
+.hl__blacklightHome__itemHighlightsFeatured .hl__itemHighlightsMetaContainer a h3 {
+    word-wrap: normal;
+    white-space: normal;
+}
+.itemSeeAll {
+    border-bottom: none;
+}
+.hl__itemHighlightsMetaContainer {
+    -ms-flex-flow: wrap;
+    flex-flow: wrap;
+    position: absolute;
+    bottom: 14px;
+    display: list-item;
+    padding: 0 20px;
+    width: 100%}
+.hl__itemHighlightsMetaContainer h3, .hl__itemHighlightsMetaContainer p {
+    font-family: TruenoLight;
+    margin: 0;
+    line-height: 1.2;
+    -o-text-overflow: ellipsis;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
+    word-wrap: break-word;
+}
+.hl__itemHighlightsMetaContainer h3 {
+    font-family: TruenoSBd;
+    font-size: 14px;
+    color: #1e1e1e;
+}
+.hl__itemHighlightsMetaContainer p {
+    font-family: TruenoRg;
+    font-size: 14px;
+    color: #5f5f5f;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.hl__blacklightHome .hl__blacklightHomeMain {
+    max-width: 1450px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.hl__generalPage {
+    min-height: 600px;
+    max-width: 930px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.hl__generalPage__title {
+    color: #222;
+    font-size: 60px;
+    font-family: Helvetica;
+    font-weight: 400;
+    text-align: center;
+    padding-top: 88px;
+}
+@media (max-width:620px) {
+    .hl__generalPage__title {
+    font-size: 32px;
+}
+}
+.hl__generalPage__textContainer {
+    padding: 86px 0;
+}
+.hl__generalPage__introBody {
+    line-height: 32px;
+    color: #414141;
+    counter-reset: section;
+}
+.hl__generalPage__body, .hl__generalPage__introBody {
+    font-family: Lora, Georgia, serif;
+    font-size: 19px;
+    font-weight: 400;
+}
+.hl__generalPage__body {
+    position: relative;
+    line-height: 29px;
+    color: #1e1e1e;
+    padding-left: 60px;
+}
+.hl__generalPage__body:before {
+    border: 2px solid #dfdfdf;
+    border-radius: 100%;
+    color: #a51c30;
+    counter-increment: section;
+    content: counter(section);
+    display: inline-block;
+    font-family: Trueno, sans-serif;
+    font-size: 30px;
+    font-weight: 600;
+    height: 41px;
+    line-height: 42px;
+    position: absolute;
+    left: 0;
+    text-align: center;
+    width: 41px;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.hl__blacklightBrowseCol__container {
+    max-width: 1450px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+.hl__blacklightBrowseCol__collectionList {
+    display: -ms-flexbox;
+    display: flex;
+    max-width: 1170px;
+    margin: 105px auto 0;
+}
+.hl__blacklightBrowseCol__listItemContainer {
+    width: 50%;
+    margin-right: 19px;
+}
+@media (max-width:620px) {
+    .hl__blacklightBrowseCol__listItemContainer {
+    width: 100%;
+    margin-right: 0;
+}
+}
+.hl__blacklightBrowseCol__listItemTitle {
+    font-family: TruenoBd;
+    font-size: 32px;
+    line-height: normal;
+    color: #1e1e1e;
+    margin-bottom: 13px;
+}
+@media (max-width:620px) {
+    .hl__blacklightBrowseCol__listItemTitle {
+    font-size: 24px;
+}
+}
+.hl__blacklightBrowseCol__link {
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%}
+@media (max-width:620px) {
+    .hl__blacklightBrowseCol__link {
+    -ms-flex-direction: column-reverse;
+    flex-direction: column-reverse;
+}
+}
+.hl__blacklightBrowseCol__listItemCount {
+    font-family: TruenoLight;
+    font-size: 25px;
+    line-height: 1.68;
+    color: #1e1e1e;
+}
+@media (max-width:620px) {
+    .hl__blacklightBrowseCol__listItemCount {
+    font-size: 18px;
+}
+}
+.hl__blacklightBrowseCol__curator li, .hl__blacklightBrowseCol__listItemDesc {
+    font-family: Lora, Georgia, serif;
+    font-size: 19px;
+    line-height: 1.68;
+    color: #414141;
+}
+@media (max-width:620px) {
+    .hl__blacklightBrowseCol__curator li, .hl__blacklightBrowseCol__listItemDesc {
+    font-size: 18px;
+}
+}
+.hl__blacklightBrowseCol__curatorMetaField, .hl__blacklightBrowseCol__repositoryMetaField {
+    font-family: TruenoSBd;
+    font-size: 13px;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: normal;
+    letter-spacing: 1.5px;
+    color: #6c6c6c;
+    margin-bottom: 5px;
+}
+.hl__blacklightBrowseCol__curator {
+    font-family: Lora, Georgia, serif;
+    font-size: 19px;
+    line-height: 1.68;
+    color: #414141;
+    margin-bottom: 25px;
+}
+.hl__blacklightBrowseCol__repository {
+    font-family: TruenoBd;
+    font-size: 19px;
+    line-height: 1.68;
+    letter-spacing: normal;
+    color: #0579b8!important;
+}
+.hl__blacklightBrowseCol__listItemImage {
+    background-image: url("https://s3.amazonaws.com/archimedes-data001/hul/images/mss-castle.jpg");
+    width: 50%;
+    margin-left: 19px;
+    height: 450px;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+@media (max-width:620px) {
+    .hl__blacklightBrowseCol__listItemImage {
+    width: 100%;
+    margin-left: 0;
+    height: 0;
+    padding: 40%;
+    margin-bottom: 20px;
+}
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.hl__blacklightBrowse {
+    padding-bottom: 187px;
+}
+.hl__blacklightBrowse__pageHeader {
+    display: -ms-flexbox;
+    display: flex;
+    height: 450px;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding: 0 7%}
+.hl__blacklightBrowse__title {
+    max-width: 887px;
+    font-family: TruenoBd;
+    font-size: 64px;
+    text-align: center;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.27;
+    letter-spacing: 3px;
+    color: #1e1e1e;
+    text-transform: uppercase;
+    margin-bottom: 25px;
+}
+@media (max-width:620px) {
+    .hl__blacklightBrowse__title {
+    font-size: 32px;
+}
+}
+.hl__blacklightBrowseCol__subtitle {
+    max-width: 887px;
+    font-family: Lora, Georgia, serif;
+    font-size: 22px;
+    text-align: center;
+    line-height: 1.54;
+    color: #1e1e1e;
+}
+@media (max-width:620px) {
+    .hl__blacklightBrowseCol__subtitle {
+    font-size: 20px;
+}
+}
+.hl__blacklightBrowseCol__sortToolbar {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    height: 74px;
+    padding: 0 7%;
+    background: #f3f3f3;
+}
+.hl__blacklightBrowseCol__sortLinkContainer {
+    display: -ms-flexbox;
+    display: flex;
+    width: 450px;
+    -ms-flex-pack: distribute;
+    justify-content: space-around;
+    margin-bottom: 0;
+    padding-left: 0;
+    padding-right: 145px;
+}
+@media (max-width:620px) {
+    .hl__blacklightBrowseCol__sortLinkContainer {
+    padding: 0;
+}
+}
+.hl__blacklightBrowseCol__sortLink {
+    color: #0579b8;
+    font-family: TruenoSBd;
+    font-size: 15px;
+    cursor: pointer;
+}
+.downChevron {
+    margin-right: 5px;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.hl__blacklightBrowseRepo__listItemContainer {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: row-reverse;
+    flex-direction: row-reverse;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    width: 50%;
+    padding: 30px;
+    cursor: pointer;
+    border-bottom: 1px solid #999;
+}
+.hl__blacklightBrowseRepo__listItemContainer:hover {
+    -webkit-box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .19);
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, .2), 0 6px 20px 0 rgba(0, 0, 0, .19);
+}
+.hl__blacklightBrowseRepo__listItemContainer:nth-child(odd) {
+    padding: 30px 30px 30px 0;
+}
+@media (max-width:620px) {
+    .hl__blacklightBrowseRepo__listItemContainer: nth-child(odd) {
+    padding: 30px 0;
+}
+}
+@media (max-width:620px) {
+    .hl__blacklightBrowseRepo__listItemContainer {
+    -ms-flex-direction: column-reverse;
+    flex-direction: column-reverse;
+    width: 100%;
+    padding: 30px 0;
+}
+}
+.hl__blacklightBrowseRepo__listItemMetaContainer {
+    width: 50%}
+@media (max-width:620px) {
+    .hl__blacklightBrowseRepo__listItemMetaContainer {
+    width: 100%;
+    margin-top: 20px;
+}
+}
+.hl__blacklightBrowseRepo__listItemMeta {
+    margin-left: 30px;
+}
+@media (max-width:620px) {
+    .hl__blacklightBrowseRepo__listItemMeta {
+    margin-left: 0;
+}
+}
+.hl__blacklightBrowseRepo__listItemCount {
+    font-family: TruenoLight;
+    font-size: 25px;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.68;
+    letter-spacing: normal;
+    color: #1e1e1e;
+}
+@media (max-width:620px) {
+    .hl__blacklightBrowseRepo__listItemCount {
+    font-size: 18px;
+}
+}
+.hl__blacklightBrowseRepo__listItemImageContainer {
+    width: 50%}
+@media (max-width:620px) {
+    .hl__blacklightBrowseRepo__listItemImageContainer {
+    width: 100%}
+}
+.hl__blacklightBrowseRepo__listItemImage {
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    height: 186px;
+    overflow: hidden;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+}
+.hl__blacklightBrowseRepo__listItemTitle {
+    font-family: TruenoBd;
+    font-size: 26px;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.23;
+    letter-spacing: normal;
+    color: #1e1e1e;
+    margin-bottom: 13px;
+}
+@media (max-width:620px) {
+    .hl__blacklightBrowseRepo__listItemTitle {
+    font-size: 24px;
+}
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.hl__blacklightBrowse__repoContainer {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    max-width: 1450px;
+    margin: 0 auto;
+    padding: 0 20px;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.hl__blacklightBrowse__pageHeader.browseRepoHeader {
+    -ms-flex-pack: start;
+    justify-content: flex-start;
+    padding-top: 87px;
+    height: 400px;
+}
+.hl__blacklightBrowse__title.browseRepoTitle {
+    max-width: 900px;
+}
+@media (max-width:620px) {
+    .hl__blacklightBrowse__title.browseRepoTitle {
+    font-size: 32px;
+}
+}
+.u-position-absolute {
+    position: absolute;
+}
+.u-position-relative {
+    position: relative;
+}
+.accordion {
+    border: 1px solid rgba(0, 0, 0, .1);
+    border-radius: 2px;
+}
+.accordion__item+.accordion__item {
+    border-top: 1px solid rgba(0, 0, 0, .1);
+}
+.accordion__item--has-icon {
+    position: relative;
+}
+.accordion__title {
+    background-color: #f4f4f4;
+    color: #444;
+    cursor: pointer;
+    padding: 18px;
+    width: 100%;
+    text-align: left;
+    border: none;
+}
+.accordion__title:hover {
+    background-color: #ddd;
+}
+.accordion__body {
+    padding: 20px;
+    display: block;
+}
+.accordion__body, .accordion__body--hidden {
+    -webkit-animation: fadein .35s ease-in;
+    animation: fadein .35s ease-in;
+}
+.accordion__body--hidden {
+    display: none;
+    opacity: 0;
+}
+.accordion__body>:last-child, .accordion__title>:last-child {
+    margin-bottom: 0;
+}
+.accordion__arrow {
+    display: inline-block;
+    position: relative;
+    width: 24px;
+    height: 12px;
+    position: absolute;
+    top: 50%;
+    right: 0;
+    margin-top: -6px;
+}
+.accordion__arrow:after, .accordion__arrow:before {
+    display: block;
+    position: absolute;
+    top: 50%;
+    width: 10px;
+    height: 2px;
+    background-color: currentColor;
+    content: ""}
+.accordion__arrow:before {
+    left: 4px;
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.accordion__arrow:after, [aria-expanded=true] .accordion__arrow:before, [aria-selected=true] .accordion__arrow:before {
+    -webkit-transform: rotate(-45deg);
+    -ms-transform: rotate(-45deg);
+    transform: rotate(-45deg);
+}
+.accordion__arrow:after {
+    right: 4px;
+}
+[aria-expanded=true] .accordion__arrow:after, [aria-selected=true] .accordion__arrow:after {
+    -webkit-transform: rotate(45deg);
+    -ms-transform: rotate(45deg);
+    transform: rotate(45deg);
+}
+.accordion__arrow:after, .accordion__arrow:before {
+    transition: transform .25s ease, -webkit-transform .25s ease;
+}
+@-webkit-keyframes fadein {
+    0% {
+    opacity: 0;
+}
+to {
+    opacity: 1;
+}
+}
+@keyframes fadein {
+    0% {
+    opacity: 0;
+}
+to {
+    opacity: 1;
+}
+}
+@-webkit-keyframes move-down {
+    0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+}
+10% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+}
+20% {
+    -webkit-transform: translateY(5px);
+    transform: translateY(5px);
+}
+30% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+}
+to {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+}
+}
+@keyframes move-down {
+    0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+}
+10% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+}
+20% {
+    -webkit-transform: translateY(5px);
+    transform: translateY(5px);
+}
+30% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+}
+to {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+}
+}
+@-webkit-keyframes move-up {
+    0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+}
+10% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+}
+20% {
+    -webkit-transform: translateY(-5px);
+    transform: translateY(-5px);
+}
+30% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+}
+to {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+}
+}
+@keyframes move-up {
+    0% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+}
+10% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+}
+20% {
+    -webkit-transform: translateY(-5px);
+    transform: translateY(-5px);
+}
+30% {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+}
+to {
+    -webkit-transform: translateY(0);
+    transform: translateY(0);
+}
+}
+.accordion__title--animated:hover .accordion__arrow {
+    -webkit-animation-name: move-down;
+    animation-name: move-down;
+    -webkit-animation-duration: 1.5s;
+    animation-duration: 1.5s;
+}
+.accordion__title--animated[aria-expanded=true]:hover .accordion__arrow {
+    -webkit-animation-name: move-up;
+    animation-name: move-up;
+    -webkit-animation-duration: 1.5s;
+    animation-duration: 1.5s;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.paginationButton {
+    background: #f6f6f6;
+    display: inline-block;
+    vertical-align: top;
+    cursor: pointer;
+    margin: 10px;
+    border: 2px solid #f6f6f6;
+    color: #0579b8;
+    background: transparent;
+    border: 2px solid transparent;
+    -o-transition: all .1s ease-in-out;
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+}
+.paginationButton.isActive, .paginationButton:hover {
+    background: #f6f6f6;
+    border: 2px solid #f6f6f6;
+}
+.paginationButton.isActive {
+    outline: 1px solid #fff;
+}
+.paginationButton a, .paginationButton span {
+    color: #0579b8;
+}
+.paginationButton a {
+    padding: 7px 15px;
+    display: block;
+}
+.paginationButton span {
+    display: inline-block;
+    vertical-align: top;
+    font-family: TruenoBd;
+}
+.paginationButton i {
+    display: inline-block;
+    vertical-align: top;
+    padding-top: 7px;
+    line-height: 10px;
+}
+.paginationDots {
+    padding: 7px 15px;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.pagination {
+    margin: 90px auto;
+    text-align: center;
+    display: block;
+    border-top: 2px solid #999;
+    border-radius: 0;
+    margin: 15px auto;
+    padding: 20px 0;
+    text-align: left;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.blacklightItemListPage {
+    padding: 0;
+}
+.blacklightItemListPage .hl__filter-rail {
+    margin-top: 0;
+}
+@media (max-width:620px) {
+    .blacklightItemListPage .hl__filter-rail {
+    width: 90%}
+}
+.blacklightItemListPage .hl__filter-rail.hl__filter-rail--collapsed {
+    left: -340px;
+}
+.blacklightItemListPage .searchOuter {
+    max-width: 1450px;
+    margin: 50px auto;
+    padding: 0 20px;
+    display: -ms-flexbox;
+    display: flex;
+}
+@media (max-width:620px) {
+    .blacklightItemListPage .searchOuter {
+    -ms-flex-direction: column;
+    flex-direction: column;
+}
+}
+@media (max-width:620px) {
+    .blacklightItemListPage .searchInner {
+    margin: 20px 0 60px 50px;
+}
+}
+.blacklightItemListPage .hl__itemGridViewContainer {
+    margin: 30px 10px;
+    max-width: 310px;
+    width: 310px;
+}
+.blacklightItemListPage .hl__itemGridViewMetaContainer {
+    display: block;
+    width: 100%;
+    height: auto;
+}
+.hl__searchRow.blacklightItemListPageSearchHeader {
+    width: 100%;
+    margin: 0 auto;
+}
+.blacklightItemListPageSearchHeaderInner {
+    width: 90%;
+    margin: 0 auto;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.blacklightItemListPageSearchHeaderInner .hl__searchContainer, .blacklightItemListPageSearchHeaderInner .hl__searchContainer .hl__searchInputOuter {
+    margin-left: 0;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.itemMetaField {
+    display: block;
+    border-top: 1px solid transparent;
+    padding: 20px 0;
+}
+.itemMetaField label, .itemMetaField span {
+    display: block;
+    vertical-align: top;
+}
+.itemMetaField label {
+    width: 10%;
+    margin-right: 15px;
+    min-width: 160px;
+    color: #aaa;
+    font-family: TruenoRg;
+    font-size: 20px;
+    text-align: left;
+}
+.itemMetaField span {
+    font-family: Lora, serif;
+    font-weight: 100;
+    color: #212121;
+    font-size: 18px;
+    line-height: 1.7em;
+    text-align: left;
+}
+.itemMetaField:last-child {
+    padding-bottom: 0;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.itemDetail {
+    width: 100%;
+    margin: 0 auto;
+    text-align: center;
+    padding: 60px 0 0;
+}
+.itemDetail .itemDetailColumn {
+    max-width: 750px;
+    width: 95%;
+    margin: 0 auto;
+}
+.itemDetail .tags {
+    margin: 0 auto;
+    width: 100%;
+    text-align: left;
+}
+.hl__itemDetail__back {
+    height: 44px;
+    width: 100%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-left: 25px;
+    cursor: pointer;
+}
+@media (max-width:620px) {
+    .hl__itemDetail__back {
+    margin-top: 60px;
+}
+}
+.hl__itemDetail__back img {
+    margin-right: 11px;
+}
+.hl__itemDetail__back .hl__itemDetail__backLink {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    font-family: TruenoRg;
+    font-size: 15px;
+    color: #f3f3f3!important;
+    text-decoration: underline!important;
+}
+.hl__itemDetail__breadcrumbSection {
+    height: 60px;
+    display: -ms-flexbox;
+    display: flex;
+    padding-left: 25px;
+    -ms-flex-align: center;
+    align-items: center;
+    background: #1e1e1e;
+    opacity: .5;
+}
+@media (max-width:620px) {
+    .hl__itemDetail__breadcrumbSection {
+    margin-top: 60px;
+}
+}
+.hl__itemDetail__breadcrumbContainer {
+    display: -ms-flexbox;
+    display: flex;
+}
+.hl__itemDetail__pageHeader {
+    height: 580px;
+    -ms-flex-flow: column;
+    flex-flow: column;
+    background: #414141;
+}
+.hl__itemDetail__pageHeader, .hl__itemDetail__pageHeader .hl__itemDetail__mainImageContainer {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.hl__itemDetail__pageHeader .hl__itemDetail__mainImageContainer {
+    width: 847px;
+    height: 497px;
+    background: #000;
+    margin-bottom: 15px;
+}
+@media (max-width:620px) {
+    .hl__itemDetail__pageHeader .hl__itemDetail__mainImageContainer {
+    height: 440px;
+    width: 90%}
+}
+@media (max-width:900px) {
+    .hl__itemDetail__pageHeader .hl__itemDetail__mainImageContainer {
+    width: 90%}
+}
+.hl__itemDetail__pageHeader .hl__itemDetail__mainImageContainer img {
+    height: 90%}
+.hl__itemDetail__pageHeader .hl__itemDetail__viewerLink {
+    display: -ms-flexbox;
+    display: flex;
+    width: 847px;
+    height: 30px;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    -ms-flex-align: center;
+    align-items: center;
+    font-family: TruenoRg;
+    font-size: 16px;
+    text-decoration: underline!important;
+    color: #fff;
+}
+@media (max-width:620px) {
+    .hl__itemDetail__pageHeader .hl__itemDetail__viewerLink {
+    width: 90%;
+    font-size: 12px;
+}
+.hl__itemDetail__pageHeader .hl__itemDetail__viewerLink.blacklightViewerLink {
+    padding-bottom: 20px;
+}
+}
+.hl__itemDetail__pageHeader .hl__itemDetail__viewerLink img {
+    margin-left: 10px;
+}
+.hl__itemDetail__breadcrumbLink {
+    display: -ms-flexbox;
+    display: flex;
+    padding-right: 60px;
+    font-family: TruenoRg;
+    color: #fff;
+    font-size: 18px;
+    cursor: arrow;
+}
+.hl__itemDetail__breadcrumbLink:hover {
+    color: inherit;
+}
+.hl__itemDetail__breadcrumbLink.underline {
+    text-decoration: underline;
+    cursor: pointer;
+}
+@media (max-width:620px) {
+    .hl__itemDetail__breadcrumbLink.itemLink, .hl__itemDetail__breadcrumbLink.overviewLink {
+    display: none;
+}
+}
+.hl__itemDetail__metaFieldSection {
+    display: -ms-flexbox;
+    display: flex;
+    max-width: 1450px;
+    margin: 80px auto;
+    padding: 0 20px;
+}
+@media (max-width:620px) {
+    .hl__itemDetail__metaFieldSection {
+    display: block!important;
+}
+}
+.hl__itemDetail__itemMetaFieldContainer {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-direction: column;
+    flex-direction: column;
+    width: 66.6%;
+    max-width: 930px;
+    margin-right: 20px;
+}
+@media (max-width:620px) {
+    .hl__itemDetail__itemMetaFieldContainer {
+    padding: 0 7%;
+    width: 100%}
+}
+.hl__itemDetail__itemMetaField {
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    padding: 40px 0;
+    border-bottom: 2px solid silver;
+}
+@media (max-width:620px) {
+    .hl__itemDetail__itemMetaField {
+    display: block;
+}
+}
+.hl__itemDetail__itemMetaField label {
+    width: 33%;
+    font-family: TruenoBd;
+    font-size: 20px;
+    letter-spacing: 1.5;
+    color: #1e1e1e;
+    margin: 0;
+}
+@media (max-width:620px) {
+    .hl__itemDetail__itemMetaField label {
+    width: 100%;
+    padding-bottom: 10px;
+}
+}
+.hl__itemDetail__itemMetaField p {
+    width: 66%;
+    font-family: Lora, Georgia, serif;
+    font-size: 15px;
+    color: #414141;
+}
+@media (max-width:620px) {
+    .hl__itemDetail__itemMetaField p {
+    width: 100%}
+}
+.hl__itemDetail__tools {
+    width: 33.3%;
+    max-width: 450px;
+    height: -webkit-fit-content;
+    height: -moz-fit-content;
+    height: fit-content;
+    padding: 45px;
+    border: 2px solid silver;
+}
+@media (max-width:620px) {
+    .hl__itemDetail__tools {
+    width: 100%;
+    border: none;
+}
+}
+.hl__itemDetail__tools .hl__itemDetail__toolTitle {
+    font-family: TruenoBd;
+    font-size: 20px;
+    text-transform: uppercase;
+    letter-spacing: 1.5px;
+    color: #1e1e1e;
+    padding-bottom: 40px;
+}
+.hl__itemDetail__tools button {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+    font-family: TruenoBd;
+    font-size: 12px;
+    text-transform: uppercase;
+    color: #fff;
+    height: 30px;
+    background-color: #1e1e1e;
+    border-radius: 4px;
+    width: 235px;
+    margin-bottom: 49px;
+    cursor: pointer;
+}
+.hl__itemDetail__tools h4 {
+    color: #6c6c6c;
+    font-family: TruenoSBd;
+    text-transform: uppercase;
+    font-size: 13px;
+}
+.hl__itemDetail__tools .hl__itemDetail__moreDetailsLink {
+    display: -ms-flexbox;
+    display: flex;
+    font-family: TruenoRg;
+    font-size: 15px;
+    color: #0579b8!important;
+    padding-right: 10px;
+    cursor: pointer;
+}
+.hl__itemDetail__tools .hl__itemDetail__toolMoreDetails {
+    padding: 30px 0;
+    border-top: 2px solid #6c6c6c;
+}
+.hl__itemDetail__tools .hl__itemDetail__toolAppearsContainer {
+    padding: 20px 0 30px;
+}
+.hl__itemDetail__tools .hl__itemDetail__toolAppearsLink {
+    font-family: TruenoRg;
+    font-size: 15px;
+    color: #0579b8!important;
+    cursor: pointer;
+}
+.hl__itemDetail__tools .hl__itemDetail__moreDetailsType {
+    display: -ms-flexbox;
+    display: flex;
+    font-family: TruenoRg;
+    color: #1e1e1e;
+    padding-bottom: 20px;
+}
+.hl__itemDetail__tools .hl__itemDetail__moreDetailsType img {
+    background: silver;
+    margin-right: 10px;
+}
+.hl__itemDetail__itemPagination {
+    display: -ms-flexbox;
+    display: flex;
+    margin: 0 7%;
+    -ms-flex-pack: center;
+    justify-content: center;
+    padding-bottom: 50px;
+}
+.hl__itemDetail__itemPagination button {
+    width: 210px;
+    height: 30px;
+    border-radius: 4px;
+    border: 1px solid #1e1e1e;
+    font-size: 12px;
+    font-family: TruenoBd;
+    letter-spacing: 1px;
+    text-align: center;
+    margin: 0 15px;
+    cursor: pointer;
+}
+.hl__itemDetail__relatedItems {
+    margin: 0 7%;
+    padding-bottom: 40px;
+}
+.hl__itemDetail__relatedItems .hl__itemDetail__relatedItemTitle {
+    font-family: TruenoBd;
+    font-size: 32px;
+    letter-spacing: 2.4px;
+    color: #1e1e1e;
+}
+.hl__itemDetail__relatedItemsContainer {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    margin: 40px 0;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.hl__page-header {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    text-align: center;
+    background-size: cover;
+    height: 400px;
+    background-repeat: no-repeat;
+    background-position: 50%}
+@media (max-width:620px) {
+    .hl__page-header {
+    -ms-flex-align: start;
+    align-items: flex-start;
+    height: 300px;
+    padding-top: 60px;
+}
+}
+.hl__page-header__background-screen {
+    opacity: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1;
+    background-color: #000;
+    background-size: 100%;
+    opacity: .6;
+    background: -webkit-linear-gradient(top, rgba(0, 0, 0, .5), #000);
+    background: -webkit-gradient(linear, left top, left bottom, from(rgba(0, 0, 0, .5)), to(#000));
+    background: -o-linear-gradient(top, rgba(0, 0, 0, .5) 0, #000 100%);
+    background: linear-gradient(180deg, rgba(0, 0, 0, .5) 0, #000);
+}
+.hl__page-header__container {
+    width: 100%;
+    position: absolute;
+    z-index: 1;
+}
+@media (max-width:620px) {
+    .hl__page-header__container {
+    margin-top: 40px;
+}
+}
+.hl__page-header__container .hl__page-title {
+    display: block;
+    color: #fff;
+    padding: 0 0 20px;
+    font-family: TruenoBd;
+    margin: 0;
+    font-size: 60px;
+    font-weight: 400;
+    font-stretch: normal;
+    font-style: normal;
+    letter-spacing: normal;
+}
+@media (max-width:620px) {
+    .hl__page-header__container .hl__page-title {
+    font-size: 2rem;
+    text-align: left;
+}
+}
+.hl__page-header__container .hl__page-title.exhibit-title {
+    padding: 0 7% 20px;
+}
+.hl__page-header__container .hl__page-subtext {
+    display: block;
+    color: #fff;
+    padding: 0 0 20px;
+    font-family: Lora, Georgia, serif;
+    margin: 0;
+    font-size: 26px;
+    font-stretch: normal;
+    font-weight: 400;
+    letter-spacing: normal;
+}
+@media (max-width:620px) {
+    .hl__page-header__container .hl__page-subtext {
+    font-size: 1rem;
+    text-align: left;
+}
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.hl__collectionDetailsSticky .sticky-inner-wrapper {
+    z-index: 1;
+    margin: 0 7%}
+.sticky-outer-wrapper.hl__collectionDetailsSticky {
+    margin-top: -90px;
+}
+@media (max-width:620px) {
+    .sticky-outer-wrapper.hl__collectionDetailsSticky {
+    margin-top: -60px;
+}
+.sticky-outer-wrapper.hl__collectionDetailsSticky .hl__collectionDetails__jumpLinks {
+    padding-top: 3%}
+.sticky-outer-wrapper.hl__collectionDetailsSticky .hl__collectionDetails__jumpLinks .hl__collectionDetails__jumpLink {
+    display: -ms-flexbox;
+    display: flex;
+    padding: 7px 0;
+}
+.sticky-outer-wrapper.hl__collectionDetailsSticky .hl__collectionDetails__jumpLinks .hl__collectionDetails__jumpLink button {
+    display: -ms-flexbox;
+    display: flex;
+    background: none;
+    border: none;
+    font-size: 14px;
+    color: #fff;
+    text-transform: uppercase;
+}
+}
+.sticky-outer-wrapper.hl__collectionDetailsSticky.toolbarOpen {
+    margin-top: -180px;
+}
+.sticky-outer-wrapper.hl__collectionDetailsSticky.toolbarOpen .hl__collectionDetails__jumpLinks {
+    height: 180px;
+    padding-bottom: 4%}
+.sticky-outer-wrapper.active .sticky-inner-wrapper {
+    margin: 0;
+}
+.sticky-outer-wrapper.active .sticky-inner-wrapper .hl__collectionDetails__jumpLinks {
+    height: 60px;
+}
+.hl__collectionDetails__jumpLinks {
+    height: 90px;
+    width: 100%;
+    background-image: -webkit-linear-gradient(203deg, #52757e, #335c67);
+    background-image: -o-linear-gradient(203deg, #52757e, #335c67);
+    background-image: linear-gradient(247deg, #52757e, #335c67);
+    max-width: 2200px;
+    display: -ms-flexbox;
+    display: flex;
+}
+@media (max-width:620px) {
+    .hl__collectionDetails__jumpLinks {
+    height: 60px;
+    overflow: hidden;
+}
+}
+.hl__collectionDetails__jumpLinks .hl__collectionDetails__jumpLinkItems {
+    width: 100%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin: 0 10px;
+    padding: 0;
+}
+.hl__collectionDetails__jumpLinks .hl__collectionDetails__jumpLink {
+    padding: 5px 30px;
+}
+.hl__collectionDetails__jumpLinks .hl__collectionDetails__jumpLink .hl__linkTag {
+    padding: 4px;
+    color: #fff;
+    font-family: TruenoSBd;
+    font-weight: 400;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+.hl__collectionDetails__jumpLinks .hl__collectionDetails__jumpLink .hl__linkTag:hover {
+    border-bottom: 3px solid hsla(0, 0%, 100%, .65);
+}
+@media (max-width:620px) {
+    .hl__collectionDetails__jumpLinks .hl__collectionDetails__jumpLink .hl__linkTag:hover {
+    border-bottom: none;
+}
+}
+.hl__collectionDetails__jumpLinks .hl__collectionDetails__jumpLink .hl__linkTag img {
+    vertical-align: sub;
+}
+.sticky-outer-wrapper.hl__collectionDetailsSticky.toolbarOpen.active .hl__collectionDetails__jumpLinks {
+    height: 100%}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.hl__filterCollectionColLeft {
+    padding-left: 0;
+}
+.hl__filter-rail {
+    width: 90%;
+    min-height: 680px;
+    margin-top: -90px;
+    background: #1e1e1e;
+}
+.hl__filter-rail span {
+    display: -ms-flexbox;
+    display: flex;
+    font-family: TruenoRg;
+    color: #0579b8;
+    padding-top: 20px;
+    margin-left: 30px;
+}
+.hl__filter-rail__header {
+    border-bottom: 2px solid hsla(0, 0%, 42%, .8);
+    height: 136px;
+}
+.hl__filter-rail__title {
+    position: relative;
+    font-family: TruenoBd;
+    font-size: 20px;
+    line-height: 1.5px;
+    letter-spacing: 1.5px;
+    color: #fff;
+    text-transform: uppercase;
+    padding-left: 20px;
+    margin-bottom: 0;
+    display: -ms-flexbox;
+    display: flex;
+    height: 40px;
+    width: 100%;
+    padding-top: 60px;
+    -ms-flex-pack: left;
+    justify-content: left;
+    -ms-flex-align: center;
+    align-items: center;
+}
+.hl__filter-rail__title .arrow--collapsed {
+    position: relative;
+    left: 40px;
+    -webkit-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+.hl__filter-rail__title .arrow--expanded {
+    position: absolute;
+    right: 30px;
+}
+@media (min-width:621px) {
+    .hl__filter-rail__title.narrow {
+    display: none;
+}
+}
+@media (max-width:620px) {
+    .hl__filter-rail__title.wide {
+    display: none;
+}
+}
+.hl__filter-rail__clearAllButton {
+    background: transparent;
+    border: none;
+    outline: none;
+    color: #0579b8;
+    -o-transition: all .1s ease-in-out;
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+    font-family: TruenoLight;
+    font-size: 14px;
+    display: block;
+    cursor: pointer;
+    margin: 10px 30px;
+    padding: 10px 0;
+}
+.hl__filter-rail__clearAllButton:hover {
+    color: #069aea;
+}
+.hl__filter-group {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding: 14px 0;
+    border-bottom: 2px solid hsla(0, 0%, 42%, .8);
+    min-height: 90px;
+    margin: 0 30px;
+}
+.hl__filter-group span {
+    display: -ms-flexbox;
+    display: flex;
+    width: 100%;
+    font-family: TruenoLight;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.71;
+    letter-spacing: 2px;
+    color: #fff;
+    padding: 0;
+}
+.hl__filter-rail__filters {
+    padding: 0;
+}
+.accordion__body {
+    padding: 20px 0!important;
+}
+.accordion__body .hl__dateInputContainer {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+}
+.accordion__body h4 {
+    font-family: TruenoRg;
+    font-size: 15px;
+    color: #fff;
+}
+.accordion__body div {
+    width: 100%}
+.accordion__body button {
+    min-height: 40px;
+    padding: 0;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    width: 100%;
+    padding: 15px;
+    margin-bottom: 10px;
+    border-radius: 4px;
+    background: #dfdfdf;
+    font-family: TruenoRg;
+    font-size: 15px;
+    color: #414141;
+    text-align: left;
+    line-height: 1.3em;
+    cursor: pointer;
+}
+.accordion__body button input {
+    margin-right: 8px;
+}
+.accordion__body .date-input {
+    width: 60px;
+    height: 45px;
+    padding: 0 10px;
+    border-radius: 4px;
+    border: none;
+}
+.accordion__body .date-input:focus {
+    outline: none;
+    color: #222;
+}
+.accordion__body input[type=text] {
+    width: 100%;
+    height: 45px;
+    padding: 0 10px;
+    border-radius: 4px;
+    border: none;
+}
+.accordion__body input[type=text]:focus {
+    outline: none;
+    color: #222;
+}
+.accordion__item {
+    margin: 0 30px;
+    background-color: #1e1e1e;
+}
+.accordion__title {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    color: #fff!important;
+    cursor: pointer;
+    padding: 30px 0!important;
+    width: 100%;
+    text-align: left;
+    border: none;
+    border-bottom: 2px solid hsla(0, 0%, 42%, .8)!important;
+}
+.accordion__title, .accordion__title:hover {
+    background: none!important;
+}
+.accordion__title h3 {
+    font-family: TruenoSBd!important;
+    color: #fff!important;
+    text-transform: uppercase;
+    font-size: 14px;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.71;
+    letter-spacing: 2px;
+    padding: 0;
+}
+.hl__filter-rail__moreContainer {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: end;
+    justify-content: flex-end;
+    padding: 20px;
+}
+.hl__filter-rail__moreButton {
+    background: none;
+    color: #0579b8;
+    border: none;
+    font-family: TruenoRg;
+    font-size: 15px;
+    cursor: pointer;
+}
+.hl__filter-rail__arrow {
+    -webkit-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+}
+.hl__filter-rail__arrow.filterItemActive {
+    -webkit-transform: rotate(0deg);
+    -ms-transform: rotate(0deg);
+    transform: rotate(0deg);
+}
+@media (max-width:620px) {
+    .hl__filter-rail.hl__filter-rail--collapsed {
+    background-image: -webkit-linear-gradient(right, #1e1e1e, #1e1e1e 60px, transparent 0);
+    background-image: -o-linear-gradient(right, #1e1e1e, #1e1e1e 60px, transparent 60px);
+    background-image: linear-gradient(270deg, #1e1e1e, #1e1e1e 60px, transparent 0);
+    padding-right: 60px;
+    width: 390px;
+    left: -365px;
+    position: absolute;
+}
+.hl__filter-rail.hl__filter-rail--collapsed .hl__filter-rail__title {
+    position: relative;
+    line-height: 1;
+    padding-right: 0;
+    right: -66px;
+    top: 10px;
+    text-align: right;
+    -webkit-transform: rotate(-90deg);
+    -ms-transform: rotate(-90deg);
+    transform: rotate(-90deg);
+    white-space: nowrap;
+    width: 100%;
+    margin-left: 100px;
+}
+.hl__filter-rail.hl__filter-rail--collapsed .hl__filter-rail__hide-filters {
+    height: 100%;
+    right: 0;
+    -webkit-transform: scaleX(-1);
+    -ms-transform: scaleX(-1);
+    transform: scaleX(-1);
+    width: 60px;
+}
+.hl__filter-rail.hl__filter-rail--collapsed .hl__filter-rail__spacer {
+    display: inline-block;
+    height: 100%;
+    width: 1px;
+}
+.hl__filter-rail.hl__filter-rail--collapsed .hl__filter-rail__filters, .hl__filter-rail.hl__filter-rail--collapsed .hl__filter-rail__header-controls {
+    visibility: hidden;
+}
+.hl__filter-rail.hl__filter-rail--collapsed .hl__collapsed-arrow:first {
+    margin-left: 30px;
+}
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.hl__collection-details-sticky .sticky-inner-wrapper {
+    z-index: 1;
+    margin: 0 7%}
+.hl__collection-details-sticky .sticky-inner-wrapper .sticky-outer-wrapper {
+    margin-top: -90px;
+}
+.sticky-outer-wrapper.active .sticky-inner-wrapper {
+    margin: 0;
+}
+.sticky-outer-wrapper.active .sticky-inner-wrapper .hl__collection-details__jump-links {
+    height: 60px;
+}
+.hl__collection-details__jump-links {
+    height: 90px;
+    width: 100%;
+    background-image: -webkit-linear-gradient(203deg, #52757e, #335c67);
+    background-image: -o-linear-gradient(203deg, #52757e, #335c67);
+    background-image: linear-gradient(247deg, #52757e, #335c67);
+    max-width: 2200px;
+    display: -ms-flexbox;
+    display: flex;
+}
+.hl__collection-details__jump-links ul {
+    width: 100%;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -ms-flex-align: center;
+    align-items: center;
+    margin: 0 8%;
+    padding: 0;
+}
+.hl__collection-details__jump-links li {
+    display: inline-block;
+}
+.hl__collection-details__jump-links li .hl__link-tag {
+    padding: 4px;
+    color: #fff;
+    font-family: TruenoSBd;
+    font-weight: 400;
+    font-size: 14px;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+}
+.hl__collection-details__jump-links li .hl__link-tag:hover {
+    border-bottom: 3px solid hsla(0, 0%, 100%, .65);
+}
+.hl__collection-details__jump-links li .hl__link-tag img {
+    vertical-align: sub;
+}
+.hl__searchRow {
+    height: 74px;
+    background: #f3f3f3;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+    margin-top: 70px;
+}
+.hl__searchRow .hl__searchInputOuter {
+    margin-left: 25px;
+}
+.hl__searchContainer {
+    margin-left: 20px;
+}
+.hl__searchInputOuter {
+    background: #fff;
+    border-radius: 6px;
+    height: 45px;
+    -o-transition: all .1s ease-in-out;
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+    width: 580px;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    -ms-flex-pack: left;
+    justify-content: left;
+    padding: 10px 20px;
+}
+@media (max-width:620px) {
+    .hl__searchInputOuter {
+    width: 80%}
+}
+.hl__searchInputOuter .hl__searchIcon {
+    display: block;
+    height: 45px;
+    padding-right: 10px;
+    width: 50px;
+    cursor: pointer;
+}
+@media (max-width:620px) {
+    .hl__searchInputOuter .hl__searchIcon {
+    padding-left: 0;
+}
+}
+.hl__searchInputOuter i {
+    color: #222;
+    width: 30px;
+}
+.hl__searchInputOuter input {
+    color: #6c6c6c;
+    font-size: 16px;
+    font-family: TruenoRg;
+    background: transparent;
+    border: none;
+    outline: none;
+}
+.hl__searchInputOuter input:focus {
+    color: #222;
+    outline: none;
+}
+@media (max-width:620px) {
+    .hl__searchCol {
+    height: 100%}
+.hl__searchContainer {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    height: 100%}
+.container .hl__searchContainer {
+    -ms-flex-pack: center;
+    justify-content: center;
+}
+}
+.hl__advancedFilter__container {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-align: center;
+    align-items: center;
+    padding-left: 50px;
+}
+@media (max-width:620px) {
+    .hl__advancedFilter__container {
+    display: none;
+}
+}
+.hl__advancedFilter__label {
+    width: 133px;
+    height: 25px;
+    margin-right: 40px;
+    font-family: TruenoSBd;
+    font-size: 15px;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.67;
+    letter-spacing: normal;
+    color: #0579b8;
+}
+.hl__collectionViewIcons {
+    border: 1px solid #222;
+    border-radius: 4px;
+    display: -ms-inline-flexbox;
+    display: inline-flex;
+    overflow: hidden;
+}
+.hl__collectionViewIcon {
+    display: -ms-flexbox;
+    display: flex;
+    cursor: pointer;
+    padding: 10px;
+    border: none;
+    background: #fff;
+}
+.hl__collectionViewIcon.collectionViewIconActive, .hl__collectionViewIcon:hover {
+    background: #222;
+    fill: #fff;
+}
+.hl__collectionViewIcon.gridIcon {
+    padding: 6px;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.hl__spotlightFeatureContainer {
+    min-height: 600px;
+}
+.hl__spotlightFeature__content {
+    font-family: Lora, Georgia, serif;
+    font-size: 19px;
+    font-weight: 400;
+    color: #414141;
+}
+.hl__spotlightFeatureContentContainer {
+    min-height: 600px;
+    max-width: 1170px;
+    margin: 0 auto;
+    padding: 100px 20px;
+    color: #414141;
+}
+.hl__spotlightFeatureContentContainer h1, .hl__spotlightFeatureContentContainer h2, .hl__spotlightFeatureContentContainer h3, .hl__spotlightFeatureContentContainer h4, .hl__spotlightFeatureContentContainer h5 {
+    font-family: TruenoBd;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.09;
+    letter-spacing: 2.4px;
+    color: #1e1e1e;
+    max-width: 930px;
+    margin: 15px auto;
+}
+.hl__spotlightFeatureContentContainer h1 {
+    font-size: 32px;
+    margin: 15px auto 30px;
+}
+.hl__spotlightFeatureContentContainer h2 {
+    font-size: 28px;
+}
+.hl__spotlightFeatureContentContainer p {
+    font-family: Lora, Georgia, serif;
+    font-size: 19px;
+    line-height: 1.68;
+    color: #414141;
+    max-width: 930px;
+    margin: 0 auto;
+    padding-bottom: 20px;
+}
+.hl__spotlightFeatureContent__heading {
+    font-family: TruenoBd;
+    font-size: 32px;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.09;
+    letter-spacing: 2.4px;
+    color: #1e1e1e;
+    max-width: 930px;
+    margin: 0 auto 27px;
+}
+.hl__spotlightFeatureContent__body {
+    font-family: Lora, Georgia, serif;
+    font-size: 19px;
+    line-height: 1.68;
+    color: #414141;
+    max-width: 930px;
+    margin: 0 auto;
+    padding-bottom: 20px;
+}
+.hl__spotlightFeatureContent__link {
+    font-family: TruenoBd;
+    font-size: 19px;
+    color: #0579b8;
+}
+.hl__spotlightFeatureContent__imageFullContainer {
+    display: block;
+    margin: 57px auto;
+}
+.hl__spotlightFeatureContent__imageFull {
+    width: 100%;
+    background-size: cover;
+    background-position: 50%;
+    height: 550px;
+    background-image: url("https://s3.amazonaws.com/archimedes-data001/hul/images/asian-rubbings-cover.jpg");
+}
+.hl__spotlightFeatureContent__imageFullCaption {
+    font-family: TruenoRg;
+    font-size: 14px;
+    letter-spacing: .6px;
+    color: #414141;
+    padding: 12px 0;
+}
+.hl__spotlightFeatureContent__imageFullLink {
+    font-family: TruenoRg;
+    font-size: 14px;
+    color: #6c6c6c!important;
+}
+.hl__spotlightFeatureContent__imageFullLink .viewerIcon {
+    margin-right: 14px;
+}
+.hl__spotlightFeature__collectionHighlights {
+    max-width: 1170px;
+    margin: 0 auto;
+    padding-top: 141px;
+    padding-bottom: 96px;
+}
+@media (max-width:620px) {
+    .hl__spotlightFeature__collectionHighlights {
+    margin: 20px;
+    padding-top: 0;
+}
+}
+.hl__spotlightFeature__collectionHighlights .hl__blacklightHome__seeAllContainer {
+    border-bottom: none;
+}
+.hl__spotlightFeature__divider {
+    width: 100%;
+    border-bottom: 2px solid #1e1e1e;
+    margin-bottom: 96px;
+}
+.hl__spotlightFeature__sectionTitle {
+    font-family: TruenoBd;
+    text-transform: uppercase;
+    font-size: 32px;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.31;
+    letter-spacing: 2.4px;
+    color: #1e1e1e;
+}
+.hl__spotlightFeatureContent__imageRightContainer {
+    width: 33%;
+    float: right;
+    margin: 20px 0 20px 20px;
+}
+.hl__spotlightFeatureContent__imageLeftContainer {
+    width: 33%;
+    float: left;
+    margin: 20px 20px 20px 0;
+}
+.hl__spotlightFeatureContent__imageSmall {
+    padding: 30%;
+    background-image: url("https://s3.amazonaws.com/archimedes-data001/hul/images/asian-rubbings-cover.jpg");
+    background-size: cover;
+    background-position: 50%}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.hl__spotlightBrowseContainer {
+    min-height: 1000px;
+}
+.spotlightBrowseHeader {
+    background-image: url("https://s3.amazonaws.com/archimedes-data001/hul/images/medieval_background.png");
+}
+.hl__spotlightBrowse__topicContainer {
+    max-width: 1450px;
+    margin: 50px auto;
+    padding: 0 20px;
+}
+.hl__spotlightBrowse__topicDesc {
+    padding-right: 33%}
+@media (max-width:620px) {
+    .hl__spotlightBrowse__topicDesc {
+    padding-right: 0;
+}
+}
+.hl__spotlightBrowse__topicDesc p {
+    font-family: TruenoLight;
+    font-size: 25px;
+    font-weight: 400;
+    line-height: 1.68;
+    color: #1e1e1e;
+}
+@media (max-width:620px) {
+    .hl__spotlightBrowse__topicDesc p {
+    font-size: 18px;
+}
+}
+.hl__spotlightBrowse__topicGridContainer {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-wrap: wrap;
+    flex-wrap: wrap;
+    -ms-flex-pack: space-evenly;
+    justify-content: space-evenly;
+    margin-top: 75px;
+}
+@media (max-width:620px) {
+    .hl__spotlightBrowse__topicGridContainer {
+    padding: 0 20px;
+}
+}
+.hl__spotlightBrowse__topicGridItem {
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-flow: column;
+    flex-flow: column;
+    -ms-flex-align: baseline;
+    align-items: baseline;
+    width: 32%;
+    margin: 20px 0;
+}
+@media (max-width:620px) {
+    .hl__spotlightBrowse__topicGridItem {
+    width: 100%}
+}
+.hl__spotlightBrowse__topicLink {
+    overflow: hidden;
+    width: 100%;
+    padding: 30%;
+    background-position: 50%;
+    background-repeat: no-repeat;
+    background-size: cover;
+    text-decoration: none;
+    -ms-flex-pack: center;
+    justify-content: center;
+    cursor: pointer;
+}
+.hl__spotlightBrowse__topicMeta {
+    margin-top: 20px;
+}
+.hl__spotlightBrowse__topicTitle {
+    font-family: TruenoBd;
+    font-size: 32px;
+    font-weight: 400;
+    color: #1e1e1e;
+}
+.hl__spotlightBrowse__topicCount {
+    font-family: TruenoRg;
+    font-size: 18px;
+    color: #1e1e1e;
+}
+.userAvatar {
+    width: 100%;
+    border-radius: 100%;
+    margin: 15px auto;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.searchIcon:before {
+    font-size: 20px;
+}
+.nav li a.searchLink {
+    padding: 14px 20px;
+}
+.projectHome .headroom--unfixed .nav-header .site-title {
+    display: none;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+#footer.projectFooter {
+    background: transparent;
+}
+.projectFooterNav {
+    padding: 15px 0;
+    text-align: left;
+}
+.projectFooterNav ul {
+    margin: 0;
+    padding: 0;
+}
+.projectFooterNav li {
+    display: inline-block;
+    vertical-align: top;
+}
+.projectFooterNav a {
+    display: inline-block;
+    padding: 0;
+    margin: 0 5px;
+    border-bottom: 2px solid #eee;
+    -o-transition: .1s all ease-in-out;
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+    color: #222;
+    font-size: 16px;
+    font-family: TruenoBd;
+}
+.projectFooterNav a:hover {
+    border-bottom: 2px solid transparent;
+    color: #0277bd;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.at-oauth button {
+    width: 100%;
+    padding: 15px 25px;
+    margin: 10px auto;
+    border-radius: 0;
+    border: 2px solid #999;
+    background: #999;
+    color: #fff;
+    -o-transition: all .1s ease-in-out;
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+}
+.at-oauth button:hover {
+    border: 2px solid #222;
+    background: #222;
+    color: #fff;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.at-pwd-form label {
+    font-size: 14px;
+    font-family: TruenoBd;
+    font-weight: 100;
+    color: #212121;
+    text-align: left;
+    width: 100%;
+    margin: 5px 0;
+}
+.at-pwd-form input {
+    border-radius: 0;
+    border: 2px solid #ddd;
+    padding: 20px;
+    font-size: 18px;
+    font-family: TruenoRg;
+    height: auto;
+    color: #222;
+    font-weight: 100;
+}
+.at-pwd-form input:focus {
+    border: 2px solid #222;
+    outline: none;
+}
+.at-pwd-form button {
+    width: 100%;
+    padding: 15px 25px;
+    margin: 10px auto 30px;
+    border-radius: 0;
+    border: 2px solid #ddd;
+    font-size: 16px;
+    color: #222;
+}
+.at-pwd-form button:focus, .at-pwd-form button:hover {
+    -o-transition: all .1s ease-in-out;
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+    background: #222;
+    border: 2px solid #222;
+    color: #fff;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.at-form h3 {
+    padding: 10px 0 20px;
+    font-size: 28px;
+    color: #727272;
+}
+.at-form h3 button {
+    color: #222;
+    margin-left: 10px;
+    padding: 0 0 2px;
+    background: none;
+    border: none;
+    outline: none;
+    -o-transition: all .1s ease-in-out;
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+}
+.at-form h3 button:hover {
+    color: #03a9f4;
+}
+.at-form form {
+    text-align: left;
+    margin: 0 auto;
+}
+.at-form .error-text {
+    font-size: 16px;
+    font-family: TruenoRg;
+    font-weight: 100;
+    color: #ff9800;
+}
+.at-sep {
+    font-size: 14px;
+    margin: 15px auto;
+    font-family: TruenoBd;
+    font-weight: 100;
+    color: #212121;
+}
+#at-forgotPwd {
+    text-align: left;
+    font-size: 16px;
+    padding: 2px 0 14px;
+    display: block;
+}
+#at-resend-verification-email {
+    padding: 0 4px;
+}
+.at-resend-verification-email-link, .at-signup-link {
+    font-size: 16px;
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+.hulModal {
+    background: hsla(0, 0%, 100%, .98);
+    width: 100vw;
+    height: 100vh;
+    text-align: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    z-index: 100;
+    color: #222;
+    overflow-y: scroll;
+}
+.hulModal .modalInner {
+    margin: 30px auto;
+    display: inline-block;
+    max-width: 720px;
+    width: 95%}
+.hulModal .closeModal {
+    position: fixed;
+    top: 25px;
+    right: 25px;
+    width: 44px;
+    height: 44px;
+    border: 2px solid #999;
+    background: #999;
+    border-radius: 100%;
+    cursor: pointer;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: center;
+    justify-content: center;
+    -ms-flex-align: center;
+    align-items: center;
+    color: #fff;
+    -o-transition: all .1s ease-in-out;
+    -webkit-transition: all .1s ease-in-out;
+    transition: all .1s ease-in-out;
+}
+.hulModal .closeModal:hover {
+    background: #222;
+    border: 2px solid #222;
+    color: #fff;
+}
+.hulModal .closeModal i:before {
+    font-size: 22px;
+}
+@font-face {
+    font-family: TruenoSBd;
+    font-weight: 400;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/TruenoSBd.otf");
+}
+@font-face {
+    font-family: TruenoBd;
+    font-weight: 400;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/TruenoBd.otf");
+}
+@font-face {
+    font-family: TruenoRg;
+    font-weight: 400;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/TruenoRg.otf");
+}
+@font-face {
+    font-family: Material Design Icons;
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?v=1.9.32");
+    src: url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.eot?#iefix&v=1.9.32") format("embedded-opentype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff2?v=1.9.32") format("woff2"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.woff?v=1.9.32") format("woff"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.ttf?v=1.9.32") format("truetype"), url("https://s3.amazonaws.com/archimedes-data001/fonts/materialdesignicons-webfont.svg?v=1.9.32#materialdesigniconsregular") format("svg");
+    font-weight: 400;
+    font-style: normal;
+}
+html {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+}
+body, html, input, label, p, span {
+    font-family: TruenoRg;
+    color: #999;
+}
+h1, h2, h3, h4, h5, h6 {
+    font-family: TruenoRg;
+    margin: 0;
+}
+body {
+    color: #fff;
+    font-family: sans-serif;
+    margin: 0;
+    padding: 0;
+    position: relative;
+}
+li {
+    list-style: none;
+}
+.ReactModal__Body--open {
+    overflow: hidden;
+}
+.absolute {
+    position: absolute;
+}
+.bg-light-blue {
+    background-color: #e7f4f8;
+}
+.bg-lighter-blue {
+    background-color: #e8f4f8;
+}
+.border-bottom {
+    border-bottom: 2px solid;
+}
+.border-left {
+    border-left: 2px solid;
+}
+.border-right {
+    border-right: 2px solid;
+}
+.border-top {
+    border-top: 2px solid;
+}
+.border-light-blue {
+    border-color: #3a9fbf;
+}
+.clearfix {
+    content: "";
+    display: table;
+    clear: both;
+}
+.float-left {
+    float: left;
+}
+.full-width {
+    width: 100%}
+.hidden {
+    visibility: hidden;
+}
+.inline-block {
+    display: inline-block;
+}
+.p1 {
+    padding: 2px;
+}
+.relative {
+    position: relative;
+}
+.rounded {
+    border-radius: 2px;
+}
+.z0 {
+    z-index: 0;
+}
+.z10 {
+    z-index: 10;
+}
+.z100 {
+    z-index: 100;
+}
+.btn {
+    font-family: TruenoBd;
+    font-weight: 400;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+.btn-primary {
+    background-color: #2797d8;
+    border: 2px solid #2797d8;
+}
+.btn-primary, .btn-secondary {
+    color: #fff;
+    padding: 10px 45px;
+    margin: 0 10px;
+}
+.btn-secondary {
+    background-color: transparent;
+    border: 2px solid #fff;
+}
+.btn-primary:hover {
+    background-color: #60b0de;
+    border: 2px solid #60b0de;
+}
+.btn-secondary:hover {
+    background-color: #fff;
+    color: #9f9f9f;
+    border: 2px solid #fff;
+}
+a:focus, button:focus, div:focus, i:focus, li:focus [role=button]:focus, span:focus {
+    outline: none;
+}
+/*# sourceMappingURL=main.931537b7.css.map*/
+.hl__blacklightHome__moreHighlights{display:none;}
+
+section .hl__blacklightHome__itemHighlights{display:none;}
