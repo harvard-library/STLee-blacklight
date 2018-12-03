@@ -1,15 +1,21 @@
 <div class="hl__searchRow blacklightItemListPageSearchHeader">
 	<div class="blacklightItemListPageSearchHeaderInner">
 		<div class="hl__searchContainer">
-			<div class="hl__searchInputOuter"><i class="mdi mdi-magnify mdi-24px hl__searchIcon"></i><input type="text" placeholder="Search across all digital collections" value="test"></div>
+			<div class="hl__searchInputOuter">
+				<form class="search-query-form clearfix navbar-form" role="search" action="/catalog" accept-charset="UTF-8" method="get">
+					<i class="mdi mdi-magnify mdi-24px hl__searchIcon"></i>
+					<input name="utf8" type="hidden" value="&#x2713;" /><input type="hidden" name="search_field" id="search_field" value="all_fields" />
+					<input name="q" id="q" type="text" placeholder="Try 'lantern slides' or 'colonial north america'" value="">
+				</form>
+			</div>
 		</div>
-		<div class="hl__collectionViewIcons blacklightCollectionViewIcons">
-			<button class="hl__collectionViewIcon gridIcon collectionViewIconActive" aria-label="show grid view">
+		<div class="hl__collectionViewIcons blacklightCollectionViewIcons view-mode">
+			<button class="hl__collectionViewIcon gridIcon collectionViewIconActive view-mode__grid" aria-label="show grid view">
 				<svg xmlns="http://www.w3.org/2000/svg" width="32" height="32" viewBox="0 0 24 24">
 					<path d="M20 2H4c-1.1 0-2 .9-2 2v16c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V4c0-1.1-.9-2-2-2zM8 20H4v-4h4v4zm0-6H4v-4h4v4zm0-6H4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4zm6 12h-4v-4h4v4zm0-6h-4v-4h4v4zm0-6h-4V4h4v4z"></path>
 				</svg>
 			</button>
-			<button class="hl__collectionViewIcon " aria-label="show list view">
+			<button class="hl__collectionViewIcon view-mode__list" aria-label="show list view">
 				<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24">
 					<g>
 						<g transform="translate(-1517 -653)">
@@ -31,8 +37,8 @@
 	</div>
 </div>
 <div class="large-3 columns" id="sidebar">
-  <%= render 'search_sidebar' %>
+	<%= render 'search_sidebar' %>
 </div>
 <div class="large-9 columns" id="content">
-      <%= render 'search_results' %>
+	<%= render 'search_results' %>
 </div>

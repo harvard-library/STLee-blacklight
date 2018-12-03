@@ -4168,3 +4168,30 @@ a:focus, button:focus, div:focus, i:focus, li:focus [role=button]:focus, span:fo
 .hl__blacklightHome__moreHighlights{display:none;}
 
 section .hl__blacklightHome__itemHighlights{display:none;}
+
+.large-12 {
+    width: 75%;
+}
+
+.hl__searchIcon {
+    display:none;
+}
+
+.hl__searchInputOuter input {
+    margin-bottom:0;
+    border-right: 1px solid #1e1e1e;
+}
+
+.hl__searchInputOuter input, .hl__searchInputOuter input:focus {
+    box-shadow:none;
+    background:white;
+}
+
+.hl__blacklightHome .hl__page-header__container .hl__searchContainer button {
+    background-color:transparent;
+    font-family:Trueno;
+    font-weight:300;
+    margin-bottom:0;
+    height:auto;
+    border:none;
+}
