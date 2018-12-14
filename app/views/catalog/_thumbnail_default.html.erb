@@ -1,5 +1,6 @@
-<div class="hl__itemGridViewImageContainer">
-  <%- if has_thumbnail?(document) && tn = render_thumbnail_tag(document, {}, :counter => document_counter_with_offset(document_counter)) %>
-  <%= tn %>
-  <%- end %>
-</div>
+<%- if has_thumbnail?(document) %>
+<a class="hl__itemGridViewImageContainer" href="<%= url_for(document) %>">
+  <div style="background-image: url(<%= document.first(blacklight_config.view_config(document_index_view_type).thumbnail_field) %>);">
+  </div>
+</a>
+<%-end %>

@@ -1,6 +1,9 @@
 <%# header bar for doc items in index view -%>
 <div class="hl__itemGridViewMetaContainer">
+  <a data-context-href="<%= url_for(document) %>/track?counter=<%=document_counter_with_offset(document_counter) %>&amp;search_id=39" href="<%= url_for(document) %>">
   <h3 class="hl__itemGridViewTitle">
-    <%= link_to_document document, document_show_link_field(document), counter: document_counter_with_offset(document_counter) %>
+    <% field ||= document_show_link_field(document) %>
+    <%= index_presenter(document).label field, nil %>
   </h3>
+  </a>
 </div>
