@@ -6,7 +6,7 @@ Collections API.
 
 It also contains a custom "skin" for the discovery interface.  
 
-Demo site: https://ancient-peak-25869.herokuapp.com
+Demo site: http://dcp-dev2.lib.harvard.edu:8080/
 
 # Deployment
 
