@@ -4,8 +4,6 @@ This repository contains a Blacklight instance that uses the Harvard LibraryClou
 the standard Solr backend. It also allows adding items to the LibraryCloud collections using the 
 Collections API.
 
-It also contains a custom "skin" for the discovery interface.  
-
 Demo site: http://dcp-dev2.lib.harvard.edu:8080/
 
 # Deployment
