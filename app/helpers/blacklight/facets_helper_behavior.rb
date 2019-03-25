@@ -166,10 +166,24 @@ module Blacklight::FacetsHelperBehavior
   # @return [String]
   def render_facet_count(num, options = {})
     classes = (options[:classes] || []) << "facet-count"
-    content_tag("span", t('blacklight.search.facets.count', :number => number_with_delimiter(num)), :class => classes)
+    content_tag("span", t('blacklight.search.facets.count', :number => format_facet_count(num)), :class => classes)
   end
 
+  def format_facet_count(num)
+    num = Float(num)
+	formatted_num = num.to_s
+	if num > 1000000
+		formatted_num = (num / 1000000).round(1).to_s + "M"	
+	else
+		if num > 1000
+			formatted_num = (num / 1000).round(1).to_s + "k"
+		end
+	end
+
+	formatted_num
+  end
     
+
   ##
   # Are any facet restrictions for a field in the query parameters?
   # 

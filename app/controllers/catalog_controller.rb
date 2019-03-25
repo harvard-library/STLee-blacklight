@@ -56,7 +56,6 @@ class CatalogController < ApplicationController
 
     # Facets
     config.add_facet_field 'resourceType', label: 'Format', single: true
-    config.add_facet_field 'contentModel', label: 'Type', single: true
     config.add_facet_field 'ownerCodeDisplayName', label: 'Harvard Repository',  single: true
     config.add_facet_field 'collectionTitle', label: 'Collections',  single: true
 
