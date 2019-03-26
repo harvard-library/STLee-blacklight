@@ -171,12 +171,14 @@ module Blacklight::FacetsHelperBehavior
 
   def format_facet_count(num)
     num = Float(num)
-	formatted_num = num.to_s
+	
 	if num > 1000000
 		formatted_num = (num / 1000000).round(1).to_s + "M"	
 	else
 		if num > 1000
 			formatted_num = (num / 1000).round(1).to_s + "k"
+		else
+			formatted_num = num.round(0)
 		end
 	end
 

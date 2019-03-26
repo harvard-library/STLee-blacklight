@@ -57,7 +57,7 @@ class CatalogController < ApplicationController
     # Facets
     config.add_facet_field 'resourceType', label: 'Format', single: true
     config.add_facet_field 'ownerCodeDisplayName', label: 'Harvard Repository',  single: true
-    config.add_facet_field 'collectionTitle', label: 'Collections',  single: true
+    config.add_facet_field 'setName_str', label: 'Collections',  single: true
 
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
@@ -79,7 +79,7 @@ class CatalogController < ApplicationController
     config.add_show_field 'content_model', label: 'Type'
     config.add_show_field 'owner_display', label: 'Harvard Repository'
     config.add_show_field 'owner_code', label: 'Repository Code'
-    config.add_show_field 'collection_title', label: 'Collection'
+    config.add_show_field 'setName', label: 'Collection'
     config.add_show_field 'abstract', label: 'Abstract'
 
     # "fielded" search configuration. Used by pulldown among other places.
