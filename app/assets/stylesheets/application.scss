@@ -15,8 +15,10 @@
  *= require_self
 */
 
+@import "fonts";
 @import "settings";
 @import "util";
+@import "layout";
 @import "facets";
 @import "collections";
 @import "header";
@@ -27,4 +29,4 @@
 @import "search_results";
 @import "item";
 @import "home";
-@import "foundation";
+/*@import "foundation";*/

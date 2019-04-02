@@ -1,0 +1,700 @@
+﻿
+<!DOCTYPE html>
+<html lang="en" class="no-js">
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+
+    <!-- Mobile viewport optimization h5bp.com/ad -->
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+
+    <!-- Internet Explorer use the highest version available -->
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
+    <!-- Mobile IE allows us to activate ClearType technology for smoothing fonts for easy reading -->
+    <!--[if IEMobile]>
+      <meta http-equiv="cleartype" content="on">
+    <![endif]-->
+
+    <title> - Harvard Digital Library Search Results</title>
+    <link href="http://localhost:3000/catalog/opensearch.xml" title="Harvard Digital Library" type="application/opensearchdescription+xml" rel="search" />
+    <link rel="shortcut icon" type="image/x-icon" href="/assets/favicon-b4185c7dd08c0b4f2142c58bbcca322b3a01f50adc3413438b98be2b664bb4b6.ico" />
+    <link rel="stylesheet" media="all" href="/assets/application.css?body=1" />
+    
+    <script src="/assets/application.js?body=1"></script>
+	<script src="/assets/modernizr.js?body=1"></script>
+    
+    <meta name="csrf-param" content="authenticity_token" />
+    <meta name="csrf-token" content="kcuVT4Gbg9372S0OlKjPfPFdhVyN+zwHEusEOy6sVmroSAVLa3S73pAppkCnqE+cS/RLSlhptzMxjbw+jgFXMw==" />
+    <meta name="totalResults" content="6233465" />
+    <meta name="startIndex" content="0" />
+    <meta name="itemsPerPage" content="12" />
+
+    <link rel="alternate" type="application/rss+xml" title="RSS for results" href="/catalog.rss" />
+    <link rel="alternate" type="application/atom+xml" title="Atom for results" href="/catalog.atom" />
+    <link rel="alternate" type="application/json" title="JSON" href="/catalog.json" />
+
+    <link href="//cloud.typenetwork.com/projects/2175/fontface.css/" rel="stylesheet" type="text/css">
+</head>
+<body class="blacklight-catalog blacklight-catalog-index">
+
+    <div class="contain-to-grid">
+        <nav class="top-bar" data-topbar role="navigation">
+            <section class="top-bar-section"></section>
+        </nav>
+    </div>
+
+    <div class="row header__navbar">
+        <div class="small-4 large-4 columns">
+            <a href="/"><img alt="Logo" class="header__logo" srcset="/assets/logo@2x-29520f4c30c2aed460515c7de73cf4cbea1f6e1113454ac8b24b77f442a3dabf.png 2x, /assets/logo@3x-9bfd04ae0e1f980418290409f101ae1019f00c444b3e6a8fd14b8729ad44bc66.png 3x" src="/assets/logo@1x-d55c8677802bce84ea8cd9159dff74fdb2646cf3bfcd23f3ff76c9a72eaa8da3.png" /></a>
+        </div>
+        <div class="small-8 large-8 columns">
+        </div>
+    </div>
+
+    <div class="searchbar__wrapper">
+        <div class="row">
+
+
+            <form class="search-query-form clearfix navbar-form" role="search" action="http://localhost:3000/catalog" accept-charset="UTF-8" method="get">
+                <input name="utf8" type="hidden" value="&#x2713;" />
+
+                <input type="hidden" name="search_field" id="search_field" value="all_fields" />
+                <div class="homepage-title">Explore digital content and curated collections</div>
+                <div class="large-4 columns search-field-input-wrapper">
+                    <label for="q" class="sr-only">search for</label>
+                    <input type="text" name="q" id="q" placeholder="Search..." class="search_q q form-control searchbar__text" autofocus="autofocus" data-autocomplete-enabled="false" data-autocomplete-path="/suggest" />
+                </div>
+                <div class="large-8 columns advanced-search-wrapper">
+                    <button type="submit" class="search-btn sr-only" id="search"></button>
+                    </span>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <!--  render :partial=>'/user_util_links' -->
+
+
+    <div id="ajax-modal" class="reveal-modal modal" data-reveal tabindex="-1" role="dialog" aria-labelledby="modal menu" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+            </div>
+        </div>
+    </div>
+
+
+    <div id="main-container" class="container">
+        <h1 class="sr-only application-heading">Harvard Digital Library</h1>
+
+        <div class="row">
+            <div class="col-md-12">
+                <div id="main-flashes">
+                    <div class="flash_messages">
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+        <div class="row enclosing-row">
+            <div class="large-4 columns" id="sidebar">
+                <div id="facets" class="facets__container">
+
+                    <h2 class='facets__heading'>
+                        Filter
+                    </h2>
+                    <a class="facets__clearall" id="startOverLink" href="/catalog">Clear All</a>
+                    <div class="toggle-wrapper">
+                        <button class="toggle-all-facets" type="button"><span class="expand-text">Expand All <span class="fa fa-caret-down"></span></span><span class="collapse-text">Collapse All <span class="fa fa-caret-up"></span></span></button>
+                    </div>
+                    
+                    <div id="facet-panel-collapse" class="panel-group">
+                        <dl class="accordion facet_limit blacklight-resourcetype" data-accordion>
+                            <dd class="accordion-navigation ">
+                                <a href="#facet-resourcetype" class="facet__title">Format <span class="fa fa-caret-down facet-expand toggle"></span><span class="fa fa-caret-up facet-collapse toggle"></span></a>
+                                <div id="facet-resourcetype" class="content ">
+                                    <ul class="facet-values no-bullet">
+                                        <li><span class="facet-label"><span class="selected">still image</span><a class="remove" href="/catalog"><span class="glyphicon glyphicon-remove"></span><span class="sr-only">[remove]</span></a></span><span class="facet-count">6.1M</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BresourceType%5D%5B%5D=text">text</a></span><span class="facet-count">128.0k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BresourceType%5D%5B%5D=moving+image">moving image</a></span><span class="facet-count">47.9k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BresourceType%5D%5B%5D=notated+music">notated music</a></span><span class="facet-count">38.5k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BresourceType%5D%5B%5D=cartographic">cartographic</a></span><span class="facet-count">36.2k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BresourceType%5D%5B%5D=sound+recording-musical">sound recording-musical</a></span><span class="facet-count">35.7k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BresourceType%5D%5B%5D=mixed+material">mixed material</a></span><span class="facet-count">16.8k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BresourceType%5D%5B%5D=sound+recording-nonmusical">sound recording-nonmusical</a></span><span class="facet-count">5.4k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BresourceType%5D%5B%5D=software%2C+multimedia">software, multimedia</a></span><span class="facet-count">2.9k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BresourceType%5D%5B%5D=three+dimensional+object">three dimensional object</a></span><span class="facet-count">804</span></li>
+
+                                    </ul>
+
+                                </div>
+                            </dd>
+                        </dl>
+
+                        <dl class="accordion facet_limit blacklight-ownercodedisplayname" data-accordion>
+                            <dd class="accordion-navigation ">
+                                <a href="#facet-ownercodedisplayname" class="facet__title">Harvard Repository<span class='toggle'></span></a>
+                                <div id="facet-ownercodedisplayname" class="content ">
+                                    <ul class="facet-values no-bullet">
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Judaica+Division.+Widener+Library.+Harvard+College+Library">Judaica Division. Widener Library. Harvard College Library</a></span><span class="facet-count">5.2M</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Harvard+Art+Museums">Harvard Art Museums</a></span><span class="facet-count">263.8k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Fine+Arts+Library">Fine Arts Library</a></span><span class="facet-count">236.3k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Houghton+Library">Houghton Library</a></span><span class="facet-count">88.9k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Schlesinger+Library+on+the+History+of+Women+in+America">Schlesinger Library on the History of Women in America</a></span><span class="facet-count">79.6k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Harvard+Graduate+School+of+Design">Harvard Graduate School of Design</a></span><span class="facet-count">75.7k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Biblioteca+Berenson">Biblioteca Berenson</a></span><span class="facet-count">45.6k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Peabody+Museum">Peabody Museum</a></span><span class="facet-count">40.3k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Collection+Development+Department.+Widener+Library.+HCL">Collection Development Department. Widener Library. HCL</a></span><span class="facet-count">34.0k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Harvard+College+Library+Harvard-Yenching+Library">Harvard College Library Harvard-Yenching Library</a></span><span class="facet-count">27.9k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Andover-Harvard+Theological+Library">Andover-Harvard Theological Library</a></span><span class="facet-count">20.5k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Radcliffe+Archives">Radcliffe Archives</a></span><span class="facet-count">18.0k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Harvard+Law+School+Library">Harvard Law School Library</a></span><span class="facet-count">14.4k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Harvard+University+Archives">Harvard University Archives</a></span><span class="facet-count">11.3k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Arnold+Arboretum+of+Harvard+University">Arnold Arboretum of Harvard University</a></span><span class="facet-count">8.7k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Dumbarton+Oaks+Research+Library">Dumbarton Oaks Research Library</a></span><span class="facet-count">7.6k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Baker+Library.+Harvard+Business+School">Baker Library. Harvard Business School</a></span><span class="facet-count">7.2k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Middle+Eastern+Division.+Widener+Library.+Harvard+College+Library">Middle Eastern Division. Widener Library. Harvard College Library</a></span><span class="facet-count">7.0k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Harvard+Map+Collection">Harvard Map Collection</a></span><span class="facet-count">6.0k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Countway+Library+of+Medicine">Countway Library of Medicine</a></span><span class="facet-count">5.0k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Western+Languages+Division%2C+Widener+Library%2C+HCL">Western Languages Division, Widener Library, HCL</a></span><span class="facet-count">2.7k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Ernst+Mayr+Library+of+the+Museum+of+Comparative+Zoology">Ernst Mayr Library of the Museum of Comparative Zoology</a></span><span class="facet-count">2.6k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Eda+Kuhn+Loeb+Music+Library">Eda Kuhn Loeb Music Library</a></span><span class="facet-count">2.3k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Harvard+Kennedy+School+Library">Harvard Kennedy School Library</a></span><span class="facet-count">1.6k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Cabot+Science+Library">Cabot Science Library</a></span><span class="facet-count">1.4k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=General+Artemas+Ward+Museum">General Artemas Ward Museum</a></span><span class="facet-count">1.4k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Center+for+Hellenic+Studies">Center for Hellenic Studies</a></span><span class="facet-count">1.3k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Slavic+Division.+Widener+Library.+HCL">Slavic Division. Widener Library. HCL</a></span><span class="facet-count">1.2k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=The+Gray+Herbarium+Library">The Gray Herbarium Library</a></span><span class="facet-count">990</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Harvard+Forest">Harvard Forest</a></span><span class="facet-count">876</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Monroe+C.+Gutman+Library">Monroe C. Gutman Library</a></span><span class="facet-count">676</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Tozzer+Library">Tozzer Library</a></span><span class="facet-count">537</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Davis+Center+for+Russian+and+Eurasian+Studies.+Fung+Library">Davis Center for Russian and Eurasian Studies. Fung Library</a></span><span class="facet-count">508</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=H.C.+Fung+Library">H.C. Fung Library</a></span><span class="facet-count">280</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Ukrainian+Research+Institute">Ukrainian Research Institute</a></span><span class="facet-count">174</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Maps%2C+Media%2C+Data+and+Government+Information+-+Harvard+College+Library">Maps, Media, Data and Government Information - Harvard College Library</a></span><span class="facet-count">170</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=David+P.+Wheatland+Collection+of+Historical+Scientific+Instruments">David P. Wheatland Collection of Historical Scientific Instruments</a></span><span class="facet-count">103</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Littauer+Library">Littauer Library</a></span><span class="facet-count">102</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=John+G.+Wolbach+Library">John G. Wolbach Library</a></span><span class="facet-count">81</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Harvard+College+Observatory">Harvard College Observatory</a></span><span class="facet-count">72</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Ware+collection+at+Harvard+Museum+of+Natural+History">Ware collection at Harvard Museum of Natural History</a></span><span class="facet-count">55</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Arnold+Library%2C+Cambridge">Arnold Library, Cambridge</a></span><span class="facet-count">16</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Harvard+University+Herbaria+Oakes+Ames+Orchid+Library">Harvard University Herbaria Oakes Ames Orchid Library</a></span><span class="facet-count">15</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Carpenter+Center">Carpenter Center</a></span><span class="facet-count">13</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Harvard+Semitic+Museum">Harvard Semitic Museum</a></span><span class="facet-count">11</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BownerCodeDisplayName%5D%5B%5D=Dumbarton+Oaks+Museum">Dumbarton Oaks Museum</a></span><span class="facet-count">4</span></li>
+
+                                    </ul>
+
+                                </div>
+                            </dd>
+                        </dl>
+
+                        <dl class="accordion facet_limit blacklight-setname_str" data-accordion>
+                            <dd class="accordion-navigation ">
+                                <a href="#facet-setname_str" class="facet__title">Collections<span class='toggle'></span></a>
+                                <div id="facet-setname_str" class="content ">
+                                    <ul class="facet-values no-bullet">
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BsetName_str%5D%5B%5D=Colonial+North+America+at+Harvard+Library">Colonial North America at Harvard Library</a></span><span class="facet-count">13.5k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BsetName_str%5D%5B%5D=Immigration+to+the+United+States%2C+1789-1930">Immigration to the United States, 1789-1930</a></span><span class="facet-count">11.4k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BsetName_str%5D%5B%5D=Latin+American+Pamphlet+Digital+Collection">Latin American Pamphlet Digital Collection</a></span><span class="facet-count">5.7k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BsetName_str%5D%5B%5D=Chinese+Rare+Books">Chinese Rare Books</a></span><span class="facet-count">5.1k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BsetName_str%5D%5B%5D=Women+Working%2C+1800-1930">Women Working, 1800-1930</a></span><span class="facet-count">4.3k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BsetName_str%5D%5B%5D=Daguerreotypes+at+Harvard">Daguerreotypes at Harvard</a></span><span class="facet-count">3.6k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BsetName_str%5D%5B%5D=Contagion%3A+Historical+Views+of+Diseases+and+Epidemics">Contagion: Historical Views of Diseases and Epidemics</a></span><span class="facet-count">2.8k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BsetName_str%5D%5B%5D=Chinese+Rubbings+Collection">Chinese Rubbings Collection</a></span><span class="facet-count">2.8k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BsetName_str%5D%5B%5D=Scanned+Maps">Scanned Maps</a></span><span class="facet-count">2.7k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BsetName_str%5D%5B%5D=Expeditions+and+Discoveries%3A+Sponsored+Exploration+and+Scientific+Discovery+in+the+Modern+Age">Expeditions and Discoveries: Sponsored Exploration and Scientific Discovery in the Modern Age</a></span><span class="facet-count">2.3k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BsetName_str%5D%5B%5D=DPLA-Review-rubbings-20190329">DPLA-Review-rubbings-20190329</a></span><span class="facet-count">2.3k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BsetName_str%5D%5B%5D=DPLA-Review-crb-digitized-20190315">DPLA-Review-crb-digitized-20190315</a></span><span class="facet-count">1.6k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BsetName_str%5D%5B%5D=Artemas+Ward+House+and+Its+Collections">Artemas Ward House and Its Collections</a></span><span class="facet-count">1.4k</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BsetName_str%5D%5B%5D=Jacques+Burkhardt+Scientific+Drawings">Jacques Burkhardt Scientific Drawings</a></span><span class="facet-count">995</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BsetName_str%5D%5B%5D=Digital+Scores+and+Libretti">Digital Scores and Libretti</a></span><span class="facet-count">852</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BsetName_str%5D%5B%5D=Reading%3A+Harvard+Views+of+Readers%2C+Readership%2C+and+Reading+History">Reading: Harvard Views of Readers, Readership, and Reading History</a></span><span class="facet-count">825</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BsetName_str%5D%5B%5D=Iranian+Oral+History+Project">Iranian Oral History Project</a></span><span class="facet-count">656</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BsetName_str%5D%5B%5D=Islamic+Heritage+Project">Islamic Heritage Project</a></span><span class="facet-count">626</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BsetName_str%5D%5B%5D=Studies+in+Scarlet%3A+Marriage+and+Sexuality+in+the+U.S.+%26+U.K.%2C+1815-1914">Studies in Scarlet: Marriage and Sexuality in the U.S. &amp; U.K., 1815-1914</a></span><span class="facet-count">444</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BsetName_str%5D%5B%5D=English+Crime+and+Execution+Broadsides">English Crime and Execution Broadsides</a></span><span class="facet-count">373</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BsetName_str%5D%5B%5D=Milman+Parry+Collection+of+Oral+Literature">Milman Parry Collection of Oral Literature</a></span><span class="facet-count">289</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BsetName_str%5D%5B%5D=DPLA-Review-cna-20180608-20181231">DPLA-Review-cna-20180608-20181231</a></span><span class="facet-count">259</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BsetName_str%5D%5B%5D=Demo+Collection">Demo Collection</a></span><span class="facet-count">57</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BsetName_str%5D%5B%5D=Medieval+%26+Renaissance+Manuscripts">Medieval &amp; Renaissance Manuscripts</a></span><span class="facet-count">18</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BsetName_str%5D%5B%5D=Colonial+North+America+at+Harvard+Library+-+Collection+Records">Colonial North America at Harvard Library - Collection Records</a></span><span class="facet-count">1</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BsetName_str%5D%5B%5D=DPLA-Review-crb-dip-20190319">DPLA-Review-crb-dip-20190319</a></span><span class="facet-count">1</span></li>
+                                        <li><span class="facet-label"><a class="facet_select" href="/catalog?f%5BsetName_str%5D%5B%5D=Trouble+Harvesting">Trouble Harvesting</a></span><span class="facet-count">1</span></li>
+
+                                    </ul>
+
+                                </div>
+                            </dd>
+                        </dl>
+
+                    </div>
+
+                </div>
+
+
+            </div>
+            <div class="large-8 columns" id="content">
+
+                <row>
+                    <h2 class="sr-only top-content-title">Search Constraints</h2>
+
+
+
+
+                    <div class="row search-header">
+                        <div class="columns large-6">
+                            <span class="page_entries">
+                                Showing 1 to 12 of 6,233,465 results
+                            </span>
+
+
+
+                        </div>
+                        <div class="columns large-6">
+                            <div class="view-mode">
+                                <a href="#" class="view-mode__list" data-no-turbolink="true" title="List"></a>
+                                <a href="#" class="view-mode__grid active" data-no-turbolink="true" title="Grid"></a>
+                            </div>
+                            <div id="sortAndPerPage" class="clearfix">
+                                <div class="search-widgets pull-right">
+
+                                    <span class="sr-only">Number of results to display per page</span>
+                                    <div id="per-page-dropdown">
+                                        <a data-dropdown="perpage" aria-controls="perpage" aria-expanded="false">12 per page<span class="caret right"></span></a>
+                                        <ul id="perpage" class="f-dropdown" data-dropdown-content aria-hidden="true" tabindex="-1">
+                                            <li><a href="/catalog?per_page=12">12<span class="sr-only"> per page</span></a></li>
+                                            <li><a href="/catalog?per_page=24">24<span class="sr-only"> per page</span></a></li>
+                                            <li><a href="/catalog?per_page=48">48<span class="sr-only"> per page</span></a></li>
+                                            <li><a href="/catalog?per_page=96">96<span class="sr-only"> per page</span></a></li>
+                                        </ul>
+                                    </div>
+
+
+                                    <div class="view-type">
+                                        <span class="sr-only">View results as: </span>
+                                        <div class="view-type-group btn-group">
+                                            <a title="List" class="btn btn-default view-type-list active" href="/catalog?view=list">
+                                                <span class="glyphicon glyphicon-list view-icon-list"></span>
+                                                <span class="caption">List</span>
+                                            </a>      <a title="Gallery" class="btn btn-default view-type-gallery " href="/catalog?view=gallery">
+                                                <span class="glyphicon glyphicon-gallery view-icon-gallery"></span>
+                                                <span class="caption">Gallery</span>
+                                            </a>      <a title="Masonry" class="btn btn-default view-type-masonry " href="/catalog?view=masonry">
+                                                <span class="glyphicon glyphicon-masonry view-icon-masonry"></span>
+                                                <span class="caption">Masonry</span>
+                                            </a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+
+
+                    <h2 class="sr-only">Search Results</h2>
+
+                    <div class="row">
+                        <div class="columns large-12">
+                            <ul id="documents" class="documents-list no-bullet clearfix">
+                                <li class="document  document-position-0 " data-document-counter="0" itemscope itemtype="http://schema.org/Thing">
+                                    <div class="document-thumbnail clearfix">
+                                    </div>
+
+                                    <div class="documentHeader">
+
+                                        <h3 class="index_title document-title-heading col-md-12">
+                                            <a data-context-href="/catalog/LN93/track?counter=1" href="/catalog/LN93">Ide Tito preko Romanije</a>
+                                        </h3>
+
+                                    </div>
+
+                                    <dl class="document-metadata dl-horizontal dl-invert pds-document">
+
+                                        <dd class="blacklight-content_model">PDS DOCUMENT</dd>
+                                        <dd class="blacklight-owner_display">Center for Hellenic Studies</dd>
+
+                                    </dl>
+
+                                    <div class="index-document-functions col-sm-3 col-lg-2">
+                                        <div class="checkbox">
+                                            <label class="toggle_add_to_collection"
+                                                   title="">
+                                                <input type="checkbox" class="toggle_add_to_collection" data-document-id="LN93"> <span>Add to collection</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                </li>
+                                <li class="document  document-position-1 " data-document-counter="1" itemscope itemtype="http://schema.org/Thing">
+                                    <div class="document-thumbnail clearfix">
+                                    </div>
+
+                                    <div class="documentHeader">
+
+                                        <h3 class="index_title document-title-heading col-md-12">
+                                            <a data-context-href="/catalog/PN652/track?counter=2" href="/catalog/PN652">Pričanje I</a>
+                                        </h3>
+
+                                    </div>
+
+                                    <dl class="document-metadata dl-horizontal dl-invert text">
+
+                                        <dd class="blacklight-content_model">TEXT</dd>
+                                        <dd class="blacklight-owner_display">Center for Hellenic Studies</dd>
+
+                                    </dl>
+
+                                    <div class="index-document-functions col-sm-3 col-lg-2">
+                                        <div class="checkbox">
+                                            <label class="toggle_add_to_collection"
+                                                   title="">
+                                                <input type="checkbox" class="toggle_add_to_collection" data-document-id="PN652"> <span>Add to collection</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                </li>
+                                <li class="document  document-position-2 " data-document-counter="2" itemscope itemtype="http://schema.org/Thing">
+                                    <div class="document-thumbnail clearfix">
+                                    </div>
+
+                                    <div class="documentHeader">
+
+                                        <h3 class="index_title document-title-heading col-md-12">
+                                            <a data-context-href="/catalog/PN275a/track?counter=3" href="/catalog/PN275a">Pjevanje i pričanje</a>
+                                        </h3>
+
+                                    </div>
+
+                                    <dl class="document-metadata dl-horizontal dl-invert text">
+
+                                        <dd class="blacklight-content_model">TEXT</dd>
+                                        <dd class="blacklight-owner_display">Center for Hellenic Studies</dd>
+
+                                    </dl>
+
+                                    <div class="index-document-functions col-sm-3 col-lg-2">
+                                        <div class="checkbox">
+                                            <label class="toggle_add_to_collection"
+                                                   title="">
+                                                <input type="checkbox" class="toggle_add_to_collection" data-document-id="PN275a"> <span>Add to collection</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                </li>
+                                <li class="document  document-position-3 " data-document-counter="3" itemscope itemtype="http://schema.org/Thing">
+                                    <div class="document-thumbnail clearfix">
+                                    </div>
+
+                                    <div class="documentHeader">
+
+                                        <h3 class="index_title document-title-heading col-md-12">
+                                            <a data-context-href="/catalog/PN679/track?counter=4" href="/catalog/PN679">Sultan Ibrahim uzima Bagdat</a>
+                                        </h3>
+
+                                    </div>
+
+                                    <dl class="document-metadata dl-horizontal dl-invert text">
+
+                                        <dd class="blacklight-content_model">TEXT</dd>
+                                        <dd class="blacklight-owner_display">Center for Hellenic Studies</dd>
+
+                                    </dl>
+
+                                    <div class="index-document-functions col-sm-3 col-lg-2">
+                                        <div class="checkbox">
+                                            <label class="toggle_add_to_collection"
+                                                   title="">
+                                                <input type="checkbox" class="toggle_add_to_collection" data-document-id="PN679"> <span>Add to collection</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                </li>
+                                <li class="document  document-position-4 " data-document-counter="4" itemscope itemtype="http://schema.org/Thing">
+                                    <div class="document-thumbnail clearfix">
+                                    </div>
+
+                                    <div class="documentHeader">
+
+                                        <h3 class="index_title document-title-heading col-md-12">
+                                            <a data-context-href="/catalog/PN669/track?counter=5" href="/catalog/PN669">Proba</a>
+                                        </h3>
+
+                                    </div>
+
+                                    <dl class="document-metadata dl-horizontal dl-invert text">
+
+                                        <dd class="blacklight-content_model">TEXT</dd>
+                                        <dd class="blacklight-owner_display">Center for Hellenic Studies</dd>
+
+                                    </dl>
+
+                                    <div class="index-document-functions col-sm-3 col-lg-2">
+                                        <div class="checkbox">
+                                            <label class="toggle_add_to_collection"
+                                                   title="">
+                                                <input type="checkbox" class="toggle_add_to_collection" data-document-id="PN669"> <span>Add to collection</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                </li>
+                                <li class="document  document-position-5 " data-document-counter="5" itemscope itemtype="http://schema.org/Thing">
+                                    <div class="document-thumbnail clearfix">
+                                    </div>
+
+                                    <div class="documentHeader">
+
+                                        <h3 class="index_title document-title-heading col-md-12">
+                                            <a data-context-href="/catalog/PN668/track?counter=6" href="/catalog/PN668">Sultan Selim uzima Bagdat</a>
+                                        </h3>
+
+                                    </div>
+
+                                    <dl class="document-metadata dl-horizontal dl-invert text">
+
+                                        <dd class="blacklight-content_model">TEXT</dd>
+                                        <dd class="blacklight-owner_display">Center for Hellenic Studies</dd>
+
+                                    </dl>
+
+                                    <div class="index-document-functions col-sm-3 col-lg-2">
+                                        <div class="checkbox">
+                                            <label class="toggle_add_to_collection"
+                                                   title="">
+                                                <input type="checkbox" class="toggle_add_to_collection" data-document-id="PN668"> <span>Add to collection</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                </li>
+                                <li class="document  document-position-6 " data-document-counter="6" itemscope itemtype="http://schema.org/Thing">
+                                    <div class="document-thumbnail clearfix">
+                                    </div>
+
+                                    <div class="documentHeader">
+
+                                        <h3 class="index_title document-title-heading col-md-12">
+                                            <a data-context-href="/catalog/PN923/track?counter=7" href="/catalog/PN923">Bunić Alibeg i Đulić Nuhan u sužanjstvu zadarskoga bana</a>
+                                        </h3>
+
+                                    </div>
+
+                                    <dl class="document-metadata dl-horizontal dl-invert text">
+
+                                        <dd class="blacklight-content_model">TEXT</dd>
+                                        <dd class="blacklight-owner_display">Center for Hellenic Studies</dd>
+
+                                    </dl>
+
+                                    <div class="index-document-functions col-sm-3 col-lg-2">
+                                        <div class="checkbox">
+                                            <label class="toggle_add_to_collection"
+                                                   title="">
+                                                <input type="checkbox" class="toggle_add_to_collection" data-document-id="PN923"> <span>Add to collection</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                </li>
+                                <li class="document  document-position-7 " data-document-counter="7" itemscope itemtype="http://schema.org/Thing">
+                                    <div class="document-thumbnail clearfix">
+                                    </div>
+
+                                    <div class="documentHeader">
+
+                                        <h3 class="index_title document-title-heading col-md-12">
+                                            <a data-context-href="/catalog/PN654/track?counter=8" href="/catalog/PN654">Pričanje II</a>
+                                        </h3>
+
+                                    </div>
+
+                                    <dl class="document-metadata dl-horizontal dl-invert text">
+
+                                        <dd class="blacklight-content_model">TEXT</dd>
+                                        <dd class="blacklight-owner_display">Center for Hellenic Studies</dd>
+
+                                    </dl>
+
+                                    <div class="index-document-functions col-sm-3 col-lg-2">
+                                        <div class="checkbox">
+                                            <label class="toggle_add_to_collection"
+                                                   title="">
+                                                <input type="checkbox" class="toggle_add_to_collection" data-document-id="PN654"> <span>Add to collection</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                </li>
+                                <li class="document  document-position-8 " data-document-counter="8" itemscope itemtype="http://schema.org/Thing">
+                                    <div class="document-thumbnail clearfix">
+                                    </div>
+
+                                    <div class="documentHeader">
+
+                                        <h3 class="index_title document-title-heading col-md-12">
+                                            <a data-context-href="/catalog/PN680/track?counter=9" href="/catalog/PN680">Boj pod Temišvarom</a>
+                                        </h3>
+
+                                    </div>
+
+                                    <dl class="document-metadata dl-horizontal dl-invert text">
+
+                                        <dd class="blacklight-content_model">TEXT</dd>
+                                        <dd class="blacklight-owner_display">Center for Hellenic Studies</dd>
+
+                                    </dl>
+
+                                    <div class="index-document-functions col-sm-3 col-lg-2">
+                                        <div class="checkbox">
+                                            <label class="toggle_add_to_collection"
+                                                   title="">
+                                                <input type="checkbox" class="toggle_add_to_collection" data-document-id="PN680"> <span>Add to collection</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                </li>
+                                <li class="document  document-position-9 " data-document-counter="9" itemscope itemtype="http://schema.org/Thing">
+                                    <div class="document-thumbnail clearfix">
+                                    </div>
+
+                                    <div class="documentHeader">
+
+                                        <h3 class="index_title document-title-heading col-md-12">
+                                            <a data-context-href="/catalog/PN674/track?counter=10" href="/catalog/PN674">Pjevanje i pričanje</a>
+                                        </h3>
+
+                                    </div>
+
+                                    <dl class="document-metadata dl-horizontal dl-invert text">
+
+                                        <dd class="blacklight-content_model">TEXT</dd>
+                                        <dd class="blacklight-owner_display">Center for Hellenic Studies</dd>
+
+                                    </dl>
+
+                                    <div class="index-document-functions col-sm-3 col-lg-2">
+                                        <div class="checkbox">
+                                            <label class="toggle_add_to_collection"
+                                                   title="">
+                                                <input type="checkbox" class="toggle_add_to_collection" data-document-id="PN674"> <span>Add to collection</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                </li>
+                                <li class="document  document-position-10 " data-document-counter="10" itemscope itemtype="http://schema.org/Thing">
+                                    <div class="document-thumbnail clearfix">
+                                    </div>
+
+                                    <div class="documentHeader">
+
+                                        <h3 class="index_title document-title-heading col-md-12">
+                                            <a data-context-href="/catalog/PN681/track?counter=11" href="/catalog/PN681">Pričanje</a>
+                                        </h3>
+
+                                    </div>
+
+                                    <dl class="document-metadata dl-horizontal dl-invert text">
+
+                                        <dd class="blacklight-content_model">TEXT</dd>
+                                        <dd class="blacklight-owner_display">Center for Hellenic Studies</dd>
+
+                                    </dl>
+
+                                    <div class="index-document-functions col-sm-3 col-lg-2">
+                                        <div class="checkbox">
+                                            <label class="toggle_add_to_collection"
+                                                   title="">
+                                                <input type="checkbox" class="toggle_add_to_collection" data-document-id="PN681"> <span>Add to collection</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                </li>
+                                <li class="document  document-position-11 " data-document-counter="11" itemscope itemtype="http://schema.org/Thing">
+                                    <div class="document-thumbnail clearfix">
+                                    </div>
+
+                                    <div class="documentHeader">
+
+                                        <h3 class="index_title document-title-heading col-md-12">
+                                            <a data-context-href="/catalog/PN678/track?counter=12" href="/catalog/PN678">Proba</a>
+                                        </h3>
+
+                                    </div>
+
+                                    <dl class="document-metadata dl-horizontal dl-invert text">
+
+                                        <dd class="blacklight-content_model">TEXT</dd>
+                                        <dd class="blacklight-owner_display">Center for Hellenic Studies</dd>
+
+                                    </dl>
+
+                                    <div class="index-document-functions col-sm-3 col-lg-2">
+                                        <div class="checkbox">
+                                            <label class="toggle_add_to_collection"
+                                                   title="">
+                                                <input type="checkbox" class="toggle_add_to_collection" data-document-id="PN678"> <span>Add to collection</span>
+                                            </label>
+                                        </div>
+                                    </div>
+
+                                </li>
+
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="row record-padding">
+                        <div class="col-md-12">
+                            <div class="pagination">
+
+                                <ul class="pagination">
+                                    <li class="disabled">
+                                        <a rel="prev" onclick="return false;" href="#">&laquo; Previous</a>
+                                    </li>
+
+
+                                    <li>
+                                        <a rel="next" href="/catalog?page=2">Next &raquo;</a>
+                                    </li>
+
+                                </ul>
+
+                            </div>
+                        </div>
+                    </div>
+
+                </row>
+            </div>
+
+        </div>
+    </div>
+
+    <div class="contain-to-grid footer">
+        <nav class="top-bar footer">
+            <section class="footer-section columns">
+                <ul class="left inline-list"></ul>
+                <ul class="right inline-list"></ul>
+            </section>
+        </nav>
+    </div>
+
+
+    <div class="contain-to-grid footer__navbar">
+        <div class="row ">
+            <div class="small-12 large-12 columns">
+            </div>
+        </div>
+    </div>
+</body>
+</html>

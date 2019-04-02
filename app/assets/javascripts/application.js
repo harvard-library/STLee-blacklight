@@ -50,10 +50,10 @@ $(document).on('turbolinks:load', function() {
 
     function setFacetAccordionState(expanded) {
         if (expanded) {
-            $(".toggle-all-facets").attr('aria-expanded', 'true').text('Collapse All');
+            $(".toggle-all-facets").attr('aria-expanded', 'true');
         }
         else {
-            $(".toggle-all-facets").attr('aria-expanded', 'false').text('Expand All');
+            $(".toggle-all-facets").attr('aria-expanded', 'false');
         }
     }
 

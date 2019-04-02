@@ -3,7 +3,7 @@ en:
     application_name: 'Harvard Digital Library'
     search:
       facets:
-        title: 'Filter'
+        title: 'Filters'
       pagination_info:
         no_items_found: 'No %{entry_name} found'
         single_item_found: '<strong>1</strong> %{entry_name} found'
