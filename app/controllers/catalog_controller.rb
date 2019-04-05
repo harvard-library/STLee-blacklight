@@ -55,9 +55,8 @@ class CatalogController < ApplicationController
     config.show.thumbnail_field = 'preview'
 
     # Facets
-    config.add_facet_field 'resourceType', label: 'Digital Format', single: true
-    config.add_facet_field 'ownerCodeDisplayName', label: 'Repository',  single: true
-    config.add_facet_field 'setName_str', label: 'Collections',  single: true
+    config.add_facet_field 'digitalFormat', label: 'Digital Format', single: true, limit: 10
+    config.add_facet_field 'ownerCodeDisplayName', label: 'Repository',  single: true, limit: 10
 
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
