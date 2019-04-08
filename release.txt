@@ -1,0 +1,7 @@
+ 6.11.2-lts-1 (04/30/2019) PP/MC
+--Removed customized STLee / Archimedes theme
+--Revised CSS for left hand filter rail on search results
+--Confirmed/created output left hand filter rail on search results
+--Global styles set up
+--Revised Gemfile to use mysql
+  
