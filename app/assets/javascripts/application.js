@@ -70,5 +70,10 @@ $(document).on('turbolinks:load', function() {
         return false;
     });
 
+    $('body').on('click', '.ajax-modal-close', function () {
+        $('#ajax-modal').removeClass('open');
+        $('.reveal-modal-bg').hide();
+    });
+
 });
 
