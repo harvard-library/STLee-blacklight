@@ -1,6 +1,6 @@
 <dl class="accordion facet_limit blacklight-<%= facet_field.key.parameterize %>" data-accordion>
   <dd class="accordion-navigation <%= 'active' if facet_field_in_params?(facet_field.key) %>">
-    <a href="#<%= facet_field_id(facet_field) %>" class="facet__title"><%= facet_field_label(facet_field.key) %><span class='toggle'></span></a>
+    <a href="#<%= facet_field_id(facet_field) %>" class="facet__title"><%= facet_field_label(facet_field.key) %><span class="fa fa-caret-down facet-expand toggle"></span><span class="fa fa-caret-up facet-collapse toggle"></span></a>
     <div id="<%= facet_field_id(facet_field) %>" class="content <%= 'active' if facet_field_in_params?(facet_field.key) %>">
       <%= yield %>
     </div>

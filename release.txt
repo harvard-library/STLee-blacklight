@@ -1,0 +1,10 @@
+ 6.11.2-lts-1 (04/30/2019) PP/MC
+--Removed customized STLee / Archimedes theme
+--Revised CSS for left hand filter rail on search results
+--Enabled More link for facets counts
+--Updated JS to fix facet modal issues
+--Updated Facet Paginator to support pagination and ordering of facet counts
+--Confirmed/created output left hand filter rail on search results
+--Global styles set up
+--Revised Gemfile to use mysql
+  

@@ -52,10 +52,6 @@ body.blacklight-catalog-show #document h1 {
   float: right;
 }
 
-dd.accordion-navigation.active span.toggle {
-  @include fa-icon-content($fa-var-minus);
-}
-
 .record-details dd.accordion-navigation:not(:first-child) {
   border-top: 2px solid white;
 }

@@ -8,6 +8,7 @@ end
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '~> 5.1.4'
+gem 'mysql2', '>= 0.3.18', '< 0.5'
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
 gem 'pg', '~> 0.20'
@@ -65,5 +66,5 @@ gem 'jquery-rails'
 gem 'devise'
 gem 'devise-guests', '~> 0.6'
 gem 'blacklight-marc', '~> 6.1'
-gem 'foundation-rails'
+gem 'foundation-rails', '~> 5.4'
 gem 'font-awesome-sass'

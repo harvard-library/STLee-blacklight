@@ -86,12 +86,20 @@ module Harvard::LibraryCloud
     end
 
     def facet_params_to_lc facet_field
-      facet_field.map do |x|
-        # "{!ex=genre_single}genre"
-        m = /\{.*\}(\S+)$/.match(x)
-        m[1] if m
-      end.join(',')
+	  if facet_field.kind_of?(Array)
+		  facet_field.map do |x|
+			# "{!ex=genre_single}genre"
+			m = facet_param_formatted(x)
+		  end.join(',')
+	  else
+		facet_param_formatted(facet_field)
+	  end 
     end
+
+	def facet_param_formatted facet_field
+		m = /\{.*\}(\S+)$/.match(facet_field)
+		m[1] if m
+	end
 
     def facet_query_params_to_lc fq
       results = {}
