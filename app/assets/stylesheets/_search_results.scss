@@ -57,10 +57,11 @@ h3.document-title-heading {
 }
 
 h3.document-title-heading a {
-  color: $rouge;
+  color: $breakthrough-blue;
   font-size: rem-calc(15);
   line-height: rem-calc(16);
-  font-weight: normal;
+  font-weight: bold;
+  font-family: 'TruenoBd', sans-serif;
 }
 
 #documents.list-mode h3.document-title-heading a {

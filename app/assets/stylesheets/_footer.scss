@@ -1,3 +1,4 @@
+@import "settings";
 
 #hl__footer {
     display: flex;
@@ -55,7 +56,8 @@
 
 .hl__footerColThree {
     width: 20%;
-    display: flex
+    display: flex;
+    margin-right: 30px
 }
 
 .hl__footerColThree ul {
@@ -117,7 +119,8 @@
 }
 
 .hl__footerLinkRight {
-    padding-right: 30px
+    padding-right: 30px;
+    list-style: none
 }
 
 .hl__footerLinkRight a {
@@ -149,7 +152,33 @@
     width: 230px;
     padding-left: 35px;
     align-items: center;
-    height: 35%
+    height: 35%;
+    color: $white
+}
+
+.hl__ccContainer {
+    margin-top: 40px
+}
+
+.hl__ccContainer svg {
+    float: left;
+    margin: 7px 10px 0 0;
+}
+
+.hl__ccLicense {
+    color: $silver;
+    font-family: TruenoLt
+}
+
+.hl__ccText {
+    color: $silver;
+    font-family: 'TruenoLt', sans-serif;
+    font-size: 11px
+}
+
+.hl__ccText a {
+    color: $white;
+    text-decoration: underline
 }
 
 @media (max-width: 620px) {
