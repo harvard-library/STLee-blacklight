@@ -1,4 +1,4 @@
- 6.19.0-lts-1 (04/30/2019) PP/MC
+ 6.11.2-lts-1 (04/30/2019) PP/MC
 --Removed customized STLee / Archimedes theme
 --Revised CSS for left hand filter rail on search results
 --Enabled More link for facets counts
