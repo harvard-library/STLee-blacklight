@@ -7,4 +7,5 @@
 --Confirmed/created output left hand filter rail on search results
 --Global styles set up
 --Revised Gemfile to use mysql
+--Added initial set of CSS customizations
   

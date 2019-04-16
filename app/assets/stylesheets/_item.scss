@@ -2,14 +2,10 @@
 @import "util";
 @import "icons";
 
-body.blacklight-catalog-show .searchbar__wrapper {
-  margin-bottom: 20px;
-}
-
 .page-header-page-links-column {
   margin-bottom: 20px;
   a {
-    color: $rouge;
+    color: $breakthrough-blue;
   }
   .page_links {
     float: right;
@@ -32,20 +28,24 @@ body.blacklight-catalog-show #document h1 {
 
 .accordion.record-details .accordion-navigation > a {
   padding: 0;
+  text-decoration: none;
 }
 
 .record-details h3 {
-  background-color: $rouge;
-  color: white;
+  background-color: transparent;
+  color: $jet;
   font-size: rem-calc(18);
   padding: 23px 25px;
   margin: 0;
+  text-transform: uppercase;
+  letter-spacing: 1.4px;
+  font-family: 'TruenoBd', sans-serif;
 }
 
 .record-details span.toggle {
   @include fa-icon;
   @include fa-icon-content($fa-var-plus);
-  color: white;
+  color: $jet;
   font-size: rem-calc(18);
   position: relative;
   top: 6px;
@@ -57,27 +57,33 @@ body.blacklight-catalog-show #document h1 {
 }
 
 .record-details dl {
-  padding: 20px 20px 50px;
+  padding: 20px 20px 30px;
   margin-bottom: 0;
 }
 
 .record-details dl dt {
-  width: 25%;
+  width: 32%;
   float: left;
   text-align: right;
-  font-family: "Benton Sans Bd", Helvetica, Roboto, Arial, sans-serif;;
+  font-family: "TruenoSBd", Helvetica, Roboto, Arial, sans-serif;;
   font-size: rem-calc(14);
-  clear: left;
+  clear: none;
+  display: inline-block;
+  letter-spacing: 1.4px;
   padding-right: 20px;
+  text-transform: uppercase;
   vertical-align: top;
+  padding-bottom: 20px;
 }
 
 .record-details dl dd {
-  width: 75%;
-  float: right;
+  width: 68%;
+  float: none;
   text-align: left;
+  font-family: 'Lora', serif;
   font-size: rem-calc(14);
   vertical-align: top;
+  padding-bottom: 20px;
   &:after {
     content: " ";
     height: 0;
@@ -88,5 +94,6 @@ body.blacklight-catalog-show #document h1 {
 
 .record-details #related,
 .record-details #reuse {
+  font-family: 'Lora', serif;
   padding: 20px;
 }

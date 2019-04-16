@@ -37,7 +37,7 @@ ul.facet-values li {
 .selected,
 .facet-count {
   font-size: rem-calc(14);
-  color: $rouge;
+  color: $jet;
 }
 
 .facet-label {
@@ -202,7 +202,8 @@ a.facet__title {
                     border-radius: 5px;
 
                     a {
-                        color: $dark-gray;
+                        color: $jet;
+                        text-decoration: none;
                     }
 
                     .facet-count {
@@ -238,11 +239,29 @@ a.facet__title {
 
 #ajax-modal {
     z-index: 2000;
-    height: 60vh;
+    height: 70vh;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    overflow: hidden;
+}
+
+.reveal-modal {
+    width: 650px;
+}
+
+.modal-title {
+    font-family: 'TruenoSBd', sans-serif;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
 }
 
 .facet_pagination {
     overflow: hidden;
+}
+
+.facet_pagination.top {
+    padding: 15px 15px 0;
 }
 
 .facet_extended_list { 
