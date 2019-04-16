@@ -46,11 +46,11 @@ GEM
     bcrypt (3.1.11)
     bcrypt (3.1.11-x64-mingw32)
     bindex (0.5.0)
-    blacklight (6.19.0)
+    blacklight (6.11.2)
       bootstrap-sass (~> 3.2)
       deprecation
       globalid
-      jbuilder (~> 2.7)
+      jbuilder
       kaminari (>= 0.15)
       nokogiri (~> 1.6)
       rails (>= 4.2, < 6)
@@ -290,7 +290,7 @@ PLATFORMS
   x64-mingw32
 
 DEPENDENCIES
-  blacklight (= 6.19.0)
+  blacklight (= 6.11.2)
   blacklight-marc (~> 6.1)
   byebug
   capybara (~> 2.13)
