@@ -8,4 +8,8 @@
 --Global styles set up
 --Revised Gemfile to use mysql
 --Added initial set of CSS customizations
-  
+--Revised Gemfile to add jsonpath
+--Added LibraryCloud metadata fields to items
+--Enabled rendering of HTML in fields on item details page
+--Updated thumbnail and raw object logic to fallback to related item
+--Updated raw object rendering to display in viewer

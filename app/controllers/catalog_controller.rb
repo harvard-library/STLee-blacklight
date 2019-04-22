@@ -56,7 +56,7 @@ class CatalogController < ApplicationController
 
     # Facets
     config.add_facet_field 'digitalFormat', label: 'Digital Format', single: true, limit: 10
-    config.add_facet_field 'ownerCodeDisplayName', label: 'Repository',  single: true, limit: 10
+    config.add_facet_field 'repository', label: 'Repository',  single: true, limit: 10
 
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
@@ -65,21 +65,42 @@ class CatalogController < ApplicationController
 
     # Fields to be displayed in the index (search results) view
     # The ordering of the field names is the order of the display
-    config.add_index_field 'content_model', label: 'Type'
-    config.add_index_field 'owner_display', label: 'Harvard Repository'
-    config.add_index_field 'abstract', label: 'Abstract'
+    #config.add_index_field 'content_model', label: 'Type'
+    #config.add_index_field 'owner_display', label: 'Harvard Repository'
+    #config.add_index_field 'abstract', label: 'Abstract'
+	config.add_index_field 'date', label: 'Date'
 
     # Fields to be displayed in the show (single result) view
     # The ordering of the field names is the order of the display
-    config.add_show_field 'title_display', label: 'Title'
-    config.add_show_field 'title', label: 'Title'
-    config.add_show_field 'title_alternative', label: 'Alternative Title'
-    config.add_show_field 'resource_type', label: 'Format'
-    config.add_show_field 'content_model', label: 'Type'
-    config.add_show_field 'owner_display', label: 'Harvard Repository'
-    config.add_show_field 'owner_code', label: 'Repository Code'
-    config.add_show_field 'setName', label: 'Collection'
-    config.add_show_field 'abstract', label: 'Abstract'
+    #config.add_show_field 'title_display', label: 'Title'
+  config.add_show_field 'title_extended', label: 'Title'
+	config.add_show_field 'name', label: 'Creator/Contributor'
+	config.add_show_field 'date', label: 'Date'
+	config.add_show_field 'description', label: 'Description'
+  config.add_show_field 'language', label: 'Language'
+	config.add_show_field 'origin', label: 'Place of Origin'
+	config.add_show_field 'permalink', label: 'Permalink'
+	config.add_show_field 'notes', label: 'Notes'
+  config.add_show_field 'abstract', label: 'Abstract'
+	config.add_show_field 'digital_format', label: 'Digital Format'
+  config.add_show_field 'repository', label: 'Repository'
+  config.add_show_field 'genre', label: 'Genre'
+  config.add_show_field 'publisher', label: 'Publisher'
+  config.add_show_field 'edition', label: 'Edition'
+  config.add_show_field 'culture', label: 'Culture'
+  config.add_show_field 'style', label: 'Style'
+  
+  config.add_show_field 'place', label: 'Place'
+  config.add_show_field 'subjects', label: 'Subjects'
+  config.add_show_field 'series', label: 'Series'
+  
+  
+    #config.add_show_field 'resource_type', label: 'Format'
+    #config.add_show_field 'content_model', label: 'Type'
+    #config.add_show_field 'owner_display', label: 'Harvard Repository'
+    #config.add_show_field 'owner_code', label: 'Repository Code'
+    #config.add_show_field 'setName', label: 'Collection'
+    #config.add_show_field 'abstract', label: 'Abstract'
 
     # "fielded" search configuration. Used by pulldown among other places.
     # For supported keys in hash, see rdoc for Blacklight::SearchFields
