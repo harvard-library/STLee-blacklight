@@ -14,3 +14,5 @@
 --Updated thumbnail and raw object logic to fallback to related item
 --Updated raw object rendering to display in viewer
 --Updated single item view template and associated CSS
+--Updated Footer links and added Google Analytics
+--Removed unnecessary div from header that overlapped links.
