@@ -33,8 +33,8 @@ class CatalogController < ApplicationController
     config.index.document_actions.delete(:bookmark)
 
     # Add the "Add to collection" action to the individual document page
-    add_show_tools_partial(:add_to_collection, define_method: false)
-    add_results_document_tool(:add_to_collection_index)
+    # add_show_tools_partial(:add_to_collection, define_method: false)
+    # add_results_document_tool(:add_to_collection_index)
 
     # Define the partials to be displayed on index and item pages
     config.index.partials = [:thumbnail, :index_header, :index]
