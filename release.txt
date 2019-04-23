@@ -16,3 +16,4 @@
 --Updated single item view template and associated CSS
 --Updated Footer links and added Google Analytics
 --Removed unnecessary div from header that overlapped links.
+--Temporarily removing Add To Collection functionality.
