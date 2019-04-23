@@ -57,40 +57,55 @@ body.blacklight-catalog-show #document h1 {
 }
 
 .record-details dl {
+  display: table;
   padding: 20px 20px 30px;
   margin-bottom: 0;
+  width: 100%;
 }
 
 .record-details dl dt {
-  width: 32%;
+  width: 250px;
   float: left;
-  text-align: right;
-  font-family: "TruenoSBd", Helvetica, Roboto, Arial, sans-serif;;
-  font-size: rem-calc(14);
-  clear: none;
-  display: inline-block;
-  letter-spacing: 1.4px;
-  padding-right: 20px;
+  text-align: left;
+  font-family: "TruenoSBd", Helvetica, Roboto, Arial, sans-serif;
+  font-size: 20px;
+  display: table-cell;
+  letter-spacing: 1.5px;
   text-transform: uppercase;
   vertical-align: top;
-  padding-bottom: 20px;
-}
-
-.record-details dl dd {
-  width: 68%;
-  float: none;
-  text-align: left;
-  font-family: 'Lora', serif;
-  font-size: rem-calc(14);
-  vertical-align: top;
-  padding-bottom: 20px;
+  margin: 0;
+  padding: 40px 0;
   &:after {
-    content: " ";
-    height: 0;
-    width: 0;
     clear: both;
   }
 }
+
+.record-details dl dd {
+  width: 100%;
+  float: none;
+  text-align: left;
+  font-family: 'Lora', serif;
+  font-size: 15px;
+  vertical-align: top;
+  margin: 0;
+  padding: 40px 0 40px 251px;
+  line-height: 28px;
+  display: block;
+  border-bottom: 1px solid #d8d8d8;
+  &:after {
+    clear: both;
+  }
+}
+
+.record-details dd.blacklight-title_extended {
+  font-size: 24px;
+  font-weight: bold;
+}
+
+.dl-horizontal dd:before, .dl-horizontal dd:after {
+  display: none;
+}
+
 
 .record-details #related,
 .record-details #reuse {
