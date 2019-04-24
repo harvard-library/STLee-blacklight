@@ -93,7 +93,8 @@ class CatalogController < ApplicationController
   config.add_show_field 'place', label: 'Place'
   config.add_show_field 'subjects', label: 'Subjects'
   config.add_show_field 'series', label: 'Series'
-  
+  config.add_show_field 'related_links', label: 'Related Links'
+  config.add_show_field 'additional_digital_items', label: 'Additional Digital Items'
   
     #config.add_show_field 'resource_type', label: 'Format'
     #config.add_show_field 'content_model', label: 'Type'
