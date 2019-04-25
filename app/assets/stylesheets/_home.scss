@@ -19,13 +19,13 @@
   line-height: 80px;
 }
 
-.search-query-form {
+.blacklight-application-home .search-query-form {
   padding: 100px 0 157px;
   margin: 0;
   position: relative;
 }
 
-.home-photo-credit {
+.blacklight-application-home .home-photo-credit {
   background-color: rgba(30,30,30,0.7);
   border: 10px transparent solid;
   color: #fff;
@@ -34,6 +34,10 @@
   bottom: 0px;
   right: 10px;
   z-index: 3;
+}
+
+.home-photo-credit {
+  display: none;
 }
 
 .home-photo-credit a {
