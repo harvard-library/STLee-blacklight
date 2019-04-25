@@ -41,7 +41,9 @@ class SolrDocument
       result[:preview] = preview_from_doc doc
       result[:raw_object] = raw_object_from_doc doc
       result[:funding] = field_values_from_node_by_path doc, '$..note[?(@["@type"]=="funding")]["#text"]', ', '
-
+      result[:related_links] = related_links_from_doc doc
+      result[:additional_digital_items] = additional_digital_items_from_doc doc
+      
       result[:id] = result[:identifier]
     end
 
@@ -256,15 +258,9 @@ class SolrDocument
     dateNodes = nodes_from_path doc, '$..["dateIssued","dateCreated","dateCaptured","dateOther","copyrightDate"]'
 
     node_to_array(dateNodes).each do |x|
-      node_to_array(x).each do |y|
-  
-        if y.kind_of?(String) || y.kind_of?(Integer)
-          return y.to_s
-        else
-          if !y['#text'].nil? && y['#text'] != '' && y['@point'].nil?
-            return y['#text']
-          end
-        end
+      date = date_from_date_node x
+      if date != ''
+        return date
       end
     end
     
@@ -274,10 +270,17 @@ class SolrDocument
   def date_from_date_node node
 	  date = ''
 
-		node_to_array(node).each do |x|
-			if x.kind_of?(String)
-				date += x
-			end
+		if node.kind_of?(Array) 
+      node.each do |x|
+        date = date_from_date_node x
+        if date != ''
+          return date
+        end
+      end
+    elsif node.kind_of?(String) || node.kind_of?(Integer)
+			date = node.to_s
+    elsif !node['#text'].nil? && node['#text'] != '' && node['@point'].nil?
+			date = node['#text']
 		end
 
 	  date
@@ -397,7 +400,7 @@ class SolrDocument
       if notes != ''
         notes += '<br/>'
       end
-      notes += '<strong>Attribution:</strong>' + attribution
+      notes += sub_label_for_field  'Attribution', attribution
     end
     
     if funding != ''
@@ -488,8 +491,16 @@ class SolrDocument
   def place_from_doc doc
     place = ''
 
-    physical_items = nodes_from_path doc, '$..physicalLocation[?(@["@type"] != "repository")]'
-    place = field_value_from_node physical_items, ', '
+    physical_items = nodes_from_path doc, '$..physicalLocation'
+
+    node_to_array(physical_items).each do |x|
+      if x["@displayLabel"].nil? || x["@displayLabel"] != "Harvard repository"
+        if place != ''
+          place += ', '
+        end
+        place += field_value_from_node x, ', '
+      end
+    end
 
     geography_items = nodes_from_path doc, '$..hierarchicalGeographic.*'
     geography = ''
@@ -627,6 +638,94 @@ class SolrDocument
     end
     
     raw_object
+  end
+
+  def related_links_from_doc doc
+    related_links = ''
+    
+    finding_aid_urls = related_links_by_type doc, 'Finding Aid', 'Finding Aid'
+    
+    if finding_aid_urls != ''
+      if related_links != ''
+        related_links += '<br/>'
+      end
+      related_links += finding_aid_urls
+    end
+
+    hollis_urls = related_links_by_type doc, 'HOLLIS record', 'Item record'
+    
+    if hollis_urls != ''
+      if related_links != ''
+        related_links += '<br/>'
+      end
+      related_links += hollis_urls + ' in HOLLIS'
+    end
+
+    hollis_image_urls = related_links_by_type doc, 'HOLLIS Images record', 'Image record'
+    
+    if hollis_image_urls != ''
+      if related_links != ''
+        related_links += '<br/>'
+      end
+      related_links += hollis_image_urls + ' in HOLLIS Images'
+    end
+    
+    digital_collection_urls = related_links_by_type doc, 'Harvard Digital Collections', 'Digital Collections record'
+    
+    if digital_collection_urls != ''
+      if related_links != ''
+        related_links += '<br/>'
+      end
+      related_links += digital_collection_urls
+    end
+    
+    related_links
+  end
+
+  def related_links_by_type doc, type, label
+    link_urls = ''
+    link_items = nodes_from_path doc, '$..relatedItem[?(@["@otherType"] == "' + type + '")]'
+    link_items.each do |x|
+      if link_urls != ''
+        link_urls += ', '
+      end
+      
+      node_to_array(x['location']).each do |y|
+        link_urls += link_tag_for_url y['url'], label, true
+      end
+    end
+
+    link_urls
+  end
+
+  def additional_digital_items_from_doc doc
+    additional_digital_items = ''
+    nodes = nodes_from_path doc, '$..location..url[?(@["@access"] == "raw object")]'
+    
+    if !nodes.nil? && nodes.kind_of?(Array) && nodes.count > 1
+      for i in 0..(nodes.count-1)
+        if i > 0
+          if !nodes[i]['#text'].nil?
+            if additional_digital_items != ''
+              additional_digital_items += '<br/>'
+            end
+          
+            additional_digital_items += link_tag_for_url nodes[i]['#text'], nodes[i]['#text'], true
+          end
+        end
+      end
+    end
+
+    additional_digital_items 
+  end
+
+  def link_tag_for_url url, label, new_window
+    link_tag = '<a href="' + url + '" '
+    if new_window
+      link_tag += ' target="_blank"'
+    end
+    link_tag += '>' + label + '</a>'
+    link_tag
   end
 
   def fetch_ids_uri(uri_str)
