@@ -12,7 +12,7 @@
 
 .hl__alert a {
     color: #0579b8;
-    font-family: 'TruenoBd',sans-serif;
+    font-family: 'TruenoBold',sans-serif;
     text-decoration: none;
     -webkit-transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
     transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
@@ -90,7 +90,7 @@
 }
 
 .hl__topHeaderTitle__harvard a {
-    font-family: TruenoBd;
+    font-family: 'TruenoBold', sans-serif;
     font-size: 24px;
     text-transform: uppercase;
     font-weight: 400;
@@ -108,7 +108,7 @@
 }
 
 span.hl__topHeaderTitle__collections {
-    font-family: Lora;
+    font-family: 'Lora', serif;
     font-size: 28px;
     font-style: italic;
     color: #fff;

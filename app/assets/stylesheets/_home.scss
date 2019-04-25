@@ -6,7 +6,7 @@
 }
 
 .homepage-title-small {
-  font-family: 'TruenoBd', sans-serif;
+  font-family: 'TruenoBold', sans-serif;
   font-size: 52px;
   letter-spacing: 2.48px;
   text-transform: uppercase;
@@ -25,10 +25,15 @@
   position: relative;
 }
 
+.home-photo-credit {
+  display: none;
+}
+
 .blacklight-application-home .home-photo-credit {
   background-color: rgba(30,30,30,0.7);
   border: 10px transparent solid;
   color: #fff;
+  display: unset;
   font-size: 13px;
   position: absolute;
   bottom: 0px;
@@ -36,12 +41,9 @@
   z-index: 3;
 }
 
-.home-photo-credit {
-  display: none;
-}
-
 .home-photo-credit a {
   color: #fff;
+  font-family: 'TruenoLight', sans-serif;
 }
 
 .home-photo-credit a:hover {
@@ -97,7 +99,7 @@
 }
 
 .blacklight-application-home #main-container h2 {
-  font-family: 'TruenoBd', sans-serif;
+  font-family: 'TruenoBold', sans-serif;
   font-size: 32px;
   letter-spacing: 2.4px;
   padding-bottom: 20px;
@@ -225,7 +227,7 @@
   border-radius: 4px;
   cursor: pointer;
   display: inline-block;
-  font-family: "Trueno",sans-serif;
+  font-family: "TruenoRegular",sans-serif;
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 1.17px;
