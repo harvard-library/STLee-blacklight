@@ -1,4 +1,27 @@
 
+.hl__alert {
+    background-color: #f3f3f3;
+    height: 60px;
+    text-align: center;
+}
+
+.hl__alert p {
+    font-family: 'Lora', serif;
+    padding-top: 16px;
+}
+
+.hl__alert a {
+    color: #0579b8;
+    font-family: 'TruenoBd',sans-serif;
+    text-decoration: none;
+    -webkit-transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
+    transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
+}
+
+.hl__alert a:hover {
+    border-bottom: 3px solid rgba(5,121,184,0.3);
+}
+
 #header-navbar .navbar-brand {
     background: transparent url(/hl_webonly_rgb_white.png) no-repeat center left;
     background-size: 20rem;
@@ -62,7 +85,8 @@
 }
 
 .hl__topHeader__link:hover {
-    color: #fff
+    color: #fff;
+    text-decoration: none;
 }
 
 .hl__topHeaderTitle__harvard a {
