@@ -5,7 +5,7 @@ en:
       form:
         search:
           label: 'search for'
-          placeholder: 'Search over six million digitized items'
+          placeholder: 'Search over 6 million digitized items'
       facets:
         title: 'Filters'
       pagination_info:
