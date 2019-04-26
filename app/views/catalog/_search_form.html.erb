@@ -3,10 +3,10 @@
   <%= form_tag search_action_url, method: :get, class: 'search-query-form clearfix navbar-form', role: 'search' do %>
     <%= render_hash_as_hidden_fields(search_state.params_for_search.except(:q, :search_field, :qt, :page, :utf8)) %>
     <%= hidden_field_tag :search_field, search_fields.first.last %>
-    <div class="homepage-title">
+    <h1 class="homepage-title">
       <span class="homepage-title-small">Harvard</span><br>
       <span class="homepage-title-large">Digital Collections</span>
-    </div>
+    </h1>
     <div class="large-4 columns search-field-input-wrapper">
       <label for="q" class="sr-only"><%= t('blacklight.search.form.search.label') %></label>
       <%= text_field_tag :q, params[:q], placeholder: t('blacklight.search.form.search.placeholder'), class: "search_q q form-control searchbar__text", id: "q", autofocus: should_autofocus_on_search_box?, data: { autocomplete_enabled: autocomplete_enabled?, autocomplete_path: blacklight.suggest_index_path }  %>
@@ -27,7 +27,7 @@
           </svg>
         </div>
       </div>
-      <a href="somewhere.html">View item details</a>
+      <a href="/catalog/W366794_urn-3:HUL.ARCH:1110380">View item details</a>
     </div>
   <% end %>
 </div>
