@@ -79,7 +79,7 @@ class CatalogController < ApplicationController
 	config.add_show_field 'description', label: 'Description'
   config.add_show_field 'language', label: 'Language'
 	config.add_show_field 'origin', label: 'Place of Origin'
-	config.add_show_field 'permalink', label: 'Permalink'
+	#config.add_show_field 'permalink', label: 'Permalink'
 	config.add_show_field 'notes', label: 'Notes'
   config.add_show_field 'abstract', label: 'Abstract'
 	config.add_show_field 'digital_format', label: 'Digital Format'

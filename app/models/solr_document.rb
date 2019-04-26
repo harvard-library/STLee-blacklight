@@ -160,7 +160,7 @@ class SolrDocument
       node_to_array(x).each do |y|
         roleTerm = nodes_from_path y, '$..roleTerm'
         node_to_array(roleTerm).each do |z|
-          if !z.nil? && z['#text'] == 'creator'
+          if !z.nil? && field_value_from_node(z, ',') == 'creator'
             if name != ''
               name += ', '
             end
@@ -172,6 +172,70 @@ class SolrDocument
     end
 
 	  name
+  end
+
+  def name_from_node node
+	  name = ''
+		namepart = ''
+    node_to_array(node).each do |x|
+      node_to_array(x[:namePart]).each do |z|
+			  if !z.nil?
+          if namepart != ''
+				    namepart += ', '
+			    end 
+			    if z.kind_of?(String)
+				    namepart += z
+			    else	
+            namepart += z['#text']
+			    end
+        end
+		  end
+
+      if name != '' && namepart != ''
+        name += '; '
+      end
+
+		  name += namepart
+      name += roleterm_from_role x[:role]
+    end
+		
+	  name
+  end
+  
+  def roleterm_from_role node
+	  role = ''
+
+	  if node.nil?
+		  return role
+	  end
+	
+		node_to_array(node).each do |z|
+      roleTerm = ''
+
+      if !z[:roleTerm].nil?		
+				if z[:roleTerm].kind_of?(String)		
+					roleTerm = z[:roleTerm]
+				else
+					roleTerm = z[:roleTerm]['#text']
+				end
+			end
+
+      if roleTerm != ''
+			  if role != ''
+				  role += ', '
+			  else
+				  role = ' ['
+			  end
+
+        role += roleTerm
+			end
+		end
+
+    if role != ''
+	    role += ']'
+    end
+    
+    role
   end
   
   def field_value_from_node node, separator
@@ -217,35 +281,6 @@ class SolrDocument
     
     fieldValue = field_value_from_node field_items, separator
     fieldValue
-  end
-
-  def name_from_node node
-	  name = ''
-		namepart = ''
-
-    node_to_array(node).each do |x|
-      node_to_array(x[:namePart]).each do |z|
-			  if !z.nil?
-          if namepart != ''
-				    namepart += ', '
-			    end 
-			    if z.kind_of?(String)
-				    namepart += z
-			    else	
-            namepart += z['#text']
-			    end
-        end
-		  end
-
-      if name != '' && namepart != ''
-        name += '; '
-      end
-
-		  name += namepart
-      name += roleterm_from_role x[:role]
-    end
-		
-	  name
   end
 
   def language_from_doc doc
@@ -419,33 +454,6 @@ class SolrDocument
     end
 
 	  notes
-  end
-
-  def roleterm_from_role node
-	  role = ''
-
-	  if node.nil?
-		  return role
-	  end
-	
-		node_to_array(node).each do |z|
-
-			if role != ''
-				role += ', '
-			else
-				role = ' ['
-			end
-			
-			if !z[:roleTerm].nil?		
-				if z[:roleTerm].kind_of?(String)		
-					role += z[:roleTerm]
-				else
-					role += z[:roleTerm]['#text']
-				end
-			end
-		end
-
-	  role += ']'
   end
 
   def abstract_from_doc doc
@@ -642,15 +650,6 @@ class SolrDocument
 
   def related_links_from_doc doc
     related_links = ''
-    
-    finding_aid_urls = related_links_by_type doc, 'Finding Aid', 'Finding Aid'
-    
-    if finding_aid_urls != ''
-      if related_links != ''
-        related_links += '<br/>'
-      end
-      related_links += finding_aid_urls
-    end
 
     hollis_urls = related_links_by_type doc, 'HOLLIS record', 'Item record'
     
@@ -670,7 +669,16 @@ class SolrDocument
       related_links += hollis_image_urls + ' in HOLLIS Images'
     end
     
-    digital_collection_urls = related_links_by_type doc, 'Harvard Digital Collections', 'Digital Collections record'
+    finding_aid_urls = related_links_by_type doc, 'Finding Aid', 'Finding Aid'
+    
+    if finding_aid_urls != ''
+      if related_links != ''
+        related_links += '<br/>'
+      end
+      related_links += finding_aid_urls
+    end
+    
+    digital_collection_urls = object_in_context_urls_from_doc doc, 'Item Record'
     
     if digital_collection_urls != ''
       if related_links != ''
@@ -678,7 +686,7 @@ class SolrDocument
       end
       related_links += digital_collection_urls
     end
-    
+        
     related_links
   end
 
@@ -686,12 +694,28 @@ class SolrDocument
     link_urls = ''
     link_items = nodes_from_path doc, '$..relatedItem[?(@["@otherType"] == "' + type + '")]'
     link_items.each do |x|
-      if link_urls != ''
-        link_urls += ', '
-      end
-      
       node_to_array(x['location']).each do |y|
+        if link_urls != ''
+          link_urls += ', '
+        end
+      
         link_urls += link_tag_for_url y['url'], label, true
+      end
+    end
+
+    link_urls
+  end
+
+  def object_in_context_urls_from_doc doc, label
+    link_urls = ''
+    link_items = nodes_from_path doc, '$..url[?(@["@access"] == "object in context")]'
+    link_items.each do |x|      
+      if x['@displayLabel'] != "Harvard Digital Collections" && x['#text'] != ""
+        if link_urls != ''
+          link_urls += '<br/>'
+        end
+        link_urls += link_tag_for_url x['#text'], 'Item Record', true
+        link_urls += ' in ' + x['@displayLabel']
       end
     end
 
