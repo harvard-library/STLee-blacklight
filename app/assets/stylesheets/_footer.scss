@@ -105,7 +105,7 @@
 }
 
 .hl__footerLink {
-    font-family: TruenoRg;
+    font-family: 'TruenoRegular', sans-serif;
     font-weight: 100;
     color: #fff;
     font-size: 14px;
@@ -125,7 +125,7 @@
 }
 
 .hl__footerLinkRight a {
-    font-family: TruenoLt;
+    font-family: 'TruenoLight', sans-serif;
     font-weight: 100;
     color: #fff;
     font-size: 14px;
@@ -145,7 +145,7 @@
     margin: 10px 0;
     font-size: 14px;
     font-weight: 100;
-    font-family: TruenoLt
+    font-family: 'TruenoLight', sans-serif;
 }
 
 .hl__footerCopyrightContainer {
@@ -168,12 +168,12 @@
 
 .hl__ccLicense {
     color: $silver;
-    font-family: TruenoLt
+    font-family: 'TruenoLight', sans-serif;
 }
 
 .hl__ccText {
     color: $silver;
-    font-family: 'TruenoLt', sans-serif;
+    font-family: 'TruenoLight', sans-serif;
     font-size: 11px
 }
 

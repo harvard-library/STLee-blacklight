@@ -44,7 +44,7 @@
   font-size: rem-calc(14);
   .filterName {
     font-size: 12px;
-    font-family: "Trueno", Helvetica, Roboto, Arial, sans-serif;
+    font-family: 'TruenoRegular', Helvetica, Roboto, Arial, sans-serif;
     &:after {
       content: ": ";
     }
@@ -83,10 +83,10 @@
 }
 
 .f-dropdown li a {
-  text-decoration: none
+  text-decoration: none;
 }
 
 #content .columns.large-6 {
     font-size: 14px;
-    font-family: TruenoLt
+    font-family: 'TruenoLight', sans-serif;
 }

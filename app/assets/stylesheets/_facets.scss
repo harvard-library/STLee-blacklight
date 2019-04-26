@@ -3,7 +3,7 @@
 
 h2.facets__heading {
   color: white;
-  font-family: "TruenoBd",sans-serif;
+  font-family: 'TruenoBold', sans-serif;
   font-weight: normal;
   font-size: rem-calc(19);
   line-height: 1.25;
@@ -88,7 +88,7 @@ ul.facet-values li {
 }
 
 button.toggle-all-facets {
-    font-family: "TruenoRg",sans-serif;
+    font-family: 'TruenoRegular', sans-serif;
     font-size: rem-calc(12);
     color: white;
     float: right;
@@ -162,7 +162,7 @@ a.facet__title {
     padding-bottom: 10px;
 
     .accordion, dl.accordion {
-        font-family: TruenoRg, sans-serif;
+        font-family: 'TruenoRegular', sans-serif;
 
         .accordion-navigation {
             border-bottom: 1px solid #444;
@@ -182,7 +182,7 @@ a.facet__title {
             }
 
             & > a {
-                font-family: TruenoRg, sans-serif;
+                font-family: 'TruenoRegular', sans-serif;
                 background: transparent;
                 color: #fff;
                 text-transform: uppercase;
@@ -251,7 +251,7 @@ a.facet__title {
 }
 
 .modal-title {
-    font-family: 'TruenoSBd', sans-serif;
+    font-family: 'TruenoSemiBold', sans-serif;
     letter-spacing: 1.4px;
     text-transform: uppercase;
 }

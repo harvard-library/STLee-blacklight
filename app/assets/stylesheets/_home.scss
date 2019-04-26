@@ -20,7 +20,7 @@
 }
 
 .blacklight-application-home .search-query-form {
-  padding: 100px 0 157px;
+  padding: 100px 20px 157px;
   margin: 0;
   position: relative;
 }
@@ -35,15 +35,39 @@
   color: #fff;
   display: unset;
   font-size: 13px;
+  padding-left: 30px;
   position: absolute;
   bottom: 0px;
   right: 10px;
   z-index: 3;
 }
 
+.blacklight-application-home .photo-credit {
+  position: relative;
+}
+
+.blacklight-application-home .image-credit-icon {
+  color: inherit;
+  height: 20px;
+  padding-right: 5px;
+  position: absolute;
+  left: -29px;
+  top: 9px;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  width: 22px;
+}
+
+.blacklight-application-home .image-credit-icon svg {
+  height: 100%;
+  width: 100%;
+}
+
+
 .home-photo-credit a {
   color: #fff;
   font-family: 'TruenoLight', sans-serif;
+  display: block;
 }
 
 .home-photo-credit a:hover {
@@ -68,6 +92,11 @@
   text-align: left;
   margin-top: 20px;
   margin-bottom: 35px;
+}
+
+.blacklight-application-home .navbar-form {
+  border-bottom: none;
+  border-top: none;
 }
 
 .blacklight-application-home .search-field-input-wrapper {
@@ -252,4 +281,29 @@
 .hl__button:focus, .hl__button:hover {
   color: #fff;
   text-decoration: none;
+}
+
+@media screen and (max-width: 768px) {
+  .blacklight-application-home .search-field-input-wrapper {
+    width: 85%;
+  }
+  .blacklight-application-home #main-container p {
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .blacklight-application-home #main-container p {
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 100%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .blacklight-application-home #main-container p {
+    width: 930px;
+  }
 }
