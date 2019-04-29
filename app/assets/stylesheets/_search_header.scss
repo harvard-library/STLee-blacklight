@@ -30,34 +30,49 @@
   @include fa-icon-content($fa-var-th);
 }
 
+.constraint.query {
+  margin-left: 5px
+}
+
+.constraint.query .btn-sm,
+.constraint.filter .btn-sm {
+  border-style: dashed
+}
+
 .constraint.filter {
   white-space: nowrap;
   font-size: rem-calc(14);
   .filterName {
-    text-transform: uppercase;
-    font-size: rem-calc(13);
-    font-family: "Benton Sans Med", Helvetica, Roboto, Arial, sans-serif;
+    font-size: 12px;
+    font-family: 'TruenoRegular', Helvetica, Roboto, Arial, sans-serif;
     &:after {
       content: ": ";
     }
   }
 }
 
+#per-page-dropdown {
+  border: 1px solid #c0c0c0;
+  border-radius: 4px;
+  padding: 4px 10px;
+}
+
 #per-page-dropdown > a {
   color: #222;
+  text-decoration: none;
   span.caret {
     @include fa-icon;
-    @include fa-icon-content($fa-var-chevron-down);
-    color: $rouge;
-    font-size: rem-calc(14);
-    position: relative;
-    top: 7px;
-    margin-left: 6px;
+    margin-left: 8px;
+    margin-top: 10px;
   }
 }
 
 .f-dropdown.open {
-  max-width: 100px;
+  border-top: none;
+  max-width: 117px;
+  margin-left: -11px;
+  padding-left: 2px;
+  padding-right: 2px;
   &:before,
   &:after {
     display: none;
@@ -65,4 +80,13 @@
     height: 0;
     content: "";
   }
+}
+
+.f-dropdown li a {
+  text-decoration: none;
+}
+
+#content .columns.large-6 {
+    font-size: 14px;
+    font-family: 'TruenoLight', sans-serif;
 }

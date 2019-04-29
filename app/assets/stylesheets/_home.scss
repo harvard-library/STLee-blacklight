@@ -5,6 +5,75 @@
   display: none;
 }
 
+.homepage-title-small {
+  font-family: 'TruenoBold', sans-serif;
+  font-size: 52px;
+  letter-spacing: 2.48px;
+  text-transform: uppercase;
+}
+
+.homepage-title-large {
+  font-family: 'Lora', serif;
+  font-size: 64px;
+  font-style: italic;
+  line-height: 80px;
+}
+
+.blacklight-application-home .search-query-form {
+  padding: 106px 20px 157px;
+  margin: 0;
+  position: relative;
+}
+
+.home-photo-credit {
+  display: none;
+}
+
+.blacklight-application-home .home-photo-credit {
+  background-color: rgba(30,30,30,0.7);
+  border: 10px transparent solid;
+  color: #fff;
+  display: unset;
+  font-size: 13px;
+  padding-left: 30px;
+  position: absolute;
+  bottom: 0px;
+  right: 10px;
+  z-index: 3;
+}
+
+.blacklight-application-home .photo-credit {
+  position: relative;
+}
+
+.blacklight-application-home .image-credit-icon {
+  color: inherit;
+  height: 20px;
+  padding-right: 5px;
+  position: absolute;
+  left: -29px;
+  top: 9px;
+  -webkit-transform: translateY(-50%);
+  transform: translateY(-50%);
+  width: 22px;
+}
+
+.blacklight-application-home .image-credit-icon svg {
+  height: 100%;
+  width: 100%;
+}
+
+
+.home-photo-credit a {
+  color: #fff;
+  font-family: 'TruenoLight', sans-serif;
+  display: block;
+}
+
+.home-photo-credit a:hover {
+  text-decoration: underline;
+}
+
 .blacklight-application-home .row.enclosing-row {
   margin: 0;
   max-width: 100%;
@@ -20,14 +89,20 @@
   display: block;
   color: white;
   font-size: rem-calc(32);
-  text-align: center;
+  text-align: left;
   margin-top: 20px;
   margin-bottom: 35px;
 }
 
+.blacklight-application-home .navbar-form {
+  border-bottom: none;
+  border-top: none;
+}
+
 .blacklight-application-home .search-field-input-wrapper {
   width: 50%;
-  margin-left: 25%;
+  margin-left: 0;
+  padding-left: 0;
   input {
     height: 60px;
     font-size: rem-calc(18);
@@ -48,8 +123,26 @@
 }
 
 .blacklight-application-home #main-container {
-  background-color: #F3F3F1;
-  padding-top: 33px;
+  background-color: inherit;
+  padding: 33px 0;
+}
+
+.blacklight-application-home #main-container h2 {
+  font-family: 'TruenoBold', sans-serif;
+  font-size: 32px;
+  letter-spacing: 2.4px;
+  padding-bottom: 20px;
+  text-align: center;
+  text-transform: uppercase;
+}
+
+.blacklight-application-home #main-container p {
+  color: #414141;
+  font-family: 'Lora', serif;
+  font-size: 19px;
+  line-height: 32px;
+  margin: 0 auto 1.84em;
+  width: 930px;
 }
 
 .blacklight-application-home .searchbar__wrapper {
@@ -58,8 +151,11 @@
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  height: 240px;
-  margin-bottom: 0;
+  height: 530px;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  z-index: 1;
 }
 
 .home-page-list {
@@ -149,4 +245,65 @@
   font-size: rem-calc(14);
   bottom: 15px;
   left: 20px;
+}
+
+.feedback-solicitation {
+  text-align: center;
+}
+
+.hl__button {
+  border: 2px solid transparent;
+  border-radius: 4px;
+  cursor: pointer;
+  display: inline-block;
+  font-family: "TruenoRegular",sans-serif;
+  font-size: 14px;
+  font-weight: 700;
+  letter-spacing: 1.17px;
+  line-height: 19px;
+  padding: 12px 23px;
+  text-decoration: none;
+  text-transform: uppercase;
+  -webkit-transition: all 0.4s ease;
+  transition: all 0.4s ease;
+}
+
+.hl__button--secondary {
+  background-color: #0579b8;
+  border-color: transparent;
+  color: #fff;
+}
+
+.hl__button--secondary:focus, .hl__button--secondary:hover {
+  background-color: #2a5280;
+}
+
+.hl__button:focus, .hl__button:hover {
+  color: #fff;
+  text-decoration: none;
+}
+
+@media screen and (max-width: 768px) {
+  .blacklight-application-home .search-field-input-wrapper {
+    width: 85%;
+  }
+  .blacklight-application-home #main-container p {
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 100%;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .blacklight-application-home #main-container p {
+    padding-left: 20px;
+    padding-right: 20px;
+    width: 100%;
+  }
+}
+
+@media (min-width: 1200px) {
+  .blacklight-application-home #main-container p {
+    width: 930px;
+  }
 }

@@ -10,13 +10,17 @@
     <% end %>
   </div>
   <div class="large-6 columns page-header-page-links-column">
-    <% if @previous_document || @next_document %>
+    <% if item_page_entry_info &&  (@previous_document || @next_document) %>
         <div class="page_links">
-          <%= link_to_previous_document @previous_document %> |
-
-          <%= item_page_entry_info %> |
-
-          <%= link_to_next_document @next_document %>
+          <% if @previous_document %>      
+            <%= link_to_previous_document @previous_document %> |
+          <% end %>
+          
+          <%= item_page_entry_info %> 
+          
+          <% if @next_document %>
+            | <%= link_to_next_document @next_document %>
+          <% end %>
         </div>
     <% end %>
   </div>

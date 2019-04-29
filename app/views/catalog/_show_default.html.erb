@@ -2,36 +2,19 @@
 <%# default partial to display solr document fields in catalog show view -%>
 
 <div class="row">
-  <div class="large-8 large-offset-2 columns">
-    <dl class="accordion record-details clearfix" data-accordion>
-      <dd class="accordion-navigation active">
-        <a href="#details"><h3>Record Details &amp; Content<span class='toggle'></span></h3></a>
-        <div id="details" class="content active ">
-          <dl class="dl-horizontal  dl-invert clearfix">
-            <% document_show_fields(document).each do |field_name, field| -%>
-              <% if should_render_show_field? document, field %>
-                <dt class="blacklight-<%= field_name.parameterize %>"><%= render_document_show_field_label document, field: field_name %></dt>
-                <dd class="blacklight-<%= field_name.parameterize %>"><%= doc_presenter.field_value field_name %></dd>
-              <% end -%>
-            <% end -%>
-          </dl>
-        </div>
-      </dd>
-
-      <dd class="accordion-navigation">
-        <a href="#related"><h3>Related Links<span class='toggle'></span></h3></a>
-        <div id="related" class="content">
-          Related links content will go here
-        </div>
-      </dd>
-
-      <dd class="accordion-navigation">
-        <a href="#reuse"><h3>Reuse &amp; Sharing<span class='toggle'></span></h3></a>
-        <div id="reuse" class="content">
-          Reuse and sharing information will go here
-        </div>
-      </dd>
-
-    </dl>
+  <div class="large-9 columns">
+    <div id="details" class="content active record-details">
+      <dl class="dl-horizontal  dl-invert clearfix">
+        <% document_show_fields(document).each do |field_name, field| -%>
+          <% if should_render_show_field? document, field %>
+            <dt class="blacklight-<%= field_name.parameterize %>"><%= render_document_show_field_label document, field: field_name %></dt>
+            <dd class="blacklight-<%= field_name.parameterize %>"><%=raw CGI.unescapeHTML doc_presenter.field_value field_name %></dd>
+          <% end -%>
+        <% end -%>
+      </dl>
+    </div> 
+  </div>
+  <div class="columm">
+    <%# Tools and Related Links component will go here %>
   </div>
 </div>

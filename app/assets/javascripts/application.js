@@ -70,9 +70,22 @@ $(document).on('turbolinks:load', function() {
         return false;
     });
 
-    $('body').on('click', '.ajax-modal-close', function () {
+    function closeModal() {
         $('#ajax-modal').removeClass('open');
+        $('.reveal-modal').removeClass('open').removeClass('in').hide();
         $('.reveal-modal-bg').hide();
+        $('.modal-backdrop').hide();
+        $('body').removeClass('modal-open');
+    }
+
+    $('body').on('click', '.ajax-modal-close', function () {
+        closeModal();
+    });
+
+    $('body').on('keyup', function (e) {
+        if (e.key === "Escape" && $('body').hasClass('modal-open')) {
+            closeModal();   
+        }
     });
 
 });

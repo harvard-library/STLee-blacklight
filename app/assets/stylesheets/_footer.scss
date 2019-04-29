@@ -1,3 +1,4 @@
+@import "settings";
 
 #hl__footer {
     display: flex;
@@ -6,7 +7,8 @@
     padding-top: 60px;
     padding-bottom: 60px;
     justify-content: space-between;
-    background: #1e1e1e
+    background: #1e1e1e;
+    margin-top: 50px;
 }
 
 .hl__footer__container {
@@ -55,7 +57,8 @@
 
 .hl__footerColThree {
     width: 20%;
-    display: flex
+    display: flex;
+    margin-right: 30px
 }
 
 .hl__footerColThree ul {
@@ -102,7 +105,7 @@
 }
 
 .hl__footerLink {
-    font-family: TruenoRg;
+    font-family: 'TruenoRegular', sans-serif;
     font-weight: 100;
     color: #fff;
     font-size: 14px;
@@ -117,11 +120,12 @@
 }
 
 .hl__footerLinkRight {
-    padding-right: 30px
+    padding-right: 30px;
+    list-style: none
 }
 
 .hl__footerLinkRight a {
-    font-family: TruenoLt;
+    font-family: 'TruenoLight', sans-serif;
     font-weight: 100;
     color: #fff;
     font-size: 14px;
@@ -141,7 +145,7 @@
     margin: 10px 0;
     font-size: 14px;
     font-weight: 100;
-    font-family: TruenoLt
+    font-family: 'TruenoLight', sans-serif;
 }
 
 .hl__footerCopyrightContainer {
@@ -149,7 +153,33 @@
     width: 230px;
     padding-left: 35px;
     align-items: center;
-    height: 35%
+    height: 35%;
+    color: $white
+}
+
+.hl__ccContainer {
+    margin-top: 40px
+}
+
+.hl__ccContainer svg {
+    float: left;
+    margin: 7px 10px 0 0;
+}
+
+.hl__ccLicense {
+    color: $silver;
+    font-family: 'TruenoLight', sans-serif;
+}
+
+.hl__ccText {
+    color: $silver;
+    font-family: 'TruenoLight', sans-serif;
+    font-size: 11px
+}
+
+.hl__ccText a {
+    color: $white;
+    text-decoration: underline
 }
 
 @media (max-width: 620px) {

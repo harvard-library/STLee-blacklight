@@ -54,13 +54,23 @@
 h3.document-title-heading {
   line-height: rem-calc(16);
   margin-bottom: 12px;
+  padding: 0
 }
 
 h3.document-title-heading a {
-  color: $rouge;
+  color: $breakthrough-blue;
   font-size: rem-calc(15);
   line-height: rem-calc(16);
-  font-weight: normal;
+  font-family: 'TruenoSemiBold', sans-serif;
+  text-decoration: none;
+  -webkit-transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
+  transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
+}
+
+h3.document-title-heading a:hover {
+  border-bottom-color: rgba(5,121,184,0.3);
+  color: #0579b8;
+  text-decoration: none;
 }
 
 #documents.list-mode h3.document-title-heading a {
@@ -73,7 +83,7 @@ dl.document-metadata {
 }
 
 dl.document-metadata > dd {
-  display: inline;
+  display: contents;
   font-size: rem-calc(14);
   line-height: 1;
   &:first-child:after {

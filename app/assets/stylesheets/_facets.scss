@@ -3,7 +3,7 @@
 
 h2.facets__heading {
   color: white;
-  font-family: "TruenoBd",sans-serif;
+  font-family: 'TruenoBold', sans-serif;
   font-weight: normal;
   font-size: rem-calc(19);
   line-height: 1.25;
@@ -37,7 +37,7 @@ ul.facet-values li {
 .selected,
 .facet-count {
   font-size: rem-calc(14);
-  color: $rouge;
+  color: $jet;
 }
 
 .facet-label {
@@ -88,7 +88,7 @@ ul.facet-values li {
 }
 
 button.toggle-all-facets {
-    font-family: "TruenoRg",sans-serif;
+    font-family: 'TruenoRegular', sans-serif;
     font-size: rem-calc(12);
     color: white;
     float: right;
@@ -162,7 +162,7 @@ a.facet__title {
     padding-bottom: 10px;
 
     .accordion, dl.accordion {
-        font-family: TruenoRg, sans-serif;
+        font-family: 'TruenoRegular', sans-serif;
 
         .accordion-navigation {
             border-bottom: 1px solid #444;
@@ -182,7 +182,7 @@ a.facet__title {
             }
 
             & > a {
-                font-family: TruenoRg, sans-serif;
+                font-family: 'TruenoRegular', sans-serif;
                 background: transparent;
                 color: #fff;
                 text-transform: uppercase;
@@ -202,7 +202,8 @@ a.facet__title {
                     border-radius: 5px;
 
                     a {
-                        color: $dark-gray;
+                        color: $jet;
+                        text-decoration: none;
                     }
 
                     .facet-count {
@@ -238,11 +239,29 @@ a.facet__title {
 
 #ajax-modal {
     z-index: 2000;
-    height: 60vh;
+    height: 70vh;
+    background-color: transparent;
+    border: none;
+    box-shadow: none;
+    overflow: hidden;
+}
+
+.reveal-modal {
+    width: 650px;
+}
+
+.modal-title {
+    font-family: 'TruenoSemiBold', sans-serif;
+    letter-spacing: 1.4px;
+    text-transform: uppercase;
 }
 
 .facet_pagination {
     overflow: hidden;
+}
+
+.facet_pagination.top {
+    padding: 15px 15px 0;
 }
 
 .facet_extended_list { 

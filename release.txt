@@ -1,4 +1,4 @@
- 6.11.2-lts-1 (04/30/2019) PP/MC
+ 6.11.2-lts-1 (04/30/2019) PP/MC/ED
 --Removed customized STLee / Archimedes theme
 --Revised CSS for left hand filter rail on search results
 --Enabled More link for facets counts
@@ -7,4 +7,14 @@
 --Confirmed/created output left hand filter rail on search results
 --Global styles set up
 --Revised Gemfile to use mysql
-  
+--Added initial set of CSS customizations
+--Revised Gemfile to add jsonpath
+--Added LibraryCloud metadata fields to items
+--Enabled rendering of HTML in fields on item details page
+--Updated thumbnail and raw object logic to fallback to related item
+--Updated raw object rendering to display in viewer
+--Updated single item view template and associated CSS
+--Updated Footer links and added Google Analytics
+--Removed unnecessary div from header that overlapped links.
+--Temporarily removing Add To Collection functionality.
+--Updated homepage-related templates and CSS
