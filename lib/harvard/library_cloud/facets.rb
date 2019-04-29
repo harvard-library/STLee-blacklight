@@ -105,13 +105,22 @@ module Harvard::LibraryCloud::Facets
   def facet_fields
     @facet_fields ||= begin
       val = {}
-      facet_counts['facetField'].each do |f|
-        val[f[:facetName]] = []
-        hash_as_list(f[:facet]).each do |v|
-          val[f[:facetName]] << v[:term]
-          val[f[:facetName]] << v[:count]
-        end if f[:facet]
-      end if facet_counts and facet_counts['facetField']
+
+      if facet_counts['facetField'].kind_of?(Array)
+		  facet_counts['facetField'].each do |f|
+			val[f[:facetName]] = []
+			hash_as_list(f[:facet]).each do |v|
+			  val[f[:facetName]] << v[:term]
+			  val[f[:facetName]] << v[:count]
+			end if f[:facet]
+		  end if facet_counts and facet_counts['facetField']
+	  else
+		val[facet_counts['facetField'][:facetName]] = []
+		hash_as_list(facet_counts['facetField'][:facet]).each do |v|
+			val[facet_counts['facetField'][:facetName]] << v[:term]
+			val[facet_counts['facetField'][:facetName]] << v[:count]
+		end if facet_counts['facetField'][:facet]
+	  end 
       val
     end
   end
@@ -182,10 +191,10 @@ module Harvard::LibraryCloud::Facets
     if params[:"f.#{facet_field_name}.facet.limit"] || params[:"facet.limit"]
       options[:limit] = (params[:"f.#{facet_field_name}.facet.limit"] || params[:"facet.limit"]).to_i
     end
-
+	
     if params[:"f.#{facet_field_name}.facet.offset"] || params[:'facet.offset']
       options[:offset] = (params[:"f.#{facet_field_name}.facet.offset"] || params[:'facet.offset']).to_i
-    end
+	end
 
     if params[:"f.#{facet_field_name}.facet.prefix"] || params[:'facet.prefix']
       options[:prefix] = (params[:"f.#{facet_field_name}.facet.prefix"] || params[:'facet.prefix'])

@@ -1,15 +1,25 @@
 .searchbar__wrapper {
   width: 100%;
   height: 68px;
-  padding: 12px 0;
-  margin-bottom: 33px;
-  background-color: black;
+  padding: 4px 0 12px;
+  margin-bottom: 0;
+  background-color: #F3F3F3;
+  font-family: 'TruenoLt';
+}
+
+.navbar-form {
+  padding-left: 0;
 }
 
 input.searchbar__text[type=text] {
-  color: #1e1e1e;
+  color: #6C6C6C;
+  font-family: 'TruenoLight', sans-serif;
   font-size: rem-calc(16);
   height: 44px;
+  border: none;
+  border-radius: 4px;
+  -webkit-border-radius: 4px;
+  width: 640px;
 }
 
 .searchbar__advanced {
@@ -22,5 +32,18 @@ input.searchbar__text[type=text] {
   &:hover {
     color: white;
     font-weight: bold;
+  }
+}
+
+@media screen and (max-width: 768px) {
+  .search-field-input-wrapper {
+    padding-left: inherit;
+    width: 100%;
+  }
+  .navbar-form {
+    padding-top: 0;
+  }
+  input.searchbar__text[type=text] {
+    width: 100%;
   }
 }

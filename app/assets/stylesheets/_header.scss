@@ -1,17 +1,161 @@
-@import "settings";
 
-.header__navbar {
-  height: 117px;
+.hl__alert {
+    background-color: #f3f3f3;
+    height: 60px;
+    text-align: center;
 }
 
-.header__logo {
-  margin-top: 23px;
+.hl__alert p {
+    font-family: 'Lora', serif;
+    padding-top: 16px;
 }
 
-.header__navbar nav {
-  padding: 45px 0 35px;
+.hl__alert a {
+    color: #0579b8;
+    font-family: 'TruenoBold',sans-serif;
+    text-decoration: none;
+    -webkit-transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
+    transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
 }
 
-.header__navbar a {
-  color: $rouge;
+.hl__alert a:hover {
+    border-bottom: 3px solid rgba(5,121,184,0.3);
+}
+
+#header-navbar .navbar-brand {
+    background: transparent url(/hl_webonly_rgb_white.png) no-repeat center left;
+    background-size: 20rem;
+    width: auto
+}
+
+.hl__topHeader {
+    display: flex;
+    width: 100%;
+    flex-wrap: wrap;
+    background-image: linear-gradient(247deg, #52757e, #335c67);
+    padding: 0
+}
+
+@media (max-width: 620px) {
+    .hl__topHeader {
+        position: fixed;
+        z-index: 11
+    }
+}
+
+.hl__topHeader .hl__topHeader__left {
+    width: 75%
+}
+
+@media (max-width: 620px) {
+    .hl__topHeader .hl__topHeader__left {
+        width: 80%
+    }
+}
+
+.hl__topHeader .hl__topHeader__right {
+    width: 25%
+}
+
+@media (max-width: 620px) {
+    .hl__topHeader .hl__topHeader__right {
+        display: none
+    }
+}
+
+.hl__topHeader .hl__topHeaderNav {
+    display: flex;
+    height: 60px;
+    align-items: center;
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 0
+}
+
+@media (max-width: 620px) {
+    .hl__topHeader .hl__topHeaderNav {
+        justify-content: space-between
+    }
+}
+
+.hl__topHeader .hl__topHeaderNav a {
+    display: flex;
+    align-items: center;
+    cursor: pointer
+}
+
+.hl__topHeader__link:hover {
+    color: #fff;
+    text-decoration: none;
+}
+
+.hl__topHeaderTitle__harvard a {
+    font-family: 'TruenoBold', sans-serif;
+    font-size: 24px;
+    text-transform: uppercase;
+    font-weight: 400;
+    font-style: normal;
+    font-stretch: normal;
+    line-height: 1.67;
+    letter-spacing: 1.1px;
+    color: #fff
+}
+
+@media (max-width: 620px) {
+    .hl__topHeaderTitle__harvard a {
+        font-size: 1.5rem
+    }
+}
+
+span.hl__topHeaderTitle__collections {
+    font-family: 'Lora', serif;
+    font-size: 28px;
+    font-style: italic;
+    color: #fff;
+    padding-left: 10px;
+    text-transform: none;
+    letter-spacing: normal
+}
+
+@media (max-width: 620px) {
+    span.hl__topHeaderTitle__collections {
+        font-size: 1.3rem;
+        padding: 0
+    }
+}
+
+.hl__fixedNav {
+    background: #1e1e1e;
+    height: 60px;
+    z-index: 101;
+    width: 100%;
+    max-width: 2200px;
+    display: flex
+}
+
+.hl__headerSticky.active .sticky-inner-wrapper {
+    z-index: 3
+}
+
+.hl__headerSticky .sticky-inner-wrapper {
+    z-index: 2
+}
+
+@media (max-width: 620px) {
+    .sticky-outer-wrapper.hl__headerSticky {
+        display: none
+    }
+}
+
+.hl__headerLogo {
+    height: 60px;
+    -o-object-fit: contain;
+    object-fit: contain;
+    display: flex;
+    justify-content: center;
+    background: #1e1e1e
+}
+
+.hl__headerLogo img {
+    width: 80%
 }
