@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 class SolrDocument
   include Blacklight::Solr::Document
+  include Blacklight::Gallery::OpenseadragonSolrDocument
+
   include ApplicationHelper
 
   def initialize(source_doc={}, response=nil)
@@ -118,7 +120,8 @@ class SolrDocument
 		    if title != '' && alternativeTitle != ''
 		      alternativeTitle += '<br/><br/>'
 		    end
-        alternativeTitle += sub_label_for_field 'Alternative Title', title
+
+        alternativeTitle += '<span class="alternative-title">' + sub_label_for_field('Alternative Title', title) + '</span>'
       end
     end
 

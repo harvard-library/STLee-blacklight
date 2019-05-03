@@ -18,3 +18,5 @@
 --Removed unnecessary div from header that overlapped links.
 --Temporarily removing Add To Collection functionality.
 --Updated homepage-related templates and CSS
+--Revised Gemfile to add blacklight-gallery
+--Enable blacklight-gallery plugin to support different search results views

@@ -1,123 +1,42 @@
-@import "foundation/components/block-grid";
 @import "settings";
 
-#documents:not(.list-mode) {
-  @include block-grid(3);
-}
+#documents {
+    .documentHeader {
+        h3.document-title-heading {
+            line-height: 1.1;
 
-#documents.list-mode li.document {
-  float: left;
-  clear: both;
-  padding: 30px 0 30px 10px;
-  border-bottom: 1px solid #D4D1D1;
-  &:first-child {
-    padding-top: 0;
-  }
-}
-
-#documents:not(.list-mode) .document-thumbnail {
-  background-color: #f7f7f7;
-  height: 252px;
-}
+            a {
+                color: $breakthrough-blue;
+                font-size: rem-calc(15);
+                line-height: rem-calc(16);
+                font-family: 'TruenoSemiBold', sans-serif;
+                text-decoration: none;
+                -webkit-transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
+                transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
+            }
+        }
+    }
 
 
-#documents:not(.list-mode) .document-thumbnail a {
-  display: block;
-  text-align: center;
-  top: 50%;
-  position: relative;
-  img {
-    margin-top: -25%;
-  }
-}
+    &.documents-list {
+        .document {
+            overflow: hidden;
+            margin-bottom: 10px;
 
-#documents.list-mode .document-thumbnail {
-  width: 230px;
-  clear: left;
-  float: left;
-}
+            .document-thumbnail {
+                float: left;
+                width: 25%;
 
-#documents.list-mode .document-thumbnail a {
-  float: left;
-}
 
-.documentHeader {
-  margin: 0;
-}
+                img {
+                    max-width: 100%;
+                }
+            }
 
-#documents.list-mode dl.document-metadata,
-#documents.list-mode .documentHeader {
-  margin-left: 230px;
-
-}
-
-h3.document-title-heading {
-  line-height: rem-calc(16);
-  margin-bottom: 12px;
-  padding: 0
-}
-
-h3.document-title-heading a {
-  color: $breakthrough-blue;
-  font-size: rem-calc(15);
-  line-height: rem-calc(16);
-  font-family: 'TruenoSemiBold', sans-serif;
-  text-decoration: none;
-  -webkit-transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
-  transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
-}
-
-h3.document-title-heading a:hover {
-  border-bottom-color: rgba(5,121,184,0.3);
-  color: #0579b8;
-  text-decoration: none;
-}
-
-#documents.list-mode h3.document-title-heading a {
-  font-size: rem-calc(20);
-  line-height: rem-calc(24);
-}
-
-dl.document-metadata {
-  line-height: 1;
-}
-
-dl.document-metadata > dd {
-  display: contents;
-  font-size: rem-calc(14);
-  line-height: 1;
-  &:first-child:after {
-    content: " - ";
-  }
-}
-
-#documents.list-mode dd {
-  line-height: 1.45;
-  margin-bottom: 6px;
-  display: inline-block;
-}
-
-#documents.list-mode dd.blacklight-abstract {
-  display: block;
-}
-
-#documents:not(.list-mode) dd.blacklight-abstract {
-  display: none;
-}
-
-dl.audio,
-dl.archival-items,
-dl.audio,
-dl.books,
-dl.drawings---illustrations,
-dl.manuscripts,
-dl.maps,
-dl.objects,
-dl.periodicals,
-dl.photographs,
-dl.posters,
-dl.video---moving-images {
-  padding-left: 30px;
-  background-position: 0 0;
-  background-repeat: no-repeat;
+            .documentHeader, .document-metadata {
+                margin-left: 5%;
+                width: 70%;
+            }
+        }
+    }
 }
