@@ -2,7 +2,7 @@
 <%# default partial to display solr document fields in catalog show view -%>
 
 <div class="row">
-  <div class="large-9 columns">
+  <div class="col-lg-8">
     <div id="details" class="content active record-details">
       <dl class="dl-horizontal  dl-invert clearfix">
         <% document_show_fields(document).each do |field_name, field| -%>
@@ -14,7 +14,31 @@
       </dl>
     </div> 
   </div>
-  <div class="columm">
-    <%# Tools and Related Links component will go here %>
+  <div class="col-lg-4">
+    <div id="tools" class="record-tools">
+      <h2 class="clearfix">Tools and Related Links</h2>
+      <div class="btn-group">
+        <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          Download This Item <span class="caret"></span>
+        </button>
+        <ul class="dropdown-menu">
+          <li><a href="#">Small: 300 x 218 px</a></li>
+          <li><a href="#">Medium: 800 x 579 px</a></li>
+          <li><a href="#">Large: 1200 x 869 px</a></li>
+          <li><a href="#">X-Large: 2400 x 1737 px</a></li>
+          <li><a href="#">IIIF Manifest</a></li>
+        </ul>
+      </div>
+      <dl class="dl-vertical dl-invert dl-appears-in clearfix">
+        <dt class="blacklight-title_extended">This item appears in</dt>
+        <dd class="blacklight-title_extended"><a href="#">Digital Medieval Manuscript Library</a></dd>
+      </dl>
+      <dl class="dl-vertical dl-invert dl-more-details clearfix">
+        <dt class="blacklight-title_extended">More item details</dt>
+        <dd class="blacklight-title_extended"><a href="#"><i class="fas fa-file-text"></i>Finding Aid</a></dd>
+        <dd class="blacklight-title_extended"><a href="#"><i class="fas fa-file-text"></i>Item Record</a> in HOLLIS</dd>
+        <dd class="blacklight-title_extended"><a href="#"><i class="fas fa-file-text"></i>Image Record</a> in HOLLIS</dd>
+      </dl>
+    </div>
   </div>
 </div>
