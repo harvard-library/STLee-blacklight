@@ -31,13 +31,11 @@
       </div>
       <dl class="dl-vertical dl-invert dl-appears-in clearfix">
         <dt class="blacklight-title_extended">This item appears in</dt>
-        <dd class="blacklight-title_extended"><a href="#">Digital Medieval Manuscript Library</a></dd>
+        <dd class="blacklight-title_extended"><a href="/catalog?f[repository][]=<%= u document[:repository]%>"><%=document[:repository]%></a></dd>
       </dl>
       <dl class="dl-vertical dl-invert dl-more-details clearfix">
-        <dt class="blacklight-title_extended">More item details</dt>
-        <dd class="blacklight-title_extended"><a href="#"><i class="fas fa-file-text"></i>Finding Aid</a></dd>
-        <dd class="blacklight-title_extended"><a href="#"><i class="fas fa-file-text"></i>Item Record</a> in HOLLIS</dd>
-        <dd class="blacklight-title_extended"><a href="#"><i class="fas fa-file-text"></i>Image Record</a> in HOLLIS</dd>
+        <dt class="blacklight-title_extended clearfix">More item details</dt>
+        <dd class="blacklight-title_extended"><i class="fa fa-file-text"></i> <%=raw document[:related_links]%></dd>
       </dl>
     </div>
   </div>
