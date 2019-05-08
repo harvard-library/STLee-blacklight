@@ -35,12 +35,18 @@
         %>
       </dl>
       <dl class="dl-vertical dl-invert dl-more-details clearfix">
-        <dt class="blacklight-title_extended clearfix">More item details</dt>
         <%
+        if (!document[:hollis_links].nil? && document[:hollis_links].kind_of?(Array) && document[:hollis_links].length > 0)  ||
+        (!document[:hollis_image_links].nil? && document[:hollis_image_links].kind_of?(Array) && document[:hollis_image_links].length > 0) ||
+        (!document[:finding_aid_links].nil? && document[:finding_aid_links].kind_of?(Array) && document[:finding_aid_links].length > 0)
+        %>
+          <dt class="blacklight-title_extended clearfix">More item details</dt>
+        <%
+        end
         if !document[:hollis_links].nil? && document[:hollis_links].kind_of?(Array)
           document[:hollis_links].each do |x|
           %>
-            <dd class="blacklight-title_extended"><i class="fa fa-file-text"></i> <a href="<%=x[:link_text]%>"><%=x[:link_text]%></a> <%=x[:label]%></dd>
+            <dd class="blacklight-title_extended"><i class="fa fa-file-text"></i> <a href="<%=x[:url]%>"><%=x[:link_text]%></a> <%=x[:label]%></dd>
           <%
           end
         end

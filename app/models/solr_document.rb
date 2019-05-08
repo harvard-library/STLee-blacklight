@@ -672,11 +672,11 @@ class SolrDocument
   end
 
   def hollis_links_from_doc doc
-    related_urls_by_type doc, 'HOLLIS record', 'Item Record', 'in HOLLIS'
+    related_urls_by_type doc, 'HOLLIS record', 'HOLLIS Record', ''
   end
 
   def hollis_image_links_from_doc doc
-    related_urls_by_type doc, 'HOLLIS Images record', 'Item Record', 'in HOLLIS Images'
+    related_urls_by_type doc, 'HOLLIS Images record', 'HOLLIS Images Record', ''
   end
 
   def finding_aid_links_from_doc doc
