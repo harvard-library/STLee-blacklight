@@ -762,7 +762,7 @@ class SolrDocument
     link_items = nodes_from_path doc, '$..url[?(@["@access"] == "object in context")]'
     link_items.each do |x|      
       if x['@displayLabel'] != "Harvard Digital Collections" && x['#text'] != ""
-        link_urls.push related_link_to_obj(x['#text'], 'Item Record', 'in ' + x['@displayLabel'])
+        link_urls.push related_link_to_obj(x['#text'], 'Item Record', x['@displayLabel'])
       end
     end
 

@@ -16,61 +16,52 @@
   </div>
   <div class="col-lg-4">
     <div id="tools" class="record-tools">
-      <h2 class="clearfix">Tools and Related Links</h2>
-      <div class="btn-group">
-        <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-          Download This Item <span class="caret"></span>
-        </button>
-        <ul class="dropdown-menu">
-          <li><a href="#">Small: 300 x 218 px</a></li>
-          <li><a href="#">Medium: 800 x 579 px</a></li>
-          <li><a href="#">Large: 1200 x 869 px</a></li>
-          <li><a href="#">X-Large: 2400 x 1737 px</a></li>
-          <li><a href="#">IIIF Manifest</a></li>
-        </ul>
-      </div>
-      <dl class="dl-vertical dl-invert dl-appears-in clearfix">
-        <dt class="blacklight-title_extended">This item appears in</dt>
-        <dd class="blacklight-title_extended"><a href="/catalog?f[repository][]=<%= u document[:repository]%>"><%=document[:repository]%></a></dd>
+      <h2 class="clearfix">Related Links</h2>
+        <%
+        if !document[:digital_collections_links].nil? && document[:digital_collections_links].kind_of?(Array) && document[:digital_collections_links].length > 0
+          %>
+            <dl class="dl-vertical dl-invert dl-appears-in clearfix">
+            <dt class="blacklight-title_extended">This item appears in</dt>
+          <%
+          document[:digital_collections_links].each do |x|
+          %>
+            <dd class="blacklight-title_extended"><i class="fa fa-file-text"></i> <a href="<%=x[:url]%>"><%=x[:label]%></a></dd>
+          <%
+          end
+          %>
+            </dl>
+          <%
+        end
+        %>
       </dl>
       <dl class="dl-vertical dl-invert dl-more-details clearfix">
         <dt class="blacklight-title_extended clearfix">More item details</dt>
-        <dd class="blacklight-title_extended"><i class="fa fa-file-text"></i> <%=raw document[:related_links]%></dd>
+        <%
+        if !document[:hollis_links].nil? && document[:hollis_links].kind_of?(Array)
+          document[:hollis_links].each do |x|
+          %>
+            <dd class="blacklight-title_extended"><i class="fa fa-file-text"></i> <a href="<%=x[:link_text]%>"><%=x[:link_text]%></a> <%=x[:label]%></dd>
+          <%
+          end
+        end
+
+        if !document[:hollis_image_links].nil? && document[:hollis_image_links].kind_of?(Array)
+          document[:hollis_image_links].each do |x|
+          %>
+            <dd class="blacklight-title_extended"><i class="fa fa-file-text"></i> <a href="<%=x[:url]%>"><%=x[:link_text]%></a> <%=x[:label]%></dd>
+          <%
+          end
+        end
+
+        if !document[:finding_aid_links].nil? && document[:finding_aid_links].kind_of?(Array)
+          document[:finding_aid_links].each do |x|
+          %>
+            <dd class="blacklight-title_extended"><i class="fa fa-file-text"></i> <a href="<%=x[:url]%>"><%=x[:link_text]%></a> <%=x[:label]%></dd>
+          <%
+          end
+        end
+        %>
       </dl>
-
-      <% 
-      if !document[:hollis_links].nil? && document[:hollis_links].kind_of?(Array) 
-        document[:hollis_links].each do |x|
-        %>
-          <a href="<%=x[:link_text]%>"><%=x[:link_text]%></a> <%=x[:label]%>
-        <%
-        end
-      end 
-
-      if !document[:hollis_image_links].nil? && document[:hollis_image_links].kind_of?(Array) 
-        document[:hollis_image_links].each do |x|
-        %>
-          <a href="<%=x[:url]%>"><%=x[:link_text]%></a> <%=x[:label]%>
-        <%
-        end
-      end 
-      
-      if !document[:finding_aid_links].nil? && document[:finding_aid_links].kind_of?(Array) 
-        document[:finding_aid_links].each do |x|
-        %>
-          <a href="<%=x[:url]%>"><%=x[:link_text]%></a> <%=x[:label]%>
-        <%
-        end
-      end 
-
-      if !document[:digital_collections_links].nil? && document[:digital_collections_links].kind_of?(Array) 
-        document[:digital_collections_links].each do |x|
-        %>
-          <a href="<%=x[:url]%>"><%=x[:link_text]%></a> <%=x[:label]%>
-        <%
-        end
-      end 
-      %>
     </div>
   </div>
 </div>
