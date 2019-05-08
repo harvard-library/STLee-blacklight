@@ -21,7 +21,7 @@ class SolrDocument
       
       result[:digital_format] = field_values_from_node_by_path doc, '$.extension..librarycloud.digitalFormats.digitalFormat', '<br/>'
       result[:repository] = field_values_from_node_by_path doc, '$..physicalLocation[?(@["@displayLabel"]=="Harvard repository")]["#text"]', '<br/>'
-      result[:genre] = field_values_from_node_by_path doc, '$..genre["#text"]', '<br/>'
+      result[:genre] = field_values_from_node_by_path doc, '$..genre..["#text"]', '<br/>'
       result[:publisher] = field_values_from_node_by_path doc, '$..publisher', '<br/>'
       result[:edition] = field_values_from_node_by_path doc, '$..edition', '<br/>'
       result[:culture] = field_values_from_node_by_path doc, '$.extension..cultureWrap.culture', '<br/>'
@@ -448,7 +448,7 @@ class SolrDocument
       if notes != ''
         notes += '<br/>'
       end
-      notes += '<strong>Funding:</strong>' + funding
+      notes += sub_label_for_field 'Funding', funding
     end
 
     access_condition = field_values_from_node_by_path doc, '$..accessCondition', '<br/>'
@@ -601,32 +601,38 @@ class SolrDocument
 
   def subject_from_node node
     subject = ''
-    node.each do |key, value|
-      if key == "geographicCode"
-        next
-      end
-      if value.kind_of?(Hash)
-        subject += subject_from_node value
-      elsif key != '@authority' 
-        if value.kind_of?(String)
+
+    if node.kind_of?(Hash)
+      node.each do |key, value|
+        if key == "geographicCode" || key == '@authority' 
+          next
+        end
+        subject_part = subject_from_node value
+        if subject_part != ''
           if subject != ''
             subject += '--'
           end
-          subject += value
-        elsif value.kind_of?(Array)
-          value.each do |x|
-            if subject != ''
+          subject += subject_part
+        end
+      end
+    elsif node.kind_of?(Array)
+      node.each do |x|
+        subject_part = subject_from_node x
+        if subject_part != ''
+          if subject != ''
             subject += '--'
           end
-          subject += x
-          end
+          subject += subject_part
         end
-        
       end
+    elsif node.kind_of?(String)
+      subject = node
     end
-
+    
     subject
   end
+
+
 
   def extension_field_from_doc doc, field
     x = hash_as_list(doc[:extension]).detect { |x| x.is_a?(Hash) and x.key?(:DRSMetadata) }

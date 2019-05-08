@@ -98,7 +98,6 @@ class CatalogController < ApplicationController
 	config.add_show_field 'style', label: 'Style'
 	config.add_show_field 'notes', label: 'Notes'
   config.add_show_field 'series', label: 'Series'
-	config.add_show_field 'digital_format', label: 'Digital Format'
   config.add_show_field 'repository', label: 'Repository'
   config.add_show_field 'additional_digital_items', label: 'Additional Digital Items'
   
