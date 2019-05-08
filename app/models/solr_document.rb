@@ -19,13 +19,13 @@ class SolrDocument
       result[:abstract] = abstract_from_doc doc
       result[:resource_type] = resource_type_from_doc doc
       
-      result[:digital_format] = field_values_from_node_by_path doc, '$.extension..librarycloud.digitalFormats.digitalFormat', ', '
-      result[:repository] = field_values_from_node_by_path doc, '$..physicalLocation[?(@["@displayLabel"]=="Harvard repository")]["#text"]', ', '
-      result[:genre] = field_values_from_node_by_path doc, '$..genre["#text"]', ', '
-      result[:publisher] = field_values_from_node_by_path doc, '$..publisher', ', '
-      result[:edition] = field_values_from_node_by_path doc, '$..edition', ', '
-      result[:culture] = field_values_from_node_by_path doc, '$.extension..cultureWrap.culture', ', '
-      result[:style] = field_values_from_node_by_path doc, '$.extension..styleWrap.style', ', '
+      result[:digital_format] = field_values_from_node_by_path doc, '$.extension..librarycloud.digitalFormats.digitalFormat', '<br/>'
+      result[:repository] = field_values_from_node_by_path doc, '$..physicalLocation[?(@["@displayLabel"]=="Harvard repository")]["#text"]', '<br/>'
+      result[:genre] = field_values_from_node_by_path doc, '$..genre["#text"]', '<br/>'
+      result[:publisher] = field_values_from_node_by_path doc, '$..publisher', '<br/>'
+      result[:edition] = field_values_from_node_by_path doc, '$..edition', '<br/>'
+      result[:culture] = field_values_from_node_by_path doc, '$.extension..cultureWrap.culture', '<br/>'
+      result[:style] = field_values_from_node_by_path doc, '$.extension..styleWrap.style', '<br/>'
       result[:owner_code] = extension_field_from_doc doc, :ownerCode
       result[:owner_display] = extension_field_from_doc doc, :ownerCodeDisplayName
       result[:place] = place_from_doc doc
@@ -42,8 +42,12 @@ class SolrDocument
       result[:subjects] = subjects_from_doc doc
       result[:preview] = preview_from_doc doc
       result[:raw_object] = raw_object_from_doc doc
-      result[:funding] = field_values_from_node_by_path doc, '$..note[?(@["@type"]=="funding")]["#text"]', ', '
+      result[:funding] = field_values_from_node_by_path doc, '$..note[?(@["@type"]=="funding")]["#text"]', '<br/>'
       result[:related_links] = related_links_from_doc doc
+      result[:hollis_links] = hollis_links_from_doc doc
+      result[:hollis_image_links] = hollis_image_links_from_doc doc
+      result[:finding_aid_links] = finding_aid_links_from_doc doc
+      result[:digital_collections_links] = digital_collections_links_from_doc doc
       result[:additional_digital_items] = additional_digital_items_from_doc doc
       
       result[:id] = result[:identifier]
@@ -195,7 +199,7 @@ class SolrDocument
 		  end
 
       if name != '' && namepart != ''
-        name += '; '
+        name += '<br/>'
       end
 
 		  name += namepart
@@ -287,7 +291,7 @@ class SolrDocument
   end
 
   def language_from_doc doc
-    field_values_from_node_by_path(doc, '$..language.languageTerm[?(@["@type"] == "text")]["#text"]', ',')
+    field_values_from_node_by_path(doc, '$..language.languageTerm[?(@["@type"] == "text")]["#text"]', '<br/>')
   end
 
   def date_from_doc doc
@@ -327,19 +331,18 @@ class SolrDocument
   def origin_from_doc doc
     origin = ''
 
-    nodes = nodes_from_path doc, '$..originInfo.place..placeTerm'
-
+    nodes = nodes_from_path doc, '$..originInfo..place..placeTerm'
 		node_to_array(nodes).each do |x|
       if x.kind_of?(String)
         if origin != ''
-          origin += ', '
+          origin += '<br/>'
         end
         origin += x
       else
         node_to_array(x).each do |y|
           if !y['#text'].nil? && y['#text'] != '' && (y['@type'].nil? || y['@type'] == 'text')
             if origin != ''
-              origin += ', '
+              origin += '<br/>'
             end
             origin += y['#text']
           end
@@ -359,7 +362,7 @@ class SolrDocument
 		node_to_array(node[:place]).each do |z|	
 			originPart = origin_from_placeterm z
 			if originPart != '' && origin != ''
-				origin += ', '
+				origin += '<br/>'
 			end
 			origin += originPart
 		end
@@ -376,7 +379,7 @@ class SolrDocument
 		node_to_array(node[:placeTerm]).each do |z|	
 			if z['@type'] == 'text'
 				if origin != ''
-					origin += ', '
+					origin += '<br/>'
 				end
 			end
 		end
@@ -385,7 +388,7 @@ class SolrDocument
   end
 
   def permalink_from_doc doc
-		field_values_from_node_by_path doc, '$..url[?(@["@displayLabel"] == "Harvard Digital Collections")]', ', '
+		field_values_from_node_by_path doc, '$..url[?(@["@displayLabel"] == "Harvard Digital Collections")]', '<br/>'
   end
 
   def permalink_from_node node
@@ -406,14 +409,14 @@ class SolrDocument
     node_to_array(items).each do |x|
       if x.kind_of?(String)
         if notes != ''
-          notes += '; '
+          notes += '<br/>'
         end
         notes += x
       else
         node_to_array(x).each do |y|
           if y.kind_of?(String)
             if notes != ''
-              notes += '; '
+              notes += '<br/>'
             end
             notes += y
           else
@@ -425,7 +428,7 @@ class SolrDocument
               organization += y['#text'].to_s  
             else 
               if notes != ''
-                notes += '; '
+                notes += '<br/>'
               end
               notes += y['#text'].to_s  
             end
@@ -448,7 +451,7 @@ class SolrDocument
       notes += '<strong>Funding:</strong>' + funding
     end
 
-    access_condition = field_values_from_node_by_path doc, '$..accessCondition', ', '
+    access_condition = field_values_from_node_by_path doc, '$..accessCondition', '<br/>'
     if access_condition != ''
       if notes != ''
         notes += '<br/>'
@@ -463,11 +466,11 @@ class SolrDocument
     abstract = ''
 
     abstract_items = nodes_from_path doc, '$..abstract'
-    abstract = field_value_from_node abstract_items, '; '
+    abstract = field_value_from_node abstract_items, '<br/>'
 
     toc_items = nodes_from_path doc, '$..tableOfContents'
 
-    toc = field_value_from_node toc_items, '; '
+    toc = field_value_from_node toc_items, '<br/>'
     if toc != ''
       if abstract != ''
         abstract += '<br/>'
@@ -480,7 +483,7 @@ class SolrDocument
 
   def description_from_doc doc
     description = ''
-    extent = field_values_from_node_by_path doc, '$..extent', ', '
+    extent = field_values_from_node_by_path doc, '$..extent', '<br/>'
     if extent != ''
       if description != ''
         description += '<br/>'
@@ -488,7 +491,7 @@ class SolrDocument
       description += sub_label_for_field 'Extent', extent
     end
 
-    materials = field_values_from_node_by_path doc, '$.extension..indexingMaterialsTechSet.termMaterialsTech', ', '
+    materials = field_values_from_node_by_path doc, '$.extension..indexingMaterialsTechSet.termMaterialsTech', '<br/>'
     if materials != ''
       if description != ''
         description += '<br/>'
@@ -507,9 +510,9 @@ class SolrDocument
     node_to_array(physical_items).each do |x|
       if x["@displayLabel"].nil? || x["@displayLabel"] != "Harvard repository"
         if place != ''
-          place += ', '
+          place += '<br/>'
         end
-        place += field_value_from_node x, ', '
+        place += field_value_from_node x, '<br/>'
       end
     end
 
@@ -527,7 +530,7 @@ class SolrDocument
 
     if geography != ''
       if place != ''
-        place += '; '
+        place += '<br/>'
       end
       place += geography
     end 
@@ -572,19 +575,23 @@ class SolrDocument
     subject_nodes = nodes_from_path(doc, '$..subject')
 
     subject_nodes.each do |x|
-      node_to_array(x).each do |y|
-        if subjects != ''
-          subjects += ', '
-        end
-        
+      node_to_array(x).each do |y|    
         if !y['name'].nil?
-          subjects += name_from_node y['name']
+          subject = name_from_node y['name']
+          if subject != ''
+            if subjects != ''
+              subjects += '<br/>'
+            end
+            subjects += subject
+          end
         else
           subject = subject_from_node y
-          if subject != '' && subjects != ''
-            subjects + ', '
+          if subject != ''
+            if subjects != ''
+              subjects += '<br/>'
+            end
+            subjects += subject
           end
-          subjects += subject
         end
       end
     end
@@ -595,13 +602,26 @@ class SolrDocument
   def subject_from_node node
     subject = ''
     node.each do |key, value|
+      if key == "geographicCode"
+        next
+      end
       if value.kind_of?(Hash)
         subject += subject_from_node value
-      elsif key != '@authority' && value.kind_of?(String)
-        if subject != ''
-          subject += '--'
+      elsif key != '@authority' 
+        if value.kind_of?(String)
+          if subject != ''
+            subject += '--'
+          end
+          subject += value
+        elsif value.kind_of?(Array)
+          value.each do |x|
+            if subject != ''
+            subject += '--'
+          end
+          subject += x
+          end
         end
-        subject += value
+        
       end
     end
 
@@ -651,74 +671,98 @@ class SolrDocument
     raw_object
   end
 
+  def hollis_links_from_doc doc
+    related_urls_by_type doc, 'HOLLIS record', 'Item Record', 'in HOLLIS'
+  end
+
+  def hollis_image_links_from_doc doc
+    related_urls_by_type doc, 'HOLLIS Images record', 'Item Record', 'in HOLLIS Images'
+  end
+
+  def finding_aid_links_from_doc doc
+    related_urls_by_type doc, 'Finding Aid', 'Finding Aid', ''
+  end
+  
+  def digital_collections_links_from_doc doc
+    object_in_context_urls_from_doc doc, 'Item Record'
+  end
+
   def related_links_from_doc doc
     related_links = ''
 
-    hollis_urls = related_links_by_type doc, 'HOLLIS record', 'Item record'
+    hollis_urls = hollis_links_from_doc doc
     
-    if hollis_urls != ''
-      if related_links != ''
-        related_links += '<br/>'
+    if !hollis_urls.nil? 
+      hollis_urls.each do |x|
+        if related_links != ''
+          related_links += '<br/>'
+        end
+        related_links += related_link_tag_for_url x[:url], x[:link_text], x[:label], true
       end
-      related_links += hollis_urls + ' in HOLLIS'
     end
 
-    hollis_image_urls = related_links_by_type doc, 'HOLLIS Images record', 'Image record'
+    hollis_image_urls = hollis_image_links_from_doc doc
     
-    if hollis_image_urls != ''
-      if related_links != ''
-        related_links += '<br/>'
+    if !hollis_image_urls.nil?
+      hollis_image_urls.each do |x|
+        if related_links != ''
+          related_links += '<br/>'
+        end
+        related_links += related_link_tag_for_url x[:url], x[:link_text], x[:label], true
       end
-      related_links += hollis_image_urls + ' in HOLLIS Images'
     end
     
-    finding_aid_urls = related_links_by_type doc, 'Finding Aid', 'Finding Aid'
+    finding_aid_urls = finding_aid_links_from_doc doc
     
-    if finding_aid_urls != ''
-      if related_links != ''
-        related_links += '<br/>'
+    if !finding_aid_urls.nil?
+      finding_aid_urls.each do |x|
+        if related_links != ''
+          related_links += '<br/>'
+        end
+        related_links += related_link_tag_for_url x[:url], x[:link_text], x[:label], true
       end
-      related_links += finding_aid_urls
     end
     
-    digital_collection_urls = object_in_context_urls_from_doc doc, 'Item Record'
+    digital_collection_urls = digital_collections_links_from_doc doc
     
-    if digital_collection_urls != ''
-      if related_links != ''
-        related_links += '<br/>'
+    if !digital_collection_urls.nil? 
+      digital_collection_urls.each do |x|
+        if related_links != ''
+          related_links += '<br/>'
+        end
+        related_links += related_link_tag_for_url x[:url], x[:link_text], x[:label], true
       end
-      related_links += digital_collection_urls
     end
         
     related_links
   end
 
-  def related_links_by_type doc, type, label
-    link_urls = ''
+  def related_urls_by_type doc, type, link_text, label
+    link_urls = []
     link_items = nodes_from_path doc, '$..relatedItem[?(@["@otherType"] == "' + type + '")]'
     link_items.each do |x|
       node_to_array(x['location']).each do |y|
-        if link_urls != ''
-          link_urls += ', '
-        end
-      
-        link_urls += link_tag_for_url y['url'], label, true
+        link_urls.push related_link_to_obj(y['url'], link_text, label)
       end
     end
 
     link_urls
   end
 
+  def related_link_to_obj url, link_text, label
+    obj = {}
+    obj[:url] = url
+    obj[:link_text] = link_text
+    obj[:label] = label
+    obj
+  end
+
   def object_in_context_urls_from_doc doc, label
-    link_urls = ''
+    link_urls = []
     link_items = nodes_from_path doc, '$..url[?(@["@access"] == "object in context")]'
     link_items.each do |x|      
       if x['@displayLabel'] != "Harvard Digital Collections" && x['#text'] != ""
-        if link_urls != ''
-          link_urls += '<br/>'
-        end
-        link_urls += link_tag_for_url x['#text'], 'Item Record', true
-        link_urls += ' in ' + x['@displayLabel']
+        link_urls.push related_link_to_obj(x['#text'], 'Item Record', 'in ' + x['@displayLabel'])
       end
     end
 
@@ -746,12 +790,20 @@ class SolrDocument
     additional_digital_items 
   end
 
-  def link_tag_for_url url, label, new_window
+  def related_link_tag_for_url url, link_text, label, new_window
+    link_tag = link_tag_for_url url, link_text, new_window
+    if label.to_s != ''
+      link_tag += ' ' + label
+    end
+    link_tag
+  end
+
+  def link_tag_for_url url, link_text, new_window
     link_tag = '<a href="' + url + '" '
     if new_window
       link_tag += ' target="_blank"'
     end
-    link_tag += '>' + label + '</a>'
+    link_tag += '>' + link_text + '</a>'
     link_tag
   end
 

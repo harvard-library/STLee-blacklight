@@ -37,6 +37,40 @@
         <dt class="blacklight-title_extended clearfix">More item details</dt>
         <dd class="blacklight-title_extended"><i class="fa fa-file-text"></i> <%=raw document[:related_links]%></dd>
       </dl>
+
+      <% 
+      if !document[:hollis_links].nil? && document[:hollis_links].kind_of?(Array) 
+        document[:hollis_links].each do |x|
+        %>
+          <a href="<%=x[:link_text]%>"><%=x[:link_text]%></a> <%=x[:label]%>
+        <%
+        end
+      end 
+
+      if !document[:hollis_image_links].nil? && document[:hollis_image_links].kind_of?(Array) 
+        document[:hollis_image_links].each do |x|
+        %>
+          <a href="<%=x[:url]%>"><%=x[:link_text]%></a> <%=x[:label]%>
+        <%
+        end
+      end 
+      
+      if !document[:finding_aid_links].nil? && document[:finding_aid_links].kind_of?(Array) 
+        document[:finding_aid_links].each do |x|
+        %>
+          <a href="<%=x[:url]%>"><%=x[:link_text]%></a> <%=x[:label]%>
+        <%
+        end
+      end 
+
+      if !document[:digital_collections_links].nil? && document[:digital_collections_links].kind_of?(Array) 
+        document[:digital_collections_links].each do |x|
+        %>
+          <a href="<%=x[:url]%>"><%=x[:link_text]%></a> <%=x[:label]%>
+        <%
+        end
+      end 
+      %>
     </div>
   </div>
 </div>
