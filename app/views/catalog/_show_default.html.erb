@@ -25,7 +25,7 @@
           <%
           document[:digital_collections_links].each do |x|
           %>
-            <dd class="blacklight-title_extended"><i class="fa fa-file-text"></i> <a href="<%=x[:url]%>"><%=x[:label]%></a></dd>
+            <dd class="blacklight-title_extended"><a href="<%=x[:url]%>"><%=x[:label]%></a></dd>
           <%
           end
           %>
@@ -46,7 +46,7 @@
         if !document[:hollis_links].nil? && document[:hollis_links].kind_of?(Array)
           document[:hollis_links].each do |x|
           %>
-            <dd class="blacklight-title_extended"><i class="fa fa-file-text"></i> <a href="<%=x[:url]%>"><%=x[:link_text]%></a> <%=x[:label]%></dd>
+            <dd class="blacklight-title_extended"><a href="<%=x[:url]%>"><%=x[:link_text]%></a> <%=x[:label]%></dd>
           <%
           end
         end
@@ -54,7 +54,7 @@
         if !document[:hollis_image_links].nil? && document[:hollis_image_links].kind_of?(Array)
           document[:hollis_image_links].each do |x|
           %>
-            <dd class="blacklight-title_extended"><i class="fa fa-file-text"></i> <a href="<%=x[:url]%>"><%=x[:link_text]%></a> <%=x[:label]%></dd>
+            <dd class="blacklight-title_extended"><a href="<%=x[:url]%>"><%=x[:link_text]%></a> <%=x[:label]%></dd>
           <%
           end
         end
@@ -62,7 +62,7 @@
         if !document[:finding_aid_links].nil? && document[:finding_aid_links].kind_of?(Array)
           document[:finding_aid_links].each do |x|
           %>
-            <dd class="blacklight-title_extended"><i class="fa fa-file-text"></i> <a href="<%=x[:url]%>"><%=x[:link_text]%></a> <%=x[:label]%></dd>
+            <dd class="blacklight-title_extended"><a href="<%=x[:url]%>"><%=x[:link_text]%></a> <%=x[:label]%></dd>
           <%
           end
         end
