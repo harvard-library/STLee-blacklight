@@ -3,14 +3,14 @@
 
 h2.facets__heading {
   color: white;
-  font-family: 'TruenoBold', sans-serif;
+  font-family: $font-family-sans-serif-bold;
   font-weight: normal;
-  font-size: rem-calc(19);
-  line-height: 1.25;
+  font-size: 20px;
+  line-height: 30px;
   padding: 35px 0 5px 25px;
   margin: 0;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
 }
 
 .facets__container a {
@@ -23,6 +23,7 @@ h2.facets__heading {
 
 ul.facet-values {
   margin-bottom: 10px;
+  padding-left: 0;
 }
 
 ul.facet-values li {
@@ -80,6 +81,7 @@ ul.facet-values li {
     padding: 0 0 0px 25px;
     font-size: rem-calc(14);
     letter-spacing: 0.5px;
+    font-family: $font-family-sans-serif;
 }
 
 .toggle-wrapper {
@@ -88,7 +90,7 @@ ul.facet-values li {
 }
 
 button.toggle-all-facets {
-    font-family: 'TruenoRegular', sans-serif;
+    font-family: $font-family-sans-serif;
     font-size: rem-calc(12);
     color: white;
     float: right;
@@ -141,7 +143,7 @@ a.facet__title {
     }
 
     span.toggle {
-        color: $red;
+        color: $jet;
         font-size: rem-calc(20);
         position: relative;
         top: 0px;
@@ -162,7 +164,7 @@ a.facet__title {
     padding-bottom: 10px;
 
     .accordion, dl.accordion {
-        font-family: 'TruenoRegular', sans-serif;
+        font-family: $font-family-sans-serif;
 
         .accordion-navigation {
             border-bottom: 1px solid #444;
@@ -182,7 +184,7 @@ a.facet__title {
             }
 
             & > a {
-                font-family: 'TruenoRegular', sans-serif;
+                font-family: $font-family-sans-serif;
                 background: transparent;
                 color: #fff;
                 text-transform: uppercase;

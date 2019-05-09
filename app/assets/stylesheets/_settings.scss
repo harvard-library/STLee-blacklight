@@ -55,7 +55,7 @@
 // $rem-base: 16px;
 
 // Allows the use of rem-calc() or lower-bound() in your settings
-@import "foundation/functions";
+// @import "foundation/functions";
 
 // The default font-size is set to 100% of the browser style sheet (usually 16px)
 // for compatibility with browser-based text zoom or user-set defaults.
@@ -87,7 +87,9 @@ $include-html-global-classes: $include-html-classes;
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 
 // We use these to define default font stacks
- $font-family-sans-serif: "TruenoRg", Helvetica, Roboto, Arial, sans-serif;
+ $font-family-sans-serif: "TruenoRegular", Helvetica, Roboto, Arial, sans-serif;
+ $font-family-sans-serif-bold: "TruenoBold", Helvetica, Roboto, Arial, sans-serif;
+ $font-family-sans-serif-light: "TruenoLight", Helvetica, Roboto, Arial, sans-serif;
  $font-family-serif: "Lora", Georgia, Cambria, "Times New Roman", Times, serif;
 // $font-family-monospace: Consolas, "Liberation Mono", Courier, monospace;
 

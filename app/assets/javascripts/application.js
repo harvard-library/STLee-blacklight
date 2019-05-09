@@ -18,7 +18,6 @@
 //= require blacklight/blacklight
 
 //= require_tree .
-//= require foundation
 
 $(document).on('turbolinks:load', function() {
     $(function(){ $(document).foundation({
