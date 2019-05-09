@@ -1,3 +1,4 @@
+@import "settings";
 
 .hl__alert {
     background-color: #f3f3f3;
@@ -6,14 +7,14 @@
 }
 
 .hl__alert p {
-    font-family: 'Lora', serif;
+    font-family: $font-family-serif;
     font-size: 16px;
     padding-top: 18px;
 }
 
 .hl__alert a {
     color: #0579b8;
-    font-family: 'TruenoBold',sans-serif;
+    font-family: $font-family-sans-serif-bold;
     text-decoration: none;
     -webkit-transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
     transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
@@ -91,10 +92,10 @@
 }
 
 .hl__topHeaderTitle__harvard a {
-    font-family: 'TruenoBold', sans-serif;
+    font-family: $font-family-sans-serif;
     font-size: 24px;
     text-transform: uppercase;
-    font-weight: 400;
+    font-weight: 700;
     font-style: normal;
     font-stretch: normal;
     line-height: 1.67;
@@ -109,7 +110,7 @@
 }
 
 span.hl__topHeaderTitle__collections {
-    font-family: 'Lora', serif;
+    font-family: $font-family-serif;
     font-size: 28px;
     font-style: italic;
     color: #fff;

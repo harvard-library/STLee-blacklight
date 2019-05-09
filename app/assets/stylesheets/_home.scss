@@ -11,8 +11,9 @@
 }
 
 .homepage-title-small {
-  font-family: 'TruenoBold', sans-serif;
+  font-family: $font-family-sans-serif;
   font-size: 52px;
+  font-weight: 700;
   letter-spacing: 2.48px;
   text-transform: uppercase;
 }
@@ -71,8 +72,9 @@
 
 .home-photo-credit a {
   color: #fff;
-  font-family: 'TruenoLight', sans-serif;
+  font-family: $font-family-sans-serif-light;
   display: block;
+  font-weight: 100;
 }
 
 .home-photo-credit a:hover {
@@ -133,8 +135,9 @@
 }
 
 .blacklight-application-home #main-container h2 {
-  font-family: 'TruenoBold', sans-serif;
+  font-family: $font-family-sans-serif;
   font-size: 32px;
+  font-weight: 700;
   letter-spacing: 2.4px;
   padding-bottom: 20px;
   text-align: center;
@@ -143,7 +146,7 @@
 
 .blacklight-application-home #main-container p {
   color: #414141;
-  font-family: 'Lora', serif;
+  font-family: $font-family-serif;
   font-size: 19px;
   line-height: 32px;
   margin: 0 auto 1.84em;
@@ -261,7 +264,7 @@
   border-radius: 4px;
   cursor: pointer;
   display: inline-block;
-  font-family: "TruenoRegular",sans-serif;
+  font-family: "Trueno",sans-serif;
   font-size: 14px;
   font-weight: 700;
   letter-spacing: 1.17px;
