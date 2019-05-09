@@ -7,7 +7,7 @@ class CatalogController < ApplicationController
 
 
   configure_blacklight do |config|
-    config.view.gallery.partials = [:index_header, :index]
+    config.view.gallery.partials = [:index_header]
     config.view.masonry.partials = [:index]
 
 
@@ -74,10 +74,10 @@ class CatalogController < ApplicationController
     #config.add_index_field 'content_model', label: 'Type'
     #config.add_index_field 'owner_display', label: 'Harvard Repository'
     #config.add_index_field 'abstract', label: 'Abstract'
-	#config.add_index_field 'name', label: 'Creator/Contributor'
-  #config.add_index_field 'origin', label: 'Place of Origin'
-  #config.add_index_field 'publisher', label: 'Publisher'
-  config.add_index_field 'date', label: 'Date'
+	  config.add_index_field 'name', label: 'Creator/Contributor'
+    config.add_index_field 'origin', label: 'Place of Origin'
+    config.add_index_field 'publisher', label: 'Publisher'
+    config.add_index_field 'date', label: 'Date'
 
     # Fields to be displayed in the show (single result) view
     # The ordering of the field names is the order of the display
