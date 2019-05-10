@@ -10,6 +10,9 @@
     font-family: $font-family-serif;
     font-size: 16px;
     padding-top: 18px;
+    @media (max-width: 320px) {
+        padding: 8px 8px 0;
+    }
 }
 
 .hl__alert a {
@@ -24,6 +27,7 @@
         border-bottom: 3px solid rgba(5,121,184,0.3);
     }
 }
+
 
 
 #header-navbar .navbar-brand {

@@ -284,33 +284,88 @@ a.facet__title {
 
 #ajax-modal {
     z-index: 2000;
-    height: 70vh;
     background-color: transparent;
     border: none;
     box-shadow: none;
+    font-family: $font-family-sans-serif;
+    margin: 0 auto;
     overflow: hidden;
+    width: 600px;
+
+    @media(max-width: 320px) {
+        width: 300px;
+    }
 }
 
 .reveal-modal {
     width: 650px;
 }
 
-.modal-title {
-    font-family: 'TruenoSemiBold', sans-serif;
+.modal-header .close {
+    font-size: 26px;
+    opacity: 0.8;
+}
+
+.modal-title {    
+    font-weight: 700;
     letter-spacing: 1.4px;
     text-transform: uppercase;
 }
 
 .facet_pagination {
     overflow: hidden;
+
+    &.top {
+        padding: 15px 15px 0;
+    }
+
+    a {
+        color: #0579b8;
+        text-decoration: none;
+        -webkit-transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
+        transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    .sort_options {
+        color: $jet;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1.17px;
+        line-height: 16px;
+        padding: 5px 9px;
+        text-transform: uppercase;
+
+        a.btn-default {
+            border-color: $jet;
+            color: $jet;
+            -webkit-transition: all 0.4s ease;
+            transition: all 0.4s ease;
+
+            &:hover {
+                background-color: $medium-gray;
+                border-color: $medium-gray;
+                color: $white;
+            }
+        }
+    }
 }
 
-.facet_pagination.top {
-    padding: 15px 15px 0;
+
+
+.btn-default.active, .btn-default.active:hover {
+    background-color: $medium-gray;
+    border-color: $medium-gray;
+    box-shadow: none;
+    color: $white;
 }
 
 .facet_extended_list { 
     .facet-label .facet_select {
+        display: inline-block;
         max-width: 75%;
         padding-left: 0;
         &:before {
@@ -319,6 +374,7 @@ a.facet__title {
     }
 
     .facet-count {
+        color: #666;
         float: right;
     }
 }
