@@ -128,11 +128,19 @@ button.toggle-all-facets {
 
     .expand-text {
         display: inline-block;
-        font-weight: 300;
     }
 
     .collapse-text {
         display: none;
+    }
+
+    .expand_caret {
+        transform: scale(1.6);
+        margin-left: 8px;
+        margin-top: -4px;
+    }
+    a[aria-expanded='false'] > .expand_caret {
+        transform: scale(1.6) rotate(-90deg);
     }
 
     &[aria-expanded=true] .collapse-text {
