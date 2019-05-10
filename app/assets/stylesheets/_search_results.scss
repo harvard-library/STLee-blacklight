@@ -26,6 +26,7 @@
         font-family: $font-family-serif;
         font-size: 14px;
         line-height: 24px;
+        margin-left: 200px;
     }
 
 
@@ -36,8 +37,9 @@
 
             .document-thumbnail {
                 float: left;
-                width: 25%;
+                width: 20%;
                 min-height: 100px;
+                padding: 20px 0;
 
 
                 img {
@@ -46,24 +48,20 @@
             }
 
             .documentHeader, .document-metadata {
-                width: 70%;
+                width: 90%;
             }
 
 
-            .record-details dl {
-                display: table;
+            dl.document-metadata.dl-horizontal {
+                display: contents;
                 padding: 20px 20px 30px;
                 margin-bottom: 0;
                 width: 100%;
-            }
-
-            dl {
                 float: left;
+                text-align: left;
 
-                dt, dd {
-                    float: left;
-                    text-align: left;
-                    margin: 0;
+                dt {
+                    display: none;
                 }
             }
         }
