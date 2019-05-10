@@ -133,6 +133,7 @@ button.toggle-all-facets {
 
     .collapse-text {
         display: none;
+        font-weight: 300;
     }
 
     &[aria-expanded=true] .collapse-text {
