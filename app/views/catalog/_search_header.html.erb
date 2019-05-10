@@ -1,6 +1,6 @@
 
 <div class="row search-header">
-  <div class="col-lg-8">
+  <div class="col-lg-8 col-sm-6">
     <%= render :partial => "paginate_compact", :object => @response if show_pagination? %>
 
     <% if query_has_constraints? %>
@@ -10,7 +10,7 @@
     <% end %>
 
   </div>
-  <div class="col-lg-4">
+  <div class="col-lg-4 col-sm-6">
     <div id="sortAndPerPage" class="clearfix">
       <%= render_results_collection_tools wrapping_class: "search-widgets pull-right" %>
     </div>

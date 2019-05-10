@@ -1,10 +1,14 @@
 @import "settings";
 @import "icons";
 
+#facets .panel-group {
+    margin-top: 24px;
+}
+
 h2.facets__heading {
-  color: white;
-  font-family: $font-family-sans-serif-bold;
-  font-weight: normal;
+  color: $white;
+  font-family: $font-family-sans-serif;
+  font-weight: 700;
   font-size: 20px;
   line-height: 30px;
   padding: 35px 0 5px 25px;
@@ -76,12 +80,13 @@ ul.facet-values li {
 }
 
 .facets__container a.facets__clearall {
-    color: #82BCDC;
+    color: $light-blue;
     display: block;
     padding: 0 0 0px 25px;
     font-size: rem-calc(14);
     letter-spacing: 0.5px;
     font-family: $font-family-sans-serif;
+    text-decoration: none;
 }
 
 .toggle-wrapper {
@@ -92,6 +97,8 @@ ul.facet-values li {
 button.toggle-all-facets {
     font-family: $font-family-sans-serif;
     font-size: rem-calc(12);
+    border: none;
+    border-radius: 4px 4px 0 0;
     color: white;
     float: right;
     padding: 6px 20px 6px 10px;
@@ -121,6 +128,7 @@ button.toggle-all-facets {
 
     .expand-text {
         display: inline-block;
+        font-weight: 300;
     }
 
     .collapse-text {
@@ -195,6 +203,41 @@ a.facet__title {
 
             & > .content.active {
                 padding: 0px 0px 10px 0px;
+                background: transparent;
+
+                li {
+                    background: $light-gray;
+                    padding: 12px 35px 12px 0px;
+                    position: relative;
+                    border-radius: 5px;
+
+                    a {
+                        color: $jet;
+                        text-decoration: none;
+                    }
+
+                    .facet-count {
+                        color: #666;
+                        position: absolute;
+                        right: 18px;
+                        top: 11px;
+                        text-align: right;
+                        width: auto !important;
+                    }
+
+                    &.more_facets_link {
+                        background: transparent;
+                        padding-right: 0;
+                        a.more_facets_link {
+                            color: $light-blue;
+                            float: right;
+                        }
+                    }
+                }
+            }
+
+            & > .content {
+                padding: 24px 0px 10px 0px;
                 background: transparent;
 
                 li {

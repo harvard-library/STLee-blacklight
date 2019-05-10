@@ -1,8 +1,54 @@
 @import "settings";
 
+.pagination {
+  width: 100%;
+}
 
 ul.pagination {
-  border-top: 1px solid #D4D1D1;
+  border-top: 1px solid $silver;
+  font-family: $font-family-sans-serif;
+  font-size: 17px;
+  font-weight: 700;
+}
+
+.pagination > li { 
+  > a {
+    border: none;
+    border-radius: 4px;
+    color: $breakthrough-blue;
+    padding: 6px 16px;
+    text-decoration: none;
+
+    &:hover {
+      background-color: $subtle-gray;
+    }
+  }
+
+  > span {
+    padding: 6px 16px;
+  }
+}
+
+.pagination > .active > span {
+  background-color: $subtle-gray;
+  border: none;
+  border-radius: 4px;
+  color: $medium-gray;
+
+  &:hover {
+    background-color: $subtle-gray;
+    color: $medium-gray;
+  }
+}
+
+.pagination > .disabled {
+  > span {
+    border: none;
+  }
+  
+  > a {
+    font-weight: 300;
+  }
 }
 
 .jump-pagination {

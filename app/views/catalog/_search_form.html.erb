@@ -1,5 +1,4 @@
 <div class="row">
-
   <%= form_tag search_action_url, method: :get, class: 'search-query-form clearfix navbar-form', role: 'search' do %>
     <%= render_hash_as_hidden_fields(search_state.params_for_search.except(:q, :search_field, :qt, :page, :utf8)) %>
     <%= hidden_field_tag :search_field, search_fields.first.last %>
