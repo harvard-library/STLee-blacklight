@@ -151,7 +151,7 @@ a.facet__title {
     }
 
     span.toggle {
-        color: $jet;
+        color: $red;
         font-size: rem-calc(20);
         position: relative;
         top: 0px;
@@ -159,7 +159,10 @@ a.facet__title {
 
         &.facet-expand {
             display: inline-block;
+
         }
+
+
 
         &.facet-collapse {
             display: none;
