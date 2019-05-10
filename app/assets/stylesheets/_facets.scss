@@ -2,7 +2,7 @@
 @import "icons";
 
 #facets .panel-group {
-    margin-top: 24px;
+    margin-bottom: 0;
 }
 
 h2.facets__heading {
@@ -128,6 +128,7 @@ button.toggle-all-facets {
 
     .expand-text {
         display: inline-block;
+        font-weight: 300;
     }
 
     .collapse-text {
@@ -178,7 +179,7 @@ a.facet__title {
 
         .accordion-navigation {
             border-bottom: 1px solid #444;
-            padding: 0;
+            padding: 25px 0;
             margin: 0 25px;
 
             &.active {
@@ -204,7 +205,7 @@ a.facet__title {
             }
 
             & > .content.active {
-                padding: 24px 0;
+                padding: 0;
                 background: transparent;
 
                 li {
@@ -239,7 +240,7 @@ a.facet__title {
             }
 
             & > .content {
-                padding: 24px 0;
+                padding: 25px 0 0 0;
                 background: transparent;
 
                 li {
