@@ -41,13 +41,30 @@
 
 
                 img {
-                    max-width: 100%;
+                    max-width: 90%;
                 }
             }
 
             .documentHeader, .document-metadata {
-                margin-left: 5%;
-                width: 90%;
+                width: 70%;
+            }
+
+
+            .record-details dl {
+                display: table;
+                padding: 20px 20px 30px;
+                margin-bottom: 0;
+                width: 100%;
+            }
+
+            dl {
+                float: left;
+
+                dt, dd {
+                    float: left;
+                    text-align: left;
+                    margin: 0;
+                }
             }
         }
     }
