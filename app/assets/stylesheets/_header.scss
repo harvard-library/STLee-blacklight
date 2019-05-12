@@ -29,6 +29,17 @@
     }
 }
 
+@media (max-width: 620px) {
+    .hl__alert {
+        padding-left: 60px;
+        padding-right: 60px;
+
+        p {
+            padding-top: 10px;
+        }
+    }
+}
+
 
 
 #header-navbar .navbar-brand {
