@@ -47,7 +47,6 @@
 
 @media (max-width: 620px) {
     .hl__topHeader {
-        position: fixed;
         z-index: 11
     }
 }
@@ -130,7 +129,7 @@ span.hl__topHeaderTitle__collections {
 @media (max-width: 620px) {
     span.hl__topHeaderTitle__collections {
         font-size: 1.3rem;
-        padding: 0
+        padding: 0 0 0 4px;
     }
 }
 

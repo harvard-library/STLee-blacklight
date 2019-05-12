@@ -84,17 +84,21 @@ li.hl__linked-list__item:last-child {
 }
 
 .hl__footerLinkRight a {
+    border-bottom: 3px solid transparent;
     font-family: $font-family-sans-serif-light;
     font-weight: 300;
     color: #fff;
     font-size: 14px;
     line-height: 1.87;
-    text-align: right
-}
-
-.hl__footerLinkRight a:hover {
+    text-align: right;
     text-decoration: none;
-    color: #fff
+    -webkit-transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
+    transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
+
+    &:hover {
+        border-bottom-color: rgba(255,255,255,0.7);
+        color: $white;
+    }
 }
 
 @media(max-width: 1200px) {
@@ -130,7 +134,7 @@ li.hl__linked-list__item:last-child {
 
 .hl__ccContainer svg {
     float: left;
-    margin: 7px 10px 0 0;
+    margin: 0 10px 4px 0;
 }
 
 .hl__ccLicense {
@@ -161,6 +165,13 @@ li.hl__linked-list__item:last-child {
     float: left;
     width: 40px;
     height: 42px;
+    -webkit-transition: opacity 0.28s cubic-bezier(0.28,1.08,1,0.96);
+    transition: opacity 0.28s cubic-bezier(0.28,1.08,1,0.96);
+
+    &:hover {
+        opacity: 0.8;
+    }
+
 }
 
 .hl__footerFacebookLogo {
