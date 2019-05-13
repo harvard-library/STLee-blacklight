@@ -1,3 +1,13 @@
+6.11.2-lts-2 (5/13/2019) PP/MC/ED
+--Replaced Foundation Framework references in markup with Bootstrap
+--Improved mobile device layout rendering
+--Added DCP Google Analytics Tracking ID
+--Added box for Related Links on right side of item detail pages
+--Switched List/Grid/Masonry icons to use Font Awesome
+--Update the metadata for list view to include: Title, Creator/Contributor, Place of Origin, Publisher, Date
+--Added a span with a class around the alternative titles.
+--Updated all item detail fields to render values with line breaks
+--Updated the sequence of the fields on the item detail page
  6.11.2-lts-1 (04/30/2019) PP/MC/ED
 --Removed customized STLee / Archimedes theme
 --Revised CSS for left hand filter rail on search results
