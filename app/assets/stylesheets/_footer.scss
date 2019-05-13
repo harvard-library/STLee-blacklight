@@ -1,12 +1,9 @@
 @import "settings";
 
 #hl__footer {
-    display: flex;
     min-height: 320px;
-    align-items: flex-start;
     padding-top: 60px;
     padding-bottom: 60px;
-    justify-content: space-between;
     background: #1e1e1e;
     margin-top: 50px;
 }
@@ -14,109 +11,67 @@
 .hl__footer__container {
     max-width: 1450px;
     margin: 0 auto;
-    padding: 0 20px;
-    display: flex
-}
-
-@media (max-width: 620px) {
-    .hl__footer__container {
-        flex-direction: column
-    }
-}
-
-.hl__footerColOne {
-    display: flex;
-    padding-left: 0;
-    width: 20%
-}
-
-@media (max-width: 620px) {
-    .hl__footerColOne {
-        display: flex;
-        justify-content: center;
-        width: 100%
-    }
-}
-
-.hl__footerColTwo {
-    display: flex;
-    text-align: left;
-    width: 20%
-}
-
-@media (max-width: 620px) {
-    .hl__footerColTwo {
-        width: 100%;
-        padding-top: 25px
-    }
-
-    .hl__footerColTwo ul {
-        padding-left: 0
-    }
-}
-
-.hl__footerColThree {
-    width: 20%;
-    display: flex;
-    margin-right: 30px
-}
-
-.hl__footerColThree ul {
-    padding: 0
-}
-
-.hl__footerColThree li {
-    display: flex;
-    align-items: center;
-    justify-content: space-between
-}
-
-.hl__footerColThree .hl__footerLink {
-    padding-right: 12px
-}
-
-@media (max-width: 620px) {
-    .hl__footerColThree {
-        width: 100%
-    }
-}
-
-.hl__footerColFour {
-    display: flex;
-    width: 30%;
-    height: 100%;
-    align-items: center;
-    flex-flow: wrap
-}
-
-@media (max-width: 620px) {
-    .hl__footerColFour {
-        flex-direction: column;
-        width: 100%
-    }
+    padding: 0;
 }
 
 .hl__footerLogo {
     width: 180px;
     height: 140px;
-    background-image: url("https://s3.amazonaws.com/archimedes-data001/hul/images/hl-logo.png");
+    background-image: image-url("hl-logo.png");
     background-size: contain;
     background-repeat: no-repeat
 }
 
-.hl__footerLink {
-    font-family: 'TruenoRegular', sans-serif;
-    font-weight: 100;
-    color: #fff;
+@media(max-width: 992px) {
+    .hl__footerLogo {
+        width: 100%;
+        background-position: center center;
+    }
+}
+
+#hl__footer__links a {
+    border-bottom: 3px solid transparent;
+    color: $white;
+    font-family: $font-family-sans-serif;
+    font-weight: 400;
     font-size: 14px;
     line-height: 1.93;
     letter-spacing: 1.9px;
-    text-transform: uppercase
+    text-decoration: none;
+    text-transform: uppercase;
+    -webkit-transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
+    transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
+
+    &:hover {
+        border-bottom-color: rgba(255,255,255,0.3);
+    }
 }
 
-.hl__footerLink:hover {
-    text-decoration: none;
-    color: #fff
+
+.hl__linked-list__items {
+    padding-left: 0;
+    margin-bottom: 0;
+}
+
+.hl__linked-list__item {
+    display: inline-block;
+    margin-bottom: 5px;
+}
+
+@media(max-width: 992px) {
+    #hl__footer__links {
+        text-align: center;
+
+        ul {
+            padding-top: 40px;
+            padding-left: 0;
+        }
+    }
+
+    #hl__footer__links .col-lg-6 + .col-lg-6 > ul {
+        padding-top: 0;
+    }
+
 }
 
 .hl__footerLinkRight {
@@ -124,33 +79,49 @@
     list-style: none
 }
 
+li.hl__linked-list__item:last-child {
+    padding-right: 0;
+}
+
 .hl__footerLinkRight a {
-    font-family: 'TruenoLight', sans-serif;
-    font-weight: 100;
+    border-bottom: 3px solid transparent;
+    font-family: $font-family-sans-serif-light;
+    font-weight: 300;
     color: #fff;
     font-size: 14px;
     line-height: 1.87;
-    text-align: right
+    text-align: right;
+    text-decoration: none;
+    -webkit-transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
+    transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
+
+    &:hover {
+        border-bottom-color: rgba(255,255,255,0.7);
+        color: $white;
+    }
 }
 
-.hl__footerLinkRight a:hover {
-    text-decoration: none;
-    color: #fff
+@media(max-width: 1200px) {
+    .hl__linked-list__item {
+        display: block;
+    }
+    .hl__footerCopyrightContainer .hl__linked-list__item {
+        display: inline-block;
+    }
+    #hl__footer__content {
+        padding-top: 40px;
+    }
 }
 
 .hl__footerCopyright {
-    display: flex;
-    justify-content: flex-end;
     color: silver;
     margin: 10px 0;
     font-size: 14px;
+    font-family: $font-family-sans-serif-light;
     font-weight: 100;
-    font-family: 'TruenoLight', sans-serif;
 }
 
 .hl__footerCopyrightContainer {
-    display: inline-flex;
-    width: 230px;
     padding-left: 35px;
     align-items: center;
     height: 35%;
@@ -163,62 +134,46 @@
 
 .hl__ccContainer svg {
     float: left;
-    margin: 7px 10px 0 0;
+    margin: 0 10px 4px 0;
 }
 
 .hl__ccLicense {
     color: $silver;
-    font-family: 'TruenoLight', sans-serif;
+    font-family: $font-family-sans-serif-light;
+    font-weight: 300;
 }
 
 .hl__ccText {
     color: $silver;
-    font-family: 'TruenoLight', sans-serif;
-    font-size: 11px
+    font-family: $font-family-sans-serif-light;
+    font-size: 11px;
+    font-weight: 300;
 }
 
 .hl__ccText a {
     color: $white;
-    text-decoration: underline
+    text-decoration: underline;
 }
 
-@media (max-width: 620px) {
-    .hl__footerCopyrightContainer {
-        display: flex;
-        width: 100%;
-        padding: 45px 0 0
-    }
-}
-
-.footerBuiltBy {
-    color: #727272
-}
-
-.hl__footerSocialLinks {
-    display: inline-flex;
-    justify-content: flex-start;
-    align-items: center;
+.hl__footer__social {
     height: 35%;
-    width: 145px;
-    border-right: 1px solid #424242
-}
-
-@media (max-width: 620px) {
-    .hl__footerSocialLinks {
-        display: flex;
-        width: 100%;
-        border-right: none
-    }
-}
-
-.hl__footerTwitterLogo {
-    margin-right: 30px
+    border-right: 1px solid #424242;
 }
 
 .hl__footerFacebookLogo,
 .hl__footerTwitterLogo {
+    float: left;
     width: 40px;
     height: 42px;
-    background-size: contain;
-    background-repeat: no-repeat
+    -webkit-transition: opacity 0.28s cubic-bezier(0.28,1.08,1,0.96);
+    transition: opacity 0.28s cubic-bezier(0.28,1.08,1,0.96);
+
+    &:hover {
+        opacity: 0.8;
+    }
+
+}
+
+.hl__footerFacebookLogo {
+    margin-left: 25px;
 }

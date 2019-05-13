@@ -2,7 +2,7 @@
 <%# default partial to display solr document fields in catalog show view -%>
 
 <div class="row">
-  <div class="large-9 columns">
+  <div class="col-lg-8">
     <div id="details" class="content active record-details">
       <dl class="dl-horizontal  dl-invert clearfix">
         <% document_show_fields(document).each do |field_name, field| -%>
@@ -14,7 +14,60 @@
       </dl>
     </div> 
   </div>
-  <div class="columm">
-    <%# Tools and Related Links component will go here %>
+  <div class="col-lg-4">
+    <div id="tools" class="record-tools">
+      <h2 class="clearfix">Related Links</h2>
+        <%
+        if !document[:digital_collections_links].nil? && document[:digital_collections_links].kind_of?(Array) && document[:digital_collections_links].length > 0
+          %>
+            <dl class="dl-vertical dl-invert dl-appears-in clearfix">
+            <dt class="blacklight-title_extended">This item appears in</dt>
+          <%
+          document[:digital_collections_links].each do |x|
+          %>
+            <dd class="blacklight-title_extended"><a href="<%=x[:url]%>"><%=x[:label]%></a></dd>
+          <%
+          end
+          %>
+            </dl>
+          <%
+        end
+        %>
+      </dl>
+      <dl class="dl-vertical dl-invert dl-more-details clearfix">
+        <%
+        if (!document[:hollis_links].nil? && document[:hollis_links].kind_of?(Array) && document[:hollis_links].length > 0)  ||
+        (!document[:hollis_image_links].nil? && document[:hollis_image_links].kind_of?(Array) && document[:hollis_image_links].length > 0) ||
+        (!document[:finding_aid_links].nil? && document[:finding_aid_links].kind_of?(Array) && document[:finding_aid_links].length > 0)
+        %>
+          <dt class="blacklight-title_extended clearfix">More item details</dt>
+        <%
+        end
+        if !document[:hollis_links].nil? && document[:hollis_links].kind_of?(Array)
+          document[:hollis_links].each do |x|
+          %>
+            <dd class="blacklight-title_extended"><a href="<%=x[:url]%>"><%=x[:link_text]%></a> <%=x[:label]%></dd>
+          <%
+          end
+        end
+
+        if !document[:hollis_image_links].nil? && document[:hollis_image_links].kind_of?(Array)
+          document[:hollis_image_links].each do |x|
+          %>
+            <dd class="blacklight-title_extended"><a href="<%=x[:url]%>"><%=x[:link_text]%></a> <%=x[:label]%></dd>
+          <%
+          end
+        end
+
+        if !document[:finding_aid_links].nil? && document[:finding_aid_links].kind_of?(Array)
+          document[:finding_aid_links].each do |x|
+          %>
+            <dd class="blacklight-title_extended"><a href="<%=x[:url]%>"><%=x[:link_text]%></a> <%=x[:label]%></dd>
+          <%
+          end
+        end
+        %>
+      </dl>
+    </div>
   </div>
 </div>

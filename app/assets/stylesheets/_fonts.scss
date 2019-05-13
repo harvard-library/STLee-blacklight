@@ -1,1 +1,98 @@
 ﻿@import url("https://fonts.googleapis.com/css?family=Lora:400,400i,700,700i");
+
+@font-face {
+  font-family: "Trueno";
+  src: asset-url("truenorg-webfont.woff2") format("woff2"),
+  asset-url("truenorg-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Trueno";
+  src: asset-url("truenorgit-webfont.woff2") format("woff2"),
+  asset-url("truenorgit-webfont.woff") format("woff");
+  font-weight: normal;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Trueno";
+  src: asset-url("truenoultlt-webfont.woff2") format("woff2"),
+  asset-url("truenoultlt-webfont.woff") format("woff");
+  font-weight: 100;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Trueno";
+  src: asset-url("truenoultltit-webfont.woff2") format("woff2"),
+  asset-url("truenoultltit-webfont.woff") format("woff");
+  font-weight: 100;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Trueno";
+  src: asset-url("truenolt-webfont.woff2") format("woff2"),
+  asset-url("truenolt-webfont.woff") format("woff");
+  font-weight: 200;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Trueno";
+  src: asset-url("truenoltit-webfont.woff2") format("woff2"),
+  asset-url("truenoltit-webfont.woff") format("woff");
+  font-weight: 200;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Trueno";
+  src: asset-url("truenosbd-webfont.woff2") format("woff2"),
+  asset-url("truenosbd-webfont.woff") format("woff");
+  font-weight: 600;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Trueno";
+  src: asset-url("truenosbdit-webfont.woff2") format("woff2"),
+  asset-url("truenosbdit-webfont.woff") format("woff");
+  font-weight: 600;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Trueno";
+  src: asset-url("truenobd-webfont.woff2") format("woff2"),
+  asset-url("truenobd-webfont.woff") format("woff");
+  font-weight: 700;
+  font-style: normal;
+}
+
+@font-face {
+  font-family: "Trueno";
+  src: asset-url("truenobdit-webfont.woff2") format("woff2"),
+  asset-url("truenobdit-webfont.woff") format("woff");
+  font-weight: 700;
+  font-style: italic;
+}
+
+@font-face {
+  font-family: "Trueno";
+  src: asset-url("truenoblk-webfont.woff2") format("woff2"),
+  asset-url("truenoblk-webfont.woff") format("woff");
+  font-weight: 800;
+  font-style: normal;
+
+}
+
+@font-face {
+  font-family: "Trueno";
+  src: asset-url("truenoblkit-webfont.woff2") format("woff2"),
+  asset-url("truenoblkit-webfont.woff") format("woff");
+  font-weight: 800;
+  font-style: italic;
+}

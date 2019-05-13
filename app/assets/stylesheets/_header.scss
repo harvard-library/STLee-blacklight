@@ -1,3 +1,4 @@
+@import "settings";
 
 .hl__alert {
     background-color: #f3f3f3;
@@ -6,21 +7,40 @@
 }
 
 .hl__alert p {
-    font-family: 'Lora', serif;
-    padding-top: 16px;
+    font-family: $font-family-serif;
+    font-size: 16px;
+    padding-top: 18px;
+    @media (max-width: 320px) {
+        padding: 8px 8px 0;
+    }
 }
 
 .hl__alert a {
+    border-bottom: 3px solid transparent;
     color: #0579b8;
-    font-family: 'TruenoBold',sans-serif;
+    font-family: $font-family-sans-serif;
+    font-weight: 700;
     text-decoration: none;
     -webkit-transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
     transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
+
+    &:hover {
+        border-bottom: 3px solid rgba(5,121,184,0.3);
+    }
 }
 
-.hl__alert a:hover {
-    border-bottom: 3px solid rgba(5,121,184,0.3);
+@media (max-width: 620px) {
+    .hl__alert {
+        padding-left: 60px;
+        padding-right: 60px;
+
+        p {
+            padding-top: 10px;
+        }
+    }
 }
+
+
 
 #header-navbar .navbar-brand {
     background: transparent url(/hl_webonly_rgb_white.png) no-repeat center left;
@@ -38,7 +58,6 @@
 
 @media (max-width: 620px) {
     .hl__topHeader {
-        position: fixed;
         z-index: 11
     }
 }
@@ -68,7 +87,7 @@
     height: 60px;
     align-items: center;
     list-style: none;
-    padding-left: 0;
+    padding-left: 20px;
     margin-bottom: 0
 }
 
@@ -90,10 +109,10 @@
 }
 
 .hl__topHeaderTitle__harvard a {
-    font-family: 'TruenoBold', sans-serif;
+    font-family: $font-family-sans-serif;
     font-size: 24px;
     text-transform: uppercase;
-    font-weight: 400;
+    font-weight: 700;
     font-style: normal;
     font-stretch: normal;
     line-height: 1.67;
@@ -108,9 +127,10 @@
 }
 
 span.hl__topHeaderTitle__collections {
-    font-family: 'Lora', serif;
+    font-family: $font-family-serif;
     font-size: 28px;
     font-style: italic;
+    font-weight: 400;
     color: #fff;
     padding-left: 10px;
     text-transform: none;
@@ -120,7 +140,7 @@ span.hl__topHeaderTitle__collections {
 @media (max-width: 620px) {
     span.hl__topHeaderTitle__collections {
         font-size: 1.3rem;
-        padding: 0
+        padding: 0 0 0 4px;
     }
 }
 

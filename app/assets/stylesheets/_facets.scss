@@ -1,16 +1,20 @@
 @import "settings";
 @import "icons";
 
+#facets .panel-group {
+    margin-bottom: 0;
+}
+
 h2.facets__heading {
-  color: white;
-  font-family: 'TruenoBold', sans-serif;
-  font-weight: normal;
-  font-size: rem-calc(19);
-  line-height: 1.25;
+  color: $white;
+  font-family: $font-family-sans-serif;
+  font-weight: 700;
+  font-size: 20px;
+  line-height: 30px;
   padding: 35px 0 5px 25px;
   margin: 0;
   text-transform: uppercase;
-  letter-spacing: 1px;
+  letter-spacing: 1.5px;
 }
 
 .facets__container a {
@@ -23,6 +27,7 @@ h2.facets__heading {
 
 ul.facet-values {
   margin-bottom: 10px;
+  padding-left: 0;
 }
 
 ul.facet-values li {
@@ -75,11 +80,13 @@ ul.facet-values li {
 }
 
 .facets__container a.facets__clearall {
-    color: #82BCDC;
+    color: $light-blue;
     display: block;
     padding: 0 0 0px 25px;
     font-size: rem-calc(14);
     letter-spacing: 0.5px;
+    font-family: $font-family-sans-serif;
+    text-decoration: none;
 }
 
 .toggle-wrapper {
@@ -88,8 +95,10 @@ ul.facet-values li {
 }
 
 button.toggle-all-facets {
-    font-family: 'TruenoRegular', sans-serif;
+    font-family: $font-family-sans-serif;
     font-size: rem-calc(12);
+    border: none;
+    border-radius: 4px 4px 0 0;
     color: white;
     float: right;
     padding: 6px 20px 6px 10px;
@@ -111,7 +120,7 @@ button.toggle-all-facets {
                 position: absolute;
                 right: 6px;
                 color: $red;
-                top: 4px;
+                top: 8px;
                 font-size: rem-calc(16);
             }
         }
@@ -119,10 +128,12 @@ button.toggle-all-facets {
 
     .expand-text {
         display: inline-block;
+        font-weight: 300;
     }
 
     .collapse-text {
         display: none;
+        font-weight: 300;
     }
 
     &[aria-expanded=true] .collapse-text {
@@ -149,7 +160,10 @@ a.facet__title {
 
         &.facet-expand {
             display: inline-block;
+
         }
+
+
 
         &.facet-collapse {
             display: none;
@@ -162,11 +176,11 @@ a.facet__title {
     padding-bottom: 10px;
 
     .accordion, dl.accordion {
-        font-family: 'TruenoRegular', sans-serif;
+        font-family: $font-family-sans-serif;
 
         .accordion-navigation {
             border-bottom: 1px solid #444;
-            padding: 0;
+            padding: 25px 0;
             margin: 0 25px;
 
             &.active {
@@ -182,7 +196,7 @@ a.facet__title {
             }
 
             & > a {
-                font-family: 'TruenoRegular', sans-serif;
+                font-family: $font-family-sans-serif;
                 background: transparent;
                 color: #fff;
                 text-transform: uppercase;
@@ -192,7 +206,42 @@ a.facet__title {
             }
 
             & > .content.active {
-                padding: 0px 0px 10px 0px;
+                padding: 0;
+                background: transparent;
+
+                li {
+                    background: $light-gray;
+                    padding: 12px 35px 12px 0px;
+                    position: relative;
+                    border-radius: 5px;
+
+                    a {
+                        color: $jet;
+                        text-decoration: none;
+                    }
+
+                    .facet-count {
+                        color: #666;
+                        position: absolute;
+                        right: 18px;
+                        top: 11px;
+                        text-align: right;
+                        width: auto !important;
+                    }
+
+                    &.more_facets_link {
+                        background: transparent;
+                        padding-right: 0;
+                        a.more_facets_link {
+                            color: $light-blue;
+                            float: right;
+                        }
+                    }
+                }
+            }
+
+            & > .content {
+                padding: 25px 0 0 0;
                 background: transparent;
 
                 li {
@@ -239,33 +288,88 @@ a.facet__title {
 
 #ajax-modal {
     z-index: 2000;
-    height: 70vh;
     background-color: transparent;
     border: none;
     box-shadow: none;
+    font-family: $font-family-sans-serif;
+    margin: 0 auto;
     overflow: hidden;
+    width: 600px;
+
+    @media(max-width: 320px) {
+        width: 300px;
+    }
 }
 
 .reveal-modal {
     width: 650px;
 }
 
-.modal-title {
-    font-family: 'TruenoSemiBold', sans-serif;
+.modal-header .close {
+    font-size: 26px;
+    opacity: 0.8;
+}
+
+.modal-title {    
+    font-weight: 700;
     letter-spacing: 1.4px;
     text-transform: uppercase;
 }
 
 .facet_pagination {
     overflow: hidden;
+
+    &.top {
+        padding: 15px 15px 0;
+    }
+
+    a {
+        color: #0579b8;
+        text-decoration: none;
+        -webkit-transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
+        transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
+
+        &:hover {
+            text-decoration: none;
+        }
+    }
+
+    .sort_options {
+        color: $jet;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1.17px;
+        line-height: 16px;
+        padding: 5px 9px;
+        text-transform: uppercase;
+
+        a.btn-default {
+            border-color: $jet;
+            color: $jet;
+            -webkit-transition: all 0.4s ease;
+            transition: all 0.4s ease;
+
+            &:hover {
+                background-color: $medium-gray;
+                border-color: $medium-gray;
+                color: $white;
+            }
+        }
+    }
 }
 
-.facet_pagination.top {
-    padding: 15px 15px 0;
+
+
+.btn-default.active, .btn-default.active:hover {
+    background-color: $medium-gray;
+    border-color: $medium-gray;
+    box-shadow: none;
+    color: $white;
 }
 
 .facet_extended_list { 
     .facet-label .facet_select {
+        display: inline-block;
         max-width: 75%;
         padding-left: 0;
         &:before {
@@ -274,6 +378,7 @@ a.facet__title {
     }
 
     .facet-count {
+        color: #666;
         float: right;
     }
 }
