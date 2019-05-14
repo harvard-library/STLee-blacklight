@@ -8,6 +8,7 @@
 --Added a span with a class around the alternative titles.
 --Updated all item detail fields to render values with line breaks
 --Updated the sequence of the fields on the item detail page
+
  6.11.2-lts-1 (04/30/2019) PP/MC/ED
 --Removed customized STLee / Archimedes theme
 --Revised CSS for left hand filter rail on search results
