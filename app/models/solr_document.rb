@@ -171,7 +171,7 @@ class SolrDocument
             if name != ''
               name += ', '
             end
-            name += name_from_node y
+            name += name_from_node y, true
             break
           end
         end
@@ -181,7 +181,7 @@ class SolrDocument
 	  name
   end
 
-  def name_from_node node
+  def name_from_node node, includeRole
 	  name = ''
 		namepart = ''
     node_to_array(node).each do |x|
@@ -203,7 +203,9 @@ class SolrDocument
       end
 
 		  name += namepart
-      name += roleterm_from_role x[:role]
+      if includeRole
+        name += roleterm_from_role x[:role]
+      end
     end
 		
 	  name
@@ -508,11 +510,15 @@ class SolrDocument
     physical_items = nodes_from_path doc, '$..physicalLocation'
 
     node_to_array(physical_items).each do |x|
-      if x["@displayLabel"].nil? || x["@displayLabel"] != "Harvard repository"
-        if place != ''
-          place += '<br/>'
+      if (x["@displayLabel"].nil? || x["@displayLabel"] != "Harvard repository") && 
+        (x["@type"].nil? || x["@type"] != "container")
+        place_item = field_value_from_node x, '<br/>'
+        if place_item != "" && place_item != "FIG"
+          if place != ''
+            place += '<br/>'
+          end
+          place += place_item
         end
-        place += field_value_from_node x, '<br/>'
       end
     end
 
@@ -558,7 +564,7 @@ class SolrDocument
 
     series_nodes.each do |x|
       title = title_from_node x['titleInfo']
-      name = name_from_node x['name']
+      name = name_from_node x['name'], true
       if series != ''
         series += '<br/>'
       end
@@ -577,7 +583,7 @@ class SolrDocument
     subject_nodes.each do |x|
       node_to_array(x).each do |y|    
         if !y['name'].nil?
-          subject = name_from_node y['name']
+          subject = name_from_node y['name'], false
           if subject != ''
             if subjects != ''
               subjects += '<br/>'
@@ -595,6 +601,33 @@ class SolrDocument
         end
       end
     end
+
+    #add any names that have the role "subject"
+    names = nodes_from_path doc, '$..name'
+    names.each do |x|
+      node_to_array(x).each do |y|
+        name = ''
+        roleTerm = nodes_from_path y, '$..roleTerm'
+        node_to_array(roleTerm).each do |z|
+          if !z.nil? && field_value_from_node(z, ',') == 'subject'
+            if name != ''
+              name += ', '
+            end
+            name += name_from_node y, false
+            break
+          end
+        end
+
+        if name != ''
+          if subjects != ''
+            subjects += '<br/>'
+          end
+          subjects += name
+        end
+      end
+    end
+
+
 
 	  subjects
   end
