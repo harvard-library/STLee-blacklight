@@ -393,14 +393,6 @@ class SolrDocument
 		field_values_from_node_by_path doc, '$..url[?(@["@displayLabel"] == "Harvard Digital Collections")]', '<br/>'
   end
 
-  def permalink_from_node node
-	  url = ''
-	  if node['@displayLabel'] && node['@displayLabel'] == 'Harvard Digital Collections'
-		  url = node['#text']
-	  end
-	  url
-  end
-
   def notes_from_doc doc
     notes = ''
     attribution = ''
@@ -510,8 +502,7 @@ class SolrDocument
     physical_items = nodes_from_path doc, '$..physicalLocation'
 
     node_to_array(physical_items).each do |x|
-      if (x["@displayLabel"].nil? || x["@displayLabel"] != "Harvard repository") && 
-        (x["@type"].nil? || x["@type"] != "container")
+      if (x["@displayLabel"].nil? || x["@displayLabel"] != "Harvard repository") && (x["@type"].nil? || x["@type"] != "container")
         place_item = field_value_from_node x, '<br/>'
         if place_item != "" && place_item != "FIG"
           if place != ''
