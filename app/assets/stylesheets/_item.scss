@@ -80,7 +80,6 @@ body.blacklight-catalog-show #document h1 {
 }
 
 .record-details dl dt {
-  width: 250px;
   float: left;
   text-align: left;
   font-family: "TruenoSBd", Helvetica, Roboto, Arial, sans-serif;
@@ -91,10 +90,8 @@ body.blacklight-catalog-show #document h1 {
   vertical-align: top;
   margin: 0;
   padding: 40px 0;
-  &:after {
-    clear: both;
-  }
 }
+
 
 .record-details dl dd {
   width: 100%;
@@ -108,9 +105,6 @@ body.blacklight-catalog-show #document h1 {
   line-height: 28px;
   display: block;
   border-bottom: 1px solid #d8d8d8;
-  &:after {
-    clear: both;
-  }
 }
 
 .record-details dd.blacklight-title_extended {
@@ -122,6 +116,26 @@ body.blacklight-catalog-show #document h1 {
     font-weight: normal;
   }
 }
+
+
+@media(max-width: 768px) {
+    .record-details dl {
+      padding-left: 0;
+      padding-right: 0;
+    }
+    .record-details dl dt {
+      display: block;
+      padding-bottom: 0;
+      width: 100%;
+    }
+    .record-details dl dd {
+      clear: left;
+      display: block;
+      padding-left: 0;
+      padding-top: 20px;
+    }
+}
+
 
 .dl-horizontal dd:before, .dl-horizontal dd:after {
   display: none;
@@ -173,6 +187,10 @@ body.blacklight-catalog-show #document h1 {
   &:after {
     clear: both;
   }
+}
+
+.record-tools dl {
+  margin-bottom: 0;
 }
 
 .record-tools dl dt {
