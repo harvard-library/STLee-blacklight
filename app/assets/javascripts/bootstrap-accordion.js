@@ -25,4 +25,9 @@ $(function() {
       $(this).find('.expand_caret').addClass('fa-rotate-180');
     }
   });
+  var windowWidth = $(window).width();
+  if(windowWidth <= 992) //for iPad & smaller devices
+    $('.panel-collapse').removeClass('in');
+    $('.toggle-all-facets .collapse-text').hide();
+    $('.toggle-all-facets .expand-text').show();
 });
