@@ -2,7 +2,9 @@
 <div class="documentHeader">
 
   <h3 class="index_title document-title-heading">
-    <%= link_to_document document, document_show_link_field(document), counter: document_counter_with_offset(document_counter) %>
+
+   <%= link_to_document(document, document_show_link_field(document), counter: document_counter_with_offset(document_counter), truncate: 50)%> 
+
   </h3>
 
 </div>
