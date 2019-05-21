@@ -10,6 +10,7 @@ class CatalogController < ApplicationController
     config.view.gallery.partials = [:index_header]
     config.view.masonry.partials = [:index]
     config.view.gallery.icon_class = 'fa-th'
+    config.view.masonry.icon_class = 'fa-th-list'
 
     config.show.tile_source_field = :content_metadata_image_iiif_info_ssm
     config.show.partials.insert(1, :openseadragon)

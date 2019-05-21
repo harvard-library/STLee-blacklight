@@ -79,6 +79,10 @@
     min-height: 100px;
 }
 
+.view-type-masonry .fa-th-list {
+    transform: rotate(90deg);
+}
+
 .masonry.document .caption {
     line-height: 17px;
     background-color: rgba(255, 255, 255, 0.8);
