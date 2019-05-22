@@ -10,6 +10,7 @@ class CatalogController < ApplicationController
     config.view.gallery.partials = [:index_header]
     config.view.masonry.partials = [:index]
     config.view.gallery.icon_class = 'fa-th'
+    config.view.masonry.icon_class = 'fa-th-list'
 
     config.show.tile_source_field = :content_metadata_image_iiif_info_ssm
     config.show.partials.insert(1, :openseadragon)
@@ -74,7 +75,7 @@ class CatalogController < ApplicationController
     #config.add_index_field 'content_model', label: 'Type'
     #config.add_index_field 'owner_display', label: 'Harvard Repository'
     #config.add_index_field 'abstract', label: 'Abstract'
-	  config.add_index_field 'name', label: 'Creator/Contributor'
+	  config.add_index_field 'name', label: 'Creator / Contributor'
     config.add_index_field 'origin', label: 'Place of Origin'
     config.add_index_field 'publisher', label: 'Publisher'
     config.add_index_field 'date', label: 'Date'
@@ -83,7 +84,7 @@ class CatalogController < ApplicationController
     # The ordering of the field names is the order of the display
     #config.add_show_field 'title_display', label: 'Title'
   config.add_show_field 'title_extended', label: 'Title'
-	config.add_show_field 'name', label: 'Creator/Contributor'
+	config.add_show_field 'name', label: 'Creator / Contributor'
 	config.add_show_field 'origin', label: 'Place of Origin'
   config.add_show_field 'publisher', label: 'Publisher'
   config.add_show_field 'date', label: 'Date'

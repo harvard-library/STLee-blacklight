@@ -358,6 +358,22 @@ a.facet__title {
     }
 }
 
+.collapse-non-md {
+    height: 0;
+    display: none;
+}
+.collapse-non-md.collapsing {
+    display: block;
+}
+
+@media (min-width: 992px) {
+    .collapse-non-md {
+        height: auto;
+        display: block;
+    }
+}
+
+
 
 
 .btn-default.active, .btn-default.active:hover {

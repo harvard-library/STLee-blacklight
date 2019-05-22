@@ -55,28 +55,54 @@
 
 
             dl.document-metadata.dl-horizontal {
-                display: contents;
-                padding: 20px 20px 30px;
+                display: grid;
+                grid-template-columns: max-content auto;
+                padding: 0 20px 30px 0;
                 margin-bottom: 0;
-                width: 100%;
-                float: left;
-                text-align: left;
 
                 dt {
-                    display: none;
+                    font-family: $font-family-sans-serif;
+                    grid-column-start: 1;
+                    letter-spacing: 1.4px;
+                    line-height: 24px;
+                    overflow: visible;
+                    text-align: left;
+                    text-transform: uppercase;
+                    text-overflow: inherit;
+                    width: 160px;
+                    white-space: normal;
+                    padding-bottom: 8px;
+                }
+
+                dd {
+                    grid-column-start: 2;
+                    line-height: 24px;
+                    padding-bottom: 6px;
                 }
             }
         }
     }
 }
 
-.dl-horizontal dd {
-    margin-left: 20%
+@media (min-width: 768px) {
+    .dl-horizontal dt {
+        clear: none;
+        width: 180px;
+    }
+    .dl-horizontal dd {
+        margin-left: 0;
+    }
 }
+
+
 
 .gallery .thumbnail {
     border: none;
     min-height: 100px;
+}
+
+.view-type-masonry .fa-th-list {
+    transform: rotate(90deg);
 }
 
 .masonry.document .caption {
@@ -92,4 +118,30 @@
         text-decoration: none;
         text-shadow: none;
     }
+}
+
+.dl-horizontal dd:before, 
+.dl-horizontal dd:after {
+    display: unset;
+}
+
+@media (max-width: 768px) {
+  #documents .documentHeader h3.document-title-heading {
+    margin-top: 12px;
+  }
+  #documents.documents-list .document dl.document-metadata.dl-horizontal {
+    display: block;
+
+    dt {
+      display: block;
+      padding: 5px 0;
+      width: 100%;
+    }
+
+    dd {
+      display: block;
+      padding-top: 0;
+      width: 100%;
+    }
+  }
 }

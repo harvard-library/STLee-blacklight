@@ -76,8 +76,37 @@ class SolrDocument
         end
       end
     end
-    
+
+    archival_title = archival_title_from_node doc, title
+    if archival_title != ''
+      title = archival_title + ' ' + title 
+    end
+
     title
+  end
+
+  def archival_title_from_node node, title
+    archival_title = ''
+    nodes_from_path(node, '$.relatedItem[?(@["@type"]=="host")]').each do |x|
+      title_part = ''
+
+      nodes_from_path(x, '$.titleInfo').each do |y|
+        title_part += title_from_node y
+      end
+
+      if title_part != ''
+        if archival_title != ''
+          archival_title += ', '
+        end
+        archival_title += title_part
+      end
+
+      if archival_title != '' && archival_title == title
+        archival_title = archival_title_from_node x, title
+      end
+    end
+
+    archival_title
   end
 
   def extended_title_from_doc doc, title
@@ -174,6 +203,22 @@ class SolrDocument
               name += ', '
             end
             name += name_from_node y, true
+            altName = ''
+            translatedNames = ''
+            if !y['@altRepGroup'].nil? && y['@altRepGroup'] != ''
+              altNames = nodes_from_path doc, '$..name[?(@["@altRepGroup"] == "' + y['@altRepGroup'] + '")]'
+              altNames.each do |m|
+                altName = name_from_node m, true
+                if name != altName
+                  translatedNames += ', ' + altName
+                end
+              end
+            end
+
+            if translatedNames != ''
+              name += translatedNames
+            end
+
             break
           end
         end
@@ -208,6 +253,7 @@ class SolrDocument
       if includeRole
         name += roleterm_from_role x[:role]
       end
+
     end
 		
 	  name
@@ -263,10 +309,10 @@ class SolrDocument
         field_value += field_value_from_node x, separator
       end
     else
-      if node.kind_of?(String)
-        field_value = node
+      if node.kind_of?(String) || node.kind_of?(Integer)
+        field_value = node.to_s
       else
-        field_value = node['#text']
+        field_value = field_value_from_node node['#text'], separator
       end
     end
     field_value
@@ -348,7 +394,9 @@ class SolrDocument
             if origin != ''
               origin += '<br/>'
             end
-            origin += y['#text']
+            
+
+            origin += field_value_from_node y['#text'], '<br/>'
           end
         end
       end
@@ -392,7 +440,7 @@ class SolrDocument
   end
 
   def permalink_from_doc doc
-		field_values_from_node_by_path doc, '$..url[?(@["@displayLabel"] == "Harvard Digital Collections")]', '<br/>'
+		field_values_from_node_by_path doc, '$..url[?(@["@displayLabel"] == "Harvard Digital Collections" && @["@access"] == "object in context")]', '<br/>'
   end
 
   def notes_from_doc doc
