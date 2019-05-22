@@ -112,7 +112,9 @@ body.blacklight-catalog-show #document h1 {
   }
 
   dl {
+    border-top: 2px dotted #d8d8d8;
     margin-bottom: 0;
+    padding-top: 20px;
   }
 
   dl dt {
@@ -139,16 +141,33 @@ body.blacklight-catalog-show #document h1 {
     }
   }
 
-  .record-tools button.btn-dark {
+  button.btn-dark {
     margin-top: 20px;
-    text-transform: uppercase;
-    font-weight: bold;
+    font-family: $font-family-sans-serif;
+    font-weight: 600;
     background-color: $jet;
     color: $white;
+    letter-spacing: 1.17px;
+    text-transform: uppercase;
+  }
+
+  .dropdown-menu {
+    margin-top: 0;
+    min-width: 220px;
+    padding: 0;
+
+    a {
+        color: #333;
+        text-decoration: none;
+        padding: 5px 20px;
+
+        &:hover {
+          border-color: transparent;
+        }
+      } 
   }
 
   .dl-appears-in {
-    border-bottom: 2px dotted #d8d8d8;
     margin-top: 20px;
     padding-bottom: 40px;
   }
@@ -158,9 +177,6 @@ body.blacklight-catalog-show #document h1 {
       padding: 20px 0;
   }
 
-  .dl-more-details {
-    margin-top: 20px;
-  }
 }
 
 @media (max-width: 992px) {
