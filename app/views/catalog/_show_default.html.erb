@@ -16,7 +16,41 @@
   </div>
   <div class="col-lg-4">
     <div id="tools" class="record-tools">
-      <h2 class="clearfix">Related Links</h2>
+      <h2 class="clearfix">Tools and Related Links</h2>
+        <% if document[:delivery_service] == 'ids' or document[:delivery_service] == 'pds'%>
+          <div class="btn-group">
+          <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             Download This Item <span class="caret"></span>
+           </button>
+           <ul class="dropdown-menu">
+            
+            <%if document[:delivery_service] == 'ids'%>
+              <% 
+              size_and_labels = [ [300, 'Small: 300 x %d px'],
+                                  [800, 'Medium: 800 x %d px'],
+                                  [1200, 'Large: 1200 x %d px'],
+                                  [2400, 'X-Large: 2400 x %d px']]
+              image_base_url = 'https://ids.lib.harvard.edu/ids/iiif/' + document[:drs_file_id]
+              json_answer = retrieve_still_image_json_metadata(image_base_url+ '/info.json')
+              max_width = json_answer['width']
+              max_height = json_answer['height']
+              ratio = (max_height.to_f)/(max_width.to_f)
+              download_url = image_base_url + '/full/%d,/0/default.jpg?download&caption'
+              %>
+                <%for size_elem in size_and_labels do%>
+                  <%if size_elem[0] <= max_width%>
+                    <li><a href="<%= download_url % size_elem[0] %>"><%= size_elem[1] % (ratio*size_elem[0]).floor %></a></li>
+                  <%end%>
+                <%end%>
+            <%end%>
+            <%
+              del_serv = document[:delivery_service]
+              manifest_base_url = 'https://iiif.lib.harvard.edu/manifests/' + (del_serv == 'pds'? 'drs': del_serv) + ':'
+            %>
+            <li><a href="<%= manifest_base_url + document[:drs_file_id] %>">IIIF Manifest</a></li>
+           </ul>
+         </div>
+       <%end%>
         <%
         if !document[:digital_collections_links].nil? && document[:digital_collections_links].kind_of?(Array) && document[:digital_collections_links].length > 0
           %>

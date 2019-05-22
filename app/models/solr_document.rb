@@ -49,6 +49,8 @@ class SolrDocument
       result[:finding_aid_links] = finding_aid_links_from_doc doc
       result[:digital_collections_links] = digital_collections_links_from_doc doc
       result[:additional_digital_items] = additional_digital_items_from_doc doc
+      result[:drs_file_id] = drs_file_id_from_raw_object result[:raw_object] 
+      result[:delivery_service] = delivery_service_from_raw_object result[:raw_object]
       
       result[:id] = result[:identifier]
     end
@@ -699,6 +701,17 @@ class SolrDocument
     end
     
     raw_object
+  end
+
+  def drs_file_id_from_raw_object url
+      end_of_url = url.split('/')[-1]
+      end_of_url.match('(.*[0-9])')[1]
+  end
+
+  def delivery_service_from_raw_object url
+      # 'https://sds...' will be split into 3 elements: ['https', '', 'sds...']
+      begin_of_url = url.split('/')[2]
+      begin_of_url.split('.')[0]
   end
 
   def hollis_links_from_doc doc
