@@ -16,4 +16,4 @@ en:
           other: 'Showing %{start_num} to %{end_num} of %{total_num} results'
       facets:
         more_html: 'More <span class="sr-only">%{field_name}</span> <span class="fa fa-angle-right"></span>'
-    back_to_search: 'Back to Search Results'
+    back_to_search: '« Back to Search Results'
