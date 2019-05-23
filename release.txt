@@ -9,6 +9,8 @@
 --Revised metadata label styles
 --Updated search constraint icon to use Font Awesome
 --Updated design of check elements in facets
+--Removed 'alt' tag in thumbnails so screen reader do not read them
+--Updated wordings to reflect current beta state
 
 6.11.2-lts-2 (5/13/2019) PP/MC/ED
 --Replaced Foundation Framework references in markup with Bootstrap
