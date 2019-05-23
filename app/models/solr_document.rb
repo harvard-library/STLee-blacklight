@@ -753,7 +753,7 @@ class SolrDocument
 
   def drs_file_id_from_raw_object url
       end_of_url = url.split('/')[-1]
-      end_of_url.match('(.*[0-9])')[1]
+      end_of_url.split('?')[0].match('([0-9]*)')[1]
   end
 
   def delivery_service_from_raw_object url
