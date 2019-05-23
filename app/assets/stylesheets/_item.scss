@@ -148,6 +148,7 @@ body.blacklight-catalog-show #document h1 {
     background-color: $jet;
     color: $white;
     letter-spacing: 1.17px;
+    padding: 6px 30px;
     text-transform: uppercase;
   }
 
@@ -174,7 +175,7 @@ body.blacklight-catalog-show #document h1 {
 
   .permalink {
       clear: both;
-      padding: 20px 0;
+      padding: 30px 0 20px;
   }
 
 }
