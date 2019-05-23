@@ -31,18 +31,23 @@
               if json_answer
               %>
               <% 
-              size_and_labels = [ [300, 'Small: 300 x %d px'],
-                                  [800, 'Medium: 800 x %d px'],
-                                  [1200, 'Large: 1200 x %d px'],
-                                  [2400, 'X-Large: 2400 x %d px']]
-              max_width = json_answer['width']
-              max_height = json_answer['height']
-              ratio = (max_height.to_f)/(max_width.to_f)
+              size_and_labels = [ [300, "Small: %d x %d px"],
+                                  [800, "Medium: %d x %d px"],
+                                  [1200, "Large: %d x %d px"],
+                                  [2400, "X-Large: %d x %d px"]]
+              max_width = json_answer['maxWidth'].to_i
+              max_height = json_answer['maxHeight'].to_i
+              ratio = json_answer['height']/json_answer['width'].to_f
               download_url = image_base_url + '/full/%d,/0/default.jpg?download&caption'
               %>
-                <%for size_elem in size_and_labels do%>
-                  <%if size_elem[0] <= max_width%>
-                    <li><a href="<%= download_url % size_elem[0] %>"><%= size_elem[1] % (ratio*size_elem[0]).floor %></a></li>
+                <%for i in 0..size_and_labels.length-1 do%>
+                  <%size_elem = size_and_labels[i]
+                    if size_elem[0] <= max_width%>
+                    <li><a href="<%= download_url % size_elem[0] %>"><%= size_elem[1] % [size_elem[0], (ratio*(size_elem[0].to_f)).floor] %></a></li>
+                  <%elsif i != size_and_labels.length-1 and max_width < size_and_labels[i+1][0]%>
+                  <li><a href="<%= download_url % size_elem[0] %>"><%= size_elem[1] % [max_width, (ratio*(max_width.to_f)).floor] %></a>
+                  </li>
+                  <%break 'break'%>
                   <%end%>
                 <%end%>
               <%end%>
