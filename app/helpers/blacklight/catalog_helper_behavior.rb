@@ -210,8 +210,7 @@ module Blacklight::CatalogHelperBehavior
     elsif blacklight_config.view_config(document_index_view_type).thumbnail_field
       url = thumbnail_url(document)
 
-      #image_tag_wout_alt url, image_options if url.present?
-      image_tag url, image_options if url.present?
+      image_tag_wout_alt url, image_options if url.present?
     end
 
     if value
