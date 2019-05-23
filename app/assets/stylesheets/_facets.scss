@@ -57,7 +57,7 @@ ul.facet-values li {
             content: ' ';
             position: absolute;
             left: 20px;
-            top: 2px;
+            top: 0;
             background: white;
             width: 20px;
             height: 20px;
@@ -206,7 +206,7 @@ a.facet__title {
             }
 
             & > .content.active {
-                padding: 0;
+                padding: 25px 0 0 0;
                 background: transparent;
 
                 li {
@@ -299,6 +299,14 @@ a.facet__title {
     @media(max-width: 320px) {
         width: 300px;
     }
+}
+
+.content.active .facet-label .selected::before {
+    background: $breakthrough-blue;
+}
+
+.content.active li a .fa-check {
+    color: $white;
 }
 
 .reveal-modal {
@@ -401,5 +409,5 @@ a.facet__title {
 
 .facets__container a.remove {
     left: 23px;
-    top: 14px;
+    top: 12px;
 }

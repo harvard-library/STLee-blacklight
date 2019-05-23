@@ -65,7 +65,7 @@
   border: 1px solid #c0c0c0;
   border-radius: 4px;
   display: inline-block;
-  padding: 4px 10px;
+  padding: 3px 10px 4px;
 }
 
 #per-page-dropdown > a {
@@ -79,7 +79,8 @@
 }
 
 #per-page-dropdown .dropdown-menu {
-  min-width: 120px;
+  margin: 0 0 0 -1px;
+  min-width: 117px;
 }
 
 .f-dropdown.open {
