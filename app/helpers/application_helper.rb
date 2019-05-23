@@ -8,7 +8,9 @@ module ApplicationHelper
 
   def retrieve_still_image_json_metadata url
   	response = Net::HTTP.get_response(URI.parse(url))
-  	JSON.parse response.body
+  	if response.is_a? Net::HTTPOK
+  		JSON.parse response.body
+  	end
   end
 
 end
