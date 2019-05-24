@@ -17,48 +17,65 @@
   <div class="col-lg-4">
     <div id="tools" class="record-tools">
       <h2 class="clearfix">Tools &amp; Related Links</h2>
-        <% if document[:delivery_service] == 'ids' or document[:delivery_service] == 'pds'%>
+        <%if document[:delivery_service] == 'ids' or document[:delivery_service] == 'pds'%>
+          
+          <%if document[:delivery_service] == 'ids'%>
           <div class="btn-group">
           <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
              Download This Item <span class="caret"></span>
            </button>
            <ul class="dropdown-menu">
-            
-            <%if document[:delivery_service] == 'ids'%>
-            <%
-              image_base_url = 'https://ids.lib.harvard.edu/ids/iiif/' + document[:drs_file_id]
+              <%image_base_url = 'https://ids.lib.harvard.edu/ids/iiif/' + document[:drs_file_id]
               json_answer = retrieve_still_image_json_metadata(image_base_url+ '/info.json')
               if json_answer
-              %>
-              <% 
-              size_and_labels = [ [300, "Small: %d x %d px"],
-                                  [800, "Medium: %d x %d px"],
-                                  [1200, "Large: %d x %d px"],
-                                  [2400, "X-Large: %d x %d px"]]
-              max_width = json_answer['maxWidth'].to_i
-              max_height = json_answer['maxHeight'].to_i
-              ratio = json_answer['height']/json_answer['width'].to_f
-              download_url = image_base_url + '/full/%d,/0/default.jpg?download&caption'
-              %>
-                <%for i in 0..size_and_labels.length-1 do%>
-                  <%size_elem = size_and_labels[i]
-                    if size_elem[0] <= max_width%>
-                    <li><a href="<%= download_url % size_elem[0] %>"><%= size_elem[1] % [size_elem[0], (ratio*(size_elem[0].to_f)).floor] %></a></li>
+                size_and_labels = [[300, "Small: %d x %d px"],[800, "Medium: %d x %d px"],
+                                    [1200, "Large: %d x %d px"],[2400, "X-Large: %d x %d px"]]
+                max_width = json_answer['maxWidth'].to_i
+                max_height = json_answer['maxHeight'].to_i
+                ratio = json_answer['height']/json_answer['width'].to_f
+                download_url = image_base_url + '/full/%d,/0/default.jpg?download&caption'
+                for i in 0..size_and_labels.length-1 do
+                  size_elem = size_and_labels[i]
+                  if size_elem[0] <= max_width
+                  %>
+                    <li>
+                      <a href="<%= download_url % size_elem[0] %>"><%= size_elem[1] % [size_elem[0], (ratio*(size_elem[0].to_f)).floor] %>
+                      </a>
+                    </li>
                   <%elsif i != size_and_labels.length-1 and max_width < size_and_labels[i+1][0]%>
-                  <li><a href="<%= download_url % size_elem[0] %>"><%= size_elem[1] % [max_width, (ratio*(max_width.to_f)).floor] %></a>
-                  </li>
-                  <%break 'break'%>
+                    <li>
+                      <a href="<%= download_url % size_elem[0] %>"><%= size_elem[1] % [max_width, (ratio*(max_width.to_f)).floor] %>
+                      </a>
+                    </li>
+                    <%break 'break'%>
                   <%end%>
                 <%end%>
               <%end%>
-            <%end%>
-            <%
+            </ul>
+            </div>
+          <%end%>
+         <div class="btn-group">
+           <%
               del_serv = document[:delivery_service]
               manifest_base_url = 'https://iiif.lib.harvard.edu/manifests/' + (del_serv == 'pds'? 'drs': del_serv) + ':'
             %>
-            <li><a href="<%= manifest_base_url + document[:drs_file_id] %>">IIIF Manifest</a></li>
+           <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reuse via IIIF<span class="caret"></span>
+           </button>
+           <ul class="dropdown-menu">
+            <li>Manifest url:</li>
+            <li><%= text_field_tag 'manifest_url', manifest_base_url+document[:drs_file_id], onclick:'this.select();'%>
+              <script>
+                function copyManifestToClipBoard() {
+                  var copyText = document.getElementById("manifest_url");
+                  copyText.select();
+                  document.execCommand("copy");
+                  alert("Copied the text: '" + copyText.value + "' to clipboard");
+                }
+              </script>
+              <button onclick="copyManifestToClipBoard()">Copy url</button>
+            </li>
            </ul>
-         </div>
+          </div>
        <%end%>
         <%
         if !document[:permalink].nil? && document[:permalink].kind_of?(String) && document[:permalink] != ''
