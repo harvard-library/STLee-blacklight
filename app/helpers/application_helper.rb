@@ -6,5 +6,11 @@ module ApplicationHelper
     val.kind_of?(Hash) ? [val] : val
   end
 
+  def retrieve_still_image_json_metadata url
+  	response = Net::HTTP.get_response(URI.parse(url))
+  	if response.is_a? Net::HTTPOK
+  		JSON.parse response.body
+  	end
+  end
 
 end

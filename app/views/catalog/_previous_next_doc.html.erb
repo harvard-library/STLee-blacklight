@@ -2,14 +2,14 @@
 <% #DEPRECATED - using id="previousNextDocument" as a selector is deprecated and will be removed in Blacklight 6.0 %>
 <div id="previous-next" class="row">
 
-  <div class="col-xs-6">
+  <div class="col-sm-6">
     <% if current_search_session %>
         <div class="search-widgets">
           <%= link_back_to_catalog %>
         </div>
     <% end %>
   </div>
-  <div class="col-xs-6 page-header-page-links-column">
+  <div class="col-sm-6 page-header-page-links-column">
     <% if item_page_entry_info &&  (@previous_document || @next_document) %>
         <div class="page_links">
           <% if @previous_document %>      

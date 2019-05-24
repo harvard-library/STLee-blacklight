@@ -49,6 +49,8 @@ class SolrDocument
       result[:finding_aid_links] = finding_aid_links_from_doc doc
       result[:digital_collections_links] = digital_collections_links_from_doc doc
       result[:additional_digital_items] = additional_digital_items_from_doc doc
+      result[:drs_file_id] = drs_file_id_from_raw_object result[:raw_object] 
+      result[:delivery_service] = delivery_service_from_raw_object result[:raw_object]
       
       result[:id] = result[:identifier]
     end
@@ -74,8 +76,37 @@ class SolrDocument
         end
       end
     end
-    
+
+    archival_title = archival_title_from_node doc, title
+    if archival_title != ''
+      title = archival_title + ' ' + title 
+    end
+
     title
+  end
+
+  def archival_title_from_node node, title
+    archival_title = ''
+    nodes_from_path(node, '$.relatedItem[?(@["@type"]=="host")]').each do |x|
+      title_part = ''
+
+      nodes_from_path(x, '$.titleInfo').each do |y|
+        title_part += title_from_node y
+      end
+
+      if title_part != ''
+        if archival_title != ''
+          archival_title += ', '
+        end
+        archival_title += title_part
+      end
+
+      if archival_title != '' && archival_title == title
+        archival_title = archival_title_from_node x, title
+      end
+    end
+
+    archival_title
   end
 
   def extended_title_from_doc doc, title
@@ -171,7 +202,23 @@ class SolrDocument
             if name != ''
               name += ', '
             end
-            name += name_from_node y
+            name += name_from_node y, true
+            altName = ''
+            translatedNames = ''
+            if !y['@altRepGroup'].nil? && y['@altRepGroup'] != ''
+              altNames = nodes_from_path doc, '$..name[?(@["@altRepGroup"] == "' + y['@altRepGroup'] + '")]'
+              altNames.each do |m|
+                altName = name_from_node m, true
+                if name != altName
+                  translatedNames += ', ' + altName
+                end
+              end
+            end
+
+            if translatedNames != ''
+              name += translatedNames
+            end
+
             break
           end
         end
@@ -181,7 +228,7 @@ class SolrDocument
 	  name
   end
 
-  def name_from_node node
+  def name_from_node node, includeRole
 	  name = ''
 		namepart = ''
     node_to_array(node).each do |x|
@@ -203,7 +250,10 @@ class SolrDocument
       end
 
 		  name += namepart
-      name += roleterm_from_role x[:role]
+      if includeRole
+        name += roleterm_from_role x[:role]
+      end
+
     end
 		
 	  name
@@ -259,10 +309,10 @@ class SolrDocument
         field_value += field_value_from_node x, separator
       end
     else
-      if node.kind_of?(String)
-        field_value = node
+      if node.kind_of?(String) || node.kind_of?(Integer)
+        field_value = node.to_s
       else
-        field_value = node['#text']
+        field_value = field_value_from_node node['#text'], separator
       end
     end
     field_value
@@ -344,7 +394,9 @@ class SolrDocument
             if origin != ''
               origin += '<br/>'
             end
-            origin += y['#text']
+            
+
+            origin += field_value_from_node y['#text'], '<br/>'
           end
         end
       end
@@ -388,15 +440,7 @@ class SolrDocument
   end
 
   def permalink_from_doc doc
-		field_values_from_node_by_path doc, '$..url[?(@["@displayLabel"] == "Harvard Digital Collections")]', '<br/>'
-  end
-
-  def permalink_from_node node
-	  url = ''
-	  if node['@displayLabel'] && node['@displayLabel'] == 'Harvard Digital Collections'
-		  url = node['#text']
-	  end
-	  url
+		field_values_from_node_by_path doc, '$..url[?(@["@displayLabel"] == "Harvard Digital Collections" && @["@access"] == "object in context")]', '<br/>'
   end
 
   def notes_from_doc doc
@@ -508,11 +552,14 @@ class SolrDocument
     physical_items = nodes_from_path doc, '$..physicalLocation'
 
     node_to_array(physical_items).each do |x|
-      if x["@displayLabel"].nil? || x["@displayLabel"] != "Harvard repository"
-        if place != ''
-          place += '<br/>'
+      if (x["@displayLabel"].nil? || x["@displayLabel"] != "Harvard repository") && (x["@type"].nil? || x["@type"] != "container")
+        place_item = field_value_from_node x, '<br/>'
+        if place_item != "" && place_item != "FIG"
+          if place != ''
+            place += '<br/>'
+          end
+          place += place_item
         end
-        place += field_value_from_node x, '<br/>'
       end
     end
 
@@ -558,7 +605,7 @@ class SolrDocument
 
     series_nodes.each do |x|
       title = title_from_node x['titleInfo']
-      name = name_from_node x['name']
+      name = name_from_node x['name'], true
       if series != ''
         series += '<br/>'
       end
@@ -577,7 +624,7 @@ class SolrDocument
     subject_nodes.each do |x|
       node_to_array(x).each do |y|    
         if !y['name'].nil?
-          subject = name_from_node y['name']
+          subject = name_from_node y['name'], false
           if subject != ''
             if subjects != ''
               subjects += '<br/>'
@@ -595,6 +642,33 @@ class SolrDocument
         end
       end
     end
+
+    #add any names that have the role "subject"
+    names = nodes_from_path doc, '$..name'
+    names.each do |x|
+      node_to_array(x).each do |y|
+        name = ''
+        roleTerm = nodes_from_path y, '$..roleTerm'
+        node_to_array(roleTerm).each do |z|
+          if !z.nil? && field_value_from_node(z, ',') == 'subject'
+            if name != ''
+              name += ', '
+            end
+            name += name_from_node y, false
+            break
+          end
+        end
+
+        if name != ''
+          if subjects != ''
+            subjects += '<br/>'
+          end
+          subjects += name
+        end
+      end
+    end
+
+
 
 	  subjects
   end
@@ -675,6 +749,17 @@ class SolrDocument
     end
     
     raw_object
+  end
+
+  def drs_file_id_from_raw_object url
+      end_of_url = url.split('/')[-1]
+      end_of_url.split('?')[0].match('([0-9]*)')[1]
+  end
+
+  def delivery_service_from_raw_object url
+      # 'https://sds...' will be split into 3 elements: ['https', '', 'sds...']
+      begin_of_url = url.split('/')[2]
+      begin_of_url.split('.')[0]
   end
 
   def hollis_links_from_doc doc

@@ -210,7 +210,7 @@ module Blacklight::CatalogHelperBehavior
     elsif blacklight_config.view_config(document_index_view_type).thumbnail_field
       url = thumbnail_url(document)
 
-      image_tag url, image_options if url.present?
+      image_tag_wout_alt url, image_options if url.present?
     end
 
     if value
@@ -225,6 +225,31 @@ module Blacklight::CatalogHelperBehavior
       end
     end
   end
+
+##
+# Customized version of rails 5.1.4 'image_tag' function so 
+# that when no alt tags are specified in the options, the 
+# alt tag will be left empty instead of having some part of
+# the image url being jammed in
+#
+# see source for details on params. 
+# source: https://github.com/rails/rails/blob/v5.1.4/actionview/lib/action_view/helpers/asset_tag_helper.rb
+#
+
+def image_tag_wout_alt(source, options = {})
+  options = options.symbolize_keys
+  check_for_image_tag_errors(options)
+
+  src = options[:src] = path_to_image(source, skip_pipeline: options.delete(:skip_pipeline))
+
+  # "|| options[:alt] == nil" is the only telement added from the base image_tag function.
+  unless src.start_with?("cid:") || src.start_with?("data:") || src.blank? || options[:alt] == nil
+    options[:alt] = options.fetch(:alt) { image_alt(src) }
+  end
+
+  options[:width], options[:height] = extract_dimensions(options.delete(:size)) if options[:size]
+  tag("img", options)
+end
 
   ##
   # Get the URL to a document's thumbnail image

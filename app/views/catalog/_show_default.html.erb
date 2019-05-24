@@ -4,7 +4,7 @@
 <div class="row">
   <div class="col-lg-8">
     <div id="details" class="content active record-details">
-      <dl class="dl-horizontal  dl-invert clearfix">
+      <dl class="row">
         <% document_show_fields(document).each do |field_name, field| -%>
           <% if should_render_show_field? document, field %>
             <dt class="blacklight-<%= field_name.parameterize %>"><%= render_document_show_field_label document, field: field_name %></dt>
@@ -16,7 +16,57 @@
   </div>
   <div class="col-lg-4">
     <div id="tools" class="record-tools">
-      <h2 class="clearfix">Related Links</h2>
+      <h2 class="clearfix">Tools &amp; Related Links</h2>
+        <% if document[:delivery_service] == 'ids' or document[:delivery_service] == 'pds'%>
+          <div class="btn-group">
+          <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+             Download This Item <span class="caret"></span>
+           </button>
+           <ul class="dropdown-menu">
+            
+            <%if document[:delivery_service] == 'ids'%>
+            <%
+              image_base_url = 'https://ids.lib.harvard.edu/ids/iiif/' + document[:drs_file_id]
+              json_answer = retrieve_still_image_json_metadata(image_base_url+ '/info.json')
+              if json_answer
+              %>
+              <% 
+              size_and_labels = [ [300, "Small: %d x %d px"],
+                                  [800, "Medium: %d x %d px"],
+                                  [1200, "Large: %d x %d px"],
+                                  [2400, "X-Large: %d x %d px"]]
+              max_width = json_answer['maxWidth'].to_i
+              max_height = json_answer['maxHeight'].to_i
+              ratio = json_answer['height']/json_answer['width'].to_f
+              download_url = image_base_url + '/full/%d,/0/default.jpg?download&caption'
+              %>
+                <%for i in 0..size_and_labels.length-1 do%>
+                  <%size_elem = size_and_labels[i]
+                    if size_elem[0] <= max_width%>
+                    <li><a href="<%= download_url % size_elem[0] %>"><%= size_elem[1] % [size_elem[0], (ratio*(size_elem[0].to_f)).floor] %></a></li>
+                  <%elsif i != size_and_labels.length-1 and max_width < size_and_labels[i+1][0]%>
+                  <li><a href="<%= download_url % size_elem[0] %>"><%= size_elem[1] % [max_width, (ratio*(max_width.to_f)).floor] %></a>
+                  </li>
+                  <%break 'break'%>
+                  <%end%>
+                <%end%>
+              <%end%>
+            <%end%>
+            <%
+              del_serv = document[:delivery_service]
+              manifest_base_url = 'https://iiif.lib.harvard.edu/manifests/' + (del_serv == 'pds'? 'drs': del_serv) + ':'
+            %>
+            <li><a href="<%= manifest_base_url + document[:drs_file_id] %>">IIIF Manifest</a></li>
+           </ul>
+         </div>
+       <%end%>
+        <%
+        if !document[:permalink].nil? && document[:permalink].kind_of?(String) && document[:permalink] != ''
+          %>
+            <div class="permalink"><a href="<%=document[:permalink]%>">Permalink</a></div>
+          <%
+        end
+        %>
         <%
         if !document[:digital_collections_links].nil? && document[:digital_collections_links].kind_of?(Array) && document[:digital_collections_links].length > 0
           %>
@@ -33,7 +83,7 @@
           <%
         end
         %>
-      </dl>
+
       <dl class="dl-vertical dl-invert dl-more-details clearfix">
         <%
         if (!document[:hollis_links].nil? && document[:hollis_links].kind_of?(Array) && document[:hollis_links].length > 0)  ||

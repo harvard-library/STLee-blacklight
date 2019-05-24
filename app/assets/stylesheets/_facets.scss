@@ -49,7 +49,7 @@ ul.facet-values li {
     .facet_select, .selected {
         display: block;
         padding: 0 0 0 55px;
-        max-width: 90%;
+        max-width: 85%;
         position: relative;
 
         &:before {
@@ -57,7 +57,7 @@ ul.facet-values li {
             content: ' ';
             position: absolute;
             left: 20px;
-            top: 2px;
+            top: 0;
             background: white;
             width: 20px;
             height: 20px;
@@ -206,7 +206,7 @@ a.facet__title {
             }
 
             & > .content.active {
-                padding: 0;
+                padding: 25px 0 0 0;
                 background: transparent;
 
                 li {
@@ -301,6 +301,14 @@ a.facet__title {
     }
 }
 
+.content.active .facet-label .selected::before {
+    background: $breakthrough-blue;
+}
+
+.content.active li a .fa-check {
+    color: $white;
+}
+
 .reveal-modal {
     width: 650px;
 }
@@ -358,6 +366,22 @@ a.facet__title {
     }
 }
 
+.collapse-non-md {
+    height: 0;
+    display: none;
+}
+.collapse-non-md.collapsing {
+    display: block;
+}
+
+@media (min-width: 992px) {
+    .collapse-non-md {
+        height: auto;
+        display: block;
+    }
+}
+
+
 
 
 .btn-default.active, .btn-default.active:hover {
@@ -381,4 +405,9 @@ a.facet__title {
         color: #666;
         float: right;
     }
+}
+
+.facets__container a.remove {
+    left: 23px;
+    top: 12px;
 }
