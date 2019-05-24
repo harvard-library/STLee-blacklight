@@ -47,23 +47,24 @@
                       <a href="<%= download_url % size_elem[0] %>"><%= size_elem[1] % [max_width, (ratio*(max_width.to_f)).floor] %>
                       </a>
                     </li>
-                    <%break 'break'%>
-                  <%end%>
-                <%end%>
-              <%end%>
+                    <%break 'break'
+                  end
+                end
+              end%>
             </ul>
             </div>
           <%end%>
          <div class="btn-group">
            <%
               del_serv = document[:delivery_service]
-              manifest_base_url = 'https://iiif.lib.harvard.edu/manifests/' + (del_serv == 'pds'? 'drs': del_serv) + ':'
+              manifest_base_url = 'https://iiif.lib.harvard.edu/manifests/' 
+              id_prefix = (del_serv == 'pds'? 'drs': del_serv) + ':'
             %>
            <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reuse via IIIF<span class="caret"></span>
            </button>
            <ul class="dropdown-menu">
             <li>Manifest url:</li>
-            <li><%= text_field_tag 'manifest_url', manifest_base_url+document[:drs_file_id], onclick:'this.select();'%>
+            <li><%= text_field_tag 'manifest_url', manifest_base_url+id_prefix+document[:drs_file_id], onclick:'this.select();'%>
               <script>
                 function copyManifestToClipBoard() {
                   var copyText = document.getElementById("manifest_url");
@@ -74,6 +75,9 @@
               </script>
               <button onclick="copyManifestToClipBoard()">Copy url</button>
             </li>
+            <%if del_serv == 'pds'%>
+              <a href="<%= manifest_base_url+'view/'+id_prefix+document[:drs_file_id]%>"> Launch in Mirador</a>
+            <%end%>
            </ul>
           </div>
        <%end%>
