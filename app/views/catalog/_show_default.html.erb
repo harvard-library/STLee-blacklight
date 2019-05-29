@@ -60,23 +60,24 @@
               manifest_base_url = 'https://iiif.lib.harvard.edu/manifests/' 
               id_prefix = (del_serv == 'pds'? 'drs': del_serv) + ':'
             %>
-           <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Reuse via IIIF<span class="caret"></span>
+           <button type="button" class="hl__button hl__button--small hl__button--inline iiif_logo  " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= image_tag("IIIFLogoBlack.svg", alt: "IIIF logo") %><span class="caret"></span>
            </button>
            <ul class="dropdown-menu">
-            <li>Manifest url:</li>
-            <li><%= text_field_tag 'manifest_url', manifest_base_url+id_prefix+document[:drs_file_id], onclick:'this.select();'%>
               <script>
-                function copyManifestToClipBoard() {
-                  var copyText = document.getElementById("manifest_url");
-                  copyText.select();
-                  document.execCommand("copy");
-                  alert("Copied the text: '" + copyText.value + "' to clipboard");
+                function copyManifestToClipBoard(manifest_url) {
+                  const el = document.createElement('textarea');
+                  el.value = manifest_url;
+                  document.body.appendChild(el);
+                  el.select();
+                  document.execCommand('copy');
+                  alert("Copied the text: '" + el.value + "' to clipboard");
+                  document.body.removeChild(el);
                 }
               </script>
-              <button onclick="copyManifestToClipBoard()">Copy url</button>
+              <li><a href="javascript:void(0);" onclick="copyManifestToClipBoard('<%=manifest_base_url+id_prefix+document[:drs_file_id]%>')">Copy Manifest Link</a></li>
             </li>
             <%if del_serv == 'pds'%>
-              <a href="<%= manifest_base_url+'view/'+id_prefix+document[:drs_file_id]%>"> Launch in Mirador</a>
+              <li><a href="<%= manifest_base_url+'view/'+id_prefix+document[:drs_file_id]%>" target="_blank">Open in Mirador</a></li>
             <%end%>
            </ul>
           </div>
