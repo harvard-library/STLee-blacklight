@@ -275,6 +275,10 @@ class SolrDocument
 				else
 					roleTerm = z[:roleTerm]['#text']
 				end
+
+        if roleTerm == 'creator'
+          roleTerm = ''
+        end
 			end
 
       if roleTerm != ''
@@ -678,7 +682,7 @@ class SolrDocument
 
     if node.kind_of?(Hash)
       node.each do |key, value|
-        if key == "geographicCode" || key == '@authority' 
+        if key == "geographicCode" || key == '@authority' || key == '@altRepGroup' 
           next
         end
         subject_part = subject_from_node value
