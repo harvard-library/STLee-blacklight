@@ -14,14 +14,14 @@ class SolrDocument
     if !doc.empty?
       result[:identifier] = identifier_from_doc doc
 	    puts 'ID=' + result[:identifier] 
-      result[:title] = title_from_doc doc
-      result[:title_extended] = extended_title_from_doc doc, result[:title]
+      result[:title] = title_from_doc doc, true
+      result[:title_extended] = extended_title_from_doc doc, title_from_doc(doc, false)
       result[:abstract] = abstract_from_doc doc
       result[:resource_type] = resource_type_from_doc doc
       
       result[:digital_format] = field_values_from_node_by_path doc, '$.extension..librarycloud.digitalFormats.digitalFormat', '<br/>', false
       result[:repository] = field_values_from_node_by_path doc, '$..physicalLocation[?(@["@displayLabel"]=="Harvard repository")]["#text"]', '<br/>', false
-      result[:genre] = field_values_from_node_by_path doc, '$..genre..["#text"]', '<br/>', false
+      result[:genre] = field_values_from_node_by_path doc, '$..genre', '<br/>', false
       result[:publisher] = field_values_from_node_by_path doc, '$..publisher', '<br/>', false
       result[:edition] = field_values_from_node_by_path doc, '$..edition', '<br/>', false
       result[:culture] = field_values_from_node_by_path doc, '$.extension..cultureWrap.culture', '<br/>', false
@@ -63,7 +63,7 @@ class SolrDocument
     path.on(doc).first
   end
 
-  def title_from_doc doc
+  def title_from_doc doc, useAltTitle
     title = ''
         
     nodes_from_path(doc, '$.titleInfo').each do |x|
@@ -80,6 +80,19 @@ class SolrDocument
     archival_title = archival_title_from_node doc, title
     if archival_title != ''
       title = archival_title + ' ' + title 
+    end
+
+    #if title is not set, check alternative title
+    if title == '' && useAltTitle
+      node_to_array(doc[:titleInfo]).each do |x|
+        if !x['@type'].nil? && x['@type'] != ''
+          title = title_from_node x
+		      #pull first alt title
+          if title != ''
+            break
+          end
+        end
+      end
     end
 
     title
@@ -303,8 +316,9 @@ class SolrDocument
     field_value = ''
     field_values = field_value_from_node_to_array node
 
+
+
     if field_values.length > 0 && !allowDuplicates
-      #puts 'checking uniq'
       field_values.uniq!
     end
     field_value = field_values.join(separator)
@@ -320,17 +334,31 @@ class SolrDocument
 
     if node.kind_of?(Array)
       node.each do |x|
-        field_values.push field_value_from_node_to_array x
+        values2 = field_value_from_node_to_array x
+        field_values = append_to_values field_values, values2
       end
     else
       if node.kind_of?(String) || node.kind_of?(Integer)
         field_values.push node.to_s
       else
-        field_values.push field_value_from_node_to_array node['#text']
+        values2 = field_value_from_node_to_array node['#text']
+        field_values = append_to_values field_values, values2
       end
     end
 
     field_values
+  end
+
+  def append_to_values values, node
+    if node.kind_of?(Array)
+      node.each do |x|
+        values = append_to_values values, x
+      end
+    elsif node.kind_of?(String) || node.kind_of?(Integer)
+      values.push node.to_s
+    end
+
+    values
   end
   
   def nodes_from_path doc, path
@@ -566,7 +594,7 @@ class SolrDocument
     physical_items = nodes_from_path doc, '$..physicalLocation'
 
     node_to_array(physical_items).each do |x|
-      if (x["@displayLabel"].nil? || x["@displayLabel"] != "Harvard repository") && (x["@type"].nil? || x["@type"] != "container")
+      if (!x.nil? && (x["@displayLabel"].nil? || x["@displayLabel"] != "Harvard repository")) && (x["@type"].nil? || x["@type"] != "container")
         place_item = field_value_from_node x, '<br/>', false
         if place_item != "" && place_item != "FIG"
           if place != ''
