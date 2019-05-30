@@ -19,13 +19,13 @@ class SolrDocument
       result[:abstract] = abstract_from_doc doc
       result[:resource_type] = resource_type_from_doc doc
       
-      result[:digital_format] = field_values_from_node_by_path doc, '$.extension..librarycloud.digitalFormats.digitalFormat', '<br/>'
-      result[:repository] = field_values_from_node_by_path doc, '$..physicalLocation[?(@["@displayLabel"]=="Harvard repository")]["#text"]', '<br/>'
-      result[:genre] = field_values_from_node_by_path doc, '$..genre..["#text"]', '<br/>'
-      result[:publisher] = field_values_from_node_by_path doc, '$..publisher', '<br/>'
-      result[:edition] = field_values_from_node_by_path doc, '$..edition', '<br/>'
-      result[:culture] = field_values_from_node_by_path doc, '$.extension..cultureWrap.culture', '<br/>'
-      result[:style] = field_values_from_node_by_path doc, '$.extension..styleWrap.style', '<br/>'
+      result[:digital_format] = field_values_from_node_by_path doc, '$.extension..librarycloud.digitalFormats.digitalFormat', '<br/>', false
+      result[:repository] = field_values_from_node_by_path doc, '$..physicalLocation[?(@["@displayLabel"]=="Harvard repository")]["#text"]', '<br/>', false
+      result[:genre] = field_values_from_node_by_path doc, '$..genre..["#text"]', '<br/>', false
+      result[:publisher] = field_values_from_node_by_path doc, '$..publisher', '<br/>', false
+      result[:edition] = field_values_from_node_by_path doc, '$..edition', '<br/>', false
+      result[:culture] = field_values_from_node_by_path doc, '$.extension..cultureWrap.culture', '<br/>', false
+      result[:style] = field_values_from_node_by_path doc, '$.extension..styleWrap.style', '<br/>', false
       result[:owner_code] = extension_field_from_doc doc, :ownerCode
       result[:owner_display] = extension_field_from_doc doc, :ownerCodeDisplayName
       result[:place] = place_from_doc doc
@@ -42,7 +42,7 @@ class SolrDocument
       result[:subjects] = subjects_from_doc doc
       result[:preview] = preview_from_doc doc
       result[:raw_object] = raw_object_from_doc doc
-      result[:funding] = field_values_from_node_by_path doc, '$..note[?(@["@type"]=="funding")]["#text"]', '<br/>'
+      result[:funding] = field_values_from_node_by_path doc, '$..note[?(@["@type"]=="funding")]["#text"]', '<br/>', false
       result[:related_links] = related_links_from_doc doc
       result[:hollis_links] = hollis_links_from_doc doc
       result[:hollis_image_links] = hollis_image_links_from_doc doc
@@ -126,7 +126,7 @@ class SolrDocument
 
   def title_from_node node
     title = ''
-    title = nonsort_from_node(node) + field_values_from_node_by_path(node, '$.title', ', ') + subtitle_from_node(node) + partnumber_from_node(node) + partname_from_node(node)
+    title = nonsort_from_node(node) + field_values_from_node_by_path(node, '$.title', ', ', true) + subtitle_from_node(node) + partnumber_from_node(node) + partname_from_node(node)
     title
   end
 
@@ -164,7 +164,7 @@ class SolrDocument
   end
 
   def subtitle_from_node node
-    subTitle = field_values_from_node_by_path(node, '$.subTitle', ', ')
+    subTitle = field_values_from_node_by_path(node, '$.subTitle', ', ', true)
     if subTitle != ''
       subTitle = '. ' + subTitle
     end
@@ -172,7 +172,7 @@ class SolrDocument
   end
 
   def partnumber_from_node node
-    partNumber = field_values_from_node_by_path(node, '$.partNumber', ', ')
+    partNumber = field_values_from_node_by_path(node, '$.partNumber', ', ', true)
     if partNumber != ''
       partNumber = '. ' + partNumber
     end
@@ -180,7 +180,7 @@ class SolrDocument
   end
 
   def partname_from_node node
-    partName = field_values_from_node_by_path(node, '$.partName', ', ')
+    partName = field_values_from_node_by_path(node, '$.partName', ', ', true)
     if partName != ''
       partName = '. ' + partName
     end
@@ -188,7 +188,7 @@ class SolrDocument
   end
 
   def nonsort_from_node node
-    field_values_from_node_by_path(node, '$.nonSort', ', ')
+    field_values_from_node_by_path(node, '$.nonSort', ', ', true)
   end
 
   def name_from_doc doc
@@ -198,7 +198,7 @@ class SolrDocument
       node_to_array(x).each do |y|
         roleTerm = nodes_from_path y, '$..roleTerm'
         node_to_array(roleTerm).each do |z|
-          if !z.nil? && field_value_from_node(z, ',') == 'creator'
+          if !z.nil? && field_value_from_node(z, ',', false) == 'creator'
             if name != ''
               name += ', '
             end
@@ -299,53 +299,64 @@ class SolrDocument
     role
   end
   
-  def field_value_from_node node, separator
+  def field_value_from_node node, separator, allowDuplicates
+    field_value = ''
+    field_values = field_value_from_node_to_array node
+
+    if field_values.length > 0 && !allowDuplicates
+      #puts 'checking uniq'
+      field_values.uniq!
+    end
+    field_value = field_values.join(separator)
+    field_value
+  end
+
+  def field_value_from_node_to_array node
+    field_values = []
     field_value = ''
     if node.nil?
-      return field_value
+      return field_values
     end
 
     if node.kind_of?(Array)
       node.each do |x|
-        if field_value != ''
-          field_value += separator
-        end
-        field_value += field_value_from_node x, separator
+        field_values.push field_value_from_node_to_array x
       end
     else
       if node.kind_of?(String) || node.kind_of?(Integer)
-        field_value = node.to_s
+        field_values.push node.to_s
       else
-        field_value = field_value_from_node node['#text'], separator
+        field_values.push field_value_from_node_to_array node['#text']
       end
     end
-    field_value
+
+    field_values
   end
   
   def nodes_from_path doc, path
     return JsonPath.new(path).on(doc)
   end
 
-  def field_values_from_node_by_path node, path, separator
+  def field_values_from_node_by_path node, path, separator, allowDuplicates
     fieldValue = ''
     field_nodes = nodes_from_path node, path
 
     if !field_nodes.nil?
-      fieldValue = field_value_from_node field_nodes, separator
+      fieldValue = field_value_from_node field_nodes, separator, allowDuplicates
     end
     fieldValue
   end
 
-  def first_field_value_from_doc_by_path node, path, separator
+  def first_field_value_from_doc_by_path node, path, separator, allowDuplicates
     fieldValue = ''
     field_items = JsonPath.new(path).first(node)
     
-    fieldValue = field_value_from_node field_items, separator
+    fieldValue = field_value_from_node field_items, separator, allowDuplicates
     fieldValue
   end
 
   def language_from_doc doc
-    field_values_from_node_by_path(doc, '$..language.languageTerm[?(@["@type"] == "text")]["#text"]', '<br/>')
+    field_values_from_node_by_path(doc, '$..language.languageTerm[?(@["@type"] == "text")]["#text"]', '<br/>', false)
   end
 
   def date_from_doc doc
@@ -399,8 +410,7 @@ class SolrDocument
               origin += '<br/>'
             end
             
-
-            origin += field_value_from_node y['#text'], '<br/>'
+            origin += field_value_from_node y['#text'], '<br/>', false
           end
         end
       end
@@ -444,7 +454,7 @@ class SolrDocument
   end
 
   def permalink_from_doc doc
-		field_values_from_node_by_path doc, '$..url[?(@["@displayLabel"] == "Harvard Digital Collections" && @["@access"] == "object in context")]', '<br/>'
+		field_values_from_node_by_path doc, '$..url[?(@["@displayLabel"] == "Harvard Digital Collections" && @["@access"] == "object in context")]', '<br/>', false
   end
 
   def notes_from_doc doc
@@ -499,7 +509,7 @@ class SolrDocument
       notes += sub_label_for_field 'Funding', funding
     end
 
-    access_condition = field_values_from_node_by_path doc, '$..accessCondition', '<br/>'
+    access_condition = field_values_from_node_by_path doc, '$..accessCondition', '<br/>', false
     if access_condition != ''
       if notes != ''
         notes += '<br/>'
@@ -514,11 +524,11 @@ class SolrDocument
     abstract = ''
 
     abstract_items = nodes_from_path doc, '$..abstract'
-    abstract = field_value_from_node abstract_items, '<br/>'
+    abstract = field_value_from_node abstract_items, '<br/>', false
 
     toc_items = nodes_from_path doc, '$..tableOfContents'
 
-    toc = field_value_from_node toc_items, '<br/>'
+    toc = field_value_from_node toc_items, '<br/>', false
     if toc != ''
       if abstract != ''
         abstract += '<br/>'
@@ -531,7 +541,7 @@ class SolrDocument
 
   def description_from_doc doc
     description = ''
-    extent = field_values_from_node_by_path doc, '$..extent', '<br/>'
+    extent = field_values_from_node_by_path doc, '$..extent', '<br/>', false
     if extent != ''
       if description != ''
         description += '<br/>'
@@ -539,7 +549,7 @@ class SolrDocument
       description += sub_label_for_field 'Extent', extent
     end
 
-    materials = field_values_from_node_by_path doc, '$.extension..indexingMaterialsTechSet.termMaterialsTech', '<br/>'
+    materials = field_values_from_node_by_path doc, '$.extension..indexingMaterialsTechSet.termMaterialsTech', '<br/>', false
     if materials != ''
       if description != ''
         description += '<br/>'
@@ -557,7 +567,7 @@ class SolrDocument
 
     node_to_array(physical_items).each do |x|
       if (x["@displayLabel"].nil? || x["@displayLabel"] != "Harvard repository") && (x["@type"].nil? || x["@type"] != "container")
-        place_item = field_value_from_node x, '<br/>'
+        place_item = field_value_from_node x, '<br/>', false
         if place_item != "" && place_item != "FIG"
           if place != ''
             place += '<br/>'
@@ -654,7 +664,7 @@ class SolrDocument
         name = ''
         roleTerm = nodes_from_path y, '$..roleTerm'
         node_to_array(roleTerm).each do |z|
-          if !z.nil? && field_value_from_node(z, ',') == 'subject'
+          if !z.nil? && field_value_from_node(z, ',', false) == 'subject'
             if name != ''
               name += ', '
             end
