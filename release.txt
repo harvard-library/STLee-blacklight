@@ -1,4 +1,4 @@
-6.11.2-lts-3 (5/28/2019) PP/MC/ED/CV
+6.11.2-lts-2 (5/28/2019) PP/MC/ED/CV
 --Updated item detail metadata layout for mobile
 --Fixed masonry icon color when toggled
 --Added truncation of long item titles in search results
@@ -11,8 +11,6 @@
 --Updated design of check elements in facets
 --Removed 'alt' tag in thumbnails so screen reader do not read them
 --Updated wordings to reflect current beta state
-
-6.11.2-lts-2 (5/13/2019) PP/MC/ED
 --Replaced Foundation Framework references in markup with Bootstrap
 --Improved mobile device layout rendering
 --Added DCP Google Analytics Tracking ID
