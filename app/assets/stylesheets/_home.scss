@@ -222,7 +222,8 @@
   font-weight: 500;
   letter-spacing: 1.17px;
   line-height: 19px;
-  padding: 12px 23px;
+  padding: 24px 0px 0px 0px;
+
   text-decoration: none;
   text-transform: uppercase;
   -webkit-transition: all 0.4s ease;
@@ -234,6 +235,7 @@
   border-color: transparent;
 }
 
+
 .hl__button--secondary {
   background-color: #0579b8;
   border-color: transparent;
@@ -244,10 +246,8 @@
   background-color: #2a5280;
 }
 
-
-
 .hl__button:focus, .hl__button:hover {
-  color: #fff;
+  color: #6C6C6C;
   text-decoration: none;
 }
 
