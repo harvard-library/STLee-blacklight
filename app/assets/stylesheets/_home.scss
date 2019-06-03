@@ -230,12 +230,6 @@
   transition: all 0.4s ease;
 }
 
-.hl__button--inline {
-  background-color: #fff;
-  border-color: transparent;
-}
-
-
 .hl__button--secondary {
   background-color: #0579b8;
   border-color: transparent;
@@ -244,11 +238,6 @@
 
 .hl__button--secondary:focus, .hl__button--secondary:hover {
   background-color: #2a5280;
-}
-
-.hl__button:focus, .hl__button:hover {
-  color: #6C6C6C;
-  text-decoration: none;
 }
 
 @media screen and (max-width: 768px) {

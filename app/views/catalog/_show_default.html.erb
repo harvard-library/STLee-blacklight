@@ -17,8 +17,6 @@
   <div class="col-lg-4">
     <div id="tools" class="record-tools">
       <h2 class="clearfix">Tools &amp; Related Links</h2>
-        <%if document[:delivery_service] == 'ids' or document[:delivery_service] == 'pds'%>
-          
           <%if document[:delivery_service] == 'ids'%>
           <div class="btn-group">
           <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
@@ -54,34 +52,6 @@
             </ul>
             </div>
           <%end%>
-         <div class="btn-group">
-           <%
-              del_serv = document[:delivery_service]
-              manifest_base_url = 'https://iiif.lib.harvard.edu/manifests/' 
-              id_prefix = (del_serv == 'pds'? 'drs': del_serv) + ':'
-            %>
-           <button type="button" class="hl__button hl__button--small hl__button--inline iiif_logo  " data-toggle="dropdown" aria-haspopup="true" aria-expanded="false"><%= image_tag("IIIFLogoBlack.svg", alt: "IIIF logo") %><span class="caret"></span>
-           </button>
-           <ul class="dropdown-menu">
-              <script>
-                function copyManifestToClipBoard(manifest_url) {
-                  const el = document.createElement('textarea');
-                  el.value = manifest_url;
-                  document.body.appendChild(el);
-                  el.select();
-                  document.execCommand('copy');
-                  alert("Copied the text: '" + el.value + "' to clipboard");
-                  document.body.removeChild(el);
-                }
-              </script>
-              <li><a href="javascript:void(0);" onclick="copyManifestToClipBoard('<%=manifest_base_url+id_prefix+document[:drs_file_id]%>')">Copy Manifest Link</a></li>
-            </li>
-            <%if del_serv == 'pds'%>
-              <li><a href="<%= manifest_base_url+'view/'+id_prefix+document[:drs_file_id]%>" target="_blank">Open in Mirador</a></li>
-            <%end%>
-           </ul>
-          </div>
-       <%end%>
         <%
         if !document[:permalink].nil? && document[:permalink].kind_of?(String) && document[:permalink] != ''
           %>
@@ -140,6 +110,37 @@
         end
         %>
       </dl>
+      <%if document[:delivery_service] == 'ids' or document[:delivery_service] == 'pds'%>
+        <dl class="dl-vertical dl-invert dl-more-details clearfix">
+           <%
+              del_serv = document[:delivery_service]
+              manifest_base_url = 'https://iiif.lib.harvard.edu/manifests/' 
+              id_prefix = (del_serv == 'pds'? 'drs': del_serv) + ':'
+            %>
+          <dt class="blacklight-title_extended clearfix">IIIF</dt><%= image_tag("IIIFLogoBlack.svg", alt: "IIIF logo") %>   
+            <script>
+              function copyManifestToClipBoard(manifest_url) {
+                const el = document.createElement('textarea');
+                el.value = manifest_url;
+                document.body.appendChild(el);
+                el.select();
+                document.execCommand('copy');
+                alert("Copied the text: '" + el.value + "' to clipboard");
+                document.body.removeChild(el);
+              }
+            </script>
+            <dd class="blacklight-title_extended"><a href="javascript:void(0);" onclick="copyManifestToClipBoard('<%=manifest_base_url+id_prefix+document[:drs_file_id]%>')">Copy Manifest Link</a>
+            </dd>
+          <%if del_serv == 'pds'%>
+            <dd class="blacklight-title_extended">
+              <a href="<%= manifest_base_url+'view/'+id_prefix+document[:drs_file_id]%>" target="_blank">Open in Mirador</a>
+            </dd>
+          <%end%>
+          <dd>
+            <a href="https://iiif.io/community/faq/" target="_blank">What is IIIF?</a>
+          </dd>
+        </dl>
+      <%end%>
     </div>
   </div>
 </div>
