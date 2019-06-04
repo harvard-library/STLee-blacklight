@@ -100,6 +100,10 @@ body.blacklight-catalog-show #document h1 {
   }
 }
 
+dl.row {
+  margin-left: 0;
+}
+
 #tools {
   border: 1px solid #d8d8d8;
   font-family: $font-family-serif;
