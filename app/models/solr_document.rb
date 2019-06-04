@@ -20,9 +20,9 @@ class SolrDocument
       result[:resource_type] = resource_type_from_doc doc
       
       result[:digital_format] = field_values_from_node_by_path doc, '$.extension..librarycloud.digitalFormats.digitalFormat', '<br/>', false
-      result[:repository] = field_values_from_node_by_path doc, '$..physicalLocation[?(@["@displayLabel"]=="Harvard repository")]["#text"]', '<br/>', false
-      result[:genre] = field_values_from_node_by_path doc, '$..genre', '<br/>', false
-      result[:publisher] = field_values_from_node_by_path doc, '$..publisher', '<br/>', false
+      result[:repository] = facet_links_from_node_by_path doc, '$..physicalLocation[?(@["@displayLabel"]=="Harvard repository")]["#text"]', 'physicalLocation', '<br/>', false
+      result[:genre] = facet_links_from_node_by_path doc, '$..genre', 'genre', '<br/>', false
+      result[:publisher] = facet_links_from_node_by_path doc, '$..publisher', 'publisher', '<br/>', false
       result[:edition] = field_values_from_node_by_path doc, '$..edition', '<br/>', false
       result[:culture] = field_values_from_node_by_path doc, '$.extension..cultureWrap.culture', '<br/>', false
       result[:style] = field_values_from_node_by_path doc, '$.extension..styleWrap.style', '<br/>', false
@@ -312,11 +312,25 @@ class SolrDocument
     role
   end
   
-  def field_value_from_node node, separator, allowDuplicates
+  def facet_link_from_node node, facet_field, separator, allowDuplicates
     field_value = ''
     field_values = field_value_from_node_to_array node
 
+    if field_values.length > 0 && !allowDuplicates
+      field_values.uniq!
+    end
+    
+    for i in 0..(field_values.length - 1)
+      field_values[i] = link_tag_for_facet field_values[i], facet_field
+    end
 
+    field_value = field_values.join(separator)
+    field_value
+  end
+
+  def field_value_from_node node, separator, allowDuplicates
+    field_value = ''
+    field_values = field_value_from_node_to_array node
 
     if field_values.length > 0 && !allowDuplicates
       field_values.uniq!
@@ -365,6 +379,16 @@ class SolrDocument
     return JsonPath.new(path).on(doc)
   end
 
+  def facet_links_from_node_by_path node, path, facet_field, separator, allowDuplicates
+    fieldValue = ''
+    field_nodes = nodes_from_path node, path
+
+    if !field_nodes.nil?
+      fieldValue = facet_link_from_node field_nodes, facet_field, separator, allowDuplicates
+    end
+    fieldValue
+  end
+
   def field_values_from_node_by_path node, path, separator, allowDuplicates
     fieldValue = ''
     field_nodes = nodes_from_path node, path
@@ -384,7 +408,9 @@ class SolrDocument
   end
 
   def language_from_doc doc
-    field_values_from_node_by_path(doc, '$..language.languageTerm[?(@["@type"] == "text")]["#text"]', '<br/>', false)
+    nodes = nodes_from_path doc, '$..language.languageTerm[?(@["@type"] == "text")]["#text"]'
+    facet_link_from_node nodes, 'languageText', '<br/>', false
+    #field_values_from_node_by_path(doc, '$..language.languageTerm[?(@["@type"] == "text")]["#text"]', '<br/>', false)
   end
 
   def date_from_doc doc
@@ -437,8 +463,8 @@ class SolrDocument
             if origin != ''
               origin += '<br/>'
             end
-            
-            origin += field_value_from_node y['#text'], '<br/>', false
+            origin += facet_link_from_node y['#text'], 'originPlace', '<br/>', false
+            #origin += field_value_from_node y['#text'], '<br/>', false
           end
         end
       end
@@ -593,16 +619,19 @@ class SolrDocument
 
     physical_items = nodes_from_path doc, '$..physicalLocation'
 
+    places = []
     node_to_array(physical_items).each do |x|
       if (!x.nil? && (x["@displayLabel"].nil? || x["@displayLabel"] != "Harvard repository")) && (x["@type"].nil? || x["@type"] != "container")
         place_item = field_value_from_node x, '<br/>', false
         if place_item != "" && place_item != "FIG"
-          if place != ''
-            place += '<br/>'
-          end
-          place += place_item
+          places.push link_tag_for_facet place_item, 'physicalLocation'
         end
       end
+    end
+
+    if places.length > 0
+      places.uniq!
+      place = places.join('<br/>')
     end
 
     geography_items = nodes_from_path doc, '$..hierarchicalGeographic.*'
@@ -641,24 +670,24 @@ class SolrDocument
   end
 
   def series_from_doc doc
-    series = ''
-    
+    series_items = []
     series_nodes = nodes_from_path(doc, '$..relatedItem[?(@["@type"] == "series")]')
 
     series_nodes.each do |x|
+      series = ''
       title = title_from_node x['titleInfo']
       name = name_from_node x['name'], true
-      if series != ''
-        series += '<br/>'
-      end
-      series += title
+      
+      series = title
       series += ' ' + name
+      series_items.push(link_tag_for_facet(series, 'seriesTitle'))
     end
 
-	  series
+    series_items.join('<br/>')
   end
 
   def subjects_from_doc doc
+    subject_items = []
     subjects = ''
     
     subject_nodes = nodes_from_path(doc, '$..subject')
@@ -668,18 +697,12 @@ class SolrDocument
         if !y['name'].nil?
           subject = name_from_node y['name'], false
           if subject != ''
-            if subjects != ''
-              subjects += '<br/>'
-            end
-            subjects += subject
+            subject_items.push(link_tag_for_facet subject, 'subject')
           end
         else
           subject = subject_from_node y
           if subject != ''
-            if subjects != ''
-              subjects += '<br/>'
-            end
-            subjects += subject
+            subject_items.push(link_tag_for_facet subject, 'subject')
           end
         end
       end
@@ -702,16 +725,14 @@ class SolrDocument
         end
 
         if name != ''
-          if subjects != ''
-            subjects += '<br/>'
-          end
-          subjects += name
+          #subject_items.push(link_tag_for_facet(name, 'subject.name'))
+          subject_items.push(name)
         end
       end
     end
 
-
-
+    subject_items.uniq!
+    subjects = subject_items.join('<br/>')
 	  subjects
   end
 
@@ -929,6 +950,11 @@ class SolrDocument
       link_tag += ' ' + label
     end
     link_tag
+  end
+
+  def link_tag_for_facet facet_value, facet_field
+    url = '/catalog?f%5B' + URI::escape(facet_field) + '%5D%5B%5D=' + URI::escape(facet_value)
+    link_tag_for_url url, facet_value, false
   end
 
   def link_tag_for_url url, link_text, new_window
