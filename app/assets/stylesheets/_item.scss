@@ -94,7 +94,7 @@ body.blacklight-catalog-show #document h1 {
   font-size: 15px;
   line-height: 28px;
   margin: 0;
-  padding: 40px;
+  padding: 40px 40px 10px;
   display: block;
   width: 100%;
 
@@ -114,7 +114,7 @@ body.blacklight-catalog-show #document h1 {
   dl {
     border-top: 2px dotted #d8d8d8;
     margin-bottom: 0;
-    padding-top: 20px;
+    padding: 20px 0;
   }
 
   dl dt {
@@ -125,6 +125,7 @@ body.blacklight-catalog-show #document h1 {
     margin: 0;
     padding: 20px 0;
     text-transform: uppercase;
+
   }
 
   a {
@@ -160,16 +161,34 @@ body.blacklight-catalog-show #document h1 {
     a {
         color: #333;
         text-decoration: none;
-        padding: 5px 20px;
+        padding: 8px 20px 6px;
 
         &:hover {
           border-color: transparent;
-        }
-      } 
+      }
+    }
+  }
+
+  .btn-group.open {
+
+    .dropdown-menu {
+      -webkit-border-radius: 0 0 4px 4px;
+      border-radius: 0 0 4px 4px;
+      border-top-width: inherit;
+    }
+
+    .btn-dark {
+      -webkit-border-radius: 4px 4px 0 0;
+      border-radius: 4px 4px 0 0;
+    }
+  }
+
+  .dl-more-details dd {
+    margin-bottom: 18px;
   }
 
   .dl-appears-in {
-    margin-top: 20px;
+    margin-top: 10px;
     padding-bottom: 40px;
   }
 
@@ -178,14 +197,11 @@ body.blacklight-catalog-show #document h1 {
       padding: 20px 0 20px;
   }
 
-}
+  .dl-iiif img {
+    height: 20px;
+    opacity: 0.7;
+  }
 
-
-.iiif_logo > img {
-    height: 25px;
-    float: left;
-    display: flex;
-    padding-right: 5px;
 }
 
 @media (max-width: 992px) {

@@ -76,7 +76,7 @@
         end
         %>
 
-      <dl class="dl-vertical dl-invert dl-more-details clearfix">
+      <dl class="dl-more-details clearfix">
         <%
         if (!document[:hollis_links].nil? && document[:hollis_links].kind_of?(Array) && document[:hollis_links].length > 0)  ||
         (!document[:hollis_image_links].nil? && document[:hollis_image_links].kind_of?(Array) && document[:hollis_image_links].length > 0) ||
@@ -111,13 +111,13 @@
         %>
       </dl>
       <%if document[:delivery_service] == 'ids' or document[:delivery_service] == 'pds'%>
-        <dl class="dl-vertical dl-invert dl-more-details clearfix">
+        <dl class="dl-iiif dl-more-details clearfix">
            <%
               del_serv = document[:delivery_service]
               manifest_base_url = 'https://iiif.lib.harvard.edu/manifests/' 
               id_prefix = (del_serv == 'pds'? 'drs': del_serv) + ':'
             %>
-          <dt class="blacklight-title_extended clearfix">IIIF</dt><%= image_tag("IIIFLogoBlack.svg", alt: "IIIF logo") %>   
+          <dt class="blacklight-title_extended clearfix"><%= image_tag("IIIFLogoBlack.svg", alt: "IIIF") %></dt>
             <script>
               function copyManifestToClipBoard(manifest_url) {
                 const el = document.createElement('textarea');
