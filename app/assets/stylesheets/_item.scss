@@ -50,6 +50,18 @@ body.blacklight-catalog-show #document h1 {
 }
 
 #details {
+  a {
+    border-bottom: 3px solid transparent;
+    color: $breakthrough-blue;
+    text-decoration: none;
+    -webkit-transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
+    transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
+
+    &:hover {
+      border-bottom: 3px solid rgba(5,121,184,0.3);
+    }
+  }
+
   dl {
       display: grid;
       grid-template-columns: max-content auto;
@@ -88,13 +100,17 @@ body.blacklight-catalog-show #document h1 {
   }
 }
 
+dl.row {
+  margin-left: 0;
+}
+
 #tools {
   border: 1px solid #d8d8d8;
   font-family: $font-family-serif;
   font-size: 15px;
   line-height: 28px;
   margin: 0;
-  padding: 40px 40px 10px;
+  padding: 40px 40px 0;
   display: block;
   width: 100%;
 
@@ -112,20 +128,23 @@ body.blacklight-catalog-show #document h1 {
   }
 
   dl {
-    border-top: 2px dotted #d8d8d8;
     margin-bottom: 0;
-    padding: 20px 0;
+    padding: 0;
   }
 
   dl dt {
+    border-top: 2px dotted #d8d8d8;
     color: $medium-gray;
     font-family: $font-family-sans-serif;
     font-size: 14px;
     letter-spacing: 1.5px;
     margin: 0;
-    padding: 20px 0;
+    padding: 40px 0 20px;
     text-transform: uppercase;
+  }
 
+  dd:last-child {
+    padding-bottom: 40px;
   }
 
   a {
@@ -183,18 +202,21 @@ body.blacklight-catalog-show #document h1 {
     }
   }
 
-  .dl-more-details dd {
-    margin-bottom: 18px;
-  }
+  .dl-appears-in, .dl-more-details {
+    padding-bottom: 0;
 
-  .dl-appears-in {
-    margin-top: 10px;
-    padding-bottom: 40px;
+    dd {
+      margin-bottom: 18px;
+
+      &:last-child, &:only-child {
+        margin-bottom: 0;
+      }
+    }
   }
 
   .permalink {
       clear: both;
-      padding: 20px 0 20px;
+      padding: 20px 0 40px;
   }
 
   .dl-iiif img {
