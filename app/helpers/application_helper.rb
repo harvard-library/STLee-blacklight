@@ -19,7 +19,7 @@ module ApplicationHelper
                           <meta name="twitter:title" content="Harvard Digital Collections">
                           <meta name="twitter:site" content="@harvardlibrary">
                           <meta name="twitter:url" content="https://digitalcollections.library.harvard.edu">
-                          <meta name=="twitter:image" content="%s">'
+                          <meta name="twitter:image" content="%s">'
     base_img_url = 'https://library.harvard.edu/sites/default/files/home-background-eclipse.jpg'
     if defined?(@document) and @document[:drs_file_id] 
       ids_download_url = 'https://ids.lib.harvard.edu/ids/iiif/%d/full/1200,/0/default.jpg'
