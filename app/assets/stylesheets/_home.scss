@@ -222,7 +222,8 @@
   font-weight: 500;
   letter-spacing: 1.17px;
   line-height: 19px;
-  padding: 12px 23px;
+  padding: 24px 0px 0px 0px;
+
   text-decoration: none;
   text-transform: uppercase;
   -webkit-transition: all 0.4s ease;
@@ -237,11 +238,6 @@
 
 .hl__button--secondary:focus, .hl__button--secondary:hover {
   background-color: #2a5280;
-}
-
-.hl__button:focus, .hl__button:hover {
-  color: #fff;
-  text-decoration: none;
 }
 
 @media screen and (max-width: 768px) {

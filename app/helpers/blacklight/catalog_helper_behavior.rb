@@ -247,6 +247,10 @@ def image_tag_wout_alt(source, options = {})
     options[:alt] = options.fetch(:alt) { image_alt(src) }
   end
 
+  if options[:alt] == nil 
+    options[:alt] = ' '
+  end
+
   options[:width], options[:height] = extract_dimensions(options.delete(:size)) if options[:size]
   tag("img", options)
 end
