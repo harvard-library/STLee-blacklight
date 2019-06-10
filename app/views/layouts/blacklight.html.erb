@@ -21,7 +21,6 @@
     <%= favicon_link_tag %>
     <%= stylesheet_link_tag "application", media: "all" %>
     <%= javascript_include_tag "application" %>
-    <%= javascript_include_tag "vendor/modernizr" %>
     <%= csrf_meta_tags %>
     <%= content_for(:head) %>
     <link href="//cloud.typenetwork.com/projects/2175/fontface.css/" rel="stylesheet" type="text/css">
@@ -39,6 +38,7 @@
     <%= render :partial=>'/flash_msg', layout: 'shared/flash_messages' %>
 
     <div class="row enclosing-row">
+
       <%= yield %>
     </div>
   </div>

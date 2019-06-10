@@ -1,20 +1,27 @@
+@import "settings";
+
 .searchbar__wrapper {
   width: 100%;
   height: 68px;
   padding: 4px 0 12px;
   margin-bottom: 0;
   background-color: #F3F3F3;
-  font-family: 'TruenoLt';
+  font-family: $font-family-sans-serif-light;
+}
+
+.searchbar__wrapper .row {
+  margin: 0;
 }
 
 .navbar-form {
-  padding-left: 0;
+  padding-left: 20px;
 }
 
 input.searchbar__text[type=text] {
   color: #6C6C6C;
-  font-family: 'TruenoLight', sans-serif;
+  font-family: $font-family-sans-serif-light;
   font-size: rem-calc(16);
+  font-weight: 300;
   height: 44px;
   border: none;
   border-radius: 4px;
@@ -41,9 +48,9 @@ input.searchbar__text[type=text] {
     width: 100%;
   }
   .navbar-form {
-    padding-top: 0;
+    padding: 0 0 0 18px;
   }
   input.searchbar__text[type=text] {
-    width: 100%;
+    width: 92%;
   }
 }

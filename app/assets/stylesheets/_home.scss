@@ -1,13 +1,19 @@
 @import "settings";
 @import "icons";
 
+.blacklight-application-home .row {
+  max-width: 100%;
+  margin: 0;
+}
+
 .homepage-title {
   display: none;
 }
 
 .homepage-title-small {
-  font-family: 'TruenoBold', sans-serif;
+  font-family: $font-family-sans-serif;
   font-size: 52px;
+  font-weight: 700;
   letter-spacing: 2.48px;
   text-transform: uppercase;
 }
@@ -20,9 +26,15 @@
 }
 
 .blacklight-application-home .search-query-form {
-  padding: 106px 20px 157px;
+  padding: 106px 20px 157px 150px;
   margin: 0;
   position: relative;
+}
+
+@media(max-width: 992px) {
+  .blacklight-application-home .search-query-form {
+    padding-left: 40px;    
+  }
 }
 
 .home-photo-credit {
@@ -38,7 +50,7 @@
   padding-left: 30px;
   position: absolute;
   bottom: 0px;
-  right: 10px;
+  right: 100px;
   z-index: 3;
 }
 
@@ -66,8 +78,9 @@
 
 .home-photo-credit a {
   color: #fff;
-  font-family: 'TruenoLight', sans-serif;
+  font-family: $font-family-sans-serif;
   display: block;
+  font-weight: 100;
 }
 
 .home-photo-credit a:hover {
@@ -128,8 +141,9 @@
 }
 
 .blacklight-application-home #main-container h2 {
-  font-family: 'TruenoBold', sans-serif;
+  font-family: $font-family-sans-serif;
   font-size: 32px;
+  font-weight: 700;
   letter-spacing: 2.4px;
   padding-bottom: 20px;
   text-align: center;
@@ -138,7 +152,7 @@
 
 .blacklight-application-home #main-container p {
   color: #414141;
-  font-family: 'Lora', serif;
+  font-family: $font-family-serif;
   font-size: 19px;
   line-height: 32px;
   margin: 0 auto 1.84em;
@@ -151,7 +165,7 @@
   background-size: cover;
   background-position: center center;
   background-repeat: no-repeat;
-  height: 530px;
+  height: 515px;
   margin: 0;
   padding: 0;
   position: relative;
@@ -184,29 +198,6 @@
   margin-bottom: 10px;
 }
 
-.home-page-list:not(.home-page-list__formats) {
-  a {
-    color: $rouge;
-    font-size: rem-calc(16);
-  }
-}
-
-.home-page-list__formats {
-  li {
-    position: relative;
-  }
-  img {
-    position: absolute;
-    top: 3px;
-  }
-  a {
-    font-size: rem-calc(18);
-    color: #1e1e1e;
-    position: relative;
-    left: 30px;
-  }
-}
-
 .blacklight-application-home .lower-background {
   background-color: white;
   h2 {
@@ -215,36 +206,6 @@
     padding: 30px 0;
     font-family:  "Benton Sans Bd", Helvetica, Roboto, Arial, sans-serif;
   }
-}
-
-.home-page-spotlight-projects {
-  .spotlight-card {
-    background-color: #F3F3F1;
-    border-top: 5px solid $rouge;
-    min-height: 420px;
-    max-width: 283px;
-    position: relative;
-  }
-}
-
-.spotlight-card h3 {
-  line-height: .85;
-  padding: 5px 40px 0 20px;
-}
-
-.spotlight-card h3 a {
-  font-size: rem-calc(20);
-  line-height: rem-calc(20);
-  color: $rouge;
-  font-weight: bold;
-}
-
-.spotlight-card a.view {
-  position: absolute;
-  color: $rouge;
-  font-size: rem-calc(14);
-  bottom: 15px;
-  left: 20px;
 }
 
 .feedback-solicitation {
@@ -256,9 +217,9 @@
   border-radius: 4px;
   cursor: pointer;
   display: inline-block;
-  font-family: "TruenoRegular",sans-serif;
+  font-family: $font-family-sans-serif;
   font-size: 14px;
-  font-weight: 700;
+  font-weight: 500;
   letter-spacing: 1.17px;
   line-height: 19px;
   padding: 12px 23px;

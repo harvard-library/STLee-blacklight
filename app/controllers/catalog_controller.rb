@@ -7,6 +7,13 @@ class CatalogController < ApplicationController
 
 
   configure_blacklight do |config|
+    config.view.gallery.partials = [:index_header]
+    config.view.masonry.partials = [:index]
+    config.view.gallery.icon_class = 'fa-th'
+    config.view.masonry.icon_class = 'fa-th-list'
+
+    config.show.tile_source_field = :content_metadata_image_iiif_info_ssm
+    config.show.partials.insert(1, :openseadragon)
 
     ## Class for sending and receiving requests from a search index
     config.repository_class = Harvard::LibraryCloud::Repository
@@ -68,33 +75,39 @@ class CatalogController < ApplicationController
     #config.add_index_field 'content_model', label: 'Type'
     #config.add_index_field 'owner_display', label: 'Harvard Repository'
     #config.add_index_field 'abstract', label: 'Abstract'
-	config.add_index_field 'date', label: 'Date'
+	  config.add_index_field 'name', label: 'Creator / Contributor'
+    config.add_index_field 'origin', label: 'Place of Origin'
+    config.add_index_field 'publisher', label: 'Publisher'
+    config.add_index_field 'date', label: 'Date'
 
     # Fields to be displayed in the show (single result) view
     # The ordering of the field names is the order of the display
     #config.add_show_field 'title_display', label: 'Title'
   config.add_show_field 'title_extended', label: 'Title'
-	config.add_show_field 'name', label: 'Creator/Contributor'
-	config.add_show_field 'date', label: 'Date'
-	config.add_show_field 'description', label: 'Description'
-  config.add_show_field 'language', label: 'Language'
+	config.add_show_field 'name', label: 'Creator / Contributor'
 	config.add_show_field 'origin', label: 'Place of Origin'
-	#config.add_show_field 'permalink', label: 'Permalink'
-	config.add_show_field 'notes', label: 'Notes'
-  config.add_show_field 'abstract', label: 'Abstract'
-	config.add_show_field 'digital_format', label: 'Digital Format'
-  config.add_show_field 'repository', label: 'Repository'
-  config.add_show_field 'genre', label: 'Genre'
   config.add_show_field 'publisher', label: 'Publisher'
+  config.add_show_field 'date', label: 'Date'
   config.add_show_field 'edition', label: 'Edition'
-  config.add_show_field 'culture', label: 'Culture'
-  config.add_show_field 'style', label: 'Style'
-  
-  config.add_show_field 'place', label: 'Place'
+  config.add_show_field 'language', label: 'Language'
+  config.add_show_field 'description', label: 'Description'
   config.add_show_field 'subjects', label: 'Subjects'
+  config.add_show_field 'place', label: 'Places'
+  config.add_show_field 'abstract', label: 'Abstract'
+	config.add_show_field 'genre', label: 'Genre'
+  config.add_show_field 'culture', label: 'Culture'
+	config.add_show_field 'style', label: 'Style'
+	config.add_show_field 'notes', label: 'Notes'
   config.add_show_field 'series', label: 'Series'
-  config.add_show_field 'related_links', label: 'Related Links'
+  config.add_show_field 'repository', label: 'Repository'
   config.add_show_field 'additional_digital_items', label: 'Additional Digital Items'
+  
+  
+  
+  #config.add_show_field 'permalink', label: 'Permalink'
+  
+  #config.add_show_field 'related_links', label: 'Related Links'
+  
   
     #config.add_show_field 'resource_type', label: 'Format'
     #config.add_show_field 'content_model', label: 'Type'

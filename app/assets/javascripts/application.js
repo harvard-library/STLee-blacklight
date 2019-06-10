@@ -18,24 +18,8 @@
 //= require blacklight/blacklight
 
 //= require_tree .
-//= require foundation
 
 $(document).on('turbolinks:load', function() {
-    $(function(){ $(document).foundation({
-        accordion: {
-            active_class: 'active',
-            // allow multiple accordion panels to be active at the same time
-            multi_expand: true,
-            // allow accordion panels to be closed by clicking on their headers
-            // setting to false only closes accordion panels when another is opened
-            toggleable: true,
-            callback: function (accordion) {
-                setFacetAccordionState($('#facets .accordion-navigation.active').length > 0);
-            }
-        }
-        
-        }, 'reflow');
-    });
 
     setFacetAccordionState($('#facets .accordion-navigation.active').length > 0);
 

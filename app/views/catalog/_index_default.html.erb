@@ -4,7 +4,8 @@
   
   <% index_fields(document).each do |field_name, field| -%>
     <% if should_render_index_field? document, field %>
-	    <dd class="blacklight-<%= field_name.parameterize %>"><%= doc_presenter.field_value field_name %></dd>
+      <dt><%= field.label %></dt>
+	    <dd class="blacklight-<%= field_name.parameterize %>"><%=raw CGI.unescapeHTML doc_presenter.field_value field_name %></dd>
     <% end -%>
   <% end -%>
 
