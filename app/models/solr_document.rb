@@ -431,6 +431,10 @@ class SolrDocument
   def date_from_date_node node
 	  date = ''
 
+    if node.nil?
+      return date
+    end
+
 		if node.kind_of?(Array) 
       node.each do |x|
         date = date_from_date_node x
