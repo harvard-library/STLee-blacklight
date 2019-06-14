@@ -173,6 +173,7 @@ dl.row {
   }
 
   .dropdown-menu {
+    font-family: $font-family-sans-serif;
     margin-top: 0;
     min-width: 258px;
     padding: 0;
@@ -184,6 +185,42 @@ dl.row {
 
         &:hover {
           border-color: transparent;
+      }
+    }
+
+    &.sequence-options {
+      padding: 15px;
+
+      input[type=text] {
+        -webkit-border-radius: 4px;
+        border-radius: 4px;
+        border: 1px solid #d8d8d8;
+        margin-top: 10px;
+        padding-left: 4px;
+      }
+
+      #email_text_form {
+        font-weight: 300;
+        line-height: 22px;
+        padding: 10px 0;
+      }
+
+      #email_field {
+        line-height: 28px;
+        width: 100%;
+      }
+
+      #invalid_email_text, #incorrect_page_range {
+        color: $red;
+        line-height: 22px;
+        margin-bottom: 10px;
+      }
+
+      button {
+        background-color: transparent;
+        border: none;
+        color: $breakthrough-blue;
+        margin-top: 10px;
       }
     }
   }
