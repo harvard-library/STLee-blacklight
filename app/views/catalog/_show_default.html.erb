@@ -8,7 +8,12 @@
         <% document_show_fields(document).each do |field_name, field| -%>
           <% if should_render_show_field? document, field %>
             <dt class="blacklight-<%= field_name.parameterize %>"><%= render_document_show_field_label document, field: field_name %></dt>
-            <dd class="blacklight-<%= field_name.parameterize %>"><%=raw CGI.unescapeHTML doc_presenter.field_value field_name %></dd>
+            <dd class="blacklight-<%= field_name.parameterize %>"><%=raw CGI.unescapeHTML doc_presenter.field_value field_name %>
+              <div><%= field_name%></div>
+              <%= CGI.unescapeHTML doc_presenter.field_value field_name%>
+              <%= generate_report_button_if_metadata_match field_name, field, 'Language', 'Undefined', nil%>
+              
+            </dd>
           <% end -%>
         <% end -%>
       </dl>
@@ -100,7 +105,6 @@
                       return msg?msg.data:"";
                     }
 
-                    //TODO: make it so the dropdown menu stays open if the click did not result 
                     function testRangeBoundariesAndLinkToPrintPDF(){
                       const maxPage = <%=number_of_pages%>;
                       let documentId = <%= document[:drs_file_id]%>;

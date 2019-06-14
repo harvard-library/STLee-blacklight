@@ -13,6 +13,13 @@ module ApplicationHelper
   	end
   end
 
+  def generate_report_button_if_metadata_match(fieldname, field, fieldname_to_check, fieldvalue_to_check, qualtrics_link)
+    if fieldname == fieldname_to_check and field == fieldvalue_to_check 
+      ('<button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Report this record</button>').html_safe
+    end
+  end
+
+
   def generate_twitter_meta_tags
     twitter_meta_tags = '<!-- BEGIN TWITTER SUMMARY CARD -->
                           <meta name="twitter:card" content="summary_large_image">
