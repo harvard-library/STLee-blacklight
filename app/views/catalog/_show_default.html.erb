@@ -63,16 +63,16 @@
                   manifest_json = retrieve_still_image_json_metadata manifest_url
                   number_of_pages = manifest_json['structures'][0]['canvases'].length
                 %>
-                <div class="dropdown-menu">
+                <div class="dropdown-menu sequence-options">
                   <div id="incorrect_page_range" style = "display:none" value='<%=number_of_pages%>'>
                     Please select a page sequence range between 1-<%=number_of_pages%> pages.
                   </div>
                   From seq <%= text_field :range, :start, size: "5" ,:value => 1 %> to seq <%= text_field :range, :end, size: "5", :value => number_of_pages%>
                   <div id='email_text_form' style = "display:none">
-                    Please enter your email, we will send you a download link once your pages are ready to download
+                    Please enter your email, we will send you a download link once your pages are ready to download:
                     <%= text_field :email, :field%>
                   </div>
-                  <div id='unvalid_email_text' style="display:none">
+                  <div id='invalid_email_text' style="display:none">
                     The email you entered was not valid.
                   </div>
 
@@ -128,7 +128,7 @@
                           document.getElementById('email_text_form').style.display = "block";
                           return;
                         }else if (!validateEmail(emailValue)){
-                          document.getElementById('unvalid_email_text').style.display = "block";
+                          document.getElementById('invalid_email_text').style.display = "block";
                           return;
                         }else{
                           let xmlhttp = null;
@@ -152,7 +152,7 @@
                       clearValuesHideText(maxPage);
                     }
                   </script>
-                  <button type='button' onclick="testRangeBoundariesAndLinkToPrintPDF()">Download</button>
+                  <button type="button" onclick="testRangeBoundariesAndLinkToPrintPDF()"><i class="fa fa-download" aria-hidden="true"></i> Download</button>
                 </div>
                 <%end%>
             </div>
