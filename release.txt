@@ -1,3 +1,16 @@
+6.11.2-lts-3 (6/11/2019) PP/MC/ED/CV
+--Added clickable metadata values on item detail page
+--Added IIIF Section at the bottom of the ‘related tools & links’ box for still image content
+--Added Twitter card meta tags
+--Removed altRepGroup attribute value from ‘Subjects’ metadata
+--Removed ‘creator’ roleTerm from ‘creator’ metadata field
+--Fixed duplicate values in ‘Genre’ and ‘Repository’ metadata
+--Search results display alternative title if no primary title has been found
+--Styling improvements to hyperlink in search views, related tools & link box and item detail metadata
+--Added ‘no results page’ when there is no results to display in search view page
+--Visual updates to search results and sign in page
+
+
 6.11.2-lts-2 (5/28/2019) PP/MC/ED/CV
 --Updated item detail metadata layout for mobile
 --Fixed masonry icon color when toggled
@@ -14,6 +27,7 @@
 --Replaced Foundation Framework references in markup with Bootstrap
 --Improved mobile device layout rendering
 --Added DCP Google Analytics Tracking ID
+--Added box for Related Links on right side of item detail pages
 --Switched List/Grid/Masonry icons to use Font Awesome
 --Update the metadata for list view to include: Title, Creator/Contributor, Place of Origin, Publisher, Date
 --Added a span with a class around the alternative titles.

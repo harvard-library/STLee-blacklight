@@ -101,11 +101,20 @@ module Harvard::LibraryCloud
 		m[1] if m
 	end
 
+	def facet_param_formatted facet_field
+		m = /\{.*\}(\S+)$/.match(facet_field)
+		m[1] if m
+	end
+
     def facet_query_params_to_lc fq
       results = {}
       fq.each do |x|
         m = /\{!term f=(\S*).*\}(.*)$/.match(x)
-        results[m[1] + '_exact'] = m[2]
+        if m[1] == 'languageText' || m[1] == 'originPlace' || m[1] == 'subject' || m[1] == 'seriesTitle'
+          results[m[1]] = m[2]
+        else
+          results[m[1] + '_exact'] = m[2]
+        end
       end if fq
       results
     end
