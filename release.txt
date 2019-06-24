@@ -1,4 +1,14 @@
-6.11.2-lts-4 (6/20/2019) PP/MC/ED/CV
+6.11.2-lts-3 (6/25/2019) PP/MC/ED/CV
+--Added clickable metadata values on item detail page
+--Added IIIF Section at the bottom of the ‘related tools & links’ box for still image content
+--Added Twitter card meta tags
+--Removed altRepGroup attribute value from ‘Subjects’ metadata
+--Removed ‘creator’ roleTerm from ‘creator’ metadata field
+--Fixed duplicate values in ‘Genre’ and ‘Repository’ metadata
+--Search results display alternative title if no primary title has been found
+--Styling improvements to hyperlink in search views, related tools & link box and item detail metadata
+--Added ‘no results page’ when there is no results to display in search view page
+--Visual updates to search results and sign in page
 --Further refinements to IIIF download options
 --Devise gem updated to 4.4.0
 --Fix for nil date nodes
@@ -12,19 +22,6 @@
 --Fixed displayLabel attribute value display
 --Updated options for alternate title displays
 --Enhanced sublabel displays for the Description field 
-
-
-6.11.2-lts-3 (6/11/2019) PP/MC/ED/CV
---Added clickable metadata values on item detail page
---Added IIIF Section at the bottom of the ‘related tools & links’ box for still image content
---Added Twitter card meta tags
---Removed altRepGroup attribute value from ‘Subjects’ metadata
---Removed ‘creator’ roleTerm from ‘creator’ metadata field
---Fixed duplicate values in ‘Genre’ and ‘Repository’ metadata
---Search results display alternative title if no primary title has been found
---Styling improvements to hyperlink in search views, related tools & link box and item detail metadata
---Added ‘no results page’ when there is no results to display in search view page
---Visual updates to search results and sign in page
 
 
 6.11.2-lts-2 (5/28/2019) PP/MC/ED/CV
