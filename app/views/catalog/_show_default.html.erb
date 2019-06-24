@@ -17,39 +17,140 @@
   <div class="col-lg-4">
     <div id="tools" class="record-tools">
       <h2 class="clearfix">Tools &amp; Related Links</h2>
-          <%if document[:delivery_service] == 'ids'%>
-          <div class="btn-group">
-          <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-             Download This Item <span class="caret"></span>
-           </button>
-           <ul class="dropdown-menu">
-              <%image_base_url = 'https://ids.lib.harvard.edu/ids/iiif/' + document[:drs_file_id]
-              json_answer = retrieve_still_image_json_metadata(image_base_url+ '/info.json')
-              if json_answer
-                size_and_labels = [[300, "Small: %d x %d px"],[800, "Medium: %d x %d px"],
-                                    [1200, "Large: %d x %d px"],[2400, "X-Large: %d x %d px"]]
-                max_width = json_answer['maxWidth'].to_i
-                max_height = json_answer['maxHeight'].to_i
-                ratio = json_answer['height']/json_answer['width'].to_f
-                download_url = image_base_url + '/full/%d,/0/default.jpg?download&caption'
-                for i in 0..size_and_labels.length-1 do
-                  size_elem = size_and_labels[i]
-                  if size_elem[0] <= max_width
-                  %>
-                    <li>
-                      <a href="<%= download_url % size_elem[0] %>"><%= size_elem[1] % [size_elem[0], (ratio*(size_elem[0].to_f)).floor] %>
-                      </a>
-                    </li>
-                  <%elsif i != size_and_labels.length-1 and max_width < size_and_labels[i+1][0]%>
-                    <li>
-                      <a href="<%= download_url % size_elem[0] %>"><%= size_elem[1] % [max_width, (ratio*(max_width.to_f)).floor] %>
-                      </a>
-                    </li>
-                    <%break 'break'
-                  end
-                end
-              end%>
-            </ul>
+          <div class="btn-group" id='idsDropdown'>
+            <%if document[:delivery_service] == 'ids' or document[:delivery_service] == 'pds'%>
+              <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                 Download This Item <span class="caret"></span>
+               </button>
+               <%if document[:delivery_service] == 'ids'%>
+               <ul class="dropdown-menu">
+                  <%image_base_url = 'https://ids.lib.harvard.edu/ids/iiif/' + document[:drs_file_id]
+                  json_answer = retrieve_still_image_json_metadata(image_base_url+ '/info.json')
+                  if json_answer
+                    size_and_labels = [[300, "Small: %d x %d px"],[800, "Medium: %d x %d px"],
+                                        [1200, "Large: %d x %d px"],[2400, "X-Large: %d x %d px"]]
+                    max_width = json_answer['maxWidth'].to_i
+                    max_height = json_answer['maxHeight'].to_i
+                    ratio = json_answer['height']/json_answer['width'].to_f
+                    download_url = image_base_url + '/full/%d,/0/default.jpg?download&caption'
+                    for i in 0..size_and_labels.length-1 do
+                      size_elem = size_and_labels[i]
+                      if size_elem[0] <= max_width
+                      %>
+                        <li>
+                          <a href="<%= download_url % size_elem[0] %>"><%= size_elem[1] % [size_elem[0], (ratio*(size_elem[0].to_f)).floor] %>
+                          </a>
+                        </li>
+                      <%elsif i != size_and_labels.length-1 and max_width < size_and_labels[i+1][0]%>
+                        <li>
+                          <a href="<%= download_url % size_elem[0] %>"><%= size_elem[1] % [max_width, (ratio*(max_width.to_f)).floor] %>
+                          </a>
+                        </li>
+                        <%break 'break'
+                      end
+                    end
+                  end%>
+                </ul>
+                <%
+                else
+                  #in the case of a pds content, we need a different behavior for the download button.
+                  manifest_url = 'https://iiif.lib.harvard.edu/manifests/drs:'+document[:drs_file_id]
+                  manifest_json = retrieve_still_image_json_metadata manifest_url
+                  number_of_pages = manifest_json['structures'][0]['canvases'].length
+                %>
+                <div class="dropdown-menu sequence-options">
+                  <div id="incorrect_page_range" style = "display:none" value='<%=number_of_pages%>'>
+                    Please select a page sequence range between 1-<%=number_of_pages%> pages.
+                  </div>
+                  From seq <%= text_field :range, :start, size: "5" ,:value => 1 %> to seq <%= text_field :range, :end, size: "5", :value => number_of_pages%>
+                  <div id='email_text_form' style = "display:none">
+                    Please enter your email, we will send you a download link once your pages are ready to download:
+                    <%= text_field :email, :field%>
+                  </div>
+                  <div id='invalid_email_text' style="display:none">
+                    The email you entered was not valid.
+                  </div>
+
+                  <script>
+                    // this prevents the dropdown menu for pds content from closing when clicking something within it.
+                    $('#idsDropdown .dropdown-menu').on({
+                      "click":function(e){
+                          e.stopPropagation();
+                        }
+                    });
+
+                    function clearValuesHideText(maximum_page){
+                      document.getElementById('email_field').value = '';
+                      document.getElementById("range_start").value = '1';
+                      document.getElementById("range_end").value = maximum_page;
+                      document.getElementById("incorrect_page_range").style.display = "none";
+                      document.getElementById('email_text_form').style.display = "none";
+                    }
+
+                    function extractMessageFromEmailDLR(text){
+                      let parser = new DOMParser();
+                      let xmlDoc = parser.parseFromString(text,"text/xml");
+                      let msg = null;
+                      if(xmlDoc.getElementsByTagName("response").length > 0){
+                        msg = xmlDoc.getElementsByTagName("response")[0].firstChild;
+                      }else if(xmlDoc.getElementsByTagName("message").length > 0){
+                        msg = xmlDoc.getElementsByTagName("message")[0].firstChild;
+                      }
+                      // .firstChild returns an object whose string content can be accessed by .data attribute.
+                      return msg?msg.data:"";
+                    }
+
+                    //TODO: make it so the dropdown menu stays open if the click did not result 
+                    function testRangeBoundariesAndLinkToPrintPDF(){
+                      const maxPage = <%=number_of_pages%>;
+                      let documentId = <%= document[:drs_file_id]%>;
+                      let validateEmail = function(email) {
+                        var re = /^([a-zA-Z0-9_.+-])+\@(([a-zA-Z0-9-])+\.)+([a-zA-Z0-9]{2,4})+$/;
+                        return re.test(email);
+                       }
+                      let startRange = parseInt(document.getElementById("range_start").value);
+                      let endRange = parseInt(document.getElementById("range_end").value);
+                      if (isNaN(startRange) || isNaN(endRange) || (startRange < 1) ||(startRange > endRange) || (endRange > maxPage)){
+                        document.getElementById("incorrect_page_range").style.display = "block";
+                        return;
+                      } 
+
+                      let printUrl = 'https://iiif.lib.harvard.edu/proxy/printpdf/'+documentId;
+                      let emailValue = document.getElementById('email_field').value;
+
+                      printUrl += '?printOpt=range&start='+startRange+'&end='+endRange;
+                      if((endRange - startRange >= 10)){
+                        if (!emailValue){
+                          document.getElementById('email_text_form').style.display = "block";
+                          return;
+                        }else if (!validateEmail(emailValue)){
+                          document.getElementById('invalid_email_text').style.display = "block";
+                          return;
+                        }else{
+                          let xmlhttp = null;
+                          if (window.XMLHttpRequest) {// code for IE7+, Firefox, Chrome, Opera, Safari
+                            xmlhttp=new XMLHttpRequest();
+                          }
+                          else {// code for IE6, IE5
+                            xmlhttp=new ActiveXObject("Microsoft.XMLHTTP");
+                          }
+                          xmlhttp.onreadystatechange = function() {
+                              if (xmlhttp.readyState == XMLHttpRequest.DONE) {
+                                  alert(extractMessageFromEmailDLR(xmlhttp.responseText));
+                              }
+                          }
+                          xmlhttp.open('GET',(printUrl+'&email='+emailValue),true);
+                          xmlhttp.send();
+                        }
+                      }else{
+                        window.open(printUrl, '_blank');
+                      }
+                      clearValuesHideText(maxPage);
+                    }
+                  </script>
+                  <button type="button" onclick="testRangeBoundariesAndLinkToPrintPDF()"><i class="fa fa-download" aria-hidden="true"></i> Download</button>
+                </div>
+                <%end%>
             </div>
           <%end%>
         <%
@@ -141,6 +242,10 @@
           </dd>
         </dl>
       <%end%>
+    </div>
+    <div id="feedback" class="record-tools">
+      <h2 class="clearfix">Feedback</h2>
+      <p><a href="https://harvard.az1.qualtrics.com/jfe/form/SV_ahGZ04EDLTP2TPf">Tell us what you think</a></p>
     </div>
   </div>
 </div>

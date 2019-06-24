@@ -38,10 +38,14 @@ module Harvard::LibraryCloud
       opts[:method] ||= :get
       raise "The :data option can only be used if :method => :post" if opts[:method] != :post and opts[:data]
 
-      if opts[:params][:preserve_original]
+
+      puts 'path=' + path.inspect
+      puts 'opts=' + opts.inspect
+
+      if !opts[:params].nil? && opts[:params][:preserve_original]
         params = opts[:params]
       else
-        params = params_to_lc(opts[:params]) unless opts[:params].empty?
+        params = params_to_lc(opts[:params]) unless opts[:params].nil? || opts[:params].empty?
       end
 
       Faraday.new(:url => @base_uri + path) do |faraday|
@@ -72,8 +76,11 @@ module Harvard::LibraryCloud
       results[:accessFlag] = 'P'
       # Don't support sort parameters for now
       # results[:sort] = sort_params_to_lc(params[:sort]) if params[:sort]
+      
       if params[:search_field] == 'all_fields'
-        results[:q] = params[:q] if params[:q]
+        search_term = params[:q].to_s
+        search_term = search_term.gsub(/[~!^()-\[\]{}\\"\/]/,'')
+        results[:q] = search_term if search_term && search_term.length > 0
       else
         results[params[:search_field]] = params[:q] if params[:q]
       end
@@ -101,16 +108,11 @@ module Harvard::LibraryCloud
 		m[1] if m
 	end
 
-	def facet_param_formatted facet_field
-		m = /\{.*\}(\S+)$/.match(facet_field)
-		m[1] if m
-	end
-
     def facet_query_params_to_lc fq
       results = {}
       fq.each do |x|
         m = /\{!term f=(\S*).*\}(.*)$/.match(x)
-        if m[1] == 'languageText' || m[1] == 'originPlace' || m[1] == 'subject' || m[1] == 'seriesTitle'
+        if m[1] == 'languageText' || m[1] == 'subject' || m[1] == 'seriesTitle'
           results[m[1]] = m[2]
         else
           results[m[1] + '_exact'] = m[2]

@@ -161,15 +161,17 @@ class SolrDocument
 
   def alternative_title_from_doc doc
     alternativeTitle = ''
+    title_info_items = nodes_from_path doc, '$..titleInfo'
+    node_to_array(title_info_items).each do |x|
+      node_to_array(x).each do |y|  
+        if (!y['@type'].nil? && y['@type'] != '') || (!y['@displayLabel'].nil? && (y['@displayLabel'] == 'Common Name' || y['@displayLabel'] == 'Original Name'))
+          title = title_from_node y
+		      if title != '' && alternativeTitle != ''
+		        alternativeTitle += '<br/><br/>'
+		      end
 
-    node_to_array(doc[:titleInfo]).each do |x|
-      if !x['@type'].nil? && x['@type'] != ''
-        title = title_from_node x
-		    if title != '' && alternativeTitle != ''
-		      alternativeTitle += '<br/><br/>'
-		    end
-
-        alternativeTitle += '<span class="alternative-title">' + sub_label_for_field('Alternative Title', title) + '</span>'
+          alternativeTitle += '<span class="alternative-title">' + sub_label_for_field('Alternative Title', title) + '</span>'
+        end
       end
     end
 
@@ -431,6 +433,10 @@ class SolrDocument
   def date_from_date_node node
 	  date = ''
 
+    if node.nil?
+      return date
+    end
+
 		if node.kind_of?(Array) 
       node.each do |x|
         date = date_from_date_node x
@@ -604,11 +610,37 @@ class SolrDocument
     end
 
     materials = field_values_from_node_by_path doc, '$.extension..indexingMaterialsTechSet.termMaterialsTech', '<br/>', false
+    otherMaterials = field_values_from_node_by_path doc, '$..physicalDescription..form[?(@["@type"] == "materialsTechniques" || @["@type"] == "support")]', '<br/>', false
+
+    if materials != '' && otherMaterials != ''
+      materials += '<br/>'
+    end
+    materials += otherMaterials
+
     if materials != ''
       if description != ''
         description += '<br/>'
       end
-      description += sub_label_for_field 'Materials', materials
+      description += sub_label_for_field 'Materials/Techniques', materials
+    end
+
+    form_items = nodes_from_path doc, '$..physicalDescription..form'
+    if !form_items.nil?
+      form_values = ''
+      form_items.each do |x|
+        node_to_array(x).each do |y|
+          if y['@type'].nil?
+            form_values += field_value_from_node y, '<br/>', false
+          end
+        end
+      end
+
+      if form_values != ''
+        if description != ''
+          description += '<br/>'
+        end
+        description += form_values
+      end
     end
 
     description
@@ -700,9 +732,15 @@ class SolrDocument
             subject_items.push(link_tag_for_facet subject, 'subject')
           end
         else
-          subject = subject_from_node y
-          if subject != ''
-            subject_items.push(link_tag_for_facet subject, 'subject')
+          subject = subject_from_node y, ''
+          if subject['subject'] != ''
+            subject_text = ''
+            if subject['prefix'] != ''
+              subject_text = subject['prefix'] + ': '
+            end
+            subject_text += link_tag_for_facet subject['subject'], 'subject'
+            
+            subject_items.push(subject_text)
           end
         end
       end
@@ -736,39 +774,53 @@ class SolrDocument
 	  subjects
   end
 
-  def subject_from_node node
-    subject = ''
+  def subject_from_node node, field_name
+    subject_item = {"subject" => "", "prefix" => ""}
+    subject_part = {"subject" => "", "prefix" => ""}
 
     if node.kind_of?(Hash)
       node.each do |key, value|
         if key == "geographicCode" || key == '@authority' || key == '@altRepGroup' 
           next
         end
-        subject_part = subject_from_node value
-        if subject_part != ''
-          if subject != ''
-            subject += '--'
-          end
-          subject += subject_part
-        end
+        subject_part = subject_from_node value, key
+        subject_item = append_subject_part subject_item, subject_part
       end
     elsif node.kind_of?(Array)
       node.each do |x|
-        subject_part = subject_from_node x
-        if subject_part != ''
-          if subject != ''
-            subject += '--'
-          end
-          subject += subject_part
-        end
+        subject_part = subject_from_node x, ''
+        subject_item = append_subject_part subject_item, subject_part
       end
-    elsif node.kind_of?(String)
-      subject = node
+    elsif node.kind_of?(String) || node.kind_of?(Integer)
+      if field_name == '@displayLabel'
+        subject_part["prefix"] = node.to_s()
+      else
+        subject_part["subject"] = node.to_s()
+      end
+      subject_item = append_subject_part subject_item, subject_part
     end
-    
-    subject
+        
+    subject_item
   end
 
+  def append_subject_part subject_item, subject_part
+    if !subject_item.nil? && !subject_part.nil?
+      if subject_part["subject"] != ''
+        if subject_item["subject"] != ''
+          subject_item["subject"] += '--'
+        end
+        subject_item["subject"] += subject_part["subject"]
+      end
+      if subject_part["prefix"] != ''
+        if subject_item["prefix"] != ''
+          subject_item["prefix"] += ' '
+        end
+        subject_item["prefix"] += subject_part["prefix"]
+      end
+    end
+
+    subject_item
+  end
 
 
   def extension_field_from_doc doc, field

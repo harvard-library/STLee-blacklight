@@ -1,4 +1,4 @@
-6.11.2-lts-3 (6/11/2019) PP/MC/ED/CV
+6.11.2-lts-3 (6/25/2019) PP/MC/ED/CV
 --Added clickable metadata values on item detail page
 --Added IIIF Section at the bottom of the ‘related tools & links’ box for still image content
 --Added Twitter card meta tags
@@ -9,6 +9,19 @@
 --Styling improvements to hyperlink in search views, related tools & link box and item detail metadata
 --Added ‘no results page’ when there is no results to display in search view page
 --Visual updates to search results and sign in page
+--Further refinements to IIIF download options
+--Devise gem updated to 4.4.0
+--Fix for nil date nodes
+--Added Google Tag Manager code global layout erb template
+--Fix for empty search errors
+--Added search input validation to handle special characters
+--Added new option to Download feature to account for PDS sequenced objects
+--Description field's "materials/techniques" sub-label enhanced with additional types
+--Added a Feedback component to the Item Detail 
+--Numerous spacing and layout refinements to Item Detail page styles
+--Fixed displayLabel attribute value display
+--Updated options for alternate title displays
+--Enhanced sublabel displays for the Description field 
 
 
 6.11.2-lts-2 (5/28/2019) PP/MC/ED/CV
