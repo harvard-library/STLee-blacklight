@@ -1,0 +1,23 @@
+<%# Link showing page number
+  - available local variables
+    page:          a page object for "this" page
+    url:           url to this page
+    current_page:  a page object for the currently displayed page
+    num_pages:     total number of pages
+    per_page:      number of items to fetch per page
+    remote:        data-remote
+-%>
+<li class="<%= 'active' if page.current? %>">
+  <% if page.current? %>
+    <span><%= number_with_delimiter(page.to_s) %></span>
+  <% else %>
+    <%
+    link_text = number_with_delimiter(page.to_s)
+    if page.number == @jump_page
+      link_text = '...'
+    end
+    %>
+    <%= link_to link_text, url, opts = {:remote => remote, :rel => page.next? ? 'next' : page.prev? ? 'prev' : nil} %>
+  <% end %>
+</li>
+

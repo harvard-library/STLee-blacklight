@@ -31,7 +31,7 @@ module Blacklight::UrlHelperBehavior
       # truncate will behave strangely on non utf-8 string. 
       label = truncate(strip_tags(label.force_encoding('utf-8')), :length => opts[:truncate])
     end
-    link_to label, url_for_document(doc), document_link_params(doc, opts)
+    link_to raw(CGI.unescapeHTML(label)), url_for_document(doc), document_link_params(doc, opts)
   end
 
   def document_link_params(doc, opts)

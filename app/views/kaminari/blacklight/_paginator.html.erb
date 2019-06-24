@@ -9,14 +9,30 @@
    Paginator now using the Bootstrap paginator class
 -%>
 
+<%
+  pages_to_show = 10
+  pagination_index = (current_page.to_i - 1) / pages_to_show
+
+  start = (pagination_index * pages_to_show) + 1
+  stop = start + pages_to_show - 1
+  stop = [stop, total_pages].min
+
+  @jump_page = ((pagination_index + 1) * pages_to_show) + 1
+  if @jump_page > total_pages
+    @jump_page = 0
+  end
+
+  jump_page = @jump_page
+%>
+
 <%= paginator.render do -%>
   <ul class="pagination">
     <%= prev_page_tag %>
     <% each_relevant_page do |page| -%>
       <% if page.left_outer? || page.right_outer? || page.inside_window? -%>
-        <%= page_tag page %>
-      <% elsif !page.was_truncated? -%>
-        <%= gap_tag %>
+        <%if (page.number >= start && page.number <= stop) || page.number == jump_page -%>
+          <%= page_tag page %>
+        <% end -%>
       <% end -%>
     <% end -%>  
     <%= next_page_tag  %>
