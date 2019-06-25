@@ -76,8 +76,11 @@ module Harvard::LibraryCloud
       results[:accessFlag] = 'P'
       # Don't support sort parameters for now
       # results[:sort] = sort_params_to_lc(params[:sort]) if params[:sort]
+      
       if params[:search_field] == 'all_fields'
-        results[:q] = params[:q] if params[:q] && params[:q].to_s().length > 0
+        search_term = params[:q].to_s
+        search_term = search_term.gsub(/[~!^()-\[\]{}\\"\/]/,'')
+        results[:q] = search_term if search_term && search_term.length > 0
       else
         results[params[:search_field]] = params[:q] if params[:q]
       end

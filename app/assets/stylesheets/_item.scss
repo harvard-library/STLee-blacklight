@@ -62,6 +62,12 @@ body.blacklight-catalog-show #document h1 {
     }
   }
 
+  br {
+    content: " ";
+    display: block;
+    margin-bottom: 10px;
+  }
+
   dl {
       display: grid;
       grid-template-columns: max-content auto;
@@ -104,7 +110,7 @@ dl.row {
   margin-left: 0;
 }
 
-#tools {
+#tools, #feedback {
   border: 1px solid #d8d8d8;
   font-family: $font-family-serif;
   font-size: 15px;
@@ -261,6 +267,14 @@ dl.row {
     opacity: 0.7;
   }
 
+}
+
+#feedback {
+  margin-top: 40px;
+
+  p {
+    padding: 20px 0 30px;
+  }
 }
 
 @media (max-width: 992px) {
