@@ -1,17 +1,38 @@
 <% doc_presenter = show_presenter(document) %>
 <%# default partial to display solr document fields in catalog show view -%>
 
+<!-- Improve this record modal-->
+<div class="modal fade" id="improve_record_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal-dialog" role="document">
+    <div class="modal-content">
+      <div class="modal-header">
+        <div class="modal-title" id="exampleModalLabel">Which field should this metadatum be?</div>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+          <span aria-hidden="true">&times;</span>
+        </button>
+      </div>
+      <div class="modal-body">
+        ...
+      </div>
+      <div class="modal-footer">
+        <button type="button" class="btn btn-save-feedback">Send feedback</button>
+      </div>
+    </div>
+  </div>
+</div>
+
 <div class="row">
   <div class="col-lg-8">
     <div id="details" class="content active record-details">
       <dl class="row">
         <% document_show_fields(document).each do |field_name, field| -%>
-          <% if should_render_show_field? document, field %>
+          <% if should_render_show_field? document, field 
+                curr_field_value = CGI.unescapeHTML doc_presenter.field_value field_name
+          %>
+
             <dt class="blacklight-<%= field_name.parameterize %>"><%= render_document_show_field_label document, field: field_name %></dt>
-            <dd class="blacklight-<%= field_name.parameterize %>"><%=raw CGI.unescapeHTML doc_presenter.field_value field_name %>
-              <div><%= field_name%></div>
-              <%= CGI.unescapeHTML doc_presenter.field_value field_name%>
-              <%= generate_report_button_if_metadata_match field_name, field, 'Language', 'Undefined', nil%>
+            <dd class="blacklight-<%= field_name.parameterize %>"><%=raw curr_field_value %>
+              <%= generate_report_button_if_metadata_match field_name, curr_field_value, 'Language', 'Undefined', nil, true%>
               
             </dd>
           <% end -%>

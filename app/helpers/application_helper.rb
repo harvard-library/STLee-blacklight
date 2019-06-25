@@ -1,5 +1,4 @@
 module ApplicationHelper
-
   include Harvard::LibraryCloud::Collections
 
   def hash_as_list val
@@ -13,9 +12,18 @@ module ApplicationHelper
   	end
   end
 
-  def generate_report_button_if_metadata_match(fieldname, field, fieldname_to_check, fieldvalue_to_check, qualtrics_link)
-    if fieldname == fieldname_to_check and field == fieldvalue_to_check 
-      ('<button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">Report this record</button>').html_safe
+  def generate_report_button_if_metadata_match(fieldname, field, fieldname_to_check, fieldvalue_to_check, qualtrics_link, extract_html)
+    require 'nokogiri'
+
+    if fieldname.downcase == fieldname_to_check.downcase 
+      new_field = nil
+      if extract_html
+        #now we have clickable metadata, we need to desugar all html from the metadata to get the value
+        new_field = Nokogiri::HTML.fragment(field).text
+      end
+      if new_field.downcase == fieldvalue_to_check.downcase 
+        ('<button type="button" class="btn btn-improve-record" data-toggle="modal" data-target="#improve_record_modal" >Improve this record</button>').html_safe
+      end
     end
   end
 
