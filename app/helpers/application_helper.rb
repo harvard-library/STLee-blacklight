@@ -22,7 +22,7 @@ module ApplicationHelper
         new_field = Nokogiri::HTML.fragment(field).text
       end
       if new_field.downcase == fieldvalue_to_check.downcase 
-        ('<button type="button" class="btn btn-improve-record" data-toggle="modal" data-target="#improve_record_modal" >Improve this record</button>').html_safe
+        ('<button type="button" class="btn btn-improve-record" data-toggle="modal" data-target="#improve_record_modal" metadata-type="%s" >Improve this record</button>' % fieldname.downcase).html_safe
       end
     end
   end
