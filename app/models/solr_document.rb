@@ -9,12 +9,19 @@ class SolrDocument
     super self.mods_to_doc(source_doc), response
   end
 
+  # Populate fields on doc from LC JSON response. 
+  # Called on both the item details and listing pages.
   def mods_to_doc doc
     result = {}
     if !doc.empty?
       result[:identifier] = identifier_from_doc doc
-	    puts 'ID=' + result[:identifier] 
+	    if result[:identifier].nil?
+        return
+      end
+      puts 'ID=' + result[:identifier] 
       result[:title] = title_from_doc doc, true
+
+      #extended title is used for item details page
       result[:title_extended] = extended_title_from_doc doc, title_from_doc(doc, false)
       result[:abstract] = abstract_from_doc doc
       result[:resource_type] = resource_type_from_doc doc
@@ -77,12 +84,13 @@ class SolrDocument
       end
     end
 
+    #some titles need to be prefixed with a series or collection title 
     archival_title = archival_title_from_node doc, title
     if archival_title != ''
       title = archival_title + ' ' + title 
     end
 
-    #if title is not set, check alternative title
+    #if title is not set, get alternative title
     if title == '' && useAltTitle
       node_to_array(doc[:titleInfo]).each do |x|
         if !x['@type'].nil? && x['@type'] != ''
@@ -98,6 +106,7 @@ class SolrDocument
     title
   end
 
+  #get title of parent collection or series
   def archival_title_from_node node, title
     archival_title = ''
     nodes_from_path(node, '$.relatedItem[?(@["@type"]=="host")]').each do |x|
@@ -122,6 +131,7 @@ class SolrDocument
     archival_title
   end
 
+  #extended title includes related title and alternative titles
   def extended_title_from_doc doc, title
 
 	  relatedTitle = related_title_from_doc doc
@@ -186,6 +196,7 @@ class SolrDocument
     subTitle
   end
 
+  # get title part number
   def partnumber_from_node node
     partNumber = field_values_from_node_by_path(node, '$.partNumber', ', ', true)
     if partNumber != ''
@@ -194,6 +205,7 @@ class SolrDocument
     partNumber
   end
 
+  #get title part name
   def partname_from_node node
     partName = field_values_from_node_by_path(node, '$.partName', ', ', true)
     if partName != ''
@@ -202,10 +214,12 @@ class SolrDocument
     partName
   end
 
+  #get title nonSort
   def nonsort_from_node node
     field_values_from_node_by_path(node, '$.nonSort', ', ', true)
   end
 
+  #get person name, such as creator
   def name_from_doc doc
     name = ''
     names = nodes_from_path doc, '$..name'
@@ -220,6 +234,8 @@ class SolrDocument
             name += name_from_node y, true
             altName = ''
             translatedNames = ''
+            
+            #get any translated names
             if !y['@altRepGroup'].nil? && y['@altRepGroup'] != ''
               altNames = nodes_from_path doc, '$..name[?(@["@altRepGroup"] == "' + y['@altRepGroup'] + '")]'
               altNames.each do |m|
@@ -314,101 +330,6 @@ class SolrDocument
     role
   end
   
-  def facet_link_from_node node, facet_field, separator, allowDuplicates
-    field_value = ''
-    field_values = field_value_from_node_to_array node
-
-    if field_values.length > 0 && !allowDuplicates
-      field_values.uniq!
-    end
-    
-    for i in 0..(field_values.length - 1)
-      field_values[i] = link_tag_for_facet field_values[i], facet_field
-    end
-
-    field_value = field_values.join(separator)
-    field_value
-  end
-
-  def field_value_from_node node, separator, allowDuplicates
-    field_value = ''
-    field_values = field_value_from_node_to_array node
-
-    if field_values.length > 0 && !allowDuplicates
-      field_values.uniq!
-    end
-    field_value = field_values.join(separator)
-    field_value
-  end
-
-  def field_value_from_node_to_array node
-    field_values = []
-    field_value = ''
-    if node.nil?
-      return field_values
-    end
-
-    if node.kind_of?(Array)
-      node.each do |x|
-        values2 = field_value_from_node_to_array x
-        field_values = append_to_values field_values, values2
-      end
-    else
-      if node.kind_of?(String) || node.kind_of?(Integer)
-        field_values.push node.to_s
-      else
-        values2 = field_value_from_node_to_array node['#text']
-        field_values = append_to_values field_values, values2
-      end
-    end
-
-    field_values
-  end
-
-  def append_to_values values, node
-    if node.kind_of?(Array)
-      node.each do |x|
-        values = append_to_values values, x
-      end
-    elsif node.kind_of?(String) || node.kind_of?(Integer)
-      values.push node.to_s
-    end
-
-    values
-  end
-  
-  def nodes_from_path doc, path
-    return JsonPath.new(path).on(doc)
-  end
-
-  def facet_links_from_node_by_path node, path, facet_field, separator, allowDuplicates
-    fieldValue = ''
-    field_nodes = nodes_from_path node, path
-
-    if !field_nodes.nil?
-      fieldValue = facet_link_from_node field_nodes, facet_field, separator, allowDuplicates
-    end
-    fieldValue
-  end
-
-  def field_values_from_node_by_path node, path, separator, allowDuplicates
-    fieldValue = ''
-    field_nodes = nodes_from_path node, path
-
-    if !field_nodes.nil?
-      fieldValue = field_value_from_node field_nodes, separator, allowDuplicates
-    end
-    fieldValue
-  end
-
-  def first_field_value_from_doc_by_path node, path, separator, allowDuplicates
-    fieldValue = ''
-    field_items = JsonPath.new(path).first(node)
-    
-    fieldValue = field_value_from_node field_items, separator, allowDuplicates
-    fieldValue
-  end
-
   def language_from_doc doc
     nodes = nodes_from_path doc, '$..language.languageTerm[?(@["@type"] == "text")]["#text"]'
     facet_link_from_node nodes, 'languageText', '<br/>', false
@@ -462,7 +383,7 @@ class SolrDocument
         if origin != ''
           origin += '<br/>'
         end
-        origin += x
+        origin += facet_link_from_node x, 'originPlace', '<br/>', false
       else
         node_to_array(x).each do |y|
           if !y['#text'].nil? && y['#text'] != '' && (y['@type'].nil? || y['@type'] == 'text')
@@ -538,6 +459,7 @@ class SolrDocument
             end
             notes += y
           else
+            #separate out particular types of notes
             if !y['@type'].nil? && y['@type'] == 'statement of responsibility'
               attribution += y['#text'].to_s  
             elsif !y['@type'].nil? && y['@type'] == 'funding'
@@ -736,7 +658,7 @@ class SolrDocument
           if subject['subject'] != ''
             subject_text = ''
             if subject['prefix'] != ''
-              subject_text = subject['prefix'] + ': '
+              subject_text = '<span class="prefix">' + subject['prefix'] + '</span>: '
             end
             subject_text += link_tag_for_facet subject['subject'], 'subject'
             
@@ -776,6 +698,7 @@ class SolrDocument
 
   def subject_from_node node, field_name
     subject_item = {"subject" => "", "prefix" => ""}
+
     subject_part = {"subject" => "", "prefix" => ""}
 
     if node.kind_of?(Hash)
@@ -792,6 +715,7 @@ class SolrDocument
         subject_item = append_subject_part subject_item, subject_part
       end
     elsif node.kind_of?(String) || node.kind_of?(Integer)
+      #the display label should be treated as a prefix
       if field_name == '@displayLabel'
         subject_part["prefix"] = node.to_s()
       else
@@ -1026,6 +950,104 @@ class SolrDocument
     else
       uri_str
     end
+  end
+
+  
+  def facet_link_from_node node, facet_field, separator, allowDuplicates
+    field_value = ''
+    field_values = field_value_from_node_to_array node
+
+    if field_values.length > 0 && !allowDuplicates
+      field_values.uniq!
+    end
+    
+    for i in 0..(field_values.length - 1)
+      field_values[i] = link_tag_for_facet field_values[i], facet_field
+    end
+
+    field_value = field_values.join(separator)
+    field_value
+  end
+
+  def field_value_from_node node, separator, allowDuplicates
+    field_value = ''
+    field_values = field_value_from_node_to_array node
+
+    if field_values.length > 0 && !allowDuplicates
+      field_values.uniq!
+    end
+    field_value = field_values.join(separator)
+    field_value
+  end
+
+  # return array of values
+  def field_value_from_node_to_array node
+    field_values = []
+    field_value = ''
+    if node.nil?
+      return field_values
+    end
+
+    if node.kind_of?(Array)
+      node.each do |x|
+        values2 = field_value_from_node_to_array x
+        field_values = append_to_values field_values, values2
+      end
+    else
+      if node.kind_of?(String) || node.kind_of?(Integer)
+        field_values.push node.to_s
+      else
+        values2 = field_value_from_node_to_array node['#text']
+        field_values = append_to_values field_values, values2
+      end
+    end
+
+    field_values
+  end
+
+  #append values to array
+  def append_to_values values, node
+    if node.kind_of?(Array)
+      node.each do |x|
+        values = append_to_values values, x
+      end
+    elsif node.kind_of?(String) || node.kind_of?(Integer)
+      values.push node.to_s
+    end
+
+    values
+  end
+  
+  def nodes_from_path doc, path
+    return JsonPath.new(path).on(doc)
+  end
+
+  def facet_links_from_node_by_path node, path, facet_field, separator, allowDuplicates
+    fieldValue = ''
+    field_nodes = nodes_from_path node, path
+
+    if !field_nodes.nil?
+      fieldValue = facet_link_from_node field_nodes, facet_field, separator, allowDuplicates
+    end
+    fieldValue
+  end
+
+  def field_values_from_node_by_path node, path, separator, allowDuplicates
+    fieldValue = ''
+    field_nodes = nodes_from_path node, path
+
+    if !field_nodes.nil?
+      fieldValue = field_value_from_node field_nodes, separator, allowDuplicates
+    end
+    fieldValue
+  end
+
+  def first_field_value_from_doc_by_path node, path, separator, allowDuplicates
+    fieldValue = ''
+    field_items = JsonPath.new(path).first(node)
+    
+    fieldValue = field_value_from_node field_items, separator, allowDuplicates
+    fieldValue
   end
 
   def node_to_array node
