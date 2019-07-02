@@ -1,6 +1,8 @@
 # frozen_string_literal: true
 class CatalogController < ApplicationController
 
+  include BlacklightRangeLimit::ControllerOverride
+
   include Blacklight::Catalog
   include Blacklight::Marc::Catalog
   include Harvard::LibraryCloud::Collections
@@ -62,9 +64,10 @@ class CatalogController < ApplicationController
     config.show.thumbnail_field = 'preview'
 
     # Facets
+    config.add_facet_field 'originDate', label: 'Date Range', range: true
     config.add_facet_field 'digitalFormat', label: 'Digital Format', single: true, limit: 10
     config.add_facet_field 'repository', label: 'Repository',  single: true, limit: 10
-
+    
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
     # handler defaults, or have no facets.

@@ -38,10 +38,6 @@ module Harvard::LibraryCloud
       opts[:method] ||= :get
       raise "The :data option can only be used if :method => :post" if opts[:method] != :post and opts[:data]
 
-
-      puts 'path=' + path.inspect
-      puts 'opts=' + opts.inspect
-
       if !opts[:params].nil? && opts[:params][:preserve_original]
         params = opts[:params]
       else
@@ -79,11 +75,26 @@ module Harvard::LibraryCloud
       
       if params[:search_field] == 'all_fields'
         search_term = params[:q].to_s
-        search_term = search_term.gsub(/[~!^()-\[\]{}\\"\/]/,'')
+
+        #escape special characters in search_term for LC API
+        search_term = search_term.gsub("&&", "&").gsub("||", "|")
+        search_term = search_term.gsub(/[~!^()-\[\]{}\\"\/]/){|match|"\\"  + match}
+
         results[:q] = search_term if search_term && search_term.length > 0
       else
         results[params[:search_field]] = params[:q] if params[:q]
       end
+      
+      #add date start/end params
+      if params['range'] && params['range']['originDate']
+        if params['range']['originDate']['begin'] && params['range']['originDate']['begin'].to_s != ''
+          results['dates.start'] = params['range']['originDate']['begin']
+        end
+        if params['range']['originDate']['end'] && params['range']['originDate']['end'].to_s != ''
+          results['dates.end'] = params['range']['originDate']['end']
+        end
+      end
+
       results[:start] = params[:start] if params[:start]
       results[:limit] = params[:rows] if params[:rows]
       results[:facets] = facet_params_to_lc(params['facet.field']) if params['facet.field']
@@ -93,30 +104,34 @@ module Harvard::LibraryCloud
     end
 
     def facet_params_to_lc facet_field
-	  if facet_field.kind_of?(Array)
-		  facet_field.map do |x|
-			# "{!ex=genre_single}genre"
-			m = facet_param_formatted(x)
-		  end.join(',')
-	  else
-		facet_param_formatted(facet_field)
-	  end 
+	    if facet_field.kind_of?(Array)
+		    facet_field.map do |x|
+			  # "{!ex=genre_single}genre"
+			  m = facet_param_formatted(x)
+		    end.join(',')
+	    else
+		    facet_param_formatted(facet_field)
+	    end 
     end
 
-	def facet_param_formatted facet_field
-		m = /\{.*\}(\S+)$/.match(facet_field)
-		m[1] if m
-	end
+    #parse field name from Blacklight formatted field name
+	  def facet_param_formatted facet_field  
+      m = /\{.*\}(\S+)$/.match(facet_field)
+      if m
+		    m[1] 
+      else
+        facet_field
+      end
+	  end
 
     def facet_query_params_to_lc fq
       results = {}
       fq.each do |x|
+        #parse facet name and vaule from QS param
         m = /\{!term f=(\S*).*\}(.*)$/.match(x)
-        if m[1] == 'languageText' || m[1] == 'subject' || m[1] == 'seriesTitle'
-          results[m[1]] = m[2]
-        else
-          results[m[1] + '_exact'] = m[2]
-        end
+        
+        #use _exact params for LC API
+        results[m[1] + '_exact'] = m[2]
       end if fq
       results
     end
