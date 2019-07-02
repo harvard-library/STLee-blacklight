@@ -381,8 +381,21 @@ a.facet__title {
     }
 }
 
-
-
+.limit_content.range_limit {   
+    form {
+        margin: 0 0 10px;
+    }
+    input.range_begin, input.range_end {
+        padding: 21px 10px 22px;
+        margin-top: -1px;
+    }
+    input[type="submit"] {
+        background-color: #E0E0E0;
+    }
+    input.range_end {
+        margin-right: 20px;
+    }
+}
 
 .btn-default.active, .btn-default.active:hover {
     background-color: $medium-gray;
