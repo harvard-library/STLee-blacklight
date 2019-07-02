@@ -160,6 +160,7 @@
           <%
         end
         %>
+        <%= render :partial => "bookmark_control", :locals => {:document => document } %>
         <%
         if !document[:digital_collections_links].nil? && document[:digital_collections_links].kind_of?(Array) && document[:digital_collections_links].length > 0
           %>
