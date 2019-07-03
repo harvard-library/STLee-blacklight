@@ -424,3 +424,58 @@ a.facet__title {
     left: 23px;
     top: 12px;
 }
+
+#curiosity {
+    background: $white url(https://library.harvard.edu/themes/custom/harvard/assets/images/dots.png) top center repeat;
+    font-family: $font-family-sans-serif;
+    margin-top: 40px;
+    text-align: center;
+    padding: 40px 20px 45px;
+
+    h3 {
+        font-size: 32px;
+        font-weight: 700;
+        letter-spacing: 1.8px;
+        line-height: 1.4;
+        padding: 0;
+        margin-top: 0;
+        text-align: center;
+        text-transform: uppercase;
+    }
+
+    p {
+        font-size: 19px;
+        line-height: 32px;
+        margin: 0 auto;
+        padding: 10px 0 30px;
+        text-align: center;
+    }
+
+    a {
+        background-color: $jet;
+        border-color: transparent;
+        border-radius: 4px;
+        color: $white;
+        font-size: 12px;
+        font-weight: 700;
+        letter-spacing: 1.17px;
+        line-height: 16px;
+        margin: 20px auto;
+        padding: 5px 9px;
+        text-transform: uppercase;
+        -webkit-transition: all 0.4s ease;
+        transition: all 0.4s ease;
+
+        &:hover {
+            background-color: $medium-gray;
+            text-decoration: none;
+        }
+    }
+
+}
+
+@media (max-width: 1200px) {
+    #curiosity {
+        display: none;
+    }
+}
