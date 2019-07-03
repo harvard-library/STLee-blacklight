@@ -325,6 +325,14 @@ end
 
     constraints.join(' / ')
   end
+    
+  def self.enable_bookmarks?
+    false
+  end
+    
+  def render_bookmarks?
+    Blacklight::CatalogHelperBehavior.enable_bookmarks?
+  end
 
   private
 
@@ -335,4 +343,5 @@ end
       scope = options.delete(:route_set) || self
       scope.url_for search_state.to_h.merge(format: format)
     end
+
 end
