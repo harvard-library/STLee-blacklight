@@ -332,7 +332,7 @@ class SolrDocument
   
   def language_from_doc doc
     nodes = nodes_from_path doc, '$..language.languageTerm[?(@["@type"] == "text")]["#text"]'
-    facet_link_from_node nodes, 'languageText', '<br/>', false
+    facet_link_from_node nodes, 'language', '<br/>', false
     #field_values_from_node_by_path(doc, '$..language.languageTerm[?(@["@type"] == "text")]["#text"]', '<br/>', false)
   end
 

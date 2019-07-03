@@ -141,8 +141,12 @@ module Harvard::LibraryCloud
         #parse facet name and vaule from QS param
         m = /\{!term f=(\S*).*\}(.*)$/.match(x)
         
-        #use _exact params for LC API
-        results[m[1] + '_exact'] = m[2]
+        #only use _exact params for certain facets due to bug in LC API
+        if m[1] == 'subject' || m[1] == 'originPlace' || m[1] == 'seriesTitle'
+          results[m[1]] = m[2]
+        else
+          results[m[1] + '_exact'] = m[2]
+        end
       end if fq
       results
     end
