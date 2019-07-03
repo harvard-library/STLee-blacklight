@@ -153,14 +153,14 @@
                 <%end%>
             </div>
           <%end%>
+        <%= render :partial => "bookmark_control", :locals => {:document => document } %>
         <%
         if !document[:permalink].nil? && document[:permalink].kind_of?(String) && document[:permalink] != ''
           %>
-            <div class="permalink"><a href="<%=document[:permalink]%>">Permalink</a></div>
+            <div class="permalink"><span class="fa fa-link"></span> &nbsp;<a href="<%=document[:permalink]%>">Permalink</a></div>
           <%
         end
-        %>
-        <%= render :partial => "bookmark_control", :locals => {:document => document } %>
+        %>        
         <%
         if !document[:digital_collections_links].nil? && document[:digital_collections_links].kind_of?(Array) && document[:digital_collections_links].length > 0
           %>

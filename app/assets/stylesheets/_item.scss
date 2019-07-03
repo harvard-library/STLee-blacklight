@@ -153,7 +153,7 @@ dl.row {
     padding-bottom: 40px;
   }
 
-  a {
+  a, .checkbox.toggle_bookmark label span {
     border-bottom: 3px solid transparent;
     color: $breakthrough-blue;
     font-family: $font-family-sans-serif;
@@ -257,9 +257,31 @@ dl.row {
     }
   }
 
+  .checkbox.toggle_bookmark {
+    padding-top: 24px;
+
+    label {
+      font-size: 15px;
+      letter-spacing: inherit;
+      padding-top: 0;
+
+      span {
+        margin-left: 3px;
+      }
+    }
+
+    input[type="checkbox"] {
+      margin-top: 0;
+    }
+  }
+
+  form input.toggle_bookmark {
+      height: 28px;
+    }
+
   .permalink {
       clear: both;
-      padding: 20px 0 40px;
+      padding: 10px 0 40px;
   }
 
   .dl-iiif img {
