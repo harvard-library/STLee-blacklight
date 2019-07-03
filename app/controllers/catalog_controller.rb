@@ -41,6 +41,11 @@ class CatalogController < ApplicationController
     config.show.document_actions.delete(:email)
     config.index.document_actions.delete(:bookmark)
 
+    config.navbar.partials = {}
+    #config.add_nav_action(:bookmark, partial: 'blacklight/nav/bookmark', if: :render_bookmarks_control?)
+    config.add_nav_action(:saved_searches, partial: 'blacklight/nav/saved_searches', if: :render_saved_searches?)
+    config.add_nav_action(:search_history, partial: 'blacklight/nav/search_history')
+
     # Add the "Add to collection" action to the individual document page
     # add_show_tools_partial(:add_to_collection, define_method: false)
     # add_results_document_tool(:add_to_collection_index)

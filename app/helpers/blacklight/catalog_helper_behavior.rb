@@ -326,12 +326,8 @@ end
     constraints.join(' / ')
   end
     
-  def self.enable_bookmarks?
+  def bookmarks_enabled?
     false
-  end
-    
-  def render_bookmarks?
-    Blacklight::CatalogHelperBehavior.enable_bookmarks?
   end
 
   private
