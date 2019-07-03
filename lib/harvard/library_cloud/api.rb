@@ -77,12 +77,23 @@ module Harvard::LibraryCloud
         search_term = params[:q].to_s
 
         #escape special characters in search_term for LC API
-        search_term = search_term.gsub("&&", "&").gsub("||", "|")
-        search_term = search_term.gsub(/[~!^()-\[\]{}\\"\/]/){|match|"\\"  + match}
-
+        special_chars = Regexp.escape('~!^()-[]{}\"/')
+        search_term = search_term.gsub(/[#{special_chars}]+/){|match| puts "\\" + match}
+        #these double characters cause issues (2 spaces, &&, ||)
+        search_term = search_term.gsub(/ +/, " ").gsub(/&+/, "&").gsub(/\|+/, "|")
+        
         results[:q] = search_term if search_term && search_term.length > 0
       else
-        results[params[:search_field]] = params[:q] if params[:q]
+        if params[:q]
+          #check if this is a recordIdentifier request
+          m = /\{\!lucene\}identifier:(.*)$/.match(params[:q])
+          if m
+		        results[:recordIdentifier] = m[1].gsub('"', '') 
+          else
+            results[params[:search_field]] = params[:q]
+          end
+          
+        end
       end
       
       #add date start/end params

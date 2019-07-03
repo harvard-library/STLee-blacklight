@@ -29,7 +29,7 @@ Rails.application.routes.draw do
 
   match '/catalog/:id/add_to_collection' => 'catalog#add_to_collection', as: 'add_to_collection_catalog', via: [:get, :post]
 
-  resources :bookmarks do
+  resources :bookmarks, constraints: { id: /[^\/]+/ } do
     concerns :exportable
     collection do
       delete 'clear'

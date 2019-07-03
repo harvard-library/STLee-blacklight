@@ -1,4 +1,4 @@
-<% if current_or_guest_user %>
+<% if user_signed_in? %>
   <%-
   # Note these two forms are pretty similar but for different :methods, classes, and labels.
   # but it was simpler to leave them seperate instead of DRYing them, got confusing trying that.
