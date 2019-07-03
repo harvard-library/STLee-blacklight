@@ -102,7 +102,12 @@
 .hl__topHeader .hl__topHeaderNav a {
     display: flex;
     align-items: center;
-    cursor: pointer
+    cursor: pointer;
+    border-bottom: none;
+
+    &:hover {
+        border-bottom: none;
+    }
 }
 
 .hl__topHeader__link:hover {
@@ -124,7 +129,7 @@
 
 @media (max-width: 620px) {
     .hl__topHeaderTitle__harvard a {
-        font-size: 1.5rem
+        font-size: 2.2rem
     }
 }
 
@@ -141,8 +146,8 @@ span.hl__topHeaderTitle__collections {
 
 @media (max-width: 620px) {
     span.hl__topHeaderTitle__collections {
-        font-size: 1.3rem;
-        padding: 0 0 0 4px;
+        font-size: 2.0rem;
+        padding: 0 0 0 6px;
     }
 }
 
@@ -180,4 +185,38 @@ span.hl__topHeaderTitle__collections {
 
 .hl__headerLogo img {
     width: 80%
+}
+
+
+.navbar__wrapper {
+    background-color: $jet;
+    width: 100%;
+    padding-right: 38px;
+
+    .nav > li > a {
+        color: $white;
+        border-bottom: 3px solid transparent;
+        font-family: $font-family-sans-serif;
+        font-weight: 300;
+        text-decoration: none;
+        -webkit-transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
+        transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
+
+        &:hover {
+            background-color: transparent;
+            border-bottom: 3px solid rgba(255, 255, 255, 0.3);
+        }
+    }
+
+    .navbar-toggle {
+        border-color: $light-gray;
+        color: $light-gray;
+        padding: 8px 12px;
+    }
+}
+
+@media (max-width: 768px) {
+    .navbar__wrapper {
+        padding-right: 0;
+    }
 }

@@ -49,14 +49,14 @@ ul.facet-values li {
     .facet_select, .selected {
         display: block;
         padding: 0 0 0 55px;
-        max-width: 85%;
+        max-width: 90%;
         position: relative;
 
         &:before {
             display: block;
             content: ' ';
             position: absolute;
-            left: 20px;
+            left: 18px;
             top: 0;
             background: white;
             width: 20px;
@@ -70,8 +70,8 @@ ul.facet-values li {
     height: 20px;
     display: block;
     position: absolute;
-    left: 22px;
-    top: 10px;
+    left: 21px;
+    top: 12px;
 }
 
 .glyphicon-remove {
@@ -418,11 +418,6 @@ a.facet__title {
         color: #666;
         float: right;
     }
-}
-
-.facets__container a.remove {
-    left: 23px;
-    top: 12px;
 }
 
 #curiosity {

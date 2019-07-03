@@ -1,6 +1,3 @@
-<div class="hl__alert">
-  <p>We're in beta! Please have a look around and <a href="https://harvard.az1.qualtrics.com/jfe/form/SV_ahGZ04EDLTP2TPf">tell us what you think.</a></p>
-</div>
 <header class="hl__topHeader">
   <div class="hl__topHeader__left">
     <ul class="hl__topHeaderNav">
@@ -18,9 +15,19 @@
       </div>
     </a>
   </div>
+  <div class="navbar__wrapper">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#utility-links" aria-expanded="false">
+        <span class="sr-only">Toggle navigation</span>
+        <span class="fa fa-bars"></span>
+      </button>
+    </div>
+    <div class="collapse navbar-collapse" id="utility-links">
+      <%= render :partial=>'/user_util_links' %>
+    </div>
+  </div>
   <div class="searchbar__wrapper">
     <%= render_search_bar  %>
   </div>
 </header>
-<%= render :partial=>'/user_util_links' %>
 

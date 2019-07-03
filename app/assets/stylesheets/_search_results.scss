@@ -166,8 +166,13 @@
         }
     }
 
-    p {
-        padding: 100px 0 80px;
+    ul {
+        font-family: $font-family-serif;
+        font-size: 15px;
+
+        li {
+            line-height: 32px;
+        }
     }
 }
 

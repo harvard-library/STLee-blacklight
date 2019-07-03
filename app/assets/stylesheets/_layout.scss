@@ -1,4 +1,9 @@
-﻿@media (min-width: 1280px) { 
+﻿html {
+    -moz-osx-font-smoothing: grayscale;
+    -webkit-font-smoothing: antialiased;
+}
+
+@media (min-width: 1280px) { 
   .container {
     width: 100%;
     max-width: 1400px;
@@ -40,4 +45,176 @@ form input {
     font-weight: 200;
     height: 45px;
     padding: 5px 10px;
+}
+
+.blacklight-search_history,
+.blacklight-saved_searches,
+.blacklight-registrations {
+    h2 {
+        font-family: "Trueno", sans-serif;
+        font-size: 32px;
+        font-weight: 700;
+        letter-spacing: 2.4px;
+        text-transform: uppercase; 
+    }
+
+    h3 {
+        font-family: "Trueno", sans-serif;
+        font-size: 20px;
+        line-height: 30px;
+        font-weight: 700;
+        text-transform: uppercase; 
+        letter-spacing: 1.5px;
+    }
+
+    a {
+        border-bottom: 3px solid transparent;
+        color: #0579b8;
+        font-family: "Trueno", sans-serif;
+        text-decoration: none;
+        -webkit-transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
+        transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
+
+        &:hover {
+            border-bottom: 3px solid rgba(5,121,184,0.3);
+        }
+    }
+
+    .btn-danger {
+        border-bottom: 1px solid;
+        border-color: #1e1e1e;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        font-family: "Trueno", sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+        height: auto;
+        letter-spacing: 1.2px;
+        line-height: 16px;
+        padding: 5px 9px;
+        text-transform: uppercase;
+        -webkit-transition: all 0.4s ease;
+        transition: all 0.4s ease;
+
+        &:hover {
+            background-color: #6c6c6c;
+            border-bottom: 1px solid;
+            border-color: #6c6c6c;
+            color: white;
+        }
+    }
+
+    .table {
+        margin-top: 40px;
+
+        a {
+            border-bottom: 3px solid transparent;
+            color: #0579b8;
+            font-family: "Lora", serif;
+            text-decoration: none;
+            -webkit-transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
+            transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
+
+            &:hover {
+                border-bottom: 3px solid rgba(5,121,184,0.3);
+            }
+
+            span.constraint {
+                margin-right: 10px;
+            }
+        }
+
+        &> tbody > tr > td {
+            vertical-align: middle;
+        }
+
+        td.actions {
+            text-align: center;
+        }
+
+        .btn-default {
+            background-color: #0579b8;
+            border-color: transparent;
+            color: #ffffff;
+            font-family: "Trueno", sans-serif;
+            font-weight: 600;
+            letter-spacing: 1.2px;
+            text-transform: uppercase;
+            -webkit-transition: all 0.4s ease;
+            transition: all 0.4s ease;
+
+            &:hover {
+                background-color: #2a5280;
+            }
+        }
+    }
+}
+
+.blacklight-registrations {
+
+    form.edit_user {
+        margin-bottom: 60px;
+    }
+
+    form label {
+        font-weight: 600;
+        text-transform: uppercase;
+    }
+
+    #user_email {
+        width: 300px;
+    }
+    .field i, .field em {
+        font-family: "Trueno", sans-serif;
+        font-weight: 300;
+    }
+    .actions {
+        margin-top: 30px;
+
+        input[type="submit"] {
+            background-color: #0579b8;
+            border-color: transparent;
+            color: #ffffff;
+            font-family: "Trueno", sans-serif;
+            font-size: 14px;
+            font-weight: 700;
+            letter-spacing: 1.17px;
+            text-transform: uppercase;
+            padding: 12px 24px;
+            -webkit-transition: all 0.4s ease;
+            transition: all 0.4s ease;
+
+            &:hover {
+                background-color: #2a5280;
+            }
+        }
+    }
+
+    p {
+        font-family: "Lora", serif;
+        padding: 20px 0;
+    }
+
+    form.button_to input[type="submit"] {
+        border-bottom: 1px solid;
+        border-color: #1e1e1e;
+        background-color: #ffffff;
+        color: #1e1e1e;
+        font-family: "Trueno", sans-serif;
+        font-size: 12px;
+        font-weight: 600;
+        height: auto;
+        letter-spacing: 1.2px;
+        line-height: 16px;
+        padding: 5px 9px;
+        text-transform: uppercase;
+        -webkit-transition: all 0.4s ease;
+        transition: all 0.4s ease;
+
+        &:hover {
+            background-color: #6c6c6c;
+            border-color: #6c6c6c;
+            color: white;
+        }
+    }
 }
