@@ -327,7 +327,7 @@ end
   end
     
   def bookmarks_enabled?
-    false
+    blacklight_config.enable_bookmarks
   end
 
   private

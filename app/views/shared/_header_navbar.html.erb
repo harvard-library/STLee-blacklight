@@ -22,9 +22,11 @@
         <span class="fa fa-bars"></span>
       </button>
     </div>
-    <div class="collapse navbar-collapse" id="utility-links">
-      <%= render :partial=>'/user_util_links' %>
-    </div>
+    <%if user_signed_in? %>
+      <div class="collapse navbar-collapse" id="utility-links">
+        <%= render :partial=>'/user_util_links' %>
+      </div>
+    <%end%>  
   </div>
   <div class="searchbar__wrapper">
     <%= render_search_bar  %>

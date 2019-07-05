@@ -41,8 +41,11 @@ class CatalogController < ApplicationController
     config.show.document_actions.delete(:email)
     config.index.document_actions.delete(:bookmark)
 
+    config.enable_bookmarks = false
     config.navbar.partials = {}
-    #config.add_nav_action(:bookmark, partial: 'blacklight/nav/bookmark', if: :render_bookmarks_control?)
+    if config.enable_bookmarks 
+      config.add_nav_action(:bookmark, partial: 'blacklight/nav/bookmark', if: :render_bookmarks_control?)
+    end
     config.add_nav_action(:saved_searches, partial: 'blacklight/nav/saved_searches', if: :render_saved_searches?)
     config.add_nav_action(:search_history, partial: 'blacklight/nav/search_history')
 
