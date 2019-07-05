@@ -80,6 +80,8 @@ $(document).on('turbolinks:load', function() {
         validateRangeLimits($(this).parents('form'));
     });
 
+    $('form.range_limit input.form-control').attr('placeholder', 'YYYY');
+
 });
 
 function validateRangeLimits($form) {
