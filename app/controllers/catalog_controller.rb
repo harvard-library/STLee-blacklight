@@ -73,7 +73,7 @@ class CatalogController < ApplicationController
     config.show.thumbnail_field = 'preview'
 
     # Facets
-    config.add_facet_field 'originDate', label: 'Date Range', range: true
+    config.add_facet_field 'originDate', label: 'Date Range', range: true, maxlength: 4
     config.add_facet_field 'digitalFormat', label: 'Digital Format', single: true, limit: 10
     config.add_facet_field 'language', label: 'Languages',  single: true, limit: 10
     config.add_facet_field 'repository', label: 'Repository',  single: true, limit: 10

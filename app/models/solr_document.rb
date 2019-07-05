@@ -37,8 +37,7 @@ class SolrDocument
       result[:owner_display] = extension_field_from_doc doc, :ownerCodeDisplayName
       result[:place] = place_from_doc doc
       result[:description] = description_from_doc doc
-      #result[:collection_title] = collection_title_from_doc doc
-	  
+    
 	    result[:name] = name_from_doc doc
 	    result[:language] = language_from_doc doc
 	    result[:origin] = origin_from_doc doc
@@ -50,7 +49,7 @@ class SolrDocument
       result[:preview] = preview_from_doc doc
       result[:raw_object] = raw_object_from_doc doc
       result[:funding] = field_values_from_node_by_path doc, '$..note[?(@["@type"]=="funding")]["#text"]', '<br/>', false
-      result[:related_links] = related_links_from_doc doc
+      
       result[:hollis_links] = hollis_links_from_doc doc
       result[:hollis_image_links] = hollis_image_links_from_doc doc
       result[:finding_aid_links] = finding_aid_links_from_doc doc
@@ -235,7 +234,7 @@ class SolrDocument
             altName = ''
             translatedNames = ''
             
-            #get any translated names
+            #get any translated names by matching altRepGroup attribute
             if !y['@altRepGroup'].nil? && y['@altRepGroup'] != ''
               altNames = nodes_from_path doc, '$..name[?(@["@altRepGroup"] == "' + y['@altRepGroup'] + '")]'
               altNames.each do |m|
@@ -307,6 +306,7 @@ class SolrDocument
 					roleTerm = z[:roleTerm]['#text']
 				end
 
+        #exclude creator from list of roles displayed
         if roleTerm == 'creator'
           roleTerm = ''
         end
@@ -333,7 +333,6 @@ class SolrDocument
   def language_from_doc doc
     nodes = nodes_from_path doc, '$..language.languageTerm[?(@["@type"] == "text")]["#text"]'
     facet_link_from_node nodes, 'language', '<br/>', false
-    #field_values_from_node_by_path(doc, '$..language.languageTerm[?(@["@type"] == "text")]["#text"]', '<br/>', false)
   end
 
   def date_from_doc doc
@@ -391,46 +390,11 @@ class SolrDocument
               origin += '<br/>'
             end
             origin += facet_link_from_node y['#text'], 'originPlace', '<br/>', false
-            #origin += field_value_from_node y['#text'], '<br/>', false
           end
         end
       end
     end
 
-	  origin
-  end
-
-  def origin_from_place node
-	  origin = ''
-	  if !node[:place]
-		  return origin
-	  end
-
-		node_to_array(node[:place]).each do |z|	
-			originPart = origin_from_placeterm z
-			if originPart != '' && origin != ''
-				origin += '<br/>'
-			end
-			origin += originPart
-		end
-
-	  origin
-  end
-
-  def origin_from_placeterm node
-	  origin = ''
-	  if !node[:placeTerm]
-		  return origin
-	  end
-
-		node_to_array(node[:placeTerm]).each do |z|	
-			if z['@type'] == 'text'
-				if origin != ''
-					origin += '<br/>'
-				end
-			end
-		end
-	
 	  origin
   end
 
@@ -649,6 +613,7 @@ class SolrDocument
     subject_nodes.each do |x|
       node_to_array(x).each do |y|    
         if !y['name'].nil?
+          #handle subjects that contain names
           subject = name_from_node y['name'], false
           if subject != ''
             subject_items.push(link_tag_for_facet subject, 'subject')
@@ -657,9 +622,11 @@ class SolrDocument
           subject = subject_from_node y, ''
           if subject['subject'] != ''
             subject_text = ''
+            #prepend prefix
             if subject['prefix'] != ''
               subject_text = '<span class="prefix">' + subject['prefix'] + '</span>: '
             end
+            #hyperlink on subject
             subject_text += link_tag_for_facet subject['subject'], 'subject'
             
             subject_items.push(subject_text)
@@ -685,7 +652,6 @@ class SolrDocument
         end
 
         if name != ''
-          #subject_items.push(link_tag_for_facet(name, 'subject.name'))
           subject_items.push(name)
         end
       end
@@ -696,9 +662,10 @@ class SolrDocument
 	  subjects
   end
 
+  #return object with prefix and subject  
   def subject_from_node node, field_name
+    #subjects can have prefixes
     subject_item = {"subject" => "", "prefix" => ""}
-
     subject_part = {"subject" => "", "prefix" => ""}
 
     if node.kind_of?(Hash)
@@ -763,6 +730,7 @@ class SolrDocument
     result
   end
 
+  #get preview (thumbnail url)
   def preview_from_doc doc
     preview = ''
 
@@ -817,56 +785,7 @@ class SolrDocument
     object_in_context_urls_from_doc doc, 'Item Record'
   end
 
-  def related_links_from_doc doc
-    related_links = ''
-
-    hollis_urls = hollis_links_from_doc doc
-    
-    if !hollis_urls.nil? 
-      hollis_urls.each do |x|
-        if related_links != ''
-          related_links += '<br/>'
-        end
-        related_links += related_link_tag_for_url x[:url], x[:link_text], x[:label], true
-      end
-    end
-
-    hollis_image_urls = hollis_image_links_from_doc doc
-    
-    if !hollis_image_urls.nil?
-      hollis_image_urls.each do |x|
-        if related_links != ''
-          related_links += '<br/>'
-        end
-        related_links += related_link_tag_for_url x[:url], x[:link_text], x[:label], true
-      end
-    end
-    
-    finding_aid_urls = finding_aid_links_from_doc doc
-    
-    if !finding_aid_urls.nil?
-      finding_aid_urls.each do |x|
-        if related_links != ''
-          related_links += '<br/>'
-        end
-        related_links += related_link_tag_for_url x[:url], x[:link_text], x[:label], true
-      end
-    end
-    
-    digital_collection_urls = digital_collections_links_from_doc doc
-    
-    if !digital_collection_urls.nil? 
-      digital_collection_urls.each do |x|
-        if related_links != ''
-          related_links += '<br/>'
-        end
-        related_links += related_link_tag_for_url x[:url], x[:link_text], x[:label], true
-      end
-    end
-        
-    related_links
-  end
-
+  #return an array of objects with url, link text, and label
   def related_urls_by_type doc, type, link_text, label
     link_urls = []
     link_items = nodes_from_path doc, '$..relatedItem[?(@["@otherType"] == "' + type + '")]'
