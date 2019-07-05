@@ -35,7 +35,7 @@
         <%= hidden_field_tag("search_field", "dummy_range") %>
       <% end %>
       
-      <%= render_range_input(solr_field, :begin, input_label_range_begin, maxlength) %> – <%= render_range_input(solr_field, :end, input_label_range_end, maxlength) %>
+      <%= render_range_input(solr_field, :begin, input_label_range_begin, maxlength) %> to <%= render_range_input(solr_field, :end, input_label_range_end, maxlength) %>
       <%= submit_tag t('blacklight.range_limit.submit_limit'), class: BlacklightRangeLimit.classes[:submit] %>
     
     <% end %>

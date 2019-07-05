@@ -155,18 +155,26 @@ a.facet__title {
         color: $red;
         font-size: rem-calc(20);
         position: relative;
-        top: 0px;
+        top: 2px;
         float: right;
+        -webkit-transition: -webkit-transform 0.5s ease;
+        transition: -webkit-transform 0.5s ease;
+        transition: transform 0.5s ease;
+        transition: transform 0.5s ease,-webkit-transform 0.5s ease;
+        transform: rotate(180deg);
 
         &.facet-expand {
             display: inline-block;
 
         }
 
-
-
         &.facet-collapse {
             display: none;
+        }
+
+        &.fa-rotate-180 {
+            -webkit-transform: scaleY(-1);
+            transform: scaleY(-1) rotate(180deg);
         }
     }
 }
@@ -288,10 +296,26 @@ a.facet__title {
 
 form.range_limit {
     .error {
-        color: #EC0B14;
+        color: $light-blue;
         display: block;
+        font-style: italic;
         line-height: 1.5;
+        padding-top: 20px;
+        -webkit-animation-duration: fadeIn 0.8s;
+        animation-duration: fadeIn 0.8s;
+        -webkit-animation-fill-mode: both;
+        animation-fill-mode: both;
     }
+
+    @-webkit-keyframes fadeIn {
+        0% {opacity: 0;}
+        100% {opacity: 1;}
+     }
+     
+     @keyframes fadeIn {
+        0% {opacity: 0;}
+        100% {opacity: 1;}
+     }
 }
 
 #ajax-modal {
@@ -389,19 +413,26 @@ form.range_limit {
     }
 }
 
-.limit_content.range_limit {   
+.limit_content.range_limit {  
+    color: $white;
+
     form {
         margin: 0 0 10px;
     }
     input.range_begin, input.range_end {
         padding: 21px 10px 22px;
         margin-top: -1px;
+        color: $jet;
     }
     input[type="submit"] {
         background-color: #E0E0E0;
     }
+    input.range_begin {
+        margin-right: 8px;
+    }
     input.range_end {
         margin-right: 20px;
+        margin-left: 8px;
     }
 }
 
@@ -427,6 +458,7 @@ form.range_limit {
         float: right;
     }
 }
+
 
 #curiosity {
     background: $white url(https://library.harvard.edu/themes/custom/harvard/assets/images/dots.png) top center repeat;

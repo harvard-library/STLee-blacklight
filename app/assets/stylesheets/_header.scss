@@ -129,7 +129,7 @@
 
 @media (max-width: 620px) {
     .hl__topHeaderTitle__harvard a {
-        font-size: 2.2rem
+        font-size: 2.0rem
     }
 }
 
@@ -146,7 +146,7 @@ span.hl__topHeaderTitle__collections {
 
 @media (max-width: 620px) {
     span.hl__topHeaderTitle__collections {
-        font-size: 2.0rem;
+        font-size: 1.8rem;
         padding: 0 0 0 6px;
     }
 }
@@ -195,16 +195,12 @@ span.hl__topHeaderTitle__collections {
 
     .nav > li > a {
         color: $white;
-        border-bottom: 3px solid transparent;
         font-family: $font-family-sans-serif;
         font-weight: 300;
         text-decoration: none;
-        -webkit-transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
-        transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
 
         &:hover {
-            background-color: transparent;
-            border-bottom: 3px solid rgba(255, 255, 255, 0.3);
+            background-color: $menu-highlight-1;
         }
     }
 

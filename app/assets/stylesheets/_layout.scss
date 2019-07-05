@@ -49,7 +49,9 @@ form input {
 
 .blacklight-search_history,
 .blacklight-saved_searches,
-.blacklight-registrations {
+.blacklight-registrations,
+.blacklight-sessions,
+.blacklight-passwords {
     h2 {
         font-family: "Trueno", sans-serif;
         font-size: 32px;
@@ -150,7 +152,9 @@ form input {
     }
 }
 
-.blacklight-registrations {
+.blacklight-registrations,
+.blacklight-sessions,
+.blacklight-passwords {
 
     form.edit_user {
         margin-bottom: 60px;
@@ -159,11 +163,17 @@ form input {
     form label {
         font-weight: 600;
         text-transform: uppercase;
+        padding-top: 0;
     }
 
     #user_email {
         width: 300px;
     }
+
+    .field {
+        margin-top: 30px;
+    }
+
     .field i, .field em {
         font-family: "Trueno", sans-serif;
         font-weight: 300;
@@ -190,11 +200,6 @@ form input {
         }
     }
 
-    p {
-        font-family: "Lora", serif;
-        padding: 20px 0;
-    }
-
     form.button_to input[type="submit"] {
         border-bottom: 1px solid;
         border-color: #1e1e1e;
@@ -216,5 +221,21 @@ form input {
             border-color: #6c6c6c;
             color: white;
         }
+    }
+
+    form.new_user {
+        margin-bottom: 30px;
+    }
+
+    form.new_user input[type="checkbox"] {
+        display: inline;
+        height: 16px;
+        margin-right: 4px;
+    }
+
+    .enclosing-row a {
+        display: inline-block;
+        font-weight: 700;
+        padding-top: 5px;
     }
 }
