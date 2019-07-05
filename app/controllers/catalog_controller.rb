@@ -41,6 +41,7 @@ class CatalogController < ApplicationController
     config.show.document_actions.delete(:email)
     config.index.document_actions.delete(:bookmark)
 
+    #hide bookmark control and nav
     config.enable_bookmarks = false
     config.navbar.partials = {}
     if config.enable_bookmarks 

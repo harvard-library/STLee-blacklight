@@ -286,6 +286,14 @@ a.facet__title {
     }
 }
 
+form.range_limit {
+    .error {
+        color: #EC0B14;
+        display: block;
+        line-height: 1.5;
+    }
+}
+
 #ajax-modal {
     z-index: 2000;
     background-color: transparent;

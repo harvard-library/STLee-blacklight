@@ -98,11 +98,26 @@ module Harvard::LibraryCloud
       
       #add date start/end params
       if params['range'] && params['range']['originDate']
-        if params['range']['originDate']['begin'] && params['range']['originDate']['begin'].to_s != ''
-          results['dates.start'] = params['range']['originDate']['begin']
+        startYear = -10000
+        if params['range']['originDate']['begin'] && params['range']['originDate']['begin'].to_s != ''  
+          begin
+            if Integer(params['range']['originDate']['begin']) 
+              results['dates.start'] = params['range']['originDate']['begin']  
+              startYear = Integer(params['range']['originDate']['begin']) 
+            end
+          rescue
+          end
         end
         if params['range']['originDate']['end'] && params['range']['originDate']['end'].to_s != ''
-          results['dates.end'] = params['range']['originDate']['end']
+          begin
+            if Integer(params['range']['originDate']['end']) 
+              endYear = Integer(params['range']['originDate']['end']) 
+              if endYear >= startYear
+                results['dates.end'] = params['range']['originDate']['end']
+              end
+            end
+          rescue
+          end
         end
       end
 
