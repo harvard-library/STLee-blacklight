@@ -18,6 +18,11 @@
   float: left;
 }
 
+.view-type-group .btn-default {
+  -webkit-transition: background-color .28s ease-in;
+  transition: background-color .28s ease-in;
+}
+
 .view-mode__grid,
 .view-mode__list {
   padding: 5px;
@@ -36,6 +41,10 @@
   @include fa-icon-content($fa-var-th);
 }
 
+span.constraint:nth-child(2) {
+  margin-left: 4px;
+}
+
 .constraint.query {
   margin-left: 5px
 }
@@ -45,15 +54,37 @@
 }
 
 .appliedFilter.constraint {
-    padding-bottom: 3px;
+  padding-bottom: 3px;
+  margin-right: 4px;
+
+  a.dropdown-toggle {
+    -webkit-transition: all .28s ease-in;
+    transition: all .28s ease-in;
+    padding-left: 11px;
+    padding-right: 10px;
+
+    &:hover {
+      background-color: #d9534f;
+      color: $white;
+      cursor: pointer;
+    }
+  }
+
+  .btn-default:hover {
+    background-color: transparent;
+    cursor: initial;
+  }
 }
 
-.constraint.filter {
+.constraint.filter, 
+.constraint.appliedFilter {
   white-space: nowrap;
   font-size: rem-calc(14);
+
   .filterName {
     font-size: 12px;
     font-family: $font-family-sans-serif;
+
     &:after {
       content: ": ";
     }
@@ -61,25 +92,56 @@
 }
 
 #per-page-dropdown {
-  border: 1px solid #c0c0c0;
+  border: 1px solid $silver;
   border-radius: 4px;
+  cursor: pointer;
   display: inline-block;
   padding: 3px 10px 4px;
-}
+  width: 121px;
 
-#per-page-dropdown > a {
-  color: #222;
-  text-decoration: none;
-  span.caret {
-    @include fa-icon;
-    margin-left: 8px;
-    margin-top: 0;
+  &.open {
+    border-radius: 4px 4px 0 0;
+
+    .dropdown-menu {
+        opacity: 1;
+      }
+
+    span.caret {
+      transform: scaleY(-1);
+    }
   }
-}
 
-#per-page-dropdown .dropdown-menu {
-  margin: 0 0 0 -1px;
-  min-width: 117px;
+  & > a {
+    color: #222;
+    text-decoration: none;
+
+    span.caret {
+      @include fa-icon;
+      margin-left: 8px;
+      margin-top: -2px;
+      -webkit-transition: transform .28s ease-out;
+      transition: transform .28s ease-out;
+    }
+  }
+
+  .dropdown-menu {
+    border-radius: 0 0 4px 4px;
+    border: 1px solid #C0C0C0FF;
+    border-top: none;
+    box-shadow: none;
+    margin: 0 0 0 -1px;
+    min-width: 121px;
+    opacity: 0;
+    -webkit-transition: opacity .28s 0.1s;
+    -moz-transition: opacity .28s 0.1s;
+    transition: opacity .28s 0.1s;
+
+    & > li > a {
+      padding: 3px 10px;
+      -webkit-transition: background 0.28s ease;
+      transition: background 0.28s ease;
+    }
+  }
 }
 
 .f-dropdown.open {

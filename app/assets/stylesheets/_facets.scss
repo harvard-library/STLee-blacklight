@@ -257,6 +257,8 @@ a.facet__title {
                     padding: 12px 35px 12px 0px;
                     position: relative;
                     border-radius: 5px;
+                    -webkit-transition: background 0.4s ease;
+                    transition: background 0.4s ease;
 
                     a {
                         color: $jet;
@@ -270,6 +272,10 @@ a.facet__title {
                         top: 11px;
                         text-align: right;
                         width: auto !important;
+                    }
+
+                    &:hover {
+                        background-color: $silver;
                     }
 
                     &.more_facets_link {
@@ -345,9 +351,26 @@ form.range_limit {
     width: 650px;
 }
 
-.modal-header .close {
-    font-size: 26px;
-    opacity: 0.8;
+.modal-header {
+
+    .close {
+        font-size: 26px;
+        opacity: 0.8;
+    }
+
+    button.ajax-modal-close {
+        border-radius: 4px;
+        padding: 3px 8px 2px 9px;
+        text-shadow: none;
+        -webkit-transition: all 0.4s ease;
+        transition: all 0.4s ease;
+
+        &:hover {
+            background-color: #d9534f;
+            color: $white;
+            opacity: 1;
+        }
+    }
 }
 
 .modal-title {    
@@ -444,6 +467,7 @@ form.range_limit {
 }
 
 .facet_extended_list { 
+
     .facet-label .facet_select {
         display: inline-block;
         max-width: 75%;
@@ -459,6 +483,7 @@ form.range_limit {
     }
 }
 
+/* CURIOSity ad banner below facet rail */
 
 #curiosity {
     background: $white url(https://library.harvard.edu/themes/custom/harvard/assets/images/dots.png) top center repeat;

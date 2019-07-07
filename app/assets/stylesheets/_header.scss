@@ -198,6 +198,8 @@ span.hl__topHeaderTitle__collections {
         font-family: $font-family-sans-serif;
         font-weight: 300;
         text-decoration: none;
+        -webkit-transition: background-color .28s ease-in;
+        transition: background-color .28s ease-in;
 
         &:hover {
             background-color: $menu-highlight-1;
