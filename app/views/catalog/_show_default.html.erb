@@ -9,9 +9,6 @@
           <% if should_render_show_field? document, field %>
             <dt class="blacklight-<%= field_name.parameterize %>"><%= render_document_show_field_label document, field: field_name %></dt>
             <dd class="blacklight-<%= field_name.parameterize %>"><%=raw CGI.unescapeHTML doc_presenter.field_value field_name %>
-              <div><%= field_name%></div>
-              <%= CGI.unescapeHTML doc_presenter.field_value field_name%>
-              <%= generate_report_button_if_metadata_match field_name, field, 'Language', 'Undefined', nil%>
               
             </dd>
           <% end -%>
