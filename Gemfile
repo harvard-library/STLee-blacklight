@@ -63,7 +63,7 @@ end
 
 gem 'rsolr', '>= 1.0'
 gem 'jquery-rails'
-gem 'devise', '4.4.0'
+gem 'devise'
 gem 'devise-guests', '~> 0.6'
 gem 'blacklight-marc', '~> 6.1'
 gem 'blacklight-gallery', '~> 0.11.0'

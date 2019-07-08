@@ -1,4 +1,4 @@
-6.11.2-lts-4 (7/5/2019) MC/ED
+6.11.2-lts-4 (7/5/2019) MC/ED/VC
 --Added date range limit facet for refining search results
 --Added validation for date range limit facet
 --Added language facet for refining search results
@@ -14,6 +14,7 @@
 --Added helper text for users when searches yield no results
 --Corrected JS issue with accordion behavior in results facet rail
 --Cleaned up solr_document.rb to remove unused code and add comments
+--Updated Gem vulnerabilities devise and updated gems for rails, mysql, blacklight gems
 
 
 6.11.2-lts-3 (6/25/2019) PP/MC/ED/CV
