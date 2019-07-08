@@ -102,12 +102,7 @@
 .hl__topHeader .hl__topHeaderNav a {
     display: flex;
     align-items: center;
-    cursor: pointer;
-    border-bottom: none;
-
-    &:hover {
-        border-bottom: none;
-    }
+    cursor: pointer
 }
 
 .hl__topHeader__link:hover {
@@ -129,7 +124,7 @@
 
 @media (max-width: 620px) {
     .hl__topHeaderTitle__harvard a {
-        font-size: 2.0rem
+        font-size: 1.5rem
     }
 }
 
@@ -146,8 +141,8 @@ span.hl__topHeaderTitle__collections {
 
 @media (max-width: 620px) {
     span.hl__topHeaderTitle__collections {
-        font-size: 1.8rem;
-        padding: 0 0 0 6px;
+        font-size: 1.3rem;
+        padding: 0 0 0 4px;
     }
 }
 
@@ -185,36 +180,4 @@ span.hl__topHeaderTitle__collections {
 
 .hl__headerLogo img {
     width: 80%
-}
-
-
-.navbar__wrapper {
-    background-color: $jet;
-    width: 100%;
-    padding-right: 38px;
-
-    .nav > li > a {
-        color: $white;
-        font-family: $font-family-sans-serif;
-        font-weight: 300;
-        text-decoration: none;
-        -webkit-transition: background-color .28s ease-in;
-        transition: background-color .28s ease-in;
-
-        &:hover {
-            background-color: $menu-highlight-1;
-        }
-    }
-
-    .navbar-toggle {
-        border-color: $light-gray;
-        color: $light-gray;
-        padding: 8px 12px;
-    }
-}
-
-@media (max-width: 768px) {
-    .navbar__wrapper {
-        padding-right: 0;
-    }
 }

@@ -80,20 +80,8 @@ body.blacklight-catalog-show #document h1 {
       letter-spacing: 1.5px;
       margin: 0;
       padding: 40px 0;
-      position: relative;
       text-transform: uppercase;
       width: 240px;
-
-      /* may the developer gods forgive me,
-         but I had no other choice... -ED */
-
-      &:after {
-        content:":";
-        color: $white;
-        position: absolute;
-        transform: translate(-100%, 0);
-        -webkit-text-stroke: 2px $white;
-      }
     }
 
     dd {
@@ -165,7 +153,7 @@ dl.row {
     padding-bottom: 40px;
   }
 
-  a, .checkbox.toggle_bookmark label span {
+  a {
     border-bottom: 3px solid transparent;
     color: $breakthrough-blue;
     font-family: $font-family-sans-serif;
@@ -179,17 +167,6 @@ dl.row {
     }
   }
 
-  .btn-group.open { 
-
-    .caret {
-      transform: scaleY(-1);
-    }
-
-    .dropdown-menu {
-      opacity: 1.0;
-    }
-  }
-
   button.btn-dark {
     margin-top: 20px;
     font-family: $font-family-sans-serif;
@@ -197,15 +174,8 @@ dl.row {
     background-color: $jet;
     color: $white;
     letter-spacing: 1.17px;
-    padding: 6px 28px;
+    padding: 6px 30px;
     text-transform: uppercase;
-
-    .caret {
-      margin-left: 6px;
-      margin-top: -2px;
-      -webkit-transition: transform .28s ease-out;
-      transition: transform .28s ease-out;
-    }
   }
 
   .dropdown-menu {
@@ -213,16 +183,11 @@ dl.row {
     margin-top: 0;
     min-width: 258px;
     padding: 0;
-    opacity: 0;
-    -webkit-transition: opacity 0.28s 0.1s;
-    transition: opacity 0.28s 0.1s;
 
     a {
         color: #333;
         text-decoration: none;
         padding: 8px 20px 6px;
-        -webkit-transition: background 0.28s ease;
-        transition: background 0.28s ease;
 
         &:hover {
           border-color: transparent;
@@ -291,28 +256,6 @@ dl.row {
       }
     }
   }
-
-  .checkbox.toggle_bookmark {
-    padding-top: 24px;
-
-    label {
-      font-size: 15px;
-      letter-spacing: inherit;
-      padding-top: 0;
-
-      span {
-        margin-left: 3px;
-      }
-    }
-
-    input[type="checkbox"] {
-      margin-top: 0;
-    }
-  }
-
-  form input.toggle_bookmark {
-      height: 28px;
-    }
 
   .permalink {
       clear: both;

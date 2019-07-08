@@ -18,8 +18,6 @@ ul.pagination {
     color: $breakthrough-blue;
     padding: 6px 16px;
     text-decoration: none;
-    -webkit-transition: all .28s ease-in;
-    transition: all .28s ease-in;
 
     &:hover {
       background-color: $subtle-gray;

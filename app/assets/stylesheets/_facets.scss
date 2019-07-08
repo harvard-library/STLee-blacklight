@@ -49,14 +49,14 @@ ul.facet-values li {
     .facet_select, .selected {
         display: block;
         padding: 0 0 0 55px;
-        max-width: 90%;
+        max-width: 85%;
         position: relative;
 
         &:before {
             display: block;
             content: ' ';
             position: absolute;
-            left: 18px;
+            left: 20px;
             top: 0;
             background: white;
             width: 20px;
@@ -70,8 +70,8 @@ ul.facet-values li {
     height: 20px;
     display: block;
     position: absolute;
-    left: 21px;
-    top: 12px;
+    left: 22px;
+    top: 10px;
 }
 
 .glyphicon-remove {
@@ -155,26 +155,18 @@ a.facet__title {
         color: $red;
         font-size: rem-calc(20);
         position: relative;
-        top: 2px;
+        top: 0px;
         float: right;
-        -webkit-transition: -webkit-transform 0.5s ease;
-        transition: -webkit-transform 0.5s ease;
-        transition: transform 0.5s ease;
-        transition: transform 0.5s ease,-webkit-transform 0.5s ease;
-        transform: rotate(180deg);
 
         &.facet-expand {
             display: inline-block;
 
         }
 
+
+
         &.facet-collapse {
             display: none;
-        }
-
-        &.fa-rotate-180 {
-            -webkit-transform: scaleY(-1);
-            transform: scaleY(-1) rotate(180deg);
         }
     }
 }
@@ -257,8 +249,6 @@ a.facet__title {
                     padding: 12px 35px 12px 0px;
                     position: relative;
                     border-radius: 5px;
-                    -webkit-transition: background 0.4s ease;
-                    transition: background 0.4s ease;
 
                     a {
                         color: $jet;
@@ -272,10 +262,6 @@ a.facet__title {
                         top: 11px;
                         text-align: right;
                         width: auto !important;
-                    }
-
-                    &:hover {
-                        background-color: $silver;
                     }
 
                     &.more_facets_link {
@@ -298,30 +284,6 @@ a.facet__title {
             }
         }
     }
-}
-
-form.range_limit {
-    .error {
-        color: $light-blue;
-        display: block;
-        font-style: italic;
-        line-height: 1.5;
-        padding-top: 20px;
-        -webkit-animation-duration: fadeIn 0.8s;
-        animation-duration: fadeIn 0.8s;
-        -webkit-animation-fill-mode: both;
-        animation-fill-mode: both;
-    }
-
-    @-webkit-keyframes fadeIn {
-        0% {opacity: 0;}
-        100% {opacity: 1;}
-     }
-     
-     @keyframes fadeIn {
-        0% {opacity: 0;}
-        100% {opacity: 1;}
-     }
 }
 
 #ajax-modal {
@@ -351,26 +313,9 @@ form.range_limit {
     width: 650px;
 }
 
-.modal-header {
-
-    .close {
-        font-size: 26px;
-        opacity: 0.8;
-    }
-
-    button.ajax-modal-close {
-        border-radius: 4px;
-        padding: 3px 8px 2px 9px;
-        text-shadow: none;
-        -webkit-transition: all 0.4s ease;
-        transition: all 0.4s ease;
-
-        &:hover {
-            background-color: #d9534f;
-            color: $white;
-            opacity: 1;
-        }
-    }
+.modal-header .close {
+    font-size: 26px;
+    opacity: 0.8;
 }
 
 .modal-title {    
@@ -436,28 +381,8 @@ form.range_limit {
     }
 }
 
-.limit_content.range_limit {  
-    color: $white;
 
-    form {
-        margin: 0 0 10px;
-    }
-    input.range_begin, input.range_end {
-        padding: 21px 10px 22px;
-        margin-top: -1px;
-        color: $jet;
-    }
-    input[type="submit"] {
-        background-color: #E0E0E0;
-    }
-    input.range_begin {
-        margin-right: 8px;
-    }
-    input.range_end {
-        margin-right: 20px;
-        margin-left: 8px;
-    }
-}
+
 
 .btn-default.active, .btn-default.active:hover {
     background-color: $medium-gray;
@@ -467,7 +392,6 @@ form.range_limit {
 }
 
 .facet_extended_list { 
-
     .facet-label .facet_select {
         display: inline-block;
         max-width: 75%;
@@ -483,59 +407,7 @@ form.range_limit {
     }
 }
 
-/* CURIOSity ad banner below facet rail */
-
-#curiosity {
-    background: $white url(https://library.harvard.edu/themes/custom/harvard/assets/images/dots.png) top center repeat;
-    font-family: $font-family-sans-serif;
-    margin-top: 40px;
-    text-align: center;
-    padding: 40px 20px 45px;
-
-    h3 {
-        font-size: 32px;
-        font-weight: 700;
-        letter-spacing: 1.8px;
-        line-height: 1.4;
-        padding: 0;
-        margin-top: 0;
-        text-align: center;
-        text-transform: uppercase;
-    }
-
-    p {
-        font-size: 19px;
-        line-height: 32px;
-        margin: 0 auto;
-        padding: 10px 0 30px;
-        text-align: center;
-    }
-
-    a {
-        background-color: $jet;
-        border-color: transparent;
-        border-radius: 4px;
-        color: $white;
-        font-size: 12px;
-        font-weight: 700;
-        letter-spacing: 1.17px;
-        line-height: 16px;
-        margin: 20px auto;
-        padding: 5px 9px;
-        text-transform: uppercase;
-        -webkit-transition: all 0.4s ease;
-        transition: all 0.4s ease;
-
-        &:hover {
-            background-color: $medium-gray;
-            text-decoration: none;
-        }
-    }
-
-}
-
-@media (max-width: 1200px) {
-    #curiosity {
-        display: none;
-    }
+.facets__container a.remove {
+    left: 23px;
+    top: 12px;
 }

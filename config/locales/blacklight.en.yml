@@ -1,10 +1,6 @@
 en:
   blacklight:
     application_name: 'Harvard Digital Collections'
-    
-    header_links:
-      search_history: 'Search History'
-
     search:
       form:
         search:

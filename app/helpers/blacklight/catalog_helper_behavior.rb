@@ -325,10 +325,6 @@ end
 
     constraints.join(' / ')
   end
-    
-  def bookmarks_enabled?
-    blacklight_config.enable_bookmarks
-  end
 
   private
 
@@ -339,5 +335,4 @@ end
       scope = options.delete(:route_set) || self
       scope.url_for search_state.to_h.merge(format: format)
     end
-
 end

@@ -7,8 +7,8 @@ end
 
 
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
-gem 'rails'
-gem 'mysql2'
+gem 'rails', '~> 5.1.4'
+gem 'mysql2', '>= 0.3.18', '< 0.5'
 # Use sqlite3 as the database for Active Record
 # gem 'sqlite3'
 gem 'pg', '~> 0.20'
@@ -56,18 +56,17 @@ end
 # Windows does not include zoneinfo files, so bundle the tzinfo-data gem
 gem 'tzinfo-data', platforms: [:mingw, :mswin, :x64_mingw, :jruby]
 
-gem 'blacklight', '~> 6.20'
+gem 'blacklight', '6.11.2'
 group :development, :test do
   gem 'solr_wrapper', '>= 0.3'
 end
 
 gem 'rsolr', '>= 1.0'
 gem 'jquery-rails'
-gem 'devise'
+gem 'devise', '4.4.0'
 gem 'devise-guests', '~> 0.6'
 gem 'blacklight-marc', '~> 6.1'
 gem 'blacklight-gallery', '~> 0.11.0'
-gem 'blacklight_range_limit', '~> 6.3.3'
 gem 'foundation-rails', '~> 5.4'
 gem 'font-awesome-sass'
 gem 'jsonpath', '1.0.1'

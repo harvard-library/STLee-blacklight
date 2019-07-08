@@ -72,43 +72,5 @@ $(document).on('turbolinks:load', function() {
         }
     });
 
-    $('body').on('submit', 'form.range_limit', function (e) {
-        return validateRangeLimits($(this));
-    });
-
-    $('body').on('blur', 'form.range_limit input', function (e) {
-        validateRangeLimits($(this).parents('form'));
-    });
-
-    $('form.range_limit input.form-control').attr('placeholder', 'YYYY');
-
 });
-
-function validateRangeLimits($form) {
-    startYear = $form.find('.form-control.range_begin').val();
-    endYear = $form.find('.form-control.range_end').val();
-
-    $form.find('.error').remove();
-
-    if (startYear != '' && (isNaN(startYear) || startYear != parseInt(startYear))) {
-        $form.append('<span class="error">Please enter a valid start year.</span>');
-        return false;
-    }
-
-    if (endYear != '' && (isNaN(endYear) || endYear != parseInt(endYear))) {
-        $form.append('<span class="error">Please enter a valid end year.</span>');
-        return false;
-    }
-    
-    if (startYear != '' && endYear != '' && parseInt(startYear) > parseInt(endYear)) {
-        $form.append('<span class="error">End year should be less than or equal start year.</span>');
-        return false;
-    }
-    
-    return true;
-}
-
-// For blacklight_range_limit built-in JS, if you don't want it you don't need
-// this:
-//= require 'blacklight_range_limit'
 

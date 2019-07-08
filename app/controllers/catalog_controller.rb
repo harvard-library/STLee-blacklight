@@ -1,8 +1,6 @@
 # frozen_string_literal: true
 class CatalogController < ApplicationController
 
-  include BlacklightRangeLimit::ControllerOverride
-
   include Blacklight::Catalog
   include Blacklight::Marc::Catalog
   include Harvard::LibraryCloud::Collections
@@ -41,15 +39,6 @@ class CatalogController < ApplicationController
     config.show.document_actions.delete(:email)
     config.index.document_actions.delete(:bookmark)
 
-    #hide bookmark control and nav
-    config.enable_bookmarks = false
-    config.navbar.partials = {}
-    if config.enable_bookmarks 
-      config.add_nav_action(:bookmark, partial: 'blacklight/nav/bookmark', if: :render_bookmarks_control?)
-    end
-    config.add_nav_action(:saved_searches, partial: 'blacklight/nav/saved_searches', if: :render_saved_searches?)
-    config.add_nav_action(:search_history, partial: 'blacklight/nav/search_history')
-
     # Add the "Add to collection" action to the individual document page
     # add_show_tools_partial(:add_to_collection, define_method: false)
     # add_results_document_tool(:add_to_collection_index)
@@ -73,11 +62,9 @@ class CatalogController < ApplicationController
     config.show.thumbnail_field = 'preview'
 
     # Facets
-    config.add_facet_field 'originDate', label: 'Date Range', range: true, maxlength: 4
     config.add_facet_field 'digitalFormat', label: 'Digital Format', single: true, limit: 10
-    config.add_facet_field 'language', label: 'Languages',  single: true, limit: 10
     config.add_facet_field 'repository', label: 'Repository',  single: true, limit: 10
-    
+
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request
     # handler defaults, or have no facets.
