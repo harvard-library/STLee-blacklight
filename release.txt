@@ -1,3 +1,23 @@
+6.20.0-lts-1 (7/5/2019) MC/ED/VC
+--Added date range limit facet for refining search results
+--Added validation for date range limit facet
+--Added language facet for refining search results
+--Added origin place facet link when there's only one place
+--Implemented user account feature to support a signed-in state, allows individual sign-ins, password reminder dispatch, search history review and to search save functionality
+--Added user utility navigation element to global page layout
+--Added sign in link to global footer
+--Added new styles to support signed-in state and related views
+--Removed the "beta" status alert ribbon from global layout
+--Corrected layout rendering issue with IDS download component
+--Improved layout rendering for mobile/smart displays
+--Inserted an "ad" for CURIOSity collections into search results layout
+--Added helper text for users when searches yield no results
+--Corrected JS issue with accordion behavior in results facet rail
+--Cleaned up solr_document.rb to remove unused code and add comments
+--Updated Gem vulnerabilities devise and updated gems for rails, mysql, blacklight gems
+--Updated the release number to use the current blacklight version 6.20
+
+
 6.11.2-lts-3 (6/25/2019) PP/MC/ED/CV
 --Added clickable metadata values on item detail page
 --Added IIIF Section at the bottom of the ‘related tools & links’ box for still image content
@@ -22,7 +42,6 @@
 --Fixed displayLabel attribute value display
 --Updated options for alternate title displays
 --Enhanced sublabel displays for the Description field 
-
 
 6.11.2-lts-2 (5/28/2019) PP/MC/ED/CV
 --Updated item detail metadata layout for mobile

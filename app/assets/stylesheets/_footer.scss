@@ -54,7 +54,7 @@
 }
 
 .hl__linked-list__item {
-    display: inline-block;
+    display: block;
     margin-bottom: 5px;
 }
 
@@ -76,7 +76,11 @@
 
 .hl__footerLinkRight {
     padding-right: 30px;
-    list-style: none
+    list-style: none;
+
+    &.hl__linked-list__item {
+        display: inline-block;
+    }
 }
 
 li.hl__linked-list__item:last-child {
@@ -123,6 +127,7 @@ li.hl__linked-list__item:last-child {
 
 .hl__footerCopyrightContainer {
     padding-left: 35px;
+    padding-top: 8px;
     align-items: center;
     height: 35%;
     color: $white
@@ -137,20 +142,20 @@ li.hl__linked-list__item:last-child {
     margin: 0 10px 4px 0;
 }
 
-.hl__ccLicense {
+p.hl__ccLicense {
     color: $silver;
     font-family: $font-family-sans-serif-light;
     font-weight: 300;
 }
 
-.hl__ccText {
+p.hl__ccText {
     color: $silver;
     font-family: $font-family-sans-serif-light;
     font-size: 11px;
     font-weight: 300;
 }
 
-.hl__ccText a {
+p.hl__ccText a {
     color: $white;
     text-decoration: underline;
 }
