@@ -35,7 +35,8 @@ module Harvard::LibraryCloud
     # @return [Blacklight::Solr::Response] the solr response object
     def send_and_receive(path, solr_params = {})
       benchmark("LibraryCloud API fetch", level: :debug) do
-        key = blacklight_config.http_method == :post ? :data : :params
+        #key = blacklight_config.http_method == :post ? :data : :params
+        key = :params
         res = connection.send_and_receive(path, {key=>solr_params.to_hash, method: blacklight_config.http_method})
 
         api_response = blacklight_config.response_model.new(res, solr_params, document_model: blacklight_config.document_model, blacklight_config: blacklight_config)

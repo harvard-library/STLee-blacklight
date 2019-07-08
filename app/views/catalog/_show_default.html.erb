@@ -22,8 +22,8 @@
   <div class="col-lg-4">
     <div id="tools" class="record-tools">
       <h2 class="clearfix">Tools &amp; Related Links</h2>
-          <div class="btn-group" id='idsDropdown'>
             <%if document[:delivery_service] == 'ids' or document[:delivery_service] == 'pds'%>
+            <div class="btn-group" id='idsDropdown'>
               <button type="button" class="btn btn-dark dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                  Download This Item <span class="caret"></span>
                </button>
@@ -157,13 +157,14 @@
                 <%end%>
             </div>
           <%end%>
+        <%= render :partial => "bookmark_control", :locals => {:document => document } %>
         <%
         if !document[:permalink].nil? && document[:permalink].kind_of?(String) && document[:permalink] != ''
           %>
-            <div class="permalink"><a href="<%=document[:permalink]%>">Permalink</a></div>
+            <div class="permalink"><span class="fa fa-link"></span> &nbsp;<a href="<%=document[:permalink]%>">Permalink</a></div>
           <%
         end
-        %>
+        %>        
         <%
         if !document[:digital_collections_links].nil? && document[:digital_collections_links].kind_of?(Array) && document[:digital_collections_links].length > 0
           %>
