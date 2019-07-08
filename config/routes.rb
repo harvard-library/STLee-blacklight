@@ -1,5 +1,6 @@
 Rails.application.routes.draw do
   
+  concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
   mount Blacklight::Engine => '/'
   Blacklight::Marc.add_routes(self)
   root to: "application#home"
@@ -7,6 +8,8 @@ Rails.application.routes.draw do
 
   resource :catalog, only: [:index], as: 'catalog', path: '/catalog', controller: 'catalog' do
     concerns :searchable
+    concerns :range_searchable
+
   end
 
   devise_for :users
@@ -18,6 +21,7 @@ Rails.application.routes.draw do
 
   # Add an additional route for the "Track" action which allows IDs to contains periods
   Blacklight::Engine.routes.draw do
+  concern :range_searchable, BlacklightRangeLimit::Routes::RangeSearchable.new
     post "/catalog/:id/track", to: 'catalog#track', as: 'track_search_context_override', constraints: { id: /[^\/]+/ }
 
     resources :suggest, only: :index, defaults: { format: 'json' }
@@ -25,7 +29,7 @@ Rails.application.routes.draw do
 
   match '/catalog/:id/add_to_collection' => 'catalog#add_to_collection', as: 'add_to_collection_catalog', via: [:get, :post]
 
-  resources :bookmarks do
+  resources :bookmarks, constraints: { id: /[^\/]+/ } do
     concerns :exportable
     collection do
       delete 'clear'

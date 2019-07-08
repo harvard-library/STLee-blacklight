@@ -9,11 +9,11 @@ $(function() {
   });
 
   $('.expand_caret').on('click', function () {
-    if ($(this).hasClass('fa-rotate-180')) {
-      $(this).removeClass('fa-rotate-180');
+    if ($(this).find('.expand_caret').hasClass('fa-rotate-180')) {
+      $(this).find('.expand_caret').removeClass('fa-rotate-180');
     }
     else {
-      $(this).addClass('fa-rotate-180');
+      $(this).find('.expand_caret').addClass('fa-rotate-180');
     }
   });
 
@@ -25,6 +25,7 @@ $(function() {
       $(this).find('.expand_caret').addClass('fa-rotate-180');
     }
   });
+  
   var windowWidth = $(window).width();
   if(windowWidth <= 992) { //for iPad & smaller devices
     $('.panel-collapse').removeClass('in');
