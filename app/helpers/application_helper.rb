@@ -15,7 +15,7 @@ module ApplicationHelper
 
   def generate_tour_modal_link(documentType)
     if documentType == 'pds'
-        ('<div id="take-a-tour" style:"display:block;"><p><a id="take-a-tour-link" data-toggle="modal" data-target="#take_a_tour_modal">Take a tour</a></p></div>').html_safe
+        ('<div id="take-a-tour" style:"display:block;"><p><a id="take-a-tour-link" data-toggle="modal" data-target="#take_a_tour_modal">Take a tour of the viewer</a></p></div>').html_safe
     end
   end
 
