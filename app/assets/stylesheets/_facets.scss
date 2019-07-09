@@ -443,9 +443,10 @@ form.range_limit {
         margin: 0 0 10px;
     }
     input.range_begin, input.range_end {
-        padding: 21px 10px 22px;
+        padding: 21px 6px 22px 9px;
         margin-top: -1px;
         color: $jet;
+        width: 4.0em;
     }
     input[type="submit"] {
         background-color: #E0E0E0;
