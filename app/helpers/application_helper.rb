@@ -13,6 +13,32 @@ module ApplicationHelper
   	end
   end
 
+  def generate_tour_modal_link(documentType)
+    if documentType == 'pds'
+        ('<div id="take-a-tour" style:"display:block;"><p><a id="take-a-tour-link" data-toggle="modal" data-target="#take_a_tour_modal">Take a tour</a></p></div>').html_safe
+    end
+  end
+
+  def generate_tour_modal_html(documentType)
+    if documentType == 'pds'
+      ('<div class="modal fade" id="take_a_tour_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+          <div class="modal-content">
+            <div class="modal-header no-border">
+              <div class="modal-title" id="exampleModalLabel">Tour the viewer</div>
+              <button type="button" class="close modal-button" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+              </button>
+            </div>
+            <div class="modal-body" id="modal-body-content">
+              <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRtpx-naAyksS0J5Jboe84367F4WXnS4gKabW0LiEihlft5HZCoO9dalZhrMVw7SUgvBDYEDrNpYvh1/embed?start=true&loop=true&delayms=10000" id="embedded-viewer-tour-presentation" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+            </div>
+          </div>
+        </div>
+      </div>').html_safe
+    end
+  end
+
   def generate_twitter_meta_tags
     twitter_meta_tags = '<!-- BEGIN TWITTER SUMMARY CARD -->
                           <meta name="twitter:card" content="summary_large_image">
