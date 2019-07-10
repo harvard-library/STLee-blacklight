@@ -1,4 +1,4 @@
-6.20.0-lts-1 (7/5/2019) MC/ED/VC
+6.20.0-lts-1 (7/11/2019) MC/ED/CV/VC
 --Added date range limit facet for refining search results
 --Added validation for date range limit facet
 --Added language facet for refining search results
@@ -14,8 +14,12 @@
 --Added helper text for users when searches yield no results
 --Corrected JS issue with accordion behavior in results facet rail
 --Cleaned up solr_document.rb to remove unused code and add comments
---Updated Gem vulnerabilities devise and updated gems for rails, mysql, blacklight gems
---Updated the release number to use the current blacklight version 6.20
+--(VC) Updated Gem vulnerabilities devise and updated gems for rails, mysql, blacklight gems
+--(VC) Updated the release number to use the current blacklight version 6.20
+--Added guided tour modal window functionality for PDS served documents
+--Added style refinements for date range facet limiter
+--Revised sign-in behavior so that users are returned to their search results after successful login instead of the homepage
+
 
 
 6.11.2-lts-3 (6/25/2019) PP/MC/ED/CV
