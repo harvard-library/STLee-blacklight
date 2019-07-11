@@ -2,6 +2,36 @@
 @import "util";
 @import "icons";
 
+.modal-dialog {
+  width: 95%;
+  height: 95%;
+}
+
+.modal-title {
+  display: inline-block;
+}
+
+.close, .modal-button {
+  display: inline-block;
+}
+
+.modal-content {
+  height:100%;
+}
+
+.modal-header, .no-border {
+  border:none;
+}
+
+.modal-body {
+  height: 95%;
+}
+
+#embedded-viewer-tour-presentation {
+  width: 100%;
+  height: 95%;
+}
+
 #previous-next {
   margin-bottom: 20px;  
   font-family: $font-family-sans-serif;
@@ -120,6 +150,30 @@ body.blacklight-catalog-show #document h1 {
 
 dl.row {
   margin-left: 0;
+}
+
+#take-a-tour {
+  margin: -40px 0 40px;
+
+  a {
+    border-bottom: 3px solid transparent;
+    color: $breakthrough-blue;
+    cursor: pointer;
+    font-family: $font-family-sans-serif;
+    font-weight: 500;
+    text-decoration: none;
+    -webkit-transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
+    transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
+
+    &:hover {
+      border-bottom: 3px solid rgba(5,121,184,0.3);
+    }
+  }
+
+  p {
+    text-align: center;
+    margin-bottom: 0;
+  }
 }
 
 #tools, #feedback {
@@ -365,5 +419,10 @@ dl.row {
   #tools dl {    
     width: 100%;
   }
+}
 
+@media (max-width: 1200px) {
+  #take-a-tour {
+      display: none;
+  }
 }

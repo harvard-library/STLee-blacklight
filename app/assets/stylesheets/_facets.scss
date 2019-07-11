@@ -452,11 +452,15 @@ form.range_limit {
         background-color: #E0E0E0;
     }
     input.range_begin {
-        margin-right: 8px;
+        margin-right: 6px;
     }
     input.range_end {
-        margin-right: 20px;
-        margin-left: 8px;
+        margin-right: 7px;
+        margin-left: 6px;
+    }
+
+    .btn {
+        padding: 6px 9px;
     }
 }
 
