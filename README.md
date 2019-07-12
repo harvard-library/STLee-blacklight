@@ -1,10 +1,10 @@
 # README
 
-This repository contains a Blacklight instance that uses the Harvard LibraryCloud Item API as a backend in place of
+This repository contains a [Blacklight](http://projectblacklight.org/) instance that uses the Harvard LibraryCloud Item API as a backend in place of
 the standard Solr backend. It also allows adding items to the LibraryCloud collections using the 
 Collections API.
 
-Demo site: http://dcp-dev2.lib.harvard.edu:8080/
+Live site: http://digitalcollections.library.harvard.edu/catalog/
 
 # Deployment
 
@@ -192,6 +192,10 @@ to be altered to reflect the difference between Solr and LibraryCloud API syntax
 * Adding parameters to the LibraryCloud API query to limit results to public items in DRS
 * Making the actual HTTPS call to the LibraryCloud API
 
+This class includes code which escapes special characters before passing them to LC in the method params_to_lc.
+
+This class also rewrites the names of certain facet fields before passing them to LC in the method facet_query_params_to_lc. Some facets use the "_exact" version of the field name, but for other fields, such as originPlace, this doesn't work due to an LC bug. 
+
 ### [lib/harvard/library_cloud/response.rb](lib/harvard/library_cloud/response.rb)
 Parse the response received from the LibraryCloud API. Inherit from the `response.rb` provided by
 Blacklight, and override certain functions as needed to handle differences between the responses
@@ -210,7 +214,9 @@ format
 
 ### [lib/harvard/library_cloud/search_builder.rb](lib/harvard/library_cloud/search_builder.rb)
 Blacklight defines a processor chain that can be used to add additional fields to the query. We use
-that here to add the 'search_field' parameter, which is required for the LibraryCloud API, but not Solr
+that here to add the 'search_field' parameter, which is required for the LibraryCloud API, but not Solr.
+
+We also add the 'range' field in order to support the Date facet.
 
 ## Apply custom design
 
@@ -227,6 +233,35 @@ in the desired order
 config.index.partials = [:thumbnail, :index_header, :index]
 config.show.partials = [ :show_header, :show_original, :show]
 ```
+* Configure the search results partials for different views. This controls what partials and fields are shown for Gallery and Masonry views.
+```
+config.view.gallery.partials = [:index_header]
+config.view.masonry.partials = [:index]
+```
+
+* Enable the BlackLight Range Limit gem. This gem is used for the Date facet functionality.
+```
+include BlacklightRangeLimit::ControllerOverride
+```
+
+* Configure the user utility nav (Saved Searches, Search History, etc). This code clears the default user util nav and adds desired the nav items.
+
+The method to clear the default nav is:
+```
+config.navbar.partials = {}
+```
+
+The method used to add nav items is:
+```
+config.add_nav_action()
+```
+
+* Disable bookmarks functionality. Because the bookmarks functionality is not ready to be used at this time, it has been removed from the utility nav and the bookmark control has been removed from search results.
+This is done with using this code:
+```
+config.enable_bookmarks = false
+```
+
 * Set the options for the pager
 ```ruby
 config.per_page = [12,24,48,96]
@@ -250,7 +285,7 @@ Create an action that allows adding items to collections through the LibraryClou
 ### [app/controllers/catalog_controller.rb](app/controllers/catalog_controller.rb)
 
 * Include the `Harvard::LibraryCloud::Collections` module to handle the "Add to Collection" 
-functinality, so Blacklight can find it
+functionality, so Blacklight can find it
 ```ruby
 include Harvard::LibraryCloud::Collections
 ``` 
@@ -277,60 +312,47 @@ Partial that renders the "Add to Collection Form"
  
 ### [app/views/catalog/add_to_collection_success.html.erb](app/views/catalog/add_to_collection_success.html.erb)
 
-Modal for displaying the "Succes" message after an item is added to a collection
- 
-## Add items to LibraryCloud Collections (Search Results Page) 
+Modal for displaying the "Success" message after an item is added to a collection
 
-Allow users to add items to the collections in bulk from the search results page.
- 
-### [app/controllers/catalog_controller.rb](app/controllers/catalog_controller.rb)
 
- * Add the "Add to Collection" action to items in the search results
- ```ruby
- add_results_document_tool(:add_to_collection, define_method: false)
- ```
+##Notable Gems
 
-### [app/views/catalog/_index_default.html.erb](app/views/catalog/_index_default.html.erb)
+*[JsonPath](https://github.com/joshbuddy/jsonpath) - Provides XPath like syntax for querying JSON objects. This is used to parse responses from the LC API. Used in [app/models/solr_document.rb](app/models/solr_document.rb). 
+*[Blacklight Gallery](https://github.com/projectblacklight/blacklight-gallery) - Plugin for Blacklight that supports multiple search results views (List, Gallery, and Masonry).
+*[Blacklight Range Limit](https://github.com/projectblacklight/blacklight_range_limit) - Plugin for Blacklight that supports date range facets.
 
-Add display of document actions to the bottom of each individual item in the search results
 
-### [app/views/catalog/_add_to_collection_index.html.erb](app/views/catalog/_add_to_collection_index.html.erb)
 
-Define a partial for the 'add to collection on the index page' action, that will be included 
-from [app/views/catalog/_index_default.html.erb](app/views/catalog/_index_default.html.erb).   
-
-This is basically just a checkbox with no smarts.
-
-### [app/views/catalog/_add_to_collection_index_action.html.erb](app/views/catalog/_add_to_collection_index_action.html.erb)
-
-Define a partial that can include the actual "Add to Collection" button for the search results page, along with a 
-"Select all" checkbox. This partial is included in the search results sidebar 
-([app/views/catalog/_search_sidebar.html.erb](app/views/catalog/_search_sidebar.html.erb))
- 
-### CSS and Javascript to handle selecting checkboxes
-
-We use Javascript to dynamically update the form submit URL for the "Add to Collection" action in the
-[app/views/catalog/_add_to_collection_index_action.html.erb](app/views/catalog/_add_to_collection_index_action.html.erb)
-partial. And a bit of CSS to make it look better. The relevant files are:
-
-* [app/assets/javascripts/add_multiple.js](app/assets/javascripts/add_multiple.js)
-* [app/assets/stylesheets/_collections.scss](app/assets/stylesheets/_collections.scss)
-  
  
 ## Known Issues
 
 * Not possible to select multiple choices within a single facet.
     * Workaround: set “single: true” on the facet_field configuration
     * Reason: LC API doesn’t handle queries on the same field correctly)
-* “More” option for facets is not enabled.
-    * Workaround: do not specify a “limit” on the facet_field configuration
-    * Reason: Not implemented
 * “Autocomplete” functionality does not work
     * Workaround: disable it in the catalog_controller
     * Reason: not supported by LibraryCloud API
 * Can only sort by relevance
     * Workaround: Use “relevance” as the only sort option
     * Reason: Sorting by date not supported by LibraryCloud API
-* When adding an item to a collection, all collections are displayed as options, including those that the current "user" (API key) doesn't have permission to change
-    * Workaround: Use an admin API key to allow adding to any collection 
-    * Reason: Collections API does not allow filtering collections by owner
+* Linked metadata not searching against "_exact" fields
+    * Workaround: Use LC field names without "_exact" for some fields.	
+    * Reason: The "_exact" field in LC is not indexing properly for some fields such as originPlace. There is an LC fix in progress.
+* Bookmarks not functional. 	
+	* Workaround: Hide from user interface for now. See "Disabled Functionality" below.
+	* Reason: LC API method for requesting multiple documents by identifier doesn't support colons. There is a plan to fix this in the API.
+
+
+## Disabled Functionality 
+
+### Bookmarks
+Out-of-the-box Blacklight includes bookmarking functionality to allow a user to save particular catalog items to their account to view later. In order to integrate this functionality with LibraryCloud, the Blacklight application needs to be able to query for multiple item identifiers in a query. The LC API support for this type of request has a bug where colons in identifiers cause the query to fail. The LC development team is currently working on a fix for this.
+
+To enable bookmarks, click set 
+
+### Add items to LibraryCloud Collections 
+The "Add To Collection" functionality was part of the original prototype but has been removed from the UI, though the underlying code still exists in the project for future use. 
+
+The current plan is to implement the functionality in phases starting with using Bookmarks. 
+
+  
