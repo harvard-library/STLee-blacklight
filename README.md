@@ -272,47 +272,22 @@ config.per_page = [12,24,48,96]
 * Install the Foundation 5 framework using the `foundation-rails` gem
 * Create a master SASS file at [app/assets/stylesheets/application.scss](app/assets/stylesheets/application.scss) and additional SASS files
 under [app/assets/stylesheets/_*.scss](app/assets/stylesheets)
+* Add Javascript for facet interactivity in [app/assets/javascripts/application.js](app/assets/javascripts/application.js)
 * Add icons for the different document types at [app/assets/images/icons/*.svg](app/assets/images/icons)
 * Add image assets for the home page at [app/assets/images/*.png](app/assets/images)
 * Add helper class to support displaying images using the `<picture>` element at [app/helpers/images_helper.rb](app/helpers/images_helper.rb)
 * Create partials under [app/views](app/views) to override the default Blacklight layout
 
+### Notable Customized Partials
 
-## Add items to LibraryCloud Collections (Item Detail Page)
+#### Item Details
+* [app/views/catalog/_show_default.html.erb](app/views/catalog/_show_default.html.erb)
 
-Create an action that allows adding items to collections through the LibraryCloud Collections API.
+#### Pagination
+Override the default Blacklight search results pagination links.
+* [app/views/kaminari/blacklight/_page.html.erb](app/views/kaminari/blacklight/_page.html.erb)
+* [app/views/kaminari/blacklight/_paginator.html.erb](app/views/kaminari/blacklight/_paginator.html.erb)
 
-### [app/controllers/catalog_controller.rb](app/controllers/catalog_controller.rb)
-
-* Include the `Harvard::LibraryCloud::Collections` module to handle the "Add to Collection" 
-functionality, so Blacklight can find it
-```ruby
-include Harvard::LibraryCloud::Collections
-``` 
-* Add the "Add to Collection" action
-```ruby
-add_show_tools_partial(:add_to_collection, define_method: false)
-```
-
-### [lib/harvard/library_cloud/collections.rb](lib/harvard/library_cloud/collections.rb)
-
-* Define method `add_to_collection` which is called by BlackLight when the 'Add to Collection' dialog is displayed
-* Define method `add_to_collection_action` which submits one or more items to be added to a LibraryCloud collection
-* Define method `add_to_collection_solr_document_path` which is called by BlackLight to define the URL to invoke
-the "Add to Collection" action
-* Define methd `available_collections` which retrives a list of collections to which an item can be added 
-
-### [app/views/catalog/add_to_collection.html.erb](app/views/catalog/add_to_collection.html.erb)
-
-Modal for displaying the "Add To Collection" form
-
-### [app/views/catalog/_add_to_collection_form.html.erb](app/views/catalog/_add_to_collection_form.html.erb)
-
-Partial that renders the "Add to Collection Form"
- 
-### [app/views/catalog/add_to_collection_success.html.erb](app/views/catalog/add_to_collection_success.html.erb)
-
-Modal for displaying the "Success" message after an item is added to a collection
 
 
 ##Notable Gems
@@ -348,7 +323,10 @@ Modal for displaying the "Success" message after an item is added to a collectio
 ### Bookmarks
 Out-of-the-box Blacklight includes bookmarking functionality to allow a user to save particular catalog items to their account to view later. In order to integrate this functionality with LibraryCloud, the Blacklight application needs to be able to query for multiple item identifiers in a query. The LC API support for this type of request has a bug where colons in identifiers cause the query to fail. The LC development team is currently working on a fix for this.
 
-To enable bookmarks, click set 
+To enable bookmarks, edit [app/controllers/catalog_controller.rb](app/controllers/catalog_controller.rb) and set enable_bookmarks to true:
+```
+config.enable_bookmarks = false
+```
 
 ### Add items to LibraryCloud Collections 
 The "Add To Collection" functionality was part of the original prototype but has been removed from the UI, though the underlying code still exists in the project for future use. 
