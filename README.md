@@ -220,7 +220,7 @@ We also add the 'range' field in order to support the Date facet.
 
 ## Apply custom design
 
-These change apply a custom design to the default Blacklight installation. The home, search,
+These changes apply a custom design to the default Blacklight installation. The home, search,
 and item detail pages have been updated with the new design.
 
 ### [app/controllers/catalog_controller.rb](app/controllers/catalog_controller.rb)
@@ -267,7 +267,7 @@ config.enable_bookmarks = false
 config.per_page = [12,24,48,96]
 ```
 
-### Additional steps to apply the design
+### Additional UI Enhacements
 
 * Install the Foundation 5 framework using the `foundation-rails` gem
 * Create a master SASS file at [app/assets/stylesheets/application.scss](app/assets/stylesheets/application.scss) and additional SASS files
@@ -280,14 +280,39 @@ under [app/assets/stylesheets/_*.scss](app/assets/stylesheets)
 
 ### Notable Customized Partials
 
-#### Item Details
-* [app/views/catalog/_show_default.html.erb](app/views/catalog/_show_default.html.erb)
+#### Facets
+Update UI for facet sidebar to support interactivity and design.
+* [app/views/catalog/_facet_layout.html.erb](app/views/catalog/_facet_layout.html.erb) - Update HTML and class names to support accordions.
+* [app/views/catalog/_facets.html.erb](app/views/catalog/_facets.html.erb) - Update HTML to support accordions. Add CTA for Curiosity.
+
+#### Search Form
+Update UI for search form that appears in the masthead.
+
+* [app/views/catalog/_search_form.html.erb](app/views/catalog/_search_form.html.erb) - Update HTML structure.
+
+
+
+#### Search Results
+Customize search results display.
+* [app/views/catalog/_document.html.erb](app/views/catalog/_document.html.erb) - Update HTML structure.  
+* [app/views/catalog/_document_list.html.erb](app/views/catalog/_document_list.html.erb) - Update HTML structure.
+* [app/views/catalog/_index_default.html.erb](app/views/catalog/_index_default.html.erb) - Render unescaped HTML for field values. 
+* [app/views/catalog/_search_header.html.erb](app/views/catalog/_search_header.html.erb) - Update HTML structure.
+* [app/views/catalog/_search_results.html.erb](app/views/catalog/_search_results.html.erb) - Update HTML structure.
+* [app/views/catalog/_zero_results.html.erb](app/views/catalog/_zero_results.html.erb) - Add help text on the "no results" page.
 
 #### Pagination
-Override the default Blacklight search results pagination links.
-* [app/views/kaminari/blacklight/_page.html.erb](app/views/kaminari/blacklight/_page.html.erb)
-* [app/views/kaminari/blacklight/_paginator.html.erb](app/views/kaminari/blacklight/_paginator.html.erb)
+Override the default Blacklight search results pagination links to show 10 pages at a time with links for "Previous", "Next", and "..." to jump to the next 10 pages. Removed links to "Last" page dues to LC API limitations. 
 
+Note that Blacklight uses a gem called Kaminari for pagination.
+* [app/views/catalog/_results_pagination.html.erb](app/views/catalog/_results_pagination.html.erb) - Update pagination parameters.
+* [app/views/kaminari/blacklight/_page.html.erb](app/views/kaminari/blacklight/_page.html.erb) - 
+* [app/views/kaminari/blacklight/_paginator.html.erb](app/views/kaminari/blacklight/_paginator.html.erb) - Add pagination logic to show pages 1-10,11-20, etc.
+
+
+#### Item Details
+Customized catalog item details page to include tools & related links functionality.
+* [app/views/catalog/_show_default.html.erb](app/views/catalog/_show_default.html.erb)
 
 
 ##Notable Gems
@@ -313,6 +338,9 @@ Override the default Blacklight search results pagination links.
 * Linked metadata not searching against "_exact" fields
     * Workaround: Use LC field names without "_exact" for some fields.	
     * Reason: The "_exact" field in LC is not indexing properly for some fields such as originPlace. There is an LC fix in progress.
+* Can only paginate through 100,000 records
+	* Workaround: Update pagination to remove "Last" links that jump to end of record set.
+	* Reason: LC API was experiencing performance issues with returning all 6 million+ records. API was updated to limit record set to 100,000 (though search counts are still accurate).
 * Bookmarks not functional. 	
 	* Workaround: Hide from user interface for now. See "Disabled Functionality" below.
 	* Reason: LC API method for requesting multiple documents by identifier doesn't support colons. There is a plan to fix this in the API.
