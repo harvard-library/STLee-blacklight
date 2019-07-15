@@ -1,8 +1,7 @@
 # README
 
-This repository contains a [Blacklight](http://projectblacklight.org/) instance that uses the Harvard LibraryCloud Item API as a backend in place of
-the standard Solr backend. It also allows adding items to the LibraryCloud collections using the 
-Collections API.
+This repository contains the Harvard Digital Collections web application, a [Blacklight](http://projectblacklight.org/) instance that uses the Harvard LibraryCloud Item API as a backend in place of
+the standard Solr backend. 
 
 Live site: http://digitalcollections.library.harvard.edu/catalog/
 
@@ -57,15 +56,6 @@ rbenv rehash
 
 ```sh
 gem install rails -v 5.1.4
-rbenv rehash
-```
-
-* Install Solr for Blacklight
-
-(This may not actually be necessary, since we're not using Solr)
-
-```sh
-gem install solr_wrapper
 rbenv rehash
 ```
 
@@ -158,11 +148,19 @@ config.autocomplete_enabled = false
 ### [app/helpers/application_helper.rb](app/helpers/application_helper.rb)
 
 Contains miscellaneous helper functions
+
+### [app/helpers/blacklight/facets_helper_behavior.rb](app/helpers/blacklight/facets_helper_behavior.rb)
+
+Updates to support rendering custom formatted facet counts (e.g. 5.8k instead of 5,800) and custom CSS classes.
  
 ### [app/models/solr_document.rb](app/models/solr_document.rb) 
 
 Create a model for the document that will be used to display content in Blacklight on index and 
 detail pages. Takes a MODS document from LibraryCloud and returns a flat list of fields with values.
+
+### [app/models/blacklight/facet_paginator.rb](app/models/blacklight/facet_paginator.rb) 
+
+Customize facet pagination logic to support ordering A-Z in "more" dialog with LC API.
 
 ### [config/application.rb](config/application.rb)
 
@@ -194,7 +192,21 @@ to be altered to reflect the difference between Solr and LibraryCloud API syntax
 
 This class includes code which escapes special characters before passing them to LC in the method params_to_lc.
 
+```ruby
+special_chars = Regexp.escape('~!^()-[]{}\"/')
+search_term = search_term.gsub(/[#{special_chars}]+/){|match| puts "\\" + match}
+search_term = search_term.gsub(/ +/, " ").gsub(/&+/, "&").gsub(/\|+/, "|")
+```
+
 This class also rewrites the names of certain facet fields before passing them to LC in the method facet_query_params_to_lc. Some facets use the "_exact" version of the field name, but for other fields, such as originPlace, this doesn't work due to an LC bug. 
+
+```ruby
+if m[1] == 'subject' || m[1] == 'originPlace' || m[1] == 'seriesTitle'
+  results[m[1]] = m[2]
+else
+  results[m[1] + '_exact'] = m[2]
+end
+```
 
 ### [lib/harvard/library_cloud/response.rb](lib/harvard/library_cloud/response.rb)
 Parse the response received from the LibraryCloud API. Inherit from the `response.rb` provided by
@@ -214,14 +226,15 @@ format
 
 ### [lib/harvard/library_cloud/search_builder.rb](lib/harvard/library_cloud/search_builder.rb)
 Blacklight defines a processor chain that can be used to add additional fields to the query. We use
-that here to add the 'search_field' parameter, which is required for the LibraryCloud API, but not Solr.
-
-We also add the 'range' field in order to support the Date facet.
+that here to add the 'search_field' parameter, which is required for the LibraryCloud API, but not Solr. We also add the 'range' field in order to support the Date facet.
 
 ## Apply custom design
 
 These changes apply a custom design to the default Blacklight installation. The home, search,
 and item detail pages have been updated with the new design.
+
+### [app/controllers/application_controller.rb](app/controllers/application_controller.rb)
+Change Devise redirect URL after sign-in and sign-out to point to the search results page.
 
 ### [app/controllers/catalog_controller.rb](app/controllers/catalog_controller.rb)
 
