@@ -94,7 +94,7 @@ rails server
 
 # Documentation of Code Changes
 
-## Use the LibraryCloud Item API
+## LibraryCloud Item API Integration
 
 These changes allow Blacklight to use the LibraryCloud API as the backend data store, rather than a Solr index .
 
@@ -234,7 +234,7 @@ format
 Blacklight defines a processor chain that can be used to add additional fields to the query. We use
 that here to add the 'search_field' parameter, which is required for the LibraryCloud API, but not Solr. We also add the 'range' field in order to support the Date facet.
 
-## Apply custom design
+## Custom Design Implementation
 
 These changes apply a custom design to the default Blacklight installation. The home, search,
 and item detail pages have been updated with the new design.
@@ -286,7 +286,7 @@ config.enable_bookmarks = false
 config.per_page = [12,24,48,96]
 ```
 
-### Additional UI Enhacements
+### Additional UI Enhancements
 
 * Install the Foundation 5 framework using the `foundation-rails` gem
 * Create a master SASS file at [app/assets/stylesheets/application.scss](app/assets/stylesheets/application.scss) and additional SASS files
@@ -372,9 +372,24 @@ Customized catalog item details page to include tools & related links functional
 Out-of-the-box Blacklight includes bookmarking functionality to allow a user to save particular catalog items to their account to view later. In order to integrate this functionality with LibraryCloud, the Blacklight application needs to be able to query for multiple item identifiers in a query. The LC API support for this type of request has a bug where colons in identifiers cause the query to fail. The LC development team is currently working on a fix for this.
 
 To enable bookmarks, edit [app/controllers/catalog_controller.rb](app/controllers/catalog_controller.rb) and set enable_bookmarks to true:
-```
+```ruby
 config.enable_bookmarks = false
 ```
+
+Note the existing API request for multiple identifiers uses "OR" to separate values: recordIdentifier=(LN91 OR LN93)
+
+An upcoming enhancement to the API will support comma separated identifiers: recordIdentifier=(LN91,LN93)
+
+The bookmarks API query syntax can be modified in the params_to_lc method of [lib/harvard/library_cloud/api.rb](lib/harvard/library_cloud/api.rb). 
+```ruby
+results[:recordIdentifier] = m[1].gsub('"', '')
+```
+
+To change the API request to use a comma, make the following string replacement:
+```ruby
+results[:recordIdentifier] = m[1].gsub('"', '').gsub(' OR ', ',') 
+```
+
 
 ### Add items to LibraryCloud Collections 
 The "Add To Collection" functionality was part of the original prototype but has been removed from the UI, though the underlying code still exists in the project for future use. 
