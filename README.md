@@ -158,6 +158,12 @@ Updates to support rendering custom formatted facet counts (e.g. 5.8k instead of
 Create a model for the document that will be used to display content in Blacklight on index and 
 detail pages. Takes a MODS document from LibraryCloud and returns a flat list of fields with values.
 
+This class is responsible for parsing all fields from the JSON response returned by the LC API. JsonPath is used to find particular nodes by path:
+
+```ruby
+raw_object = JsonPath.new('$..location..url[?(@["@access"] == "raw object")]["#text"]').first(doc)
+```
+
 ### [app/models/blacklight/facet_paginator.rb](app/models/blacklight/facet_paginator.rb) 
 
 Customize facet pagination logic to support ordering A-Z in "more" dialog with LC API.
@@ -289,7 +295,8 @@ under [app/assets/stylesheets/_*.scss](app/assets/stylesheets)
 * Add icons for the different document types at [app/assets/images/icons/*.svg](app/assets/images/icons)
 * Add image assets for the home page at [app/assets/images/*.png](app/assets/images)
 * Add helper class to support displaying images using the `<picture>` element at [app/helpers/images_helper.rb](app/helpers/images_helper.rb)
-* Create partials under [app/views](app/views) to override the default Blacklight layout
+* Customize the default Blacklight layout in [app/views/layouts/blacklight.html.erb](app/views/layouts/blacklight.html.erb)
+* Create partials under [app/views](app/views) to override the Blacklight presentation
 
 ### Notable Customized Partials
 
@@ -319,7 +326,7 @@ Override the default Blacklight search results pagination links to show 10 pages
 
 Note that Blacklight uses a gem called Kaminari for pagination.
 * [app/views/catalog/_results_pagination.html.erb](app/views/catalog/_results_pagination.html.erb) - Update pagination parameters.
-* [app/views/kaminari/blacklight/_page.html.erb](app/views/kaminari/blacklight/_page.html.erb) - 
+* [app/views/kaminari/blacklight/_page.html.erb](app/views/kaminari/blacklight/_page.html.erb) - Add "..." link to jump to the next 10 pages
 * [app/views/kaminari/blacklight/_paginator.html.erb](app/views/kaminari/blacklight/_paginator.html.erb) - Add pagination logic to show pages 1-10,11-20, etc.
 
 
@@ -328,11 +335,11 @@ Customized catalog item details page to include tools & related links functional
 * [app/views/catalog/_show_default.html.erb](app/views/catalog/_show_default.html.erb)
 
 
-##Notable Gems
+## Notable Gems
 
-*[JsonPath](https://github.com/joshbuddy/jsonpath) - Provides XPath like syntax for querying JSON objects. This is used to parse responses from the LC API. Used in [app/models/solr_document.rb](app/models/solr_document.rb). 
-*[Blacklight Gallery](https://github.com/projectblacklight/blacklight-gallery) - Plugin for Blacklight that supports multiple search results views (List, Gallery, and Masonry).
-*[Blacklight Range Limit](https://github.com/projectblacklight/blacklight_range_limit) - Plugin for Blacklight that supports date range facets.
+* [JsonPath](https://github.com/joshbuddy/jsonpath) - Provides XPath like syntax for querying JSON objects. This is used to parse responses from the LC API. Used in [app/models/solr_document.rb](app/models/solr_document.rb). 
+* [Blacklight Gallery](https://github.com/projectblacklight/blacklight-gallery) - Plugin for Blacklight that supports multiple search results views (List, Gallery, and Masonry).
+* [Blacklight Range Limit](https://github.com/projectblacklight/blacklight_range_limit) - Plugin for Blacklight that supports date range facets.
 
 
 
@@ -350,7 +357,7 @@ Customized catalog item details page to include tools & related links functional
     * Reason: Sorting by date not supported by LibraryCloud API
 * Linked metadata not searching against "_exact" fields
     * Workaround: Use LC field names without "_exact" for some fields.	
-    * Reason: The "_exact" field in LC is not indexing properly for some fields such as originPlace. There is an LC fix in progress.
+    * Reason: The "_exact" field in LC is not indexing properly for some fields, such as originPlace. There is an LC fix in progress.
 * Can only paginate through 100,000 records
 	* Workaround: Update pagination to remove "Last" links that jump to end of record set.
 	* Reason: LC API was experiencing performance issues with returning all 6 million+ records. API was updated to limit record set to 100,000 (though search counts are still accurate).
@@ -372,6 +379,6 @@ config.enable_bookmarks = false
 ### Add items to LibraryCloud Collections 
 The "Add To Collection" functionality was part of the original prototype but has been removed from the UI, though the underlying code still exists in the project for future use. 
 
-The current plan is to implement the functionality in phases starting with using Bookmarks. 
+The current plan is to implement the functionality in phases, starting with using Bookmarks. 
 
   
