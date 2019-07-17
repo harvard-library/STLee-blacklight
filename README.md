@@ -156,7 +156,7 @@ Updates to support rendering custom formatted facet counts (e.g. 5.8k instead of
  
 ### [app/helpers/blacklight/catalog_helper_behavior.rb](app/helpers/blacklight/catalog_helper_behavior.rb)
 
-Updated the method 'render_thumbnail_tag_document' so that it uses a new function 'image_tag_wout_alt'. This was done to avoid having the urn being put in the thumbnail image alt tag. The new function is a duplicate of the built_in [function 'image_tag' from rails v. 5.1.4](https://github.com/rails/rails/blob/v5.1.4/actionview/lib/action_view/helpers/asset_tag_helper.rb) with a minor modification: the alt tag in the image generated will be an empty string in the case the _:alt_ attribute from the _options_ argument is null.
+Updated the method 'render_thumbnail_tag_document' so that it uses a new function 'image_tag_wout_alt'. This was done to avoid having the URN being put in the thumbnail image's alt tag. The new function is a duplicate of the built_in [function 'image_tag' from rails v. 5.1.4](https://github.com/rails/rails/blob/v5.1.4/actionview/lib/action_view/helpers/asset_tag_helper.rb) with a minor modification: the alt tag in the image generated will be an empty string in the case the _:alt_ attribute from the _options_ argument is nil.
 
 ### [app/models/solr_document.rb](app/models/solr_document.rb) 
 
@@ -349,15 +349,15 @@ end
 
 Which allowed to dynamically generate different functionnalities according to the type of item embedded in the details page. Even though the tools & related box is present on any item details page, its download button and IIF section is only generated for single and multiple pages content (`document[:delivery_service] == 'ids'` and `document[:delivery_service] == 'pds'` respectively).
 
-It should be noted that the download button behavior differ between the two types of image content: 
+It should be noted that the download button's behavior differs between the two types of image content: 
 
-For single image content, the download button offer the possibility to download the current image in up to four different resolutions through a dropdown. The options in this dropdown are dynamicallly generated using a for loop in this fashion:
+For single image content, the download button offers the possibility to download the current image in up to four different resolutions through a dropdown. The options in this dropdown are dynamicallly generated using a for loop in such a fashion:
 
 ```ruby
 size_and_labels = [[300, "Small: %d x %d px"],[800, "Medium: %d x %d px"],
                     [1200, "Large: %d x %d px"],[2400, "X-Large: %d x %d px"]]
 for i in 0..size_and_labels.length-1 do
-  # generates the <a> tag according to the image max resolution and the size_and_labels array's content
+  # generates the <a> tag's attributes and content according to the image max resolution and the size_and_labels array's content
 end
 ```
 
@@ -367,7 +367,6 @@ Some other customisations on this page are only present in the case of a pds doc
 
 * The link to open the current item in Mirador included on the IIIF section. 
 * The link and code related to the guided tour modal. The ruby functions generating part of this code are included in [app/helpers/application_helper.rb](app/helpers/application_helper.rb)
-* 
 
 ## Notable Gems
 
