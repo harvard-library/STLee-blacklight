@@ -147,12 +147,17 @@ config.autocomplete_enabled = false
 
 ### [app/helpers/application_helper.rb](app/helpers/application_helper.rb)
 
-Contains miscellaneous helper functions
+Contains miscellaneous helper functions. 
+One of which is 'generate_twitter_meta_tags' callled in [app/views/layouts/blacklight.html.erb](app/views/layouts/blacklight.html.erb). As its name implies, it will generate twitter meta tags in order for this balcklight instance to correctly be hyperlinked on a twitter post. This function will also dynamically link in the meta tags a corresponding thumbnail according to whether the current page is one about a still image content. This thumbnail is either the still image itself, or the first page in the case of multiple pages content. 
 
 ### [app/helpers/blacklight/facets_helper_behavior.rb](app/helpers/blacklight/facets_helper_behavior.rb)
 
 Updates to support rendering custom formatted facet counts (e.g. 5.8k instead of 5,800) and custom CSS classes.
  
+### [app/helpers/blacklight/catalog_helper_behavior.rb](app/helpers/blacklight/catalog_helper_behavior.rb)
+
+Updated the method 'render_thumbnail_tag_document' so that it uses a new function 'image_tag_wout_alt'. This was done to avoid having the urn being put in the thumbnail image alt tag. The new function is a duplicate of the built_in [function 'image_tag' from rails v. 5.1.4](https://github.com/rails/rails/blob/v5.1.4/actionview/lib/action_view/helpers/asset_tag_helper.rb) with a minor modification: the alt tag in the image generated will be an empty string in the case the _:alt_ attribute from the _options_ argument is null.
+
 ### [app/models/solr_document.rb](app/models/solr_document.rb) 
 
 Create a model for the document that will be used to display content in Blacklight on index and 
@@ -334,6 +339,35 @@ Note that Blacklight uses a gem called Kaminari for pagination.
 Customized catalog item details page to include tools & related links functionality.
 * [app/views/catalog/_show_default.html.erb](app/views/catalog/_show_default.html.erb)
 
+This partial was heavily customized in order to propose new user-centered functionnalities regarding the current document. The main ruby additions were lines such as these: 
+
+```ruby
+if document[:delivery_service] == 'pds'
+  #html/js code
+end
+```
+
+Which allowed to dynamically generate different functionnalities according to the type of item embedded in the details page. Even though the tools & related box is present on any item details page, its download button and IIF section is only generated for single and multiple pages content (`document[:delivery_service] == 'ids'` and `document[:delivery_service] == 'pds'` respectively).
+
+It should be noted that the download button behavior differ between the two types of image content: 
+
+For single image content, the download button offer the possibility to download the current image in up to four different resolutions through a dropdown. The options in this dropdown are dynamicallly generated using a for loop in this fashion:
+
+```ruby
+size_and_labels = [[300, "Small: %d x %d px"],[800, "Medium: %d x %d px"],
+                    [1200, "Large: %d x %d px"],[2400, "X-Large: %d x %d px"]]
+for i in 0..size_and_labels.length-1 do
+  # generates the <a> tag according to the image max resolution and the size_and_labels array's content
+end
+```
+
+In the case of multiple pages content the download button offers a submenu which allow the user to specify a page range and email adress. This menu's behavior and interactions with the PDS are handled by a custom javascript function 'extractMessageFromEmailDLR()' included only in this case. 
+
+Some other customisations on this page are only present in the case of a pds document: 
+
+* The link to open the current item in Mirador included on the IIIF section. 
+* The link and code related to the guided tour modal. The ruby functions generating part of this code are included in [app/helpers/application_helper.rb](app/helpers/application_helper.rb)
+* 
 
 ## Notable Gems
 
