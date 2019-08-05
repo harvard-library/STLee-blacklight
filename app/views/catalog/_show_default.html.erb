@@ -211,6 +211,13 @@
           <%
           end
         end
+
+        hasocr = retrieve_hasocr_info document[:drs_file_id]
+        if document[:delivery_service] == 'pds' and hasocr
+          %>
+            <dd class="blacklight-title_extended"><a href="/fulltext/<%=document[:drs_file_id]%>" target="_blank">View Text</a></dd>
+          <%
+        end
         %>
       </dl>
       <%if document[:delivery_service] == 'ids' or document[:delivery_service] == 'pds'%>

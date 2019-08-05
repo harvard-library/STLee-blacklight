@@ -13,6 +13,20 @@ module ApplicationHelper
   	end
   end
 
+
+  def retrieve_hasocr_info drs_file_id
+    url = 'https://iiif.lib.harvard.edu/proxy/hasocr/%d?callback=' % [drs_file_id]
+    response = Net::HTTP.get_response(URI.parse(url))
+    if response.is_a? Net::HTTPOK
+      # for some reason, the answer even though is JSON, is embedded in paranthesis and closed by a semicolon.
+      stripped_response = response.body.gsub(/[\(\);]/, '')
+      parsed = JSON.parse stripped_response
+      if parsed['hasocr']
+        parsed['hasocr']
+      end
+    end
+  end
+
   def generate_tour_modal_link(documentType)
     if documentType == 'pds'
         ('<div id="take-a-tour" style:"display:block;"><p><a id="take-a-tour-link" data-toggle="modal" data-target="#take_a_tour_modal">Take a tour of the viewer</a></p></div>').html_safe

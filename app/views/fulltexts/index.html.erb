@@ -34,23 +34,45 @@
 
     </div>
 
+
 		<script type="text/javascript">
       // some drs IDs to test with: 2678271 (45 pages); 6612363 (84 pages); 52666264 (120 pages); 9752507 (900 pages)
+
+      <%
+        image_metadata = retrieve_still_image_json_metadata 'https://iiif.lib.harvard.edu/manifests/drs:'+drs_id
+        if image_metadata
+
+          pages = image_metadata['structures'][0]['canvases']
+
+          pages_ids = pages.map { |s| s.match(/canvas-([0-9]*).json/)[1].to_i + 1 }
+
+          doc_title = image_metadata['label']
+        end
+      %>
 
 			const drs_id = <%= drs_id %>; // TODO: feed this variable from url
       $('#download').hide();
 
 			document.getElementsByClassName('no-content')[0].style.display = "none";
       $(document).ready(function() {
-        $.ajax({
-          url: "http://fds.lib.harvard.edu/fds/deliver/" + drs_id
-        }).then(function(xml_DOM) {
-          process_xml(xml_DOM)
-          add_title(xml_DOM)
-        }).then(function() {
-          add_text();
-        })
+        generateDivs(<%= raw pages_ids%>);
+        var title_div = document.getElementById("display_label");
+        title_div.innerText = "<%=doc_title%>";
+        add_text();
       });
+
+
+      function generateDivs(page_ids){
+
+        for (let i = 0; i < page_ids.length; i++) {
+          let textZone = document.getElementById('fulltext-zone');
+          let newDiv = document.createElement('div');
+          newDiv.setAttribute("id", i+1);
+
+          newDiv.setAttribute("drs_id", page_ids[i])
+          textZone.appendChild(newDiv);
+        }
+      }
 
       function process_xml(xml_DOM) {
         var fileSec = xml_DOM.getElementsByTagName("fileSec")[0]; // fileSec is an Element
