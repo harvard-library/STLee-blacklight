@@ -28,8 +28,10 @@
       </div>
     <%end%>  
   </div>
-  <div class="searchbar__wrapper">
-    <%= render_search_bar  %>
-  </div>
+  <%if controller_name != 'fulltexts'%>
+    <div class="searchbar__wrapper">
+      <%= render_search_bar  %>
+    </div>
+  <%end%>
 </header>
 

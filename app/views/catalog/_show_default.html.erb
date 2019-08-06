@@ -161,6 +161,13 @@
             <div class="permalink"><span class="fa fa-link"></span> &nbsp;<a href="<%=document[:permalink]%>">Permalink</a></div>
           <%
         end
+
+        hasocr = retrieve_hasocr_info document[:drs_file_id]
+        if document[:delivery_service] == 'pds' and hasocr
+          %>
+            <div class="permalink"><span class="fa"> T </span><a href="/fulltext/<%=document[:drs_file_id]%>" target="_blank"> Full Text</a></div>
+          <%
+        end
         %>        
         <%
         if !document[:digital_collections_links].nil? && document[:digital_collections_links].kind_of?(Array) && document[:digital_collections_links].length > 0
@@ -210,13 +217,6 @@
             <dd class="blacklight-title_extended"><a href="<%=x[:url]%>"><%=x[:link_text]%></a> <%=x[:label]%></dd>
           <%
           end
-        end
-
-        hasocr = retrieve_hasocr_info document[:drs_file_id]
-        if document[:delivery_service] == 'pds' and hasocr
-          %>
-            <dd class="blacklight-title_extended"><a href="/fulltext/<%=document[:drs_file_id]%>" target="_blank">View Text</a></dd>
-          <%
         end
         %>
       </dl>
