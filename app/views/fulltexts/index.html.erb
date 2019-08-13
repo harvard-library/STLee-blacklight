@@ -13,11 +13,14 @@ else
   doc_title = image_metadata['label']
 
 %>
-<div id="title_box">
-  <div id="field_name">
+<div id="ft-dl-title-box">
+  <div id="ft-dl-field-name">
     <h2>Full text of</h2>
   </div>
-  <h4><div id="display_label"></div></h4>
+  <h4><div id="ft-dl-display-label"></div></h4>
+
+  <button id="ft-dl-download" class="btn btn-dark" onclick="triggerFullTextDownload()">DOWNLOAD
+  </button>
 </div>
 
 <div id="progress">
@@ -25,8 +28,6 @@ else
   <div id="loading-text" role='status'>Retrieving item metadata, please wait<div class="ft-dl-spinner-container"><div class="ft-dl-spinner"></div></div></div>
 </div>
 
-<button id="download" class="btn btn-dark" onclick="triggerFullTextDownload()">DOWNLOAD
-</button>
 
 <div id="ft-dl-page-counter"><span id="ft-dl-curr-page">0</span> / <span id="ft-dl-total-page">0</span></div>
 
@@ -39,12 +40,12 @@ else
   let pages_ids = <%= raw pages_ids%>;
 
   const drs_id = <%= drs_id %>;
-  $('#download').hide();
+  $('#ft-dl-download').hide();
   $('#ft-dl-spinner').show();
 
   $(document).ready(function() {
     generateDivs(pages_ids);
-    var title_div = document.getElementById("display_label");
+    var title_div = document.getElementById("ft-dl-display-label");
     title_div.innerText = "<%=doc_title%>";
     updatePageCounter(0, pages_ids.length);
     add_text();
@@ -61,7 +62,6 @@ else
       }
     }
   });
-
 
   function generateDivs(page_ids){
     for (let i = 0; i < page_ids.length; i++) {
@@ -90,9 +90,8 @@ else
           page_divs[i].innerText = data;
           updateBar(progressionIndex.idx, page_divs.length);
           if(progressionIndex.idx == page_divs.length - 1){
-            $('#download').show({easing: 'swing'});
+            $('#ft-dl-download').show({easing: 'swing'});
             $('#progress').hide({easing: 'swing'});
-            computeArrayOfDivSize(page_divs);
           }
         },
         error: function(xhr, status, error) {
@@ -103,7 +102,6 @@ else
           }   
       });
   }
-
 
   function updatePageCounter(currPageNmb, totalPageNmb){
     $('#ft-dl-curr-page').text(currPageNmb);
@@ -138,7 +136,6 @@ else
     return text;
   } 
 
-
   function download(filename, text) {
     var element = document.createElement('a');
     element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
@@ -151,11 +148,7 @@ else
 
     document.body.removeChild(element);
   }
-
-
 </script>
-
-
 <%    
   end
 %>
