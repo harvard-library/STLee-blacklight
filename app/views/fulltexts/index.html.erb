@@ -22,11 +22,13 @@ else
 
 <div id="progress">
   <div id="bar"></div>
-  <div id="loading-text" role='status'>Retrieving item metadata, please wait...<div class="ft-dl-spinner-container"><div class="ft-dl-spinner"></div></div></div>
+  <div id="loading-text" role='status'>Retrieving item metadata, please wait<div class="ft-dl-spinner-container"><div class="ft-dl-spinner"></div></div></div>
 </div>
 
 <button id="download" class="btn btn-dark" onclick="triggerFullTextDownload()">DOWNLOAD
 </button>
+
+<div id="ft-dl-page-counter"><span id="ft-dl-curr-page">0</span> / <span id="ft-dl-total-page">0</span></div>
 
 <div id="fulltext-zone" class="col-lg-8">
 
@@ -34,16 +36,30 @@ else
 
 <script type="text/javascript">
   // some drs IDs to test with: 2678271 (45 pages); 6612363 (84 pages); 52666264 (120 pages); 9752507 (900 pages)
+  let pages_ids = <%= raw pages_ids%>;
 
-  const drs_id = <%= drs_id %>; // TODO: feed this variable from url
+  const drs_id = <%= drs_id %>;
   $('#download').hide();
   $('#ft-dl-spinner').show();
 
   $(document).ready(function() {
-    generateDivs(<%= raw pages_ids%>);
+    generateDivs(pages_ids);
     var title_div = document.getElementById("display_label");
     title_div.innerText = "<%=doc_title%>";
+    updatePageCounter(0, pages_ids.length);
     add_text();
+  });
+
+  $(document).scroll(function(){
+    let yMiddleScreen = $(window).height()/2;
+    let xMiddleScreen = $(window).width()/2; 
+    let currDiv = document.elementFromPoint(xMiddleScreen, yMiddleScreen);
+    if(currDiv){
+      let currId = currDiv.id;
+      if(currId && !isNaN(currId)){
+        updatePageCounter(currDiv.id, pages_ids.length);
+      }
+    }
   });
 
 
@@ -76,6 +92,7 @@ else
           if(progressionIndex.idx == page_divs.length - 1){
             $('#download').show({easing: 'swing'});
             $('#progress').hide({easing: 'swing'});
+            computeArrayOfDivSize(page_divs);
           }
         },
         error: function(xhr, status, error) {
@@ -88,13 +105,18 @@ else
   }
 
 
+  function updatePageCounter(currPageNmb, totalPageNmb){
+    $('#ft-dl-curr-page').text(currPageNmb);
+    $('#ft-dl-total-page').text(totalPageNmb);
+  }
+
   function add_text() {
     var page_divs = document.getElementById("fulltext-zone").children;
     // this was implemented in order to have a "pass by reference" int into 'retrieveOCRAJAX' 
     let progressionIndex = {
       idx: 0
     };
-    for (let i = 0; i < page_divs.length; i++) { // replace testing number with page_divs.length
+    for (let i = 0; i < page_divs.length; i++) {
       retrieveOCRAJAX(i, progressionIndex, page_divs);
     }
   }

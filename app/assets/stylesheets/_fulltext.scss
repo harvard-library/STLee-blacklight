@@ -17,6 +17,19 @@
 	background-color: $silver;
 }
 
+
+#ft-dl-page-counter {
+	position:fixed;
+	bottom:0;
+	right:0;
+	width: 85px;
+	
+	font-family: "Trueno", Helvetica, Roboto, Arial, Bold,  sans-serif;
+	text-transform: uppercase;
+	text-align: center;
+	background-color: $light-gray;
+}
+
 $progress-bar-top-spacing: 2px;
 
 $spinner-size: 15px;
@@ -44,7 +57,7 @@ $spinner-size: 15px;
 
 .ft-dl-spinner{
   position: absolute;
-  border: 4px solid $subtle-gray; /* Light grey */
+  border: 4px solid $light-gray; /* Light grey */
   border-top: 4px solid $silver; /* Blue */
   border-radius: 50%;
   width: $spinner-size;
