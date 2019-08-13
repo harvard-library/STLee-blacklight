@@ -1,6 +1,6 @@
 <div id='ft-maincontent'>
 <%
-image_metadata = nil#retrieve_still_image_json_metadata 'https://iiif.lib.harvard.edu/manifests/drs:'+drs_id
+image_metadata = retrieve_still_image_json_metadata 'https://iiif.lib.harvard.edu/manifests/drs:'+drs_id
 if !image_metadata
 %>  
 <%= render "no_ocr" %>
@@ -11,6 +11,7 @@ else
   pages_ids = pages.map { |s| s.match(/canvas-([0-9]*).json/)[1].to_i + 1 }
 
   doc_title = image_metadata['label']
+
 %>
 <div id="title_box">
   <div id="field_name">
@@ -24,7 +25,7 @@ else
   <div id="loading-text" role='status'>Retrieving item metadata, please wait...<span id='ft-dl-spinner' class="sr-only">Loading...</span></div>
 </div>
 
-<button id="download" onclick="triggerFullTextDownload()">DOWNLOAD
+<button id="download" class="btn btn-dark" onclick="triggerFullTextDownload()">DOWNLOAD
 </button>
 
 <div id="fulltext-zone" class="col-lg-8">
@@ -99,7 +100,11 @@ else
   }
 
   function triggerFullTextDownload(){
-    download(String(drs_id) + ".txt", make_text_file());
+    let raw_title = "<%= j doc_title %>";
+    //removing punctuation or weird char from the file title, and replace whitespaces by underscores.
+    let raw_title_stripped = raw_title.replace(/[^a-z0-9 ]/gi, '').replace(/[ ]/gi, '_')
+
+    download(raw_title_stripped + ".txt", make_text_file());
   }
 
   function make_text_file() {

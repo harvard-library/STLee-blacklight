@@ -3,17 +3,18 @@
 #progress {
 	width: 100%;
 	height: 30px;
-	background-color: white;
+	background-color: $subtle-gray;
 	position: relative;
 	border: solid;
-	border-color: silver;
+	border-color: $silver;
 	border-radius: 5px;
+
 }
 
 #bar {
 	width: 0%;
 	height: 24px;
-	background-color: silver;
+	background-color: $silver;
 }
 
 #loading-text {
@@ -25,6 +26,21 @@
 	text-align: center;
 	width: 100%;
 	z-index: 10;
+}
+
+button.btn-dark {
+	margin-top: 20px;
+	font-family: $font-family-sans-serif;
+	font-weight: 600;
+	background-color: $jet;
+	color: $white;
+	letter-spacing: 1.17px;
+	padding: 6px 28px;
+	text-transform: uppercase;
+}
+
+button.btn-dark:hover{
+	color: $light-gray;
 }
 
 #ft-dl-noresults {
