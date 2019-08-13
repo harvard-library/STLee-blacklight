@@ -8,7 +8,7 @@ class FulltextsController < ApplicationController
 			if hasocr
 				render "index", :locals => {:drs_id => params[:id]}
 			else
-				render "no_ocr"
+				render "_no_ocr"
 			end
 		else
 			render "wrong_id"

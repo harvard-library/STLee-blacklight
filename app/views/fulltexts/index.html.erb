@@ -1,201 +1,136 @@
-<!DOCTYPE html>
-<html>
-  <head>
-    <meta charset="utf-8">
+<div id='ft-maincontent'>
+<%
+image_metadata = nil#retrieve_still_image_json_metadata 'https://iiif.lib.harvard.edu/manifests/drs:'+drs_id
+if !image_metadata
+%>  
+<%= render "no_ocr" %>
+<%
+else
+  pages = image_metadata['structures'][0]['canvases']
+  #for some reason the IDs on the manifest are offset by 1 compared to the  to be sent to the FDS server in the js part. 
+  pages_ids = pages.map { |s| s.match(/canvas-([0-9]*).json/)[1].to_i + 1 }
 
-    <title>Download full text</title>
+  doc_title = image_metadata['label']
+%>
+<div id="title_box">
+  <div id="field_name">
+    <h2>Full text of</h2>
+  </div>
+  <h4><div id="display_label"></div></h4>
+</div>
 
-    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.10.2/jquery.min.js"></script>
+<div id="progress">
+  <div id="bar"></div>
+  <div id="loading-text" role='status'>Retrieving item metadata, please wait...<span id='ft-dl-spinner' class="sr-only">Loading...</span></div>
+</div>
 
-  </head>
+<button id="download" onclick="triggerFullTextDownload()">DOWNLOAD
+</button>
 
-  <body>
+<div id="fulltext-zone" class="col-lg-8">
 
-		<div class="no-content">
-			This document currently holds no OCR text to be downloaded.
-		</div>
+</div>
 
-    <div id="title_box">
-      <div id="field_name">
-        <h2>Full text of</h2>
-      </div>
-      <h4><div id="display_label"></div></h4>
-    </div>
+<script type="text/javascript">
+  // some drs IDs to test with: 2678271 (45 pages); 6612363 (84 pages); 52666264 (120 pages); 9752507 (900 pages)
 
-    <div id="progress">
-      <div id="bar"></div>
-      <div id="loading-text">Retrieving item metadata, please wait...</div>
-    </div>
+  const drs_id = <%= drs_id %>; // TODO: feed this variable from url
+  $('#download').hide();
+  $('#ft-dl-spinner').show();
 
-    <button id="download" onclick="triggerFullTextDownload()">DOWNLOAD
-    </button>
-
-    <div id="fulltext-zone" class="col-lg-8">
-
-    </div>
-
-
-		<script type="text/javascript">
-      // some drs IDs to test with: 2678271 (45 pages); 6612363 (84 pages); 52666264 (120 pages); 9752507 (900 pages)
-
-      <%
-        image_metadata = retrieve_still_image_json_metadata 'https://iiif.lib.harvard.edu/manifests/drs:'+drs_id
-        if image_metadata
-
-          pages = image_metadata['structures'][0]['canvases']
-
-          pages_ids = pages.map { |s| s.match(/canvas-([0-9]*).json/)[1].to_i + 1 }
-
-          doc_title = image_metadata['label']
-        end
-      %>
-
-			const drs_id = <%= drs_id %>; // TODO: feed this variable from url
-      $('#download').hide();
-
-			document.getElementsByClassName('no-content')[0].style.display = "none";
-      $(document).ready(function() {
-        generateDivs(<%= raw pages_ids%>);
-        var title_div = document.getElementById("display_label");
-        title_div.innerText = "<%=doc_title%>";
-        add_text();
-      });
+  $(document).ready(function() {
+    generateDivs(<%= raw pages_ids%>);
+    var title_div = document.getElementById("display_label");
+    title_div.innerText = "<%=doc_title%>";
+    add_text();
+  });
 
 
-      function generateDivs(page_ids){
+  function generateDivs(page_ids){
+    for (let i = 0; i < page_ids.length; i++) {
+      let textZone = document.getElementById('fulltext-zone');
+      let newDiv = document.createElement('div');
+      newDiv.setAttribute("id", i+1);
 
-        for (let i = 0; i < page_ids.length; i++) {
-          let textZone = document.getElementById('fulltext-zone');
-          let newDiv = document.createElement('div');
-          newDiv.setAttribute("id", i+1);
+      newDiv.setAttribute("drs_id", page_ids[i])
+      textZone.appendChild(newDiv);
+    }
+  }
 
-          newDiv.setAttribute("drs_id", page_ids[i])
-          textZone.appendChild(newDiv);
-        }
-      }
+  function updateBar(currentPage, totalPage) {
+    let bar = document.getElementById("bar");
+    let width = (currentPage/totalPage) * 100;
+    bar.style.width = width + '%';
+    let loadText = document.getElementById("loading-text");
+    loadText.innerText = "Loading full text ("+ String(currentPage)+" of "+String(totalPage)+" pages)"
+  }
 
-      function process_xml(xml_DOM) {
-        var fileSec = xml_DOM.getElementsByTagName("fileSec")[0]; // fileSec is an Element
-        var fileGrps = fileSec.children; // fileGrps is an HTML Collection
-
-        for (let g = 0; g < fileGrps.length; g++) {
-          fileGrp = fileGrps[g];
-          if (fileGrp.getAttribute("USE") == "text-plain") {
-            let txt_nodes = fileGrp.children; // txt_nodes is an HTML Collection
-            for (let i = 0; i < txt_nodes.length; i++) { // txt_nodes.length , or 3 for testing
-              let textZone = document.getElementById('fulltext-zone');
-          		let newDiv = document.createElement('div');
-          		newDiv.setAttribute("id", i+1);
-              newDiv.setAttribute("drs_id", txt_nodes[i].firstElementChild.getAttribute("xlink:href"))
-              textZone.appendChild(newDiv);
-            }
+  function retrieveOCRAJAX(i, progressionIndex, page_divs) {
+    $.ajax({
+        url: "http://fds.lib.harvard.edu/fds/deliver/" + page_divs[i].getAttribute("drs_id"),
+        success: function(data) {
+          progressionIndex.idx++;
+          page_divs[i].innerText = data;
+          updateBar(progressionIndex.idx, page_divs.length);
+          if(progressionIndex.idx == page_divs.length - 1){
+            $('#download').show({easing: 'swing'});
+            $('#progress').hide({easing: 'swing'});
           }
-        }
-      }
-
-      function updateBar(currentPage, totalPage) {
-    	  let bar = document.getElementById("bar");
-    	  let width = (currentPage/totalPage) * 100;
-          bar.style.width = width + '%';
-          let loadText = document.getElementById("loading-text");
-          loadText.innerText = "Loading full text ("+ String(currentPage)+" of "+String(totalPage)+" pages)"
-    	}
-
-      function retrieveOCRAJAX(i, progressionIndex, page_divs) {
-        $.ajax({
-            url: "http://fds.lib.harvard.edu/fds/deliver/" + page_divs[i].getAttribute("drs_id"),
-            success: function(data) {
-              progressionIndex.idx++;
-              page_divs[i].innerText = data;
-              updateBar(progressionIndex.idx, page_divs.length);
-              if(progressionIndex.idx == page_divs.length - 1){
-                $('#download').show({easing: 'swing'});
-                $('#progress').hide({easing: 'swing'});
-              }
-            },
-            error: function(xhr, status, error) {
-              console.log('at div : '+ String(i));
-            },
-            statusCode: {
-              500: function() {setTimeout( function () {retrieveOCRAJAX(i, progressionIndex, page_divs);}, 5000);}
-              }   
-          });
-      }
+        },
+        error: function(xhr, status, error) {
+          console.log('at div : '+ String(i));
+        },
+        statusCode: {
+          500: function() {setTimeout( function () {retrieveOCRAJAX(i, progressionIndex, page_divs);}, 5000);}
+          }   
+      });
+  }
 
 
-      function add_text() {
-        var page_divs = document.getElementById("fulltext-zone").children;
-        let progressionIndex = {
-          idx: 0
-        };
-        for (let i = 0; i < page_divs.length; i++) { // replace testing number with page_divs.length
-          retrieveOCRAJAX(i, progressionIndex, page_divs);
-        }
-      }
+  function add_text() {
+    var page_divs = document.getElementById("fulltext-zone").children;
+    // this was implemented in order to have a "pass by reference" int into 'retrieveOCRAJAX' 
+    let progressionIndex = {
+      idx: 0
+    };
+    for (let i = 0; i < page_divs.length; i++) { // replace testing number with page_divs.length
+      retrieveOCRAJAX(i, progressionIndex, page_divs);
+    }
+  }
 
-      function add_title(xml_DOM) {
-        var title_div = document.getElementById("display_label")
-        var title = xml_DOM.getElementsByTagName("mets")[0].getAttribute("LABEL")
-        title_div.innerText = title
-      }
+  function triggerFullTextDownload(){
+    download(String(drs_id) + ".txt", make_text_file());
+  }
 
-      function triggerFullTextDownload(){
-        download(String(drs_id) + ".txt", make_text_file());
-      }
-
-      function make_text_file() {
-        var text = [];
-        var page_divs = document.getElementById("fulltext-zone").children;
-        for (let i= 0; i < page_divs.length; i++) {
-          text += page_divs[i].textContent
-        }
-        return text;
-      } 
+  function make_text_file() {
+    var text = [];
+    var page_divs = document.getElementById("fulltext-zone").children;
+    for (let i= 0; i < page_divs.length; i++) {
+      text += page_divs[i].textContent
+    }
+    return text;
+  } 
 
 
-      function download(filename, text) {
-        var element = document.createElement('a');
-        element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-        element.setAttribute('download', filename);
+  function download(filename, text) {
+    var element = document.createElement('a');
+    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+    element.setAttribute('download', filename);
 
-        element.style.display = 'none';
-        document.body.appendChild(element);
+    element.style.display = 'none';
+    document.body.appendChild(element);
 
-        element.click();
+    element.click();
 
-        document.body.removeChild(element);
-      }
+    document.body.removeChild(element);
+  }
 
 
-    </script>
+</script>
 
-	</body>
 
-</html>
-
-<style type="text/css">
-#progress {
-	width: 100%;
-	height: 40px;
-	background-color: white;
-	position: relative;
-	border: solid;
-}
-
-#bar {
-	width: 1%;
-	height: 34px;
-	background-color: silver;
-}
-
-#loading-text {
-	position: absolute;
-	top: 10px;
-	height: 20px;
-	font-family: "Trueno", Helvetica, Roboto, Arial, sans-serif;
-	text-align: center;
-	width: 100%;
-	z-index: 10;
-}
-
-</style>
+<%    
+  end
+%>
+  
+</div>
