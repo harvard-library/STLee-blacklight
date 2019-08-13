@@ -9,6 +9,7 @@
 	border: solid;
 	border-color: $silver;
 	border-radius: 5px;
+	margin-top: 10px
 
 }
 
@@ -75,6 +76,7 @@ $spinner-size: 15px;
 	width:100%;
 	position: relative;
 	display: flex;
+	margin-bottom: 20px;
 }
 
 #ft-dl-title-box h4{
@@ -95,8 +97,8 @@ $spinner-size: 15px;
 
 #ft-dl-display-label{
 	flex-grow: 1;
-	margin-left: 220px;
-	margin-right: 220px;
+	margin-left: 250px;
+	margin-right: 250px;
 	font-family: $font-family-serif;
 }
 
