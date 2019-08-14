@@ -135,7 +135,8 @@ else
     var text = [];
     var page_divs = document.getElementById("fulltext-zone").children;
     for (let i= 0; i < page_divs.length; i++) {
-      text += page_divs[i].textContent
+      //replacing the html line break by the txt line break char. Adding two line breaks at each div's content end to denote a page change.
+      text += page_divs[i].innerHTML.replace(/<br>/gi, '\n') + '\n\n';
     }
     return text;
   } 
