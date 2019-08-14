@@ -50,7 +50,7 @@ else
   $(document).ready(function() {
     generateDivs(pages_ids);
     var title_div = document.getElementById("ft-dl-display-label");
-    title_div.innerText = "<%=doc_title%>";
+    title_div.innerText = "<%= raw CGI.unescapeHTML doc_title%>";
     updatePageCounter(0, pages_ids.length);
     add_text();
   });
@@ -124,7 +124,7 @@ else
   }
 
   function triggerFullTextDownload(){
-    let raw_title = "<%= j doc_title %>";
+    let raw_title = "<%= raw CGI.unescapeHTML doc_title %>";
     //removing punctuation or weird char from the file title, and replace whitespaces by underscores.
     let raw_title_stripped = raw_title.replace(/[^a-z0-9 ]/gi, '').replace(/[ ]/gi, '_')
 
