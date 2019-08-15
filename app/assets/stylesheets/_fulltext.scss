@@ -7,6 +7,7 @@
 	background-color: $subtle-gray;
 	position: relative;
 	border: solid;
+	border-width: 2px;
 	border-color: $silver;
 	border-radius: 5px;
 	margin-top: 10px
@@ -15,10 +16,9 @@
 
 #ft-dl-bar {
 	width: 0%;
-	height: 24px;
+	height: 27px;
 	background-color: $silver;
 }
-
 
 #ft-dl-page-counter {
 	position:fixed;
@@ -87,28 +87,32 @@ $spinner-size: 15px;
 	position:absolute;
 	top:0;
 	left:0;
-	width:200px;
+	width:180px;
 }
 
 #ft-dl-field-name h2{
 	margin: 0;
+}
 
+.ft-dl-header h2{
+	font-size: 15px; 
 }
 
 #ft-dl-display-label{
 	flex-grow: 1;
-	margin-left: 250px;
-	margin-right: 250px;
+	margin-left: 220px;
+	margin-right: 220px;
 	font-family: $font-family-serif;
 }
-
-
 
 #ft-dl-download{
 	margin-top: 0;
 	position:absolute;
 	right:0;
-	width:200px;
+	width:180px;
+	height: 25px;
+	padding-top: 3px;
+	padding-bottom: 3px;
 }
 
 #fulltext-zone{

@@ -14,10 +14,10 @@ else
 
 %>
 <div id="ft-dl-title-box">
-  <div id="ft-dl-field-name">
+  <div id="ft-dl-field-name" class="ft-dl-header">
     <h2>Full text of</h2>
   </div>
-  <h4><div id="ft-dl-display-label"><%= raw CGI.unescapeHTML doc_title%></div></h4>
+  <h4><div id="ft-dl-display-label"><b><%= raw CGI.unescapeHTML doc_title%></b></div></h4>
 
   <button id="ft-dl-download" class="btn btn-dark" onclick="triggerFullTextDownload()">DOWNLOAD
   </button>
@@ -28,8 +28,8 @@ else
   <div id="ft-dl-loading-text" role='status'>Retrieving item metadata, please wait<div class="ft-dl-spinner-container"><div class="ft-dl-spinner"></div></div></div>
 </div>
 
-<div id="ft-dl-about-title"><h2>About Full text<span class='caret'></span></h2></div>
-<div id="ft-dl-about-content">This page contains raw, uncorrected text that was automatically created through optical character recognition (OCR). For the most accurate content, access this item through the Mirador viewer or download a PDF. <br><br>Read more about the <a href='https://wiki.harvard.edu/confluence/display/DigitalImaging/Technical+resources' target="_blank">OCR technologies</a> used at Harvard Library.</div>
+<div id="ft-dl-about-title" class="ft-dl-header"><h2>About Full text<span class='caret'></span></h2></div>
+<div id="ft-dl-about-content">This page contains raw, uncorrected text that was automatically created through optical character recognition (OCR). For the most accurate content, access this item through the Mirador viewer or download a PDF. <br><br>Read more about the <a href='https://wiki.harvard.edu/confluence/display/DigitalImaging/Technical+resources' target="_blank"><b>OCR technologies</b></a> used at Harvard Library.</div>
 
 <hr></hr>
 
@@ -98,9 +98,7 @@ else
             $('#ft-dl-progress').hide({easing: 'swing'});
           }
         },
-        error: function(xhr, status, error) {
-          console.log('at div : '+ String(i));
-        },
+        // 500 internal error happen pretty often randomly. Thus we simply try it again after waiting 2 seconds.
         statusCode: {
           500: function() {setTimeout( function () {retrieveOCRAJAX(i, progressionIndex, page_divs);}, 5000);}
           }   
