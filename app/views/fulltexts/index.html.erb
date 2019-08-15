@@ -17,7 +17,7 @@ else
   <div id="ft-dl-field-name">
     <h2>Full text of</h2>
   </div>
-  <h4><div id="ft-dl-display-label"></div></h4>
+  <h4><div id="ft-dl-display-label"><%= raw CGI.unescapeHTML doc_title%></div></h4>
 
   <button id="ft-dl-download" class="btn btn-dark" onclick="triggerFullTextDownload()">DOWNLOAD
   </button>
@@ -41,7 +41,7 @@ else
 
 <script type="text/javascript">
   // some drs IDs to test with: 2678271 (45 pages); 6612363 (84 pages); 52666264 (120 pages); 9752507 (900 pages)
-  let pages_ids = <%= raw pages_ids%>;
+  const pages_ids = <%= raw pages_ids%>;
 
   const drs_id = <%= drs_id %>;
   $('#ft-dl-download').hide();
@@ -49,13 +49,13 @@ else
 
   $(document).ready(function() {
     generateDivs(pages_ids);
-    var title_div = document.getElementById("ft-dl-display-label");
-    title_div.innerText = "<%= raw CGI.unescapeHTML doc_title%>";
     updatePageCounter(0, pages_ids.length);
     add_text();
   });
 
   $(document).scroll(function(){
+    // basically a cursor to the centre of the page retrieving the current div.
+    // retrieving the current div allows to retrieve information on the current page.
     let yMiddleScreen = $(window).height()/2;
     let xMiddleScreen = $(window).width()/2; 
     let currDiv = document.elementFromPoint(xMiddleScreen, yMiddleScreen);
@@ -136,15 +136,16 @@ else
     var page_divs = document.getElementById("fulltext-zone").children;
     for (let i= 0; i < page_divs.length; i++) {
       //replacing the html line break by the txt line break char. Adding two line breaks at each div's content end to denote a page change.
-      text += page_divs[i].innerHTML.replace(/<br>/gi, '\n') + '\n\n';
+      text += page_divs[i].innerHTML.replace(/<br>/gi, '\n') + '\n';
     }
     return text;
   } 
 
   function download(filename, text) {
-    var element = document.createElement('a');
-    element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
-    element.setAttribute('download', filename);
+    let blob = new Blob([text], {type: 'text/plain'});
+    let element = document.createElement('a');
+    element.href = (window.webkitURL || window.URL).createObjectURL(blob);
+    element.download = filename;
 
     element.style.display = 'none';
     document.body.appendChild(element);
