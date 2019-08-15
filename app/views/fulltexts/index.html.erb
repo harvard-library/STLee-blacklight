@@ -23,9 +23,9 @@ else
   </button>
 </div>
 
-<div id="progress">
-  <div id="bar"></div>
-  <div id="loading-text" role='status'>Retrieving item metadata, please wait<div class="ft-dl-spinner-container"><div class="ft-dl-spinner"></div></div></div>
+<div id="ft-dl-progress">
+  <div id="ft-dl-bar"></div>
+  <div id="ft-dl-loading-text" role='status'>Retrieving item metadata, please wait<div class="ft-dl-spinner-container"><div class="ft-dl-spinner"></div></div></div>
 </div>
 
 <div id="ft-dl-about-title"><h2>About Full text<span class='caret'></span></h2></div>
@@ -79,10 +79,10 @@ else
   }
 
   function updateBar(currentPage, totalPage) {
-    let bar = document.getElementById("bar");
+    let bar = document.getElementById("ft-dl-bar");
     let width = (currentPage/totalPage) * 100;
     bar.style.width = width + '%';
-    let loadText = document.getElementById("loading-text");
+    let loadText = document.getElementById("ft-dl-loading-text");
     loadText.innerText = "Loading full text ("+ String(currentPage)+" of "+String(totalPage)+" pages)"
   }
 
@@ -95,7 +95,7 @@ else
           updateBar(progressionIndex.idx, page_divs.length);
           if(progressionIndex.idx == page_divs.length - 1){
             $('#ft-dl-download').show({easing: 'swing'});
-            $('#progress').hide({easing: 'swing'});
+            $('#ft-dl-progress').hide({easing: 'swing'});
           }
         },
         error: function(xhr, status, error) {
