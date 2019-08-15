@@ -67,6 +67,14 @@ else
     }
   });
 
+  // "about full text" dropdown feature
+  $('#ft-dl-about-title').click(function(){
+    let aboutContent = $('#ft-dl-about-content');
+    aboutContent.toggle();
+    let caretAngle = String(aboutContent.is(':hidden')?0:180);
+    $('#ft-dl-about-title span').css({'transform': 'rotate('+caretAngle+'deg)'});
+  });
+
   function generateDivs(page_ids){
     for (let i = 0; i < page_ids.length; i++) {
       let textZone = document.getElementById('fulltext-zone');
