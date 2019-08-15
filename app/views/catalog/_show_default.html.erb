@@ -1,6 +1,3 @@
-<a href="/fulltext/<%=document[:drs_file_id]%>" class="visually-hidden focusable skip-link" style='overflow:hidden;'>
-  Open full-text in tab
-</a>
 <% doc_presenter = show_presenter(document) %>
 <%# default partial to display solr document fields in catalog show view -%>
 <%=generate_tour_modal_html document[:delivery_service]%>
@@ -165,8 +162,7 @@
           <%
         end
 
-        hasocr = retrieve_hasocr_info document[:drs_file_id]
-        if document[:delivery_service] == 'pds' and hasocr
+        if document[:delivery_service] == 'pds' and retrieve_hasocr_info document[:drs_file_id]
           %>
             <div class="permalink"><span class="fa"> T </span><a id="open-full-text" href="/fulltext/<%=document[:drs_file_id]%>" target="_blank"> Full Text</a></div>
           <%
