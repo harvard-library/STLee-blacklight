@@ -96,7 +96,7 @@ else
 
   function retrieveOCRAJAX(i, progressionIndex, page_divs) {
     $.ajax({
-        url: "http://fds.lib.harvard.edu/fds/deliver/" + page_divs[i].getAttribute("drs_id"),
+        url: "https://fds.lib.harvard.edu/fds/deliver/" + page_divs[i].getAttribute("drs_id"),
         success: function(data) {
           progressionIndex.idx++;
           page_divs[i].innerText = data;
