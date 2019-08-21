@@ -1,4 +1,5 @@
-<% doc_presenter = show_presenter(document) %>
+<% doc_presenter = show_presenter(document) 
+    feedback_form = nil%>
 <%# default partial to display solr document fields in catalog show view -%>
 <%=generate_tour_modal_html document[:delivery_service]%>
 <div class="row">
@@ -9,7 +10,15 @@
         <% document_show_fields(document).each do |field_name, field| -%>
           <% if should_render_show_field? document, field %>
             <dt class="blacklight-<%= field_name.parameterize %>"><%= render_document_show_field_label document, field: field_name %></dt>
-            <dd class="blacklight-<%= field_name.parameterize %>"><%=raw CGI.unescapeHTML doc_presenter.field_value field_name %></dd>
+            <dd class="blacklight-<%= field_name.parameterize %>"><%=raw CGI.unescapeHTML doc_presenter.field_value field_name %>
+              
+            <%improve_button, temp_form = generate_metadata_crowdsourcing_elems field_name, (CGI.unescapeHTML doc_presenter.field_value field_name) 
+              unless temp_form.nil?
+                feedback_form = temp_form
+              end
+            %>
+            <%= improve_button unless improve_button.nil?%>
+            </dd>
           <% end -%>
         <% end -%>
       </dl>
@@ -257,3 +266,6 @@
     </div>
   </div>
 </div>
+<%= unless feedback_form.nil?
+      generate_modal_code('improve_record_modal', 'What value should this field hold?', feedback_form)
+    end%>

@@ -2,6 +2,20 @@
 @import "util";
 @import "icons";
 
+button.btn-improve-record {
+  margin-left: 40px;
+  font-family: $font-family-sans-serif;
+  font-weight: 600;
+  background-color: $jet;
+  color: $white;
+  letter-spacing: 1.17px;
+  padding: 6px 30px;
+  text-transform: uppercase;
+}
+
+button.btn:hover {
+  color: $subtle-gray;
+}
 
 .skip {
     position: absolute;

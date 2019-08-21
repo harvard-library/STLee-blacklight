@@ -13,6 +13,45 @@ module ApplicationHelper
   	end
   end
 
+  def generate_metadata_crowdsourcing_elems(fieldname, field)
+    require 'nokogiri'
+    creds_file_name = 'metadata_crowdsourcing_credentials.json'
+
+    if(File.exist?('metadata_crowdsourcing_credentials.json'))  
+      json_res = JSON.parse(File.read(creds_file_name))
+      fieldname_to_check = json_res['field name']
+      fieldvalue_to_check = json_res['field value']
+      api_token = json_res['api-token']
+      base_url = json_res['base url']
+      survey_id = json_res['survey id']
+      is_something_nil = (fieldname_to_check.nil? or fieldvalue_to_check.nil? or api_token.nil? or base_url.nil? or survey_id.nil?)
+      if not is_something_nil and fieldname.downcase == fieldname_to_check.downcase
+        new_field = Nokogiri::HTML.fragment(field).text
+        if new_field.downcase == fieldvalue_to_check.downcase
+          uri = URI(base_url + survey_id)
+          req = Net::HTTP::Get.new(uri) 
+          req['x-api-token'] = api_token
+          response = nil
+          Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') {|http|
+            response = http.request(req)
+          }
+          if not response.nil? and response.kind_of? Net::HTTPSuccess
+            form = parse_qualtrics_survey_into_hml_form(JSON.parse(response.body)['result']['questions']['QID1'])
+            return ('<button type="button" class="btn btn-improve-record" data-toggle="modal" data-target="#improve_record_modal" >Improve this record</button>').html_safe, form
+          end
+        end
+      end
+    end  
+  end
+
+  def parse_qualtrics_survey_into_hml_form(json_survey)
+    form = '<form>'
+    json_survey['choices'].each do |key, value|
+      input_type = value['textEntry'].nil? ? 'checkbox' : 'text' 
+      form = form + '<input type="%s" name="%s" value="%s"/> %s' % [input_type, key, value['choiceText'], value['choiceText']]
+    end
+    (form + '</form>').html_safe
+  end
 
   def retrieve_hasocr_info drs_file_id
     url = 'https://iiif.lib.harvard.edu/proxy/hasocr/%d?callback=' % [drs_file_id]
@@ -35,22 +74,26 @@ module ApplicationHelper
 
   def generate_tour_modal_html(documentType)
     if documentType == 'pds'
-      ('<div class="modal fade" id="take_a_tour_modal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+      generate_modal_code('take_a_tour_modal', 'Tour the viewer', '<iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRtpx-naAyksS0J5Jboe84367F4WXnS4gKabW0LiEihlft5HZCoO9dalZhrMVw7SUgvBDYEDrNpYvh1/embed?start=true&loop=true&delayms=10000" id="embedded-viewer-tour-presentation" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>')
+    end
+  end
+
+  def generate_modal_code(id, title, content)
+    ('<div class="modal fade" id="%s" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
           <div class="modal-content">
             <div class="modal-header no-border">
-              <div class="modal-title" id="exampleModalLabel">Tour the viewer</div>
+              <div class="modal-title" id="exampleModalLabel">%s</div>
               <button type="button" class="close modal-button" data-dismiss="modal" aria-label="Close">
                 <span aria-hidden="true">&times;</span>
               </button>
             </div>
             <div class="modal-body" id="modal-body-content">
-              <iframe src="https://docs.google.com/presentation/d/e/2PACX-1vRtpx-naAyksS0J5Jboe84367F4WXnS4gKabW0LiEihlft5HZCoO9dalZhrMVw7SUgvBDYEDrNpYvh1/embed?start=true&loop=true&delayms=10000" id="embedded-viewer-tour-presentation" frameborder="0" allowfullscreen="true" mozallowfullscreen="true" webkitallowfullscreen="true"></iframe>
+              %s
             </div>
           </div>
         </div>
-      </div>').html_safe
-    end
+      </div>' % [id, title, content]).html_safe
   end
 
   def generate_twitter_meta_tags
