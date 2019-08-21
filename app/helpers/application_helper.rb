@@ -18,6 +18,7 @@ module ApplicationHelper
     creds_file_name = 'metadata_crowdsourcing_credentials.json'
 
     if(File.exist?('metadata_crowdsourcing_credentials.json'))  
+      #we need to retrieve all the required info for the API call with qualtrix from the local credential file we created.
       json_res = JSON.parse(File.read(creds_file_name))
       fieldname_to_check = json_res['field name']
       fieldvalue_to_check = json_res['field value']
@@ -25,18 +26,25 @@ module ApplicationHelper
       base_url = json_res['base url']
       survey_id = json_res['survey id']
       is_something_nil = (fieldname_to_check.nil? or fieldvalue_to_check.nil? or api_token.nil? or base_url.nil? or survey_id.nil?)
+      
       if not is_something_nil and fieldname.downcase == fieldname_to_check.downcase
         new_field = Nokogiri::HTML.fragment(field).text
         if new_field.downcase == fieldvalue_to_check.downcase
-          uri = URI(base_url + survey_id)
-          req = Net::HTTP::Get.new(uri) 
+          #setup for the http post request.
+          uri = URI(base_url + survey_id + '/sessions')
+          req = Net::HTTP::Post.new(uri) 
           req['x-api-token'] = api_token
+          req['Content-Type'] = 'application/json'
+          req.body = ({language: 'EN'}).to_json
+          
+          #actual request being made using https
           response = nil
           Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') {|http|
             response = http.request(req)
           }
           if not response.nil? and response.kind_of? Net::HTTPSuccess
-            form = parse_qualtrics_survey_into_hml_form(JSON.parse(response.body)['result']['questions']['QID1'])
+            response_json = JSON.parse(response.body)
+            form = parse_qualtrics_survey_into_html_form(response_json['result']['questions'][0], response_json['result']['sessionId'])
             return ('<button type="button" class="btn btn-improve-record" data-toggle="modal" data-target="#improve_record_modal" >Improve this record</button>').html_safe, form
           end
         end
@@ -44,13 +52,23 @@ module ApplicationHelper
     end  
   end
 
-  def parse_qualtrics_survey_into_hml_form(json_survey)
-    form = '<form>'
-    json_survey['choices'].each do |key, value|
-      input_type = value['textEntry'].nil? ? 'checkbox' : 'text' 
-      form = form + '<input type="%s" name="%s" value="%s"/> %s' % [input_type, key, value['choiceText'], value['choiceText']]
+  def parse_qualtrics_survey_into_html_form(json_survey, sessionId)
+    form_name = 'crowdsourcing_metadata'
+    form = '<form name="%s">' % form_name
+    json_survey['choices'].each do |obj|
+      input_type = obj['textual'] ? 'text' : 'checkbox'
+      form += '<div class="crowdsource_elem"><input type="%s" name="%s"/> <label>%s</label></div>' % [input_type, obj['choiceId'], obj['display'], obj['display']]
     end
-    (form + '</form>').html_safe
+    js_code = '
+    <script type="text/javascript">
+      function retrieveAndSendFormValues(){
+        let formValues = $(\'form[name="%s"]\').serializeArray();
+        console.log(formValues[0]);
+      }
+    </script>
+    ' % form_name
+
+    (form + '</form><button type="button" class="btn btn-save-feedback" onclick="retrieveAndSendFormValues()">Send feedback</button>'+js_code).html_safe
   end
 
   def retrieve_hasocr_info drs_file_id
