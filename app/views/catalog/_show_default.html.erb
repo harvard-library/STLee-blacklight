@@ -1,5 +1,5 @@
 <% doc_presenter = show_presenter(document) 
-    feedback_form = nil%>
+    feedback_form = ''%>
 <%# default partial to display solr document fields in catalog show view -%>
 <%=generate_tour_modal_html document[:delivery_service]%>
 <div class="row">
@@ -12,9 +12,10 @@
             <dt class="blacklight-<%= field_name.parameterize %>"><%= render_document_show_field_label document, field: field_name %></dt>
             <dd class="blacklight-<%= field_name.parameterize %>"><%=raw CGI.unescapeHTML doc_presenter.field_value field_name %>
               
-            <%improve_button, temp_form = generate_metadata_crowdsourcing_elems field_name, (CGI.unescapeHTML doc_presenter.field_value field_name) 
+            <% improve_button = nil
+            improve_button, temp_form = generate_metadata_crowdsourcing_elems field_name, (CGI.unescapeHTML doc_presenter.field_value field_name) 
               unless temp_form.nil?
-                feedback_form = temp_form
+                feedback_form += temp_form
               end
             %>
             <%= improve_button unless improve_button.nil?%>
@@ -110,7 +111,6 @@
                       return msg?msg.data:"";
                     }
 
-                    //TODO: make it so the dropdown menu stays open if the click did not result 
                     function testRangeBoundariesAndLinkToPrintPDF(){
                       const maxPage = <%=number_of_pages%>;
                       let documentId = <%= document[:drs_file_id]%>;
@@ -156,6 +156,11 @@
                         window.open(printUrl, '_blank');
                       }
                       clearValuesHideText(maxPage);
+                    }
+
+                    function retrieveAndSendMetadataFormValues(formName){
+                      let formValues = $('form[name='+formName+']').serializeArray();
+                      console.log(formValues[0]);
                     }
                   </script>
                   <button type="button" onclick="testRangeBoundariesAndLinkToPrintPDF()"><i class="fa fa-download" aria-hidden="true"></i> Download</button>
@@ -267,5 +272,5 @@
   </div>
 </div>
 <%= unless feedback_form.nil?
-      generate_modal_code('improve_record_modal', 'What value should this field hold?', feedback_form)
+      feedback_form.html_safe
     end%>

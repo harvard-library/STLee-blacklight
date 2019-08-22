@@ -14,61 +14,65 @@ module ApplicationHelper
   end
 
   def generate_metadata_crowdsourcing_elems(fieldname, field)
-    require 'nokogiri'
     creds_file_name = 'metadata_crowdsourcing_credentials.json'
 
     if(File.exist?('metadata_crowdsourcing_credentials.json'))  
-      #we need to retrieve all the required info for the API call with qualtrix from the local credential file we created.
       json_res = JSON.parse(File.read(creds_file_name))
-      fieldname_to_check = json_res['field name']
-      fieldvalue_to_check = json_res['field value']
-      api_token = json_res['api-token']
-      base_url = json_res['base url']
-      survey_id = json_res['survey id']
-      is_something_nil = (fieldname_to_check.nil? or fieldvalue_to_check.nil? or api_token.nil? or base_url.nil? or survey_id.nil?)
-      
-      if not is_something_nil and fieldname.downcase == fieldname_to_check.downcase
-        new_field = Nokogiri::HTML.fragment(field).text
-        if new_field.downcase == fieldvalue_to_check.downcase
-          #setup for the http post request.
-          uri = URI(base_url + survey_id + '/sessions')
-          req = Net::HTTP::Post.new(uri) 
-          req['x-api-token'] = api_token
-          req['Content-Type'] = 'application/json'
-          req.body = ({language: 'EN'}).to_json
-          
-          #actual request being made using https
-          response = nil
-          Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') {|http|
-            response = http.request(req)
-          }
+      json_res.each do |key, value|
+        fieldname_to_check = key
+        if fieldname_to_check.downcase == fieldname.downcase
+          response = check_field_value_and_make_qualtrics_api_call(field, value)
           if not response.nil? and response.kind_of? Net::HTTPSuccess
             response_json = JSON.parse(response.body)
-            form = parse_qualtrics_survey_into_html_form(response_json['result']['questions'][0], response_json['result']['sessionId'])
-            return ('<button type="button" class="btn btn-improve-record" data-toggle="modal" data-target="#improve_record_modal" >Improve this record</button>').html_safe, form
+            #creating a field code to get unique ids for each "improve this record" button and modal.
+            field_code = fieldname.downcase[0,3]
+            form = parse_qualtrics_survey_into_modal(response_json['result']['questions'][0], response_json['result']['sessionId'], field_code)
+            modal_id = 'improve_record_modal_%s'%field_code
+            return ('<button type="button" class="btn btn-improve-record" data-toggle="modal" data-target="#%s" >Improve this record</button>'%modal_id).html_safe, generate_modal_code(modal_id, 'What value should this field hold?', form)
           end
         end
       end
-    end  
+    end
+    return nil, nil  
   end
 
-  def parse_qualtrics_survey_into_html_form(json_survey, sessionId)
-    form_name = 'crowdsourcing_metadata'
+  def check_field_value_and_make_qualtrics_api_call(field, infos)
+    #we need to retrieve all the required info for the API call with qualtrix from the local credential file we created.
+    fieldvalue_to_check = infos['field value']
+    api_token = infos['api-token']
+    base_url = infos['base url']
+    survey_id = infos['survey id']
+    something_is_nil = (fieldvalue_to_check.nil? or api_token.nil? or base_url.nil? or survey_id.nil?)
+    response = nil
+    unless something_is_nil 
+      require 'nokogiri'
+      new_field = Nokogiri::HTML.fragment(field).text
+      if new_field.downcase == fieldvalue_to_check.downcase
+        #setup for the http request.
+        uri = URI(base_url + survey_id + '/sessions')
+        #post request is necessary in order to retrieve a session Id from qualtrics
+        req = Net::HTTP::Post.new(uri) 
+        req['x-api-token'] = api_token
+        req['Content-Type'] = 'application/json'
+        req.body = ({language: 'EN'}).to_json
+        
+        #actual request being made using https
+        Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') {|http|
+          response = http.request(req)
+        }
+      end
+    end
+    return response
+  end
+
+  def parse_qualtrics_survey_into_modal(json_survey, sessionId, fieldcode)
+    form_name = 'crowdsourcing_metadata_%s' % fieldcode
     form = '<form name="%s">' % form_name
     json_survey['choices'].each do |obj|
       input_type = obj['textual'] ? 'text' : 'checkbox'
       form += '<div class="crowdsource_elem"><input type="%s" name="%s"/> <label>%s</label></div>' % [input_type, obj['choiceId'], obj['display'], obj['display']]
     end
-    js_code = '
-    <script type="text/javascript">
-      function retrieveAndSendFormValues(){
-        let formValues = $(\'form[name="%s"]\').serializeArray();
-        console.log(formValues[0]);
-      }
-    </script>
-    ' % form_name
-
-    (form + '</form><button type="button" class="btn btn-save-feedback" onclick="retrieveAndSendFormValues()">Send feedback</button>'+js_code).html_safe
+    (form + '</form><button type="button" class="btn btn-save-feedback" onclick="retrieveAndSendMetadataFormValues(\'%s\')">Send feedback</button>'%form_name).html_safe
   end
 
   def retrieve_hasocr_info drs_file_id
