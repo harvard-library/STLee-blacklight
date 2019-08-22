@@ -26,7 +26,7 @@ module ApplicationHelper
             response_json = JSON.parse(response.body)
             #creating a field code to get unique ids for each "improve this record" button and modal.
             field_code = fieldname.downcase[0,3]
-            form = parse_qualtrics_survey_into_modal(response_json['result']['questions'][0], response_json['result']['sessionId'], field_code)
+            form = parse_qualtrics_survey_into_modal(response_json['result']['questions'][0], response_json['result']['sessionId'], field_code, fieldname_to_check)
             modal_id = 'improve_record_modal_%s'%field_code
             return ('<button type="button" class="btn btn-improve-record" data-toggle="modal" data-target="#%s" >Improve this record</button>'%modal_id).html_safe, generate_modal_code(modal_id, 'What value should this field hold?', form)
           end
@@ -65,14 +65,17 @@ module ApplicationHelper
     return response
   end
 
-  def parse_qualtrics_survey_into_modal(json_survey, sessionId, fieldcode)
+  def parse_qualtrics_survey_into_modal(json_survey, session_id, fieldcode, fieldname)
     form_name = 'crowdsourcing_metadata_%s' % fieldcode
     form = '<form name="%s">' % form_name
     json_survey['choices'].each do |obj|
-      input_type = obj['textual'] ? 'text' : 'checkbox'
-      form += '<div class="crowdsource_elem"><input type="%s" name="%s"/> <label>%s</label></div>' % [input_type, obj['choiceId'], obj['display'], obj['display']]
+      radio_input = '<input type="radio" name="%s" value="%s"/> <label>%s</label>' % [fieldcode ,obj['choiceId'], obj['display']]
+      if obj['textual']
+        radio_input += '<input type="text" name="%s_%s"/>' % [fieldcode, obj['choiceId']]
+      end
+      form += '<div class="crowdsource_elem">%s</div>' % radio_input
     end
-    (form + '</form><button type="button" class="btn btn-save-feedback" onclick="retrieveAndSendMetadataFormValues(\'%s\')">Send feedback</button>'%form_name).html_safe
+    (form + '</form><button type="button" class="btn btn-save-feedback" onclick="retrieveAndSendMetadataFormValues(\'%s\', \'%s\', \'%s\');">Send feedback</button>'% [form_name, session_id, fieldname]).html_safe
   end
 
   def retrieve_hasocr_info drs_file_id

@@ -7,6 +7,9 @@ class CatalogController < ApplicationController
   include Blacklight::Marc::Catalog
   include Harvard::LibraryCloud::Collections
 
+  def qualtricsPostRequest
+    
+  end
 
   configure_blacklight do |config|
     config.view.gallery.partials = [:index_header]

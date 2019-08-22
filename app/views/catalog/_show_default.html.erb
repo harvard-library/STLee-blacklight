@@ -158,9 +158,47 @@
                       clearValuesHideText(maxPage);
                     }
 
-                    function retrieveAndSendMetadataFormValues(formName){
+                    function retrieveAndSendMetadataFormValues(formName, sessionId, fieldname){
+                      let currentUrl = '<%= request.original_url %>';
                       let formValues = $('form[name='+formName+']').serializeArray();
-                      console.log(formValues[0]);
+                      if(formValues.length == 2){
+                        /*Text area inputs wil have a slighty different name, rather than just
+                        the metadata field code, it will be '<field code>_<number>'. To test whether the field with the text are was checked, we test if the number inside the value tag of the checked radio corresponds to the second part of the name tag from the text area. The text area input will always be coming after the checked radio button, so we check for the '<field code>_<number>' only on the second value*/
+                        let valueEntered = null;
+                        let codeAndNumber = formValues[1].name.split('_');
+                        let choiceId = 'choiceId';
+                        if(codeAndNumber.length == 2){
+                          let radioButton = formValues[0];
+                          let textArea = formValues[1]
+                          if(codeAndNumber[1] === radioButton.value){
+                            //this means the option selected was a text area
+                            if(!(textArea.value === "")){
+                              valueEntered = {choiceId: codeAndNumber[1], 'text': textArea.value};
+                            }
+                          }else{
+                            valueEntered = {choiceId: radioButton.value};
+                          }
+                        }
+                        else{
+                          // this means formValues[1] is the actual value that has been checked that we are looking for 
+                          valueEntered = {choiceId: formValues[1].value};
+                        }
+                        if(valueEntered != null){
+                          // now we can expand the valueEntered with relevant infos and make a POST call.
+                          valueEntered['session id'] = sessionId;
+                          valueEntered['field'] = fieldname;
+                          console.log(valueEntered);
+                          
+                          //we can now send the value entered back to the server
+
+                        }else{
+                          console.log("No values entered in text area");
+                          //TODO: display message that says that the text area value was not filled in. 
+                        }
+                      }else{
+                        //TODO: Error message
+                        console.log('Not enough values entered');
+                      }
                     }
                   </script>
                   <button type="button" onclick="testRangeBoundariesAndLinkToPrintPDF()"><i class="fa fa-download" aria-hidden="true"></i> Download</button>
