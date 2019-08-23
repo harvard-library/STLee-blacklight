@@ -1,5 +1,7 @@
 # frozen_string_literal: true
 class CatalogController < ApplicationController
+  #WARNING: TEMPORARY SOLUTION, THIS DISABLES CSRF!!!!
+  protect_from_forgery with: :null_session
 
   include BlacklightRangeLimit::ControllerOverride
 
@@ -8,7 +10,58 @@ class CatalogController < ApplicationController
   include Harvard::LibraryCloud::Collections
 
   def qualtricsPostRequest
-    
+
+    received_str = request.body.read()
+    req_body = Rack::Utils.parse_nested_query(received_str)
+    doc_id = params[:id]
+    textInput = req_body.key?('text') ? req_body['text'] : nil
+    qualtrics_post_body = {
+      "advance": true,
+      "responses": {
+        "QID1": {
+          req_body['choiceId'] => {
+            "selected": true,
+            "text": (textInput unless textInput.nil?)
+          }.compact
+        },
+        "QID2": doc_id
+      }
+    }.to_json
+
+    creds = retrieveQualtricsCredentials(req_body['field'])
+
+    unless creds.nil?
+      survey_id, base_url, api_token =  creds['survey id'], creds['base url'], creds['api-token']
+      session_id = req_body['session_id']
+      uri = URI(base_url + survey_id + '/sessions/'+ session_id)
+      #post request is necessary in order to retrieve a session Id from qualtrics
+      req = Net::HTTP::Post.new(uri) 
+      req['x-api-token'] = api_token
+      req['Content-Type'] = 'application/json'
+      req.body = qualtrics_post_body
+      response = nil
+      #actual request being made using https
+      Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') {|http|
+        response = http.request(req)
+      }
+      if response.kind_of? Net::HTTPSuccess
+        puts 'success!'
+      end
+    end
+
+  end
+
+
+  def retrieveQualtricsCredentials(fieldname)
+    creds_file_name = 'metadata_crowdsourcing_credentials.json'
+    if(File.exist?(creds_file_name))  
+      json_res = JSON.parse(File.read(creds_file_name))
+      json_res.each do |key, value|
+        if key == fieldname
+          return value
+        end
+      end
+    end
   end
 
   configure_blacklight do |config|

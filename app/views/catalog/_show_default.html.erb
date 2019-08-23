@@ -185,10 +185,18 @@
                         }
                         if(valueEntered != null){
                           // now we can expand the valueEntered with relevant infos and make a POST call.
-                          valueEntered['session id'] = sessionId;
+                          valueEntered['session_id'] = sessionId;
                           valueEntered['field'] = fieldname;
                           console.log(valueEntered);
-                          
+                          $.post(currentUrl+'/metadata_crowdsourcing', valueEntered);
+                          // $.ajax({
+                          //   url:currentUrl+'/metadata_crowdsourcing', 
+                          //   type: 'POST',
+                          //   data: valueEntered,
+                          //   contentType:"application/json; charset=utf-8",
+                          //   dataType:"json"
+                          // })
+
                           //we can now send the value entered back to the server
 
                         }else{
