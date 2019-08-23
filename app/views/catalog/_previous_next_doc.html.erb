@@ -28,5 +28,5 @@
 <%
   if @document[:delivery_service] == 'pds' and retrieve_hasocr_info @document[:drs_file_id]
     %>
-    <a href="/fulltext/<%=@document[:drs_file_id]%>" target="_blank" class="skip">Open full text in new tab</a>
+    <a href="/rawtext/<%=@document[:drs_file_id]%>" target="_blank" class="skip">Open raw text in new tab</a>
 <%end%>

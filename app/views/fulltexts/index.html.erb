@@ -15,7 +15,7 @@ else
 %>
 <div id="ft-dl-title-box">
   <div id="ft-dl-field-name" class="ft-dl-header">
-    <h2>Full text of</h2>
+    <h2>raw text of</h2>
   </div>
   <h4><div id="ft-dl-display-label"><b><%= raw CGI.unescapeHTML doc_title%></b></div></h4>
 
@@ -28,8 +28,8 @@ else
   <div id="ft-dl-loading-text" role='status'>Retrieving item metadata, please wait<div class="ft-dl-spinner-container"><div class="ft-dl-spinner"></div></div></div>
 </div>
 
-<div id="ft-dl-about-title" class="ft-dl-header"><h2>About Full text</h2></div>
-<div id="ft-dl-about-content">This page contains raw, uncorrected text that was automatically created through optical character recognition (OCR). For the most accurate content, access this item through the Mirador viewer or download a PDF <a href='<%=#TODO: generate link back to the original item page%>'>from the item detail page</a>. <br><br>Read more about the <a href='https://wiki.harvard.edu/confluence/display/DigitalImaging/Technical+resources' target="_blank">OCR technologies</a> used at Harvard Library.</div>
+<div id="ft-dl-about-title" class="ft-dl-header"><h2>About raw text</h2></div>
+<div id="ft-dl-about-content">This page contains raw, uncorrected text that was automatically created through optical character recognition (OCR). For the most accurate content, access this item through the Mirador viewer or download a PDF <!--#TODO: generate link back to the original item page--><a href=''>from the item detail page</a>. <br><br>Read more about the <a href='https://wiki.harvard.edu/confluence/display/DigitalImaging/Technical+resources' target="_blank">OCR technologies</a> used at Harvard Library.</div>
 
 <hr></hr>
 
@@ -83,7 +83,7 @@ else
     let width = (currentPage/totalPage) * 100;
     bar.style.width = width + '%';
     let loadText = document.getElementById("ft-dl-loading-text");
-    loadText.innerText = "Loading full text ("+ String(currentPage)+" of "+String(totalPage)+" pages)"
+    loadText.innerText = "Loading raw text ("+ String(currentPage)+" of "+String(totalPage)+" pages)"
   }
 
   function retrieveOCRAJAX(i, progressionIndex, page_divs) {

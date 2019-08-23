@@ -164,7 +164,7 @@
 
         if document[:delivery_service] == 'pds' and retrieve_hasocr_info document[:drs_file_id]
           %>
-            <div class="permalink"><span class="fa"> T </span><a id="open-full-text" href="/fulltext/<%=document[:drs_file_id]%>" target="_blank"> Full Text</a></div>
+            <div class="permalink"><span class="fa"> T </span><a id="open-full-text" href="/rawtext/<%=document[:drs_file_id]%>" target="_blank"> Raw Text</a></div>
           <%
         end
         %>        
