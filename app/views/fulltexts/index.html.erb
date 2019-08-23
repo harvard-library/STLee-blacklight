@@ -28,8 +28,8 @@ else
   <div id="ft-dl-loading-text" role='status'>Retrieving item metadata, please wait<div class="ft-dl-spinner-container"><div class="ft-dl-spinner"></div></div></div>
 </div>
 
-<div id="ft-dl-about-title" class="ft-dl-header"><h2>About Full text<span class='caret'></span></h2></div>
-<div id="ft-dl-about-content">This page contains raw, uncorrected text that was automatically created through optical character recognition (OCR). For the most accurate content, access this item through the Mirador viewer or download a PDF. <br><br>Read more about the <a href='https://wiki.harvard.edu/confluence/display/DigitalImaging/Technical+resources' target="_blank"><b>OCR technologies</b></a> used at Harvard Library.</div>
+<div id="ft-dl-about-title" class="ft-dl-header"><h2>About Full text</h2></div>
+<div id="ft-dl-about-content">This page contains raw, uncorrected text that was automatically created through optical character recognition (OCR). For the most accurate content, access this item through the Mirador viewer or download a PDF <a href='<%=#TODO: generate link back to the original item page%>'>from the item detail page</a>. <br><br>Read more about the <a href='https://wiki.harvard.edu/confluence/display/DigitalImaging/Technical+resources' target="_blank">OCR technologies</a> used at Harvard Library.</div>
 
 <hr></hr>
 
@@ -65,14 +65,6 @@ else
         updatePageCounter(currDiv.id, pages_ids.length);
       }
     }
-  });
-
-  // "about full text" dropdown feature
-  $('#ft-dl-about-title').click(function(){
-    let aboutContent = $('#ft-dl-about-content');
-    aboutContent.toggle();
-    let caretAngle = String(aboutContent.is(':hidden')?0:180);
-    $('#ft-dl-about-title span').css({'transform': 'rotate('+caretAngle+'deg)'});
   });
 
   function generateDivs(page_ids){

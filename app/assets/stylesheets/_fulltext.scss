@@ -106,8 +106,26 @@ $spinner-size: 15px;
 }
 
 #ft-dl-about-content{
-	display: none;
+	color: $regular-plain-text-color;
+	font-family: $font-family-serif;
+
+	a {
+    border-bottom: 3px solid transparent;
+    color: $breakthrough-blue;
+    cursor: pointer;
+    font-family: $font-family-sans-serif;
+    font-weight: 500;
+    text-decoration: none;
+    -webkit-transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
+    transition: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
+
+    &:hover {
+      border-bottom: 3px solid rgba(5,121,184,0.3);
+    }
+  }
 }
+
+
 
 #ft-dl-download{
 	margin-top: 0;

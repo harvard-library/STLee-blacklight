@@ -31,3 +31,4 @@ config/database.yml
 stlee_dev
 stlee_dev
 Gemfile.lock
+metadata_crowdsourcing_credentials.json
