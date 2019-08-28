@@ -1,0 +1,1 @@
+Blacklight::Engine.config.routes.identifier_constraint = %r{.+}
