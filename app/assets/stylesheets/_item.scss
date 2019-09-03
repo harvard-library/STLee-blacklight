@@ -55,6 +55,12 @@ a.skip:hover {
   height: 95%;
 }
 
+#no-dl-button{
+  display: none;
+  color: $jet;
+  font-family: $font-family-sans-serif;
+}
+
 #previous-next {
   margin-bottom: 20px;  
   font-family: $font-family-sans-serif;
