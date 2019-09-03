@@ -33,14 +33,11 @@ else
 
 <hr></hr>
 
-<div id="ft-dl-page-counter"><span id="ft-dl-curr-page">0</span> / <span id="ft-dl-total-page">0</span></div>
-
 <div id="fulltext-zone" class="col-lg-8">
 
 </div>
 
 <script type="text/javascript">
-  // some drs IDs to test with: 2678271 (45 pages); 6612363 (84 pages); 52666264 (120 pages); 9752507 (900 pages)
   const pages_ids = <%= raw pages_ids%>;
 
   const drs_id = <%= drs_id %>;
@@ -48,6 +45,7 @@ else
   $('#ft-dl-spinner').show();
 
   $(document).ready(function() {
+    $('<div id="ft-dl-page-counter"><span id="ft-dl-curr-page">0</span> / <span id="ft-dl-total-page">0</span></div>"').insertBefore("#hl__footer")
     generateDivs(pages_ids);
     updatePageCounter(0, pages_ids.length);
     add_text();
@@ -64,6 +62,18 @@ else
       if(currId && !isNaN(currId)){
         updatePageCounter(currDiv.id, pages_ids.length);
       }
+    }
+  });
+
+  $(window).scroll(function(){
+    let absoluteTopPosition = $(this).scrollTop();
+    let windowHeight = $(window).height();
+    let absoluteBottomPosition = absoluteTopPosition + windowHeight;
+    let absoluteFooterPosition = $(document).height() - $('#hl__footer').innerHeight();
+    if(absoluteBottomPosition < absoluteFooterPosition){
+      $('#ft-dl-page-counter').addClass('fixed');
+    }else{
+      $('#ft-dl-page-counter').removeClass('fixed');  
     }
   });
 

@@ -21,12 +21,18 @@
 }
 
 
-#ft-dl-page-counter {
+#ft-dl-page-counter.fixed {
 	position:fixed;
 	bottom:0;
 	right:0;
-	width: 85px;
+}
 
+#ft-dl-page-counter {
+	//to cancel the margin-top 50px of the footer. (30+20 == 50)
+	position:relative;
+	height:20px;
+	width: 85px;
+	float:right;
 	font-family: "Trueno", Helvetica, Roboto, Arial, Bold,  sans-serif;
 	text-transform: uppercase;
 	text-align: center;
@@ -36,8 +42,9 @@
 
 @media(min-width: 992px) {
 	#ft-dl-page-counter {
-		left: 60%;
-		transform: translateX(-40%);
+		float:none;
+		left: 55%;
+		transform: translateX(-55%);
 	}
 }
 
@@ -161,7 +168,7 @@ button.btn-dark {
 	text-transform: uppercase;
 }
 
-button.btn-dark:hover{
+button.btn-dark:hover, button.btn-dark:focus{
 	color: $light-gray;
 }
 
