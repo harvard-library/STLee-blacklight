@@ -20,6 +20,7 @@
 	background-color: $silver;
 }
 
+
 #ft-dl-page-counter {
 	position:fixed;
 	bottom:0;
@@ -30,6 +31,14 @@
 	text-transform: uppercase;
 	text-align: center;
 	background-color: $light-gray;
+}
+
+
+@media(min-width: 992px) {
+	#ft-dl-page-counter {
+		left: 60%;
+		transform: translateX(-40%);
+	}
 }
 
 $progress-bar-top-spacing: 2px;
