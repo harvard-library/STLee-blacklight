@@ -45,8 +45,8 @@ else
   $('#ft-dl-spinner').show();
 
   $(document).ready(function() {
-    $('<div id="ft-dl-page-counter"><span id="ft-dl-curr-page">0</span> / <span id="ft-dl-total-page">0</span></div>"').insertBefore("#hl__footer")
-    generateDivs(pages_ids);
+    $('<div id="ft-dl-page-counter" aria-hidden=true><span id="ft-dl-curr-page">0</span> / <span id="ft-dl-total-page">0</span></div>"').insertBefore("#hl__footer")
+    generateDivs(pages_ids);  
     updatePageCounter(0, pages_ids.length);
     add_text();
   });
