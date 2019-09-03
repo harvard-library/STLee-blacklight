@@ -14,11 +14,12 @@ else
 
 %>
 <div id="ft-dl-title-box">
+  <h2>
   <div id="ft-dl-field-name" class="ft-dl-header">
-    <h2>raw text of</h2>
+    raw text of
   </div>
-  <h4><div id="ft-dl-display-label"><%= raw CGI.unescapeHTML doc_title%></div></h4>
-
+  <div id="ft-dl-display-label"><%= raw CGI.unescapeHTML doc_title%></div>
+  </h2>
   <button id="ft-dl-download" class="btn btn-dark" onclick="triggerFullTextDownload()">DOWNLOAD
   </button>
 </div>
@@ -28,7 +29,7 @@ else
   <div id="ft-dl-loading-text" role='status'>Retrieving item metadata, please wait<div class="ft-dl-spinner-container"><div class="ft-dl-spinner"></div></div></div>
 </div>
 
-<div id="ft-dl-about-title" class="ft-dl-header"><h2>About raw text</h2></div>
+<h2><div id="ft-dl-about-title" class="ft-dl-header">About raw text</div></h2>
 <div id="ft-dl-about-content">This page contains raw, uncorrected text that was automatically created through optical character recognition (OCR). For the most accurate content, access this item through the Mirador viewer or download a PDF<%if catalog_id%> <a href='/catalog/<%=catalog_id%>'>from the item detail page</a><%end%>. <br><br>Read more about the <a href='https://wiki.harvard.edu/confluence/display/DigitalImaging/Technical+resources' target="_blank">OCR technologies</a> used at Harvard Library.</div>
 
 <hr></hr>
@@ -168,5 +169,4 @@ else
 <%    
   end
 %>
-  
 </div>
