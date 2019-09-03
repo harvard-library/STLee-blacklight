@@ -7,7 +7,7 @@ if !image_metadata
 <%
 else
   pages = image_metadata['structures'][0]['canvases']
-  #for some reason the IDs on the manifest are offset by 1 compared to the  to be sent to the FDS server in the js part. 
+  #for some reason the IDs on the manifest are offset by 1 compared to the id to be sent to the FDS server in the js part. 
   pages_ids = pages.map { |s| s.match(/canvas-([0-9]*).json/)[1].to_i + 1 }
 
   doc_title = image_metadata['label']
@@ -17,7 +17,7 @@ else
   <div id="ft-dl-field-name" class="ft-dl-header">
     <h2>raw text of</h2>
   </div>
-  <h4><div id="ft-dl-display-label"><b><%= raw CGI.unescapeHTML doc_title%></b></div></h4>
+  <h4><div id="ft-dl-display-label"><%= raw CGI.unescapeHTML doc_title%></div></h4>
 
   <button id="ft-dl-download" class="btn btn-dark" onclick="triggerFullTextDownload()">DOWNLOAD
   </button>
@@ -29,7 +29,7 @@ else
 </div>
 
 <div id="ft-dl-about-title" class="ft-dl-header"><h2>About raw text</h2></div>
-<div id="ft-dl-about-content">This page contains raw, uncorrected text that was automatically created through optical character recognition (OCR). For the most accurate content, access this item through the Mirador viewer or download a PDF <!--#TODO: generate link back to the original item page--><a href=''>from the item detail page</a>. <br><br>Read more about the <a href='https://wiki.harvard.edu/confluence/display/DigitalImaging/Technical+resources' target="_blank">OCR technologies</a> used at Harvard Library.</div>
+<div id="ft-dl-about-content">This page contains raw, uncorrected text that was automatically created through optical character recognition (OCR). For the most accurate content, access this item through the Mirador viewer or download a PDF<%if catalog_id%> <a href='/catalog/<%=catalog_id%>'>from the item detail page</a><%end%>. <br><br>Read more about the <a href='https://wiki.harvard.edu/confluence/display/DigitalImaging/Technical+resources' target="_blank">OCR technologies</a> used at Harvard Library.</div>
 
 <hr></hr>
 

@@ -36,7 +36,7 @@ Rails.application.routes.draw do
     end
   end
 
-  get '/rawtext/:id', to: 'fulltexts#index'
+  get '/rawtext/*path', to: 'fulltexts#index'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end
