@@ -126,6 +126,8 @@ else
     let progressionIndex = {
       idx: 0
     };
+    // so users with screen reader does not get a loop of text getting updated in the loading bar
+    $('#ft-dl-loading-text').attr('aria-hidden', true);
     for (let i = 0; i < page_divs.length; i++) {
       retrieveOCRAJAX(i, progressionIndex, page_divs);
     }

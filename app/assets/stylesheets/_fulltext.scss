@@ -23,8 +23,10 @@
 
 #ft-dl-page-counter.fixed {
 	position:fixed;
-	bottom:0;
-	right:0;
+	bottom:0px;
+	right:0px;
+	top:auto;
+	margin-bottom: 0px;
 }
 
 #ft-dl-page-counter {
@@ -32,6 +34,7 @@
 	position:relative;
 	height:20px;
 	width: 85px;
+	top:30px;
 	float:right;
 	font-family: "Trueno", Helvetica, Roboto, Arial, Bold,  sans-serif;
 	text-transform: uppercase;
@@ -45,6 +48,7 @@
 		float:none;
 		left: 55%;
 		transform: translateX(-55%);
+		margin-bottom: -20px;
 	}
 }
 
