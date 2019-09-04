@@ -412,8 +412,17 @@ dl.row {
     }
 
   .permalink {
-      clear: both;
-      padding: 20px 0 40px;
+    clear: both;
+    padding: 20px 0 0;
+  }
+
+  .fulltext {
+    clear: both;
+    padding: 20px 0 40px;
+
+    span.fa {
+      padding: 0 8px 0 1px;
+    }
   }
 
   .dl-iiif img {

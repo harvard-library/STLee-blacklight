@@ -46,27 +46,13 @@ else
   $('#ft-dl-spinner').show();
 
   $(document).ready(function() {
-    $('<div id="ft-dl-page-counter" aria-hidden=true><span id="ft-dl-curr-page">0</span> / <span id="ft-dl-total-page">0</span></div>"').insertBefore("#hl__footer")
+    $('<div id="ft-dl-page-counter" aria-hidden=true>Page <span id="ft-dl-curr-page">0</span> / <span id="ft-dl-total-page">0</span></div>"').insertBefore("#hl__footer")
     generateDivs(pages_ids);  
     updatePageCounter(0, pages_ids.length);
     add_text();
   });
 
-  $(document).scroll(function(){
-    // basically a cursor to the centre of the page retrieving the current div.
-    // retrieving the current div allows to retrieve information on the current page.
-    let yMiddleScreen = $(window).height()/2;
-    let xMiddleScreen = $(window).width()/2; 
-    let currDiv = document.elementFromPoint(xMiddleScreen, yMiddleScreen);
-    if(currDiv){
-      let currId = currDiv.id;
-      if(currId && !isNaN(currId)){
-        updatePageCounter(currDiv.id, pages_ids.length);
-      }
-    }
-  });
-
-  $(window).scroll(function(){
+  function updatePageCounterPosition(){
     let absoluteTopPosition = $(this).scrollTop();
     let windowHeight = $(window).height();
     let absoluteBottomPosition = absoluteTopPosition + windowHeight;
@@ -76,6 +62,28 @@ else
     }else{
       $('#ft-dl-page-counter').removeClass('fixed');  
     }
+  }
+
+  function updatePageCounterContent(){
+    // basically a cursor to the centre of the page retrieving the current div.
+    // retrieving the current div allows to retrieve information on the current page.
+    let yMiddleScreen = $(window).height()/2;
+    let xMiddleScreen = $(window).width()/5; //getting to 20% on the x-axis to be sure we get the text div. 
+    let currDiv = document.elementFromPoint(xMiddleScreen, yMiddleScreen);
+    if(currDiv){
+      let currId = currDiv.id;
+      if(currId && !isNaN(currId)){
+        updatePageCounter(currDiv.id, pages_ids.length);
+      }
+    }
+  }
+
+  $(document).scroll(function(){
+    updatePageCounterContent();
+  });
+
+  $(window).scroll(function(){
+    updatePageCounterPosition();
   });
 
   function generateDivs(page_ids){
@@ -107,6 +115,9 @@ else
           if(progressionIndex.idx == page_divs.length - 1){
             $('#ft-dl-download').show({easing: 'swing'});
             $('#ft-dl-progress').hide({easing: 'swing'});
+          }else if(progressionIndex.idx <5 ){
+            updatePageCounterPosition();
+            updatePageCounterContent();
           }
         },
         // 500 internal error happen pretty often randomly. Thus we simply try it again after waiting 2 seconds.
@@ -132,6 +143,7 @@ else
     for (let i = 0; i < page_divs.length; i++) {
       retrieveOCRAJAX(i, progressionIndex, page_divs);
     }
+    updatePageCounterPosition();
   }
 
   function triggerFullTextDownload(){
