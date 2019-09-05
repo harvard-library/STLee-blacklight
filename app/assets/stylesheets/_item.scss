@@ -22,7 +22,8 @@
 a.skip:active, 
 a.skip:focus, 
 a.skip:hover {
-  display: inline-block;
+  outline-width: 0;
+  display: inline-block;e-block;
   left: 50%;
   transform: translateX(-50%);
   top: 0;
