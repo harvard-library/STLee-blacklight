@@ -15,21 +15,24 @@
       </div>
     </a>
   </div>
-  <div class="navbar__wrapper">
-    <%if user_signed_in? %>
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#utility-links" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="fa fa-bars"></span>
-        </button>
-      </div>
-      <div class="collapse navbar-collapse" id="utility-links">
-        <%= render :partial=>'/user_util_links' %>
-      </div>
-    <%end%>  
-  </div>
-  <div class="searchbar__wrapper">
-    <%= render_search_bar  %>
-  </div>
+  
+  <%if controller_name != 'fulltexts'%>
+    <div class="navbar__wrapper">
+      <%if user_signed_in? %>
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#utility-links" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="fa fa-bars"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="utility-links">
+          <%= render :partial=>'/user_util_links' %>
+        </div>
+      <%end%>  
+    </div>
+    <div class="searchbar__wrapper">
+      <%= render_search_bar  %>
+    </div>
+  <%end%>
 </header>
 

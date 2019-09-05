@@ -1,0 +1,184 @@
+<div id='ft-maincontent'>
+<%
+image_metadata = retrieve_still_image_json_metadata 'https://iiif.lib.harvard.edu/manifests/drs:'+drs_id
+if !image_metadata
+%>  
+<%= render "no_ocr" %>
+<%
+else
+  pages = image_metadata['structures'][0]['canvases']
+  #for some reason the IDs on the manifest are offset by 1 compared to the id to be sent to the FDS server in the js part. 
+  pages_ids = pages.map { |s| s.match(/canvas-([0-9]*).json/)[1].to_i + 1 }
+
+  doc_title = image_metadata['label']
+
+%>
+<div id="ft-dl-title-box">
+  <h2>
+  <div id="ft-dl-field-name" class="ft-dl-header">
+    raw text of
+  </div>
+  <div id="ft-dl-display-label"><%= raw CGI.unescapeHTML doc_title%></div>
+  </h2>
+  <button id="ft-dl-download" class="btn btn-dark" onclick="triggerFullTextDownload()">DOWNLOAD
+  </button>
+</div>
+
+<div id="ft-dl-progress">
+  <div id="ft-dl-bar"></div>
+  <div id="ft-dl-loading-text" role='status'>Retrieving item metadata, please wait<div class="ft-dl-spinner-container"><div class="ft-dl-spinner"></div></div></div>
+</div>
+
+<h2><div id="ft-dl-about-title" class="ft-dl-header">About raw text</div></h2>
+<div id="ft-dl-about-content">This page contains raw, uncorrected text that was automatically created through optical character recognition (OCR). For the most accurate content, access this item through the Mirador viewer or download a PDF<%if catalog_id%> <a href='/catalog/<%=catalog_id%>'>from the item detail page</a><%end%>. <br><br>Read more about the <a href='https://wiki.harvard.edu/confluence/display/DigitalImaging/Technical+resources' target="_blank">OCR technologies</a> used at Harvard Library.</div>
+
+<hr></hr>
+
+<div id="fulltext-zone" class="col-lg-8">
+
+</div>
+
+<script type="text/javascript">
+  const pages_ids = <%= raw pages_ids%>;
+
+  const drs_id = <%= drs_id %>;
+  $('#ft-dl-download').hide();
+  $('#ft-dl-spinner').show();
+
+  $(document).ready(function() {
+    $('<div id="ft-dl-page-counter" aria-hidden=true>Page <span id="ft-dl-curr-page">0</span> / <span id="ft-dl-total-page">0</span></div>"').insertBefore("#hl__footer")
+    generateDivs(pages_ids);  
+    updatePageCounter(0, pages_ids.length);
+    add_text();
+  });
+
+  function updatePageCounterPosition(){
+    let absoluteTopPosition = $(this).scrollTop();
+    let windowHeight = $(window).height();
+    let absoluteBottomPosition = absoluteTopPosition + windowHeight;
+    let absoluteFooterPosition = $(document).height() - $('#hl__footer').innerHeight();
+    if(absoluteBottomPosition < absoluteFooterPosition){
+      $('#ft-dl-page-counter').addClass('fixed');
+    }else{
+      $('#ft-dl-page-counter').removeClass('fixed');  
+    }
+  }
+
+  function updatePageCounterContent(){
+    // basically a cursor to the centre of the page retrieving the current div.
+    // retrieving the current div allows to retrieve information on the current page.
+    let yMiddleScreen = $(window).height()/2;
+    let xMiddleScreen = $(window).width()/5; //getting to 20% on the x-axis to be sure we get the text div. 
+    let currDiv = document.elementFromPoint(xMiddleScreen, yMiddleScreen);
+    if(currDiv){
+      let currId = currDiv.id;
+      if(currId && !isNaN(currId)){
+        updatePageCounter(currId, pages_ids.length);
+      }
+    }
+  }
+
+  $(document).scroll(function(){
+    updatePageCounterContent();
+  });
+
+  $(window).scroll(function(){
+    updatePageCounterPosition();
+  });
+
+  function generateDivs(page_ids){
+    for (let i = 0; i < page_ids.length; i++) {
+      let textZone = document.getElementById('fulltext-zone');
+      let newDiv = document.createElement('div');
+      newDiv.setAttribute("id", i+1);
+
+      newDiv.setAttribute("drs_id", page_ids[i])
+      textZone.appendChild(newDiv);
+    }
+  }
+
+  function updateBar(currentPage, totalPage) {
+    let bar = document.getElementById("ft-dl-bar");
+    let width = (currentPage/totalPage) * 100;
+    bar.style.width = width + '%';
+    let loadText = document.getElementById("ft-dl-loading-text");
+    loadText.innerText = "Loading raw text ("+ String(currentPage)+" of "+String(totalPage)+" pages)"
+  }
+
+  function retrieveOCRAJAX(i, progressionIndex, page_divs) {
+    $.ajax({
+        url: "https://fds.lib.harvard.edu/fds/deliver/" + page_divs[i].getAttribute("drs_id"),
+        success: function(data) {
+          progressionIndex.idx++;
+          page_divs[i].innerText = data;
+          updateBar(progressionIndex.idx, page_divs.length);
+          if(progressionIndex.idx == page_divs.length - 1){
+            $('#ft-dl-download').show({easing: 'swing'});
+            $('#ft-dl-progress').hide({easing: 'swing'});
+          }else if(progressionIndex.idx <5 ){
+            updatePageCounterPosition();
+            updatePageCounterContent();
+          }
+        },
+        // 500 internal error happen pretty often randomly. Thus we simply try it again after waiting 2 seconds.
+        statusCode: {
+          500: function() {setTimeout( function () {retrieveOCRAJAX(i, progressionIndex, page_divs);}, 5000);}
+          }   
+      });
+  }
+
+  function updatePageCounter(currPageNmb, totalPageNmb){
+    $('#ft-dl-curr-page').text(currPageNmb);
+    $('#ft-dl-total-page').text(totalPageNmb);
+  }
+
+  function add_text() {
+    var page_divs = document.getElementById("fulltext-zone").children;
+    // this was implemented in order to have a "pass by reference" int into 'retrieveOCRAJAX' 
+    let progressionIndex = {
+      idx: 0
+    };
+    // so users with screen reader does not get a loop of text getting updated in the loading bar
+    $('#ft-dl-loading-text').attr('aria-hidden', true);
+    for (let i = 0; i < page_divs.length; i++) {
+      retrieveOCRAJAX(i, progressionIndex, page_divs);
+    }
+    updatePageCounterPosition();
+  }
+
+  function triggerFullTextDownload(){
+    let raw_title = "<%= raw CGI.unescapeHTML doc_title %>";
+    //removing punctuation or weird char from the file title, and replace whitespaces by underscores.
+    let raw_title_stripped = raw_title.replace(/[^a-z0-9 ]/gi, '').replace(/[ ]/gi, '_')
+
+    download(raw_title_stripped + ".txt", make_text_file());
+  }
+
+  function make_text_file() {
+    var text = [];
+    var page_divs = document.getElementById("fulltext-zone").children;
+    for (let i= 0; i < page_divs.length; i++) {
+      //replacing the html line break by the txt line break char. Adding two line breaks at each div's content end to denote a page change.
+      text += page_divs[i].innerHTML.replace(/<br>/gi, '\n') + '\n';
+    }
+    return text;
+  } 
+
+  function download(filename, text) {
+    let blob = new Blob([text], {type: 'text/plain'});
+    let element = document.createElement('a');
+    element.href = (window.webkitURL || window.URL).createObjectURL(blob);
+    element.download = filename;
+
+    element.style.display = 'none';
+    document.body.appendChild(element);
+
+    element.click();
+
+    document.body.removeChild(element);
+  }
+</script>
+<%    
+  end
+%>
+</div>

@@ -2,6 +2,43 @@
 @import "util";
 @import "icons";
 
+
+
+#skip-link-for-raw-text{
+  background-color: $black;
+  color: $white;
+  font-family: $font-family-sans-serif;
+}
+
+.skip {
+  position: absolute;
+  top: -1000px;
+  left: -1000px;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
+
+a.skip:active, 
+a.skip:focus, 
+a.skip:hover {
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+  margin-top: 15px;
+  display: inline-block;
+  width: auto; 
+  height: 40px; 
+  line-height: 40px;
+  padding-left:10px;
+  padding-right:10px;
+  background-color: $black;
+  color: $white;
+  font-family: $font-family-sans-serif;
+  font-size: 20px;
+  overflow: visible; 
+}
+
 .modal-dialog {
   width: 95%;
   height: 95%;
@@ -30,6 +67,12 @@
 #embedded-viewer-tour-presentation {
   width: 100%;
   height: 95%;
+}
+
+#no-dl-button{
+  display: none;
+  color: $jet;
+  font-family: $font-family-sans-serif;
 }
 
 #previous-next {
@@ -369,8 +412,17 @@ dl.row {
     }
 
   .permalink {
-      clear: both;
-      padding: 20px 0 40px;
+    clear: both;
+    padding: 20px 0 0;
+  }
+
+  .fulltext {
+    clear: both;
+    padding: 20px 0 40px;
+
+    span.fa {
+      padding: 0 8px 0 1px;
+    }
   }
 
   .dl-iiif img {
