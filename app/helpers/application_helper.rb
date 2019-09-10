@@ -42,12 +42,18 @@ module ApplicationHelper
     api_token = infos['api-token']
     base_url = infos['base url']
     survey_id = infos['survey id']
-    something_is_nil = (fieldvalue_to_check.nil? or api_token.nil? or base_url.nil? or survey_id.nil?)
+    use_regex = infos['is-regex']
+    something_is_nil = (fieldvalue_to_check.nil? or api_token.nil? or base_url.nil? or survey_id.nil? or use_regex.nil?)
     response = nil
     unless something_is_nil 
       require 'nokogiri'
       new_field = Nokogiri::HTML.fragment(field).text
-      if new_field.downcase == fieldvalue_to_check.downcase
+      #TODO: check if curr is valid regex before maching (and return false if it aint valid regex)
+      regex_match = lambda {|curr, to_check| curr.match(Regexp.new(to_check))}
+      normal_match = lambda {|curr, to_check| curr == to_check}
+      check_behavior = use_regex ? regex_match: normal_match
+      #calling lambda in ruby require bracket, not parenthesis.
+      if check_behavior[new_field, fieldvalue_to_check]
         #setup for the http request.
         uri = URI(base_url + survey_id + '/sessions')
         #post request is necessary in order to retrieve a session Id from qualtrics
