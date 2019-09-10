@@ -78,6 +78,11 @@ module ApplicationHelper
     (form + '</form><button type="button" class="btn btn-save-feedback" onclick="retrieveAndSendMetadataFormValues(\'%s\', \'%s\', \'%s\');">Send feedback</button>'% [form_name, session_id, fieldname]).html_safe
   end
 
+  #this function should only be called within views rendered on the catalog controller.
+  def full_text_href drs_id, catalog_id
+    '/rawtext/'+drs_id+'/'+catalog_id
+  end
+
   def retrieve_hasocr_info drs_file_id
     url = 'https://iiif.lib.harvard.edu/proxy/hasocr/%d?callback=' % [drs_file_id]
     response = Net::HTTP.get_response(URI.parse(url))

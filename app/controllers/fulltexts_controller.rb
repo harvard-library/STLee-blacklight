@@ -3,10 +3,15 @@ class FulltextsController < ApplicationController
 	include ApplicationHelper
 
 	def index
-		if params[:id] and params[:id] =~ /\A\d+\Z/ then #way to test if the id is numeric
-			hasocr  = retrieve_hasocr_info params[:id]
+		#this will 
+		url_paths = params[:path].split('/', 2)
+		drs_id = url_paths[0]
+		#using the fact that hash returns nil when accessed somewhere not indexed.
+		catalog_id = url_paths[1]
+		if drs_id and drs_id =~ /\A\d+\Z/ then #way to test if the id is numeric
+			hasocr  = retrieve_hasocr_info drs_id
 			if hasocr
-				render "index", :locals => {:drs_id => params[:id]}
+				render "index", :locals => {:drs_id => drs_id, :catalog_id => catalog_id}
 			else
 				render "_no_ocr"
 			end

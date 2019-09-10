@@ -7,18 +7,19 @@ if !image_metadata
 <%
 else
   pages = image_metadata['structures'][0]['canvases']
-  #for some reason the IDs on the manifest are offset by 1 compared to the  to be sent to the FDS server in the js part. 
+  #for some reason the IDs on the manifest are offset by 1 compared to the id to be sent to the FDS server in the js part. 
   pages_ids = pages.map { |s| s.match(/canvas-([0-9]*).json/)[1].to_i + 1 }
 
   doc_title = image_metadata['label']
 
 %>
 <div id="ft-dl-title-box">
+  <h2>
   <div id="ft-dl-field-name" class="ft-dl-header">
-    <h2>Full text of</h2>
+    raw text of
   </div>
-  <h4><div id="ft-dl-display-label"><b><%= raw CGI.unescapeHTML doc_title%></b></div></h4>
-
+  <div id="ft-dl-display-label"><%= raw CGI.unescapeHTML doc_title%></div>
+  </h2>
   <button id="ft-dl-download" class="btn btn-dark" onclick="triggerFullTextDownload()">DOWNLOAD
   </button>
 </div>
@@ -28,19 +29,16 @@ else
   <div id="ft-dl-loading-text" role='status'>Retrieving item metadata, please wait<div class="ft-dl-spinner-container"><div class="ft-dl-spinner"></div></div></div>
 </div>
 
-<div id="ft-dl-about-title" class="ft-dl-header"><h2>About Full text<span class='caret'></span></h2></div>
-<div id="ft-dl-about-content">This page contains raw, uncorrected text that was automatically created through optical character recognition (OCR). For the most accurate content, access this item through the Mirador viewer or download a PDF. <br><br>Read more about the <a href='https://wiki.harvard.edu/confluence/display/DigitalImaging/Technical+resources' target="_blank"><b>OCR technologies</b></a> used at Harvard Library.</div>
+<h2><div id="ft-dl-about-title" class="ft-dl-header">About raw text</div></h2>
+<div id="ft-dl-about-content">This page contains raw, uncorrected text that was automatically created through optical character recognition (OCR). For the most accurate content, access this item through the Mirador viewer or download a PDF<%if catalog_id%> <a href='/catalog/<%=catalog_id%>'>from the item detail page</a><%end%>. <br><br>Read more about the <a href='https://wiki.harvard.edu/confluence/display/DigitalImaging/Technical+resources' target="_blank">OCR technologies</a> used at Harvard Library.</div>
 
 <hr></hr>
-
-<div id="ft-dl-page-counter"><span id="ft-dl-curr-page">0</span> / <span id="ft-dl-total-page">0</span></div>
 
 <div id="fulltext-zone" class="col-lg-8">
 
 </div>
 
 <script type="text/javascript">
-  // some drs IDs to test with: 2678271 (45 pages); 6612363 (84 pages); 52666264 (120 pages); 9752507 (900 pages)
   const pages_ids = <%= raw pages_ids%>;
 
   const drs_id = <%= drs_id %>;
@@ -48,31 +46,44 @@ else
   $('#ft-dl-spinner').show();
 
   $(document).ready(function() {
-    generateDivs(pages_ids);
+    $('<div id="ft-dl-page-counter" aria-hidden=true>Page <span id="ft-dl-curr-page">0</span> / <span id="ft-dl-total-page">0</span></div>"').insertBefore("#hl__footer")
+    generateDivs(pages_ids);  
     updatePageCounter(0, pages_ids.length);
     add_text();
   });
 
-  $(document).scroll(function(){
+  function updatePageCounterPosition(){
+    let absoluteTopPosition = $(this).scrollTop();
+    let windowHeight = $(window).height();
+    let absoluteBottomPosition = absoluteTopPosition + windowHeight;
+    let absoluteFooterPosition = $(document).height() - $('#hl__footer').innerHeight();
+    if(absoluteBottomPosition < absoluteFooterPosition){
+      $('#ft-dl-page-counter').addClass('fixed');
+    }else{
+      $('#ft-dl-page-counter').removeClass('fixed');  
+    }
+  }
+
+  function updatePageCounterContent(){
     // basically a cursor to the centre of the page retrieving the current div.
     // retrieving the current div allows to retrieve information on the current page.
     let yMiddleScreen = $(window).height()/2;
-    let xMiddleScreen = $(window).width()/2; 
+    let xMiddleScreen = $(window).width()/5; //getting to 20% on the x-axis to be sure we get the text div. 
     let currDiv = document.elementFromPoint(xMiddleScreen, yMiddleScreen);
     if(currDiv){
       let currId = currDiv.id;
       if(currId && !isNaN(currId)){
-        updatePageCounter(currDiv.id, pages_ids.length);
+        updatePageCounter(currId, pages_ids.length);
       }
     }
+  }
+
+  $(document).scroll(function(){
+    updatePageCounterContent();
   });
 
-  // "about full text" dropdown feature
-  $('#ft-dl-about-title').click(function(){
-    let aboutContent = $('#ft-dl-about-content');
-    aboutContent.toggle();
-    let caretAngle = String(aboutContent.is(':hidden')?0:180);
-    $('#ft-dl-about-title span').css({'transform': 'rotate('+caretAngle+'deg)'});
+  $(window).scroll(function(){
+    updatePageCounterPosition();
   });
 
   function generateDivs(page_ids){
@@ -91,12 +102,12 @@ else
     let width = (currentPage/totalPage) * 100;
     bar.style.width = width + '%';
     let loadText = document.getElementById("ft-dl-loading-text");
-    loadText.innerText = "Loading full text ("+ String(currentPage)+" of "+String(totalPage)+" pages)"
+    loadText.innerText = "Loading raw text ("+ String(currentPage)+" of "+String(totalPage)+" pages)"
   }
 
   function retrieveOCRAJAX(i, progressionIndex, page_divs) {
     $.ajax({
-        url: "http://fds.lib.harvard.edu/fds/deliver/" + page_divs[i].getAttribute("drs_id"),
+        url: "https://fds.lib.harvard.edu/fds/deliver/" + page_divs[i].getAttribute("drs_id"),
         success: function(data) {
           progressionIndex.idx++;
           page_divs[i].innerText = data;
@@ -104,6 +115,9 @@ else
           if(progressionIndex.idx == page_divs.length - 1){
             $('#ft-dl-download').show({easing: 'swing'});
             $('#ft-dl-progress').hide({easing: 'swing'});
+          }else if(progressionIndex.idx <5 ){
+            updatePageCounterPosition();
+            updatePageCounterContent();
           }
         },
         // 500 internal error happen pretty often randomly. Thus we simply try it again after waiting 2 seconds.
@@ -124,9 +138,12 @@ else
     let progressionIndex = {
       idx: 0
     };
+    // so users with screen reader does not get a loop of text getting updated in the loading bar
+    $('#ft-dl-loading-text').attr('aria-hidden', true);
     for (let i = 0; i < page_divs.length; i++) {
       retrieveOCRAJAX(i, progressionIndex, page_divs);
     }
+    updatePageCounterPosition();
   }
 
   function triggerFullTextDownload(){
@@ -164,5 +181,4 @@ else
 <%    
   end
 %>
-  
 </div>

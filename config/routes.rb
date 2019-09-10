@@ -38,7 +38,7 @@ Rails.application.routes.draw do
 
   post '/catalog/:id/metadata_crowdsourcing', to: 'catalog#qualtricsPostRequest'
 
-  get '/fulltext/:id', to: 'fulltexts#index'
+  get '/rawtext/*path', to: 'fulltexts#index'
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
 end

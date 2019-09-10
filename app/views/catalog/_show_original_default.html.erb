@@ -1,4 +1,9 @@
 <% doc_presenter = show_presenter(document) %>
+<%
+  if document[:delivery_service] == 'pds' and retrieve_hasocr_info document[:drs_file_id]
+    %>
+    <a href="<%=full_text_href document[:drs_file_id], params[:id]%>" target="_blank" class="skip">Open raw text in new tab</a>
+<%end%>
 <div class="original-document-wrapper">
   <iframe src="<%= doc_presenter.field_value 'raw_object' %>" allowfullscreen="true"></iframe>
 </div>
