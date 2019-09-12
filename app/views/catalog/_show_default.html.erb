@@ -201,6 +201,7 @@
                           // now we can expand the valueEntered with relevant infos and make a POST call.
                           valueEntered['session_id'] = sessionId;
                           valueEntered['field'] = fieldname;
+                          //needed to make successful post request to the rails server.
                           let csrf_token = $('meta[name="csrf-token"]').attr('content');
                           //$.post(currentUrl+'/metadata_crowdsourcing', valueEntered);
                           $.ajax({
@@ -211,10 +212,17 @@
                               "X-CSRF-Token": csrf_token
                             },
                             success: function(data){
-                              console.log(String(data));
+                              //
+                              $('.btn-save-feedback').hide({easing: 'swing'});
+                              $('form[name='+formName+']').children().hide({easing: 'swing'});
+                              let successText = '<div class="feedback-success">Thank you for contributing to our item\'s metadata. Your feedback has been saved and will be reviewed by a member of our team.</div>'
+                              $('form[name='+formName+']').append(successText)
+
                             },
-                            error: function(xhr, status, error){
-                              console.log("Error: "+String(xhr));
+                            error: function(xhr, status, error){ 
+                              let errorText = '<div class="feedback-error">Your feedback could not be saved, the server returned this error"' + String(xhr) + ' ' + String(status)+'" please try again later. </div>'
+
+                              $('form[name='+formName+']').append(errorText)
                             }
                           })
 

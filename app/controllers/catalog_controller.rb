@@ -42,13 +42,13 @@ class CatalogController < ApplicationController
       Net::HTTP.start(uri.hostname, uri.port, :use_ssl => uri.scheme == 'https') {|http|
         response = http.request(req)
       }
+      #making an answer back to the client side. 
       if response.kind_of? Net::HTTPSuccess
         render :status => "200", :json => {:message => "success"}.to_json
       else
-        render :status => "", :json => {:message => "#{response.message}"}.to_json
+        render :status => response.code, :json => {:message => "#{response.message}"}.to_json
       end
     end
-
   end
 
 
