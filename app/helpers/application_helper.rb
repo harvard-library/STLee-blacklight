@@ -13,6 +13,9 @@ module ApplicationHelper
   	end
   end
 
+
+
+
   def generate_metadata_crowdsourcing_elems(fieldname, field)
     creds_file_name = 'metadata_crowdsourcing_credentials.json'
 
@@ -36,6 +39,14 @@ module ApplicationHelper
     return nil, nil  
   end
 
+
+  def valid_regex value_regex
+    Regexp.new(value_regex.to_s)
+    true
+  rescue RegexpError => _
+    false
+  end
+
   def check_field_value_and_make_qualtrics_api_call(field, infos)
     #we need to retrieve all the required info for the API call with qualtrix from the local credential file we created.
     fieldvalue_to_check = infos['field value']
@@ -52,7 +63,12 @@ module ApplicationHelper
       regex_match = lambda {|curr, to_check| curr.match(Regexp.new(to_check))}
       normal_match = lambda {|curr, to_check| curr == to_check}
       check_behavior = use_regex ? regex_match: normal_match
-      #calling lambda in ruby require bracket, not parenthesis.
+      if use_regex and not valid_regex(fieldvalue_to_check)
+        #regex is not valid. Do nothing. 
+        return response
+      end
+
+      #calling lambda in ruby require bracket, not parenthesis. Learnt that the hard way
       if check_behavior[new_field, fieldvalue_to_check]
         #setup for the http request.
         uri = URI(base_url + survey_id + '/sessions')
