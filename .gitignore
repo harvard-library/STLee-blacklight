@@ -32,3 +32,4 @@ stlee_dev
 stlee_dev
 Gemfile.lock
 metadata_crowdsourcing_credentials.json
+qualtrics_auth_token.yaml

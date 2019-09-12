@@ -2,6 +2,14 @@ module ApplicationHelper
 
   include Harvard::LibraryCloud::Collections
 
+  # way to cache the values accessed from the library.harvard page so that we don't do a request for each metadata field (crowdsouring metadata feature)
+  @@qualtrics_json = nil
+
+  #global variables used for the metadata_crowdsourcing feature.
+  @@drupal_url = 'http://harvardlibdev.prod.acquia-sites.com/api/v1/qualtrics_surveys'
+  @@qualtrics_base_url = 'https://harvard.az1.qualtrics.com/API/v3/surveys/'
+  @@qualtrics_auth_filename = 'qualtrics_auth_token.yaml'
+
   def hash_as_list val
     val.kind_of?(Hash) ? [val] : val
   end
@@ -13,19 +21,24 @@ module ApplicationHelper
   	end
   end
 
-
-  def retrieve_crowdsourcing_info_from_drupal_page(page_url)
-    nil
+  def retrieve_crowdsourcing_info_from_drupal_page
+    if @@qualtrics_json.nil?
+      response = Net::HTTP.get_response(URI.parse(@@drupal_url))
+      if response.is_a? Net::HTTPOK
+        json_ans = JSON.parse response.body
+        if json_ans['results'] and json_ans['results']['items']
+          @@qualtrics_json = json_ans['results']['items']
+        end
+      end
+    end
+    @@qualtrics_json
   end
 
-
   def generate_metadata_crowdsourcing_elems(fieldname, field)
-    creds_file_name = 'metadata_crowdsourcing_credentials.json'
-
-    if(File.exist?('metadata_crowdsourcing_credentials.json'))  
-      json_res = JSON.parse(File.read(creds_file_name))
-      json_res.each do |key, value|
-        fieldname_to_check = key
+    qualtrics_data = retrieve_crowdsourcing_info_from_drupal_page
+    if qualtrics_data
+      qualtrics_data.each do |value|
+        fieldname_to_check = value['metadata_field_title']
         if fieldname_to_check.downcase == fieldname.downcase
           response = check_field_value_and_make_qualtrics_api_call(field, value)
           if not response.nil? and response.kind_of? Net::HTTPSuccess
@@ -50,14 +63,23 @@ module ApplicationHelper
     false
   end
 
+  def retrieve_qualtrics_authentication_token_from_yaml
+    require 'yaml'
+    local_config = YAML.load_file(@@qualtrics_auth_filename)
+    unless local_config.nil?
+      local_config['token']
+    end
+  end
+
+
   def check_field_value_and_make_qualtrics_api_call(field, infos)
     #we need to retrieve all the required info for the API call with qualtrix from the local credential file we created.
-    fieldvalue_to_check = infos['field value']
-    api_token = infos['api-token']
-    base_url = infos['base url']
-    survey_id = infos['survey id']
-    use_regex = infos['is-regex']
-    something_is_nil = (fieldvalue_to_check.nil? or api_token.nil? or base_url.nil? or survey_id.nil? or use_regex.nil?)
+    fieldvalue_to_check = infos['metadata_field_value']
+
+    api_token = retrieve_qualtrics_authentication_token_from_yaml
+    survey_id = infos['survey_id']
+    use_regex = infos['is-regex'] != '0'
+    something_is_nil = (fieldvalue_to_check.nil? or api_token.nil? or survey_id.nil? or use_regex.nil?)
     response = nil
     unless something_is_nil 
       require 'nokogiri'
@@ -75,7 +97,7 @@ module ApplicationHelper
       #calling lambda in ruby require bracket, not parenthesis. Learnt that the hard way
       if check_behavior[new_field, fieldvalue_to_check]
         #setup for the http request.
-        uri = URI(base_url + survey_id + '/sessions')
+        uri = URI(@@qualtrics_base_url + survey_id + '/sessions')
         #post request is necessary in order to retrieve a session Id from qualtrics
         req = Net::HTTP::Post.new(uri) 
         req['x-api-token'] = api_token
