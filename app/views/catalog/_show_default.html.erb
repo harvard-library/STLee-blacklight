@@ -200,15 +200,18 @@
                           // now we can expand the valueEntered with relevant infos and make a POST call.
                           valueEntered['session_id'] = sessionId;
                           valueEntered['field'] = fieldname;
-                          console.log(valueEntered);
-                          $.post(currentUrl+'/metadata_crowdsourcing', valueEntered);
-                          // $.ajax({
-                          //   url:currentUrl+'/metadata_crowdsourcing', 
-                          //   type: 'POST',
-                          //   data: valueEntered,
-                          //   contentType:"application/json; charset=utf-8",
-                          //   dataType:"json"
-                          // })
+                          let csrf_token = $('meta[name="csrf-token"]').attr('content');
+                          //$.post(currentUrl+'/metadata_crowdsourcing', valueEntered);
+                          $.ajax({
+                            url: currentUrl+'/metadata_crowdsourcing', 
+                            type: 'post',
+                            data: valueEntered,
+                            headers: { 
+                              "X-CSRF-Token": csrf_token
+                            }
+                            //contentType:"application/json; charset=utf-8",
+                            //dataType:"json"
+                          })
 
                           //we can now send the value entered back to the server
 

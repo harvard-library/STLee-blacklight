@@ -1,7 +1,5 @@
 # frozen_string_literal: true
 class CatalogController < ApplicationController
-  #WARNING: TEMPORARY SOLUTION, THIS DISABLES CSRF!!!!
-  protect_from_forgery with: :null_session
 
   include BlacklightRangeLimit::ControllerOverride
 
