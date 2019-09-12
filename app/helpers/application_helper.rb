@@ -14,6 +14,9 @@ module ApplicationHelper
   end
 
 
+  def retrieve_crowdsourcing_info_from_drupal_page(page_url)
+    nil
+  end
 
 
   def generate_metadata_crowdsourcing_elems(fieldname, field)
@@ -39,7 +42,7 @@ module ApplicationHelper
     return nil, nil  
   end
 
-
+  #returns true if the value passed is a valid regular expression, false otherwise.
   def valid_regex value_regex
     Regexp.new(value_regex.to_s)
     true
@@ -63,6 +66,7 @@ module ApplicationHelper
       regex_match = lambda {|curr, to_check| curr.match(Regexp.new(to_check))}
       normal_match = lambda {|curr, to_check| curr == to_check}
       check_behavior = use_regex ? regex_match: normal_match
+
       if use_regex and not valid_regex(fieldvalue_to_check)
         #regex is not valid. Do nothing. 
         return response

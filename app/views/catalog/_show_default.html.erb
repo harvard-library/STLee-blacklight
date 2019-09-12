@@ -80,6 +80,7 @@
                       }
                     </style>
                   <%
+                  number_of_pages = 0
                   end
                 %>
                 <div class="dropdown-menu sequence-options">
@@ -208,9 +209,13 @@
                             data: valueEntered,
                             headers: { 
                               "X-CSRF-Token": csrf_token
+                            },
+                            success: function(data){
+                              console.log(String(data));
+                            },
+                            error: function(xhr, status, error){
+                              console.log("Error: "+String(xhr));
                             }
-                            //contentType:"application/json; charset=utf-8",
-                            //dataType:"json"
                           })
 
                           //we can now send the value entered back to the server

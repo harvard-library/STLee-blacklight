@@ -43,7 +43,9 @@ class CatalogController < ApplicationController
         response = http.request(req)
       }
       if response.kind_of? Net::HTTPSuccess
-        puts 'success!'
+        render :status => "200", :json => {:message => "success"}.to_json
+      else
+        render :status => "", :json => {:message => "#{response.message}"}.to_json
       end
     end
 
