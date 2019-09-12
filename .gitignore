@@ -28,8 +28,7 @@
 .editorconfig
 config/database.yml
 config/database.yml
+config/qualtrics_auth_token.yaml
 stlee_dev
 stlee_dev
 Gemfile.lock
-metadata_crowdsourcing_credentials.json
-qualtrics_auth_token.yaml

@@ -8,7 +8,7 @@ module ApplicationHelper
   #global variables used for the metadata_crowdsourcing feature.
   @@drupal_url = 'http://harvardlibdev.prod.acquia-sites.com/api/v1/qualtrics_surveys'
   @@qualtrics_base_url = 'https://harvard.az1.qualtrics.com/API/v3/surveys/'
-  @@qualtrics_auth_filename = 'qualtrics_auth_token.yaml'
+  @@qualtrics_auth_filename = 'config/qualtrics_auth_token.yaml'
 
   def hash_as_list val
     val.kind_of?(Hash) ? [val] : val
@@ -65,9 +65,11 @@ module ApplicationHelper
 
   def retrieve_qualtrics_authentication_token_from_yaml
     require 'yaml'
-    local_config = YAML.load_file(@@qualtrics_auth_filename)
-    unless local_config.nil?
-      local_config['token']
+    if(File.exist?(@@qualtrics_auth_filename)) 
+      local_config = YAML.load_file(@@qualtrics_auth_filename)
+      unless local_config.nil?
+        local_config['token']
+      end
     end
   end
 
