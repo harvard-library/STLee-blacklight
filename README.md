@@ -147,6 +147,11 @@ config.autocomplete_enabled = false
 
 * The addition of a new action called `qualtricsPostRequest`. This action is routed to receive the post request made for metadata crowdsourcing from the item page. It will parse the user form's answer and send it to [qualtrics](qualtrics.com), which is the backend data collection service used. Acting as a middle man between the client side and qualtrics, this method will also send back to the user's browser whether the data collection was successful or not. 
 
+
+### [app/controllers/fulltexts_controller.rb](app/controllers/fulltexts_controller.rb)
+
+New controller generated in order to take care of the "raw text" feature. Only has one method `index` which will pipe the params received from routing (in [config/routes.rb](config/routes.rb)to generate the page using the corresponding view ([app/views/fulltexts/index.html.erb](app/views/fulltexts/index.html.erb)). According to the value of the params passed it can also generate a page indicating no ocr being present or a page indicating the drs id is incorrect. 
+
 ### [app/helpers/application_helper.rb](app/helpers/application_helper.rb)
 
 Contains miscellaneous helper functions. 
