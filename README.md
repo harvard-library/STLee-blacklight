@@ -152,6 +152,10 @@ config.autocomplete_enabled = false
 Contains miscellaneous helper functions. 
 One of which is 'generate_twitter_meta_tags' callled in [app/views/layouts/blacklight.html.erb](app/views/layouts/blacklight.html.erb). As its name implies, it will generate twitter meta tags in order for this balcklight instance to correctly be hyperlinked on a twitter post. This function will also dynamically link in the meta tags a corresponding thumbnail according to whether the current page is one about a still image content. This thumbnail is either the still image itself, or the first page in the case of multiple pages content. 
 
+This also contains all the main functions used in order to generate the html elements related to the metadata crowdsourcing feature. Namely the function `generate_metadata_crowdsourcing_elems` which if its arguments match the crowdsourcing trigger's requirements (fetched by the helper function `retrieve_crowdsourcing_info_from_drupal_page`) will return the html tag for an "Improve this record" button as well as the html code for the modal containing the crowdsourcing options. This function is called in [app/views/catalog/_show_default.html.erb](app/views/catalog/_show_default.html.erb) and its result are stored there. Most of the other functions ins application_helper are helper function in order to achieve the metadata crowdsourcing. 
+
+
+
 ### [app/helpers/blacklight/facets_helper_behavior.rb](app/helpers/blacklight/facets_helper_behavior.rb)
 
 Updates to support rendering custom formatted facet counts (e.g. 5.8k instead of 5,800) and custom CSS classes.
@@ -292,6 +296,10 @@ config.enable_bookmarks = false
 ```ruby
 config.per_page = [12,24,48,96]
 ```
+
+* Has an action  called `qualtricsPostRequest` corresonding to a post request made on the metadata crowdsourcing's form  generated in [app/views/catalog/_show_default.html.erb](app/views/catalog/_show_default.html.erb). This function parse the post request body and then use them in a post request to qualtrics. According to the success of this subsequent request, it will render back a HTTP answer to the client.
+
+
 
 ### Additional UI Enhancements
 
