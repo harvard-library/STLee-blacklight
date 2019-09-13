@@ -145,6 +145,8 @@ in an error if enabled
 config.autocomplete_enabled = false
 ```
 
+* The addition of a new action called `qualtricsPostRequest`. This action is routed to receive the post request made for metadata crowdsourcing from the item page. It will parse the user form's answer and send it to [qualtrics](qualtrics.com), which is the backend data collection service used. Acting as a middle man between the client side and qualtrics, this method will also send back to the user's browser whether the data collection was successful or not. 
+
 ### [app/helpers/application_helper.rb](app/helpers/application_helper.rb)
 
 Contains miscellaneous helper functions. 

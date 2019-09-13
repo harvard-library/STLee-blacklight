@@ -211,16 +211,16 @@
                             headers: { 
                               "X-CSRF-Token": csrf_token
                             },
-                            success: function(data){
-                              //
+                            success: function(data, textStatus, xhr){
+                              //the line below might hide this button for other crowdsourcing modal.
                               $('.btn-save-feedback').hide({easing: 'swing'});
                               $('form[name='+formName+']').children().hide({easing: 'swing'});
-                              let successText = '<div class="feedback-success">Thank you for contributing to our item\'s metadata. Your feedback has been saved and will be reviewed by a member of our team.</div>'
+                              let successText = (xhr.status != 204)? '<div class="feedback-success">Thank you for contributing to our item\'s metadata. Your feedback has been saved and will be reviewed by a member of our team.</div>':'<div class="feedback-success">Unfortunately the server could not properly record your contribution. Please inform this website\'s admin about this issue.</div>';
                               $('form[name='+formName+']').append(successText)
 
                             },
                             error: function(xhr, status, error){ 
-                              let errorText = '<div class="feedback-error">Your feedback could not be saved, the server returned this error"' + String(xhr) + ' ' + String(status)+'" please try again later. </div>'
+                              let errorText = '<div class="feedback-error">Your feedback could not be saved, the server returned this error: "' + String(xhr.status) + ' ' + String(status)+'" please try again later. </div>'
 
                               $('form[name='+formName+']').append(errorText)
                             }

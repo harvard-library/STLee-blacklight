@@ -6,6 +6,7 @@ class CatalogController < ApplicationController
   include Blacklight::Catalog
   include Blacklight::Marc::Catalog
   include Harvard::LibraryCloud::Collections
+  include ApplicationHelper
 
   def qualtricsPostRequest
 
@@ -27,9 +28,8 @@ class CatalogController < ApplicationController
     }.to_json
 
     creds = retrieveQualtricsCredentials(req_body['field'])
-
     unless creds.nil?
-      survey_id, base_url, api_token =  creds['survey id'], creds['base url'], creds['api-token']
+      survey_id, base_url, api_token =  creds['survey_id'], @@qualtrics_base_url, retrieve_qualtrics_authentication_token_from_yaml
       session_id = req_body['session_id']
       uri = URI(base_url + survey_id + '/sessions/'+ session_id)
       #post request is necessary in order to retrieve a session Id from qualtrics
@@ -53,11 +53,10 @@ class CatalogController < ApplicationController
 
 
   def retrieveQualtricsCredentials(fieldname)
-    creds_file_name = 'metadata_crowdsourcing_credentials.json'
-    if(File.exist?(creds_file_name))  
-      json_res = JSON.parse(File.read(creds_file_name))
-      json_res.each do |key, value|
-        if key == fieldname
+    crowdsource_infos = retrieve_crowdsourcing_info_from_drupal_page
+    unless crowdsource_infos.nil? 
+      crowdsource_infos.each do |value|
+        if value['metadata_field_title'].downcase == fieldname.downcase
           return value
         end
       end
