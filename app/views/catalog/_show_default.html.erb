@@ -57,7 +57,7 @@
                   #in the case of a pds content, we need a different behavior for the download button.
                   manifest_url = 'https://iiif.lib.harvard.edu/manifests/drs:'+document[:drs_file_id]
                   manifest_json = retrieve_still_image_json_metadata manifest_url
-                  number_of_pages = manifest_json['structures'][0]['canvases'].length
+                  number_of_pages = manifest_json['sequences'][0]['canvases'].length
                 %>
                 <div class="dropdown-menu sequence-options">
                   <div id="incorrect_page_range" style = "display:none" value='<%=number_of_pages%>'>
