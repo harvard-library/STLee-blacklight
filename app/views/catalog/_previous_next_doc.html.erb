@@ -12,22 +12,21 @@
   <div class="col-sm-6 page-header-page-links-column">
     <% if item_page_entry_info &&  (@previous_document || @next_document) %>
         <div class="page_links">
-          <% if @previous_document %>      
+          <% if @previous_document %>
             <%= link_to_previous_document @previous_document %> |
           <% end %>
-          
-          <%= item_page_entry_info %> 
-          
+
+          <%= item_page_entry_info %>
+
           <% if @next_document %>
             | <%= link_to_next_document @next_document %>
           <% end %>
         </div>
     <% end %>
-  </div>    
+  </div>
 </div>
 <%
   if @document[:delivery_service] == 'pds' and retrieve_hasocr_info @document[:drs_file_id]
     %>
     <a href="<%=full_text_href @document[:drs_file_id], params[:id]%>" target="_blank" class="skip">Open raw text in new tab</a>
 <%end%>
-    

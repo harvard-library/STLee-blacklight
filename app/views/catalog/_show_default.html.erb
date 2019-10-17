@@ -13,7 +13,7 @@
           <% end -%>
         <% end -%>
       </dl>
-    </div> 
+    </div>
   </div>
   <div class="col-lg-4">
     <div id="tools" class="record-tools">
@@ -59,7 +59,7 @@
                   manifest_url = 'https://iiif.lib.harvard.edu/manifests/drs:'+document[:drs_file_id]
                   manifest_json = retrieve_still_image_json_metadata manifest_url
                   if manifest_json
-                    number_of_pages = manifest_json['structures'][0]['canvases'].length
+              number_of_pages = manifest_json['sequences'][0]['canvases'].length
                   else#below is an easy way to "remove" the download button if there is no manifest retrieved.%>
                     <style type="text/css">
                       #dl-dropdown{
@@ -114,7 +114,7 @@
                       return msg?msg.data:"";
                     }
 
-                    //TODO: make it so the dropdown menu stays open if the click did not result 
+                    //TODO: make it so the dropdown menu stays open if the click did not result
                     function testRangeBoundariesAndLinkToPrintPDF(){
                       const maxPage = <%=number_of_pages%>;
                       let documentId = <%= document[:drs_file_id]%>;
@@ -127,7 +127,7 @@
                       if (isNaN(startRange) || isNaN(endRange) || (startRange < 1) ||(startRange > endRange) || (endRange > maxPage)){
                         document.getElementById("incorrect_page_range").style.display = "block";
                         return;
-                      } 
+                      }
 
                       let printUrl = 'https://iiif.lib.harvard.edu/proxy/printpdf/'+documentId;
                       let emailValue = document.getElementById('email_field').value;
@@ -180,7 +180,7 @@
             <div class="fulltext"><span class="fa"> T </span><a id="open-full-text" href="<%=full_text_href document[:drs_file_id], params[:id]%>" target="_blank"> Raw Text</a></div>
           <%
         end
-        %>        
+        %>
         <%
         if !document[:digital_collections_links].nil? && document[:digital_collections_links].kind_of?(Array) && document[:digital_collections_links].length > 0
           %>
@@ -236,7 +236,7 @@
         <dl class="dl-iiif dl-more-details clearfix">
            <%
               del_serv = document[:delivery_service]
-              manifest_base_url = 'https://iiif.lib.harvard.edu/manifests/' 
+              manifest_base_url = 'https://iiif.lib.harvard.edu/manifests/'
               id_prefix = (del_serv == 'pds'? 'drs': del_serv) + ':'
             %>
           <dt class="blacklight-title_extended clearfix"><%= image_tag("IIIFLogoBlack.svg", alt: "IIIF") %></dt>

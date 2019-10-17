@@ -65,7 +65,7 @@ module ApplicationHelper
                           <meta name="twitter:url" content="https://digitalcollections.library.harvard.edu">
                           <meta name="twitter:image" content="%s">'
     base_img_url = 'https://library.harvard.edu/sites/default/files/home-background-eclipse.jpg'
-    if defined?(@document) and @document[:drs_file_id] 
+    if defined?(@document) and @document[:drs_file_id]
       ids_download_url = 'https://ids.lib.harvard.edu/ids/iiif/%d/full/1200,/0/default.jpg'
       if @document[:delivery_service] == 'ids'
         base_img_url = ids_download_url % @document[:drs_file_id]
@@ -75,13 +75,7 @@ module ApplicationHelper
         res = retrieve_still_image_json_metadata manifest_url
         if res
           #the cover image manifest url will always be the first element from the array 'canvases'
-          cover_img_manifest_url = res['structures'][0]['canvases'][0]
-          if cover_img_manifest_url
-            matches = cover_img_manifest_url.match('canvas-(.*).json')
-            if matches[1]
-              base_img_url = ids_download_url % matches[1]
-            end
-          end
+          base_img_url = res['sequences'][0]['canvases'][0]['thumbnail']['@id']
         end
       end
     end

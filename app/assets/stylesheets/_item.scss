@@ -19,8 +19,8 @@
   overflow: hidden;
 }
 
-a.skip:active, 
-a.skip:focus, 
+a.skip:active,
+a.skip:focus,
 a.skip:hover {
   outline-width: 0;
   display: inline-block;
@@ -29,8 +29,8 @@ a.skip:hover {
   top: 0;
   margin-top: 15px;
   display: inline-block;
-  width: auto; 
-  height: 40px; 
+  width: auto;
+  height: 40px;
   line-height: 40px;
   padding-left:10px;
   padding-right:10px;
@@ -38,7 +38,7 @@ a.skip:hover {
   color: $white;
   font-family: $font-family-mirador-ui;
   font-size: 20px;
-  overflow: visible; 
+  overflow: visible;
 }
 
 .modal-dialog {
@@ -78,7 +78,7 @@ a.skip:hover {
 }
 
 #previous-next {
-  margin-bottom: 20px;  
+  margin-bottom: 20px;
   font-family: $font-family-sans-serif;
 
   a {
@@ -95,7 +95,7 @@ a.skip:hover {
     }
 
   .page-header-page-links-column {
-    
+
     .page_links {
       float: right;
     }
@@ -278,7 +278,7 @@ dl.row {
     }
   }
 
-  .btn-group.open { 
+  .btn-group.open {
 
     .caret {
       transform: scaleY(-1);
@@ -440,6 +440,7 @@ dl.row {
   p {
     padding: 20px 0 30px;
   }
+
 }
 
 @media (max-width: 992px) {
@@ -470,7 +471,7 @@ dl.row {
     margin-right: -15px;
   }
 
-  #tools dl {    
+  #tools dl {
     width: 100%;
   }
 }

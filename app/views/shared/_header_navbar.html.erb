@@ -15,7 +15,7 @@
       </div>
     </a>
   </div>
-  
+
   <%if controller_name != 'fulltexts'%>
     <div class="navbar__wrapper">
       <%if user_signed_in? %>
@@ -28,7 +28,7 @@
         <div class="collapse navbar-collapse" id="utility-links">
           <%= render :partial=>'/user_util_links' %>
         </div>
-      <%end%>  
+      <%end%>
     </div>
     <div class="searchbar__wrapper">
       <%= render_search_bar  %>
