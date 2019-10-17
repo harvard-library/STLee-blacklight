@@ -6,7 +6,7 @@ if !image_metadata
 <%= render "no_ocr" %>
 <%
 else
-  pages = image_metadata['structures'][0]['canvases']
+  pages = image_metadata['sequences'][0]['canvases']
   #for some reason the IDs on the manifest are offset by 1 compared to the id to be sent to the FDS server in the js part. 
   pages_ids = pages.map { |s| s.match(/canvas-([0-9]*).json/)[1].to_i + 1 }
 
