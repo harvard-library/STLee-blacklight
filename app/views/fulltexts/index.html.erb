@@ -7,8 +7,12 @@ if !image_metadata
 <%
 else
   pages = image_metadata['sequences'][0]['canvases']
-  #for some reason the IDs on the manifest are offset by 1 compared to the id to be sent to the FDS server in the js part. 
-  pages_ids = pages.map { |s| s.match(/canvas-([0-9]*).json/)[1].to_i + 1 }
+  pages_ids = Array.new
+  #for some reason the IDs on the manifest are offset by 1 compared to the id to be sent to the FDS server in the js part.
+  image_metadata['sequences'][0]['canvases'].each { |item|
+    current_id = /canvas-([0-9]*).json/.match(item.to_s)[1].to_i + 1
+    pages_ids.push(current_id)
+  }
 
   doc_title = image_metadata['label']
 
@@ -92,7 +96,7 @@ else
       let newDiv = document.createElement('div');
       newDiv.setAttribute("id", i+1);
 
-      newDiv.setAttribute("drs_id", page_ids[i])
+      newDiv.setAttribute("drs_id", page_ids[i]);
       textZone.appendChild(newDiv);
     }
   }
