@@ -3,7 +3,6 @@
     <a role="button" class="facet__title" data-toggle="collapse" data-parent="#accordion" href="#<%= facet_field_id(facet_field) %>" aria-expanded="true" aria-controls="#<%= facet_field_id(facet_field) %>">
       <%= facet_field_label(facet_field.key) %>
       <span class="fa fa-caret-down facet-expand toggle expand_caret"></span>
-      <span class="fa fa-caret-up facet-collapse toggle expand_caret"></span>
     </a>
     <div id="<%= facet_field_id(facet_field) %>" class="panel-collapse collapse in content <%= 'active' if facet_field_in_params?(facet_field.key) %>" role="tabpanel" aria-labelledby="<%= facet_field.key %>">
       <%= yield %>
