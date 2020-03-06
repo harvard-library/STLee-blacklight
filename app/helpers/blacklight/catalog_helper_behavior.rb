@@ -209,7 +209,6 @@ module Blacklight::CatalogHelperBehavior
       send(blacklight_config.view_config(document_index_view_type).thumbnail_method, document, image_options)
     elsif blacklight_config.view_config(document_index_view_type).thumbnail_field
       url = thumbnail_url(document)
-
       image_tag_wout_alt url, image_options if url.present?
     end
 
@@ -223,6 +222,18 @@ module Blacklight::CatalogHelperBehavior
       else
         link_to_document document, value, url_options
       end
+    else
+      # Harvard customization render placeholder icon if
+      # no thumbnail for document
+      placeholder_icon = "icon-nothumbnail.svg" 
+      if document[:digital_format].downcase.strip == "audio"
+        placeholder_icon = "icon-audio-placeholder.svg" 
+      elsif document[:digital_format].downcase.strip == "video" 
+        placeholder_icon = "icon-video-placeholder.svg" 
+      end
+    
+      img_tag = '<img src="/assets/icons/' + placeholder_icon + '" class="placeholder" alt="No thumbnail available" />'
+      link_to_document document, img_tag, url_options
     end
   end
 

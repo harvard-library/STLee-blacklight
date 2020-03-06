@@ -42,9 +42,12 @@
                 min-height: 100px;
                 padding: 20px 0;
 
-
                 img {
                     max-width: 90%;
+
+                    &.placeholder {
+                        max-width: 60%;
+                    }
                 }
             }
 
@@ -99,6 +102,11 @@
             }
         }
     }
+
+    .thumbnail a > img.placeholder {
+        min-width: 1px;
+        max-width: 50%;
+    }
 }
 
 @media (min-width: 768px) {
@@ -118,8 +126,19 @@
     min-height: 100px;
 }
 
-.view-type-masonry .fa-th-list {
-    transform: rotate(90deg);
+.view-type-masonry {
+    .masonry-icon {
+        display: block;
+        background: url(/assets/icons/icon-masonry.svg);
+        height: 15px;
+        width: 14px;
+    }
+
+    &.active {
+        .masonry-icon {
+            background: url(/assets/icons/icon-masonry-white.svg);
+        }
+    }
 }
 
 .masonry.document .caption {
