@@ -18,7 +18,7 @@ class SolrDocument
 	    if result[:identifier].nil?
         return
       end
-      puts 'ID=' + result[:identifier] 
+      puts 'ID=' + result[:identifier]
       result[:title] = title_from_doc doc, true
 
       #extended title is used for item details page
@@ -69,9 +69,14 @@ class SolrDocument
     path.on(doc).first
   end
 
+  def identifier_source_from_doc doc
+    path = JsonPath.new("$.recordInfo.recordIdentifier['@source']")
+    path.on(doc).first
+  end
+
   def title_from_doc doc, useAltTitle
     title = ''
-        
+    
     nodes_from_path(doc, '$.titleInfo').each do |x|
       node_to_array(x).each do |y|
         unless y['@type']
@@ -81,6 +86,11 @@ class SolrDocument
           title += title_from_node y
         end
       end
+    end
+                    
+	  relatedTitle = related_title_from_doc doc
+    if relatedTitle != ''
+      title = relatedTitle + title
     end
 
     #some titles need to be prefixed with a series or collection title 
@@ -132,12 +142,6 @@ class SolrDocument
 
   #extended title includes related title and alternative titles
   def extended_title_from_doc doc, title
-
-	  relatedTitle = related_title_from_doc doc
-    if relatedTitle != ''
-      title += relatedTitle
-    end
-
     alternativeTitle = alternative_title_from_doc doc
     if alternativeTitle != ''
       title += '<br/><br/>' + alternativeTitle
@@ -154,14 +158,20 @@ class SolrDocument
 
   def related_title_from_doc doc
 	  relatedTitle = ''
+
+    source = identifier_source_from_doc(doc)
+    if source != 'MH:VIA'
+      return relatedTitle
+    end 
+
     node_to_array(doc[:relatedItem]).each do |x|
 	  	if x['@type'] == 'constituent' && x[:titleInfo] 
 			  if x[:titleInfo].kind_of?(Array)
 				  x[:titleInfo].each do |z|
-					  relatedTitle += ". " + title_from_node(z)
+					  relatedTitle += title_from_node(z) + ". "
 				  end
 			  else
-				  relatedTitle += ". " + title_from_node(x[:titleInfo])
+				  relatedTitle += title_from_node(x[:titleInfo]) + ". "
 			  end
 		  end
 	  end
