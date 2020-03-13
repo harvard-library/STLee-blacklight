@@ -226,9 +226,9 @@ module Blacklight::CatalogHelperBehavior
       # Harvard customization render placeholder icon if
       # no thumbnail for document
       placeholder_icon = "icon-nothumbnail.svg" 
-      if document[:digital_format].downcase.strip == "audio"
+      if document[:digital_format].downcase.include? "audio"
         placeholder_icon = "icon-audio-placeholder.svg" 
-      elsif document[:digital_format].downcase.strip == "video" 
+      elsif document[:digital_format].downcase.include? "video" 
         placeholder_icon = "icon-video-placeholder.svg" 
       end
     
