@@ -21,26 +21,6 @@
 
 $(document).on('turbolinks:load', function() {
 
-    setFacetAccordionState($('#facets .accordion-navigation.active').length > 0);
-
-    $('.toggle-all-facets').click(function () {
-        if ($(this).attr('aria-expanded') == 'true') {
-            $('#facets .accordion-navigation.active > a').trigger('click');
-        } else {
-            $('#facets .accordion-navigation:not(.active) > a').trigger('click');
-        }
-        return false;
-    });
-
-    function setFacetAccordionState(expanded) {
-        if (expanded) {
-            $(".toggle-all-facets").attr('aria-expanded', 'true');
-        }
-        else {
-            $(".toggle-all-facets").attr('aria-expanded', 'false');
-        }
-    }
-
     $(".view-mode__list").click(function() {
         $('#documents').toggleClass('list-mode', true);
         $(this).toggleClass('active', true);

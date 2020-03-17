@@ -2,6 +2,45 @@
 @import "util";
 @import "icons";
 
+
+
+#skip-link-for-raw-text{
+  background-color: $black;
+  color: $white;
+  font-family: $font-family-sans-serif;
+}
+
+.skip {
+  position: absolute;
+  top: -1000px;
+  left: -1000px;
+  height: 1px;
+  width: 1px;
+  overflow: hidden;
+}
+
+a.skip:active,
+a.skip:focus,
+a.skip:hover {
+  outline-width: 0;
+  display: inline-block;
+  left: 50%;
+  transform: translateX(-50%);
+  top: 0;
+  margin-top: 15px;
+  display: inline-block;
+  width: auto;
+  height: 40px;
+  line-height: 40px;
+  padding-left:10px;
+  padding-right:10px;
+  background-color: $black;
+  color: $white;
+  font-family: $font-family-mirador-ui;
+  font-size: 20px;
+  overflow: visible;
+}
+
 .modal-dialog {
   width: 95%;
   height: 95%;
@@ -32,8 +71,14 @@
   height: 95%;
 }
 
+#no-dl-button{
+  display: none;
+  color: $jet;
+  font-family: $font-family-sans-serif;
+}
+
 #previous-next {
-  margin-bottom: 20px;  
+  margin-bottom: 20px;
   font-family: $font-family-sans-serif;
 
   a {
@@ -50,7 +95,7 @@
     }
 
   .page-header-page-links-column {
-    
+
     .page_links {
       float: right;
     }
@@ -233,7 +278,7 @@ dl.row {
     }
   }
 
-  .btn-group.open { 
+  .btn-group.open {
 
     .caret {
       transform: scaleY(-1);
@@ -369,8 +414,17 @@ dl.row {
     }
 
   .permalink {
-      clear: both;
-      padding: 20px 0 40px;
+    clear: both;
+    padding: 20px 0 0;
+  }
+
+  .fulltext {
+    clear: both;
+    padding: 20px 0 40px;
+
+    span.fa {
+      padding: 0 8px 0 1px;
+    }
   }
 
   .dl-iiif img {
@@ -386,6 +440,7 @@ dl.row {
   p {
     padding: 20px 0 30px;
   }
+
 }
 
 @media (max-width: 992px) {
@@ -416,7 +471,7 @@ dl.row {
     margin-right: -15px;
   }
 
-  #tools dl {    
+  #tools dl {
     width: 100%;
   }
 }

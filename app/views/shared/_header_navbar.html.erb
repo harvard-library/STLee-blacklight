@@ -2,8 +2,8 @@
   <div class="hl__topHeader__left">
     <ul class="hl__topHeaderNav">
       <li class="hl__topHeaderTitle__harvard">
-        <a class="hl__topHeader__link" href="https://library.harvard.edu/digital-collections">
-          Harvard <span class="hl__topHeaderTitle__collections hl__topHeader__link">Digital Collections</span>
+        <a class="hl__topHeader__link" href="https://digitalcollections.library.harvard.edu/">
+          Digital <span class="hl__topHeaderTitle__collections hl__topHeader__link">Collections</span>
         </a>
       </li>
     </ul>
@@ -15,21 +15,24 @@
       </div>
     </a>
   </div>
-  <div class="navbar__wrapper">
-    <%if user_signed_in? %>
-      <div class="navbar-header">
-        <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#utility-links" aria-expanded="false">
-          <span class="sr-only">Toggle navigation</span>
-          <span class="fa fa-bars"></span>
-        </button>
-      </div>
-      <div class="collapse navbar-collapse" id="utility-links">
-        <%= render :partial=>'/user_util_links' %>
-      </div>
-    <%end%>  
-  </div>
-  <div class="searchbar__wrapper">
-    <%= render_search_bar  %>
-  </div>
+
+  <%if controller_name != 'fulltexts'%>
+    <div class="navbar__wrapper">
+      <%if user_signed_in? %>
+        <div class="navbar-header">
+          <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#utility-links" aria-expanded="false">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="fa fa-bars"></span>
+          </button>
+        </div>
+        <div class="collapse navbar-collapse" id="utility-links">
+          <%= render :partial=>'/user_util_links' %>
+        </div>
+      <%end%>
+    </div>
+    <div class="searchbar__wrapper">
+      <%= render_search_bar  %>
+    </div>
+  <%end%>
 </header>
 

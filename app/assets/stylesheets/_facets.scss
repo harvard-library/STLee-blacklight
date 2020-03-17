@@ -168,10 +168,6 @@ a.facet__title {
 
         }
 
-        &.facet-collapse {
-            display: none;
-        }
-
         &.fa-rotate-180 {
             -webkit-transform: scaleY(-1);
             transform: scaleY(-1) rotate(180deg);
@@ -191,17 +187,6 @@ a.facet__title {
             padding: 25px 0;
             margin: 0 25px;
 
-            &.active {
-                .facet__title {
-                    span.facet-collapse {
-                        display: inline-block;
-                    }
-
-                    span.facet-expand {
-                        display: none;
-                    }
-                }
-            }
 
             & > a {
                 font-family: $font-family-sans-serif;

@@ -1,5 +1,3 @@
 <div class="document-thumbnail clearfix">
-  <%- if has_thumbnail?(document) && tn = render_thumbnail_tag(document, {}, :counter => document_counter_with_offset(document_counter)) %>
-  <%= tn %>
-  <%- end %>
+  <%=render_thumbnail_tag(document, {}, :counter => document_counter_with_offset(document_counter)) %>
 </div>
