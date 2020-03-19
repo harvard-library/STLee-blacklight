@@ -244,6 +244,18 @@ module Blacklight::FacetsHelperBehavior
     end
   end
 
+  
+  def get_resource_type_translation *args
+    puts args.inspect
+    translation_label = args[0].to_s().gsub(' ', '_').gsub(',', '_').gsub('-', '_').gsub('/', '_').gsub('__', '_')
+    puts translation_label
+    translation = t('blacklight.search.facets.values.' + translation_label)
+    if translation == ''
+      translation = args[0]
+    end
+    translation
+  end
+
   def facet_field_id facet_field
     "facet-#{facet_field.key.parameterize}"
   end
