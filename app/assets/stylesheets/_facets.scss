@@ -317,10 +317,14 @@ form.range_limit {
     font-family: $font-family-sans-serif;
     margin: 0 auto;
     overflow: hidden;
-    width: 600px;
+    width: 100%;
 
-    @media(max-width: 320px) {
-        width: 300px;
+    @media(min-width: 400px) {
+        width: 90%;
+    }
+
+    @media(min-width: 700px) {
+        width: 600px;
     }
 }
 

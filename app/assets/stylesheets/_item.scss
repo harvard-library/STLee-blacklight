@@ -42,8 +42,14 @@ a.skip:hover {
 }
 
 .modal-dialog {
-  width: 95%;
-  height: 95%;
+    width: 95%;
+    height: 95%;
+    max-height: 900px;
+    margin: 5px 0;
+
+    @media(min-width: 700px) {
+        margin: 10px 0;
+    }
 }
 
 .modal-title {
@@ -56,6 +62,7 @@ a.skip:hover {
 
 .modal-content {
   height:100%;
+  overflow-y: auto;
 }
 
 .modal-header, .no-border {
@@ -63,7 +70,7 @@ a.skip:hover {
 }
 
 .modal-body {
-  height: 95%;
+  height: auto;
 }
 
 #embedded-viewer-tour-presentation {
