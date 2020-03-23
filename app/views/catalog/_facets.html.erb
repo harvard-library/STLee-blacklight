@@ -1,19 +1,15 @@
 <% # main container for facets/limits menu -%>
 <% if has_facet_values?  %>
-    <div id="facets" class="facets__container">
-
-      <h2 class='facets__heading'>
-        <%= t('blacklight.search.facets.title') %>
-      </h2>
-	  <%=link_to 'Clear All', start_over_path, :class => "facets__clearall", :id=>"startOverLink" %>
-	  <div class="toggle-wrapper">
-		<button class="toggle-all-facets" type="button"><span class="expand-text">Expand All <span class="fa fa-caret-down"></span></span><span class="collapse-text">Collapse All <span class="fa fa-caret-up"></span></span></button>
+    <h2 class='facets__heading'>
+      <%= t('blacklight.search.facets.title') %>
+    </h2>
+    <div class="toggle-wrapper">
+		  <button class="toggle-all-facets" type="button"><span class="expand-text">Expand All <span class="fa fa-caret-down"></span></span><span class="collapse-text">Collapse All <span class="fa fa-caret-up"></span></span></button>
 	  </div>
-	  
+    <div id="facets" class="facets__container">	  
       <div id="facet-panel-collapse" class="panel-group">
         <%= render_facet_partials %>
       </div>
-
     </div>
 <% end %>
 

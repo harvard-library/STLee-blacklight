@@ -11,7 +11,7 @@ en:
           label: 'search for'
           placeholder: 'Search over 6 million digitized items'
       facets:
-        title: 'Filters'
+        title: 'Limit Your Search'
         more_html: 'More <span class="sr-only">%{field_name}</span> <span class="fa fa-angle-right"></span>'
         values:
           cartographic: 'Maps'
@@ -22,10 +22,12 @@ en:
           sound_recording_nonmusical: 'Audio - non-music'
           still_image: 'Image'
           three_dimensional_object: '3D Object'
+      filters:
+        search_term: 'Search term'
       pagination_info:
         no_items_found: 'No %{entry_name} found'
         single_item_found: '<strong>1</strong> %{entry_name} found'
         pages:
-          one: 'Showing %{start_num} to %{end_num} of %{total_num} results'
-          other: 'Showing %{start_num} to %{end_num} of %{total_num} results'
+          one: 'Showing <strong>%{start_num}</strong> to <strong>%{end_num}</strong> of <strong>%{total_num}</strong> results'
+          other: 'Showing <strong>%{start_num}</strong> to <strong>%{end_num}</strong> of <strong>%{total_num}</strong> results'
     back_to_search: '« Back to Search Results'

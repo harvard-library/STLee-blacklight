@@ -1,17 +1,31 @@
 <div class="row">
-  <%= form_tag search_action_url, method: :get, class: 'search-query-form clearfix navbar-form', role: 'search' do %>
+  <%= form_tag search_action_url, method: :get, class: 'search-query-form clearfix navbar-form container', role: 'search' do %>
     <%= render_hash_as_hidden_fields(search_state.params_for_search.except(:q, :search_field, :qt, :page, :utf8)) %>
     <%= hidden_field_tag :search_field, search_fields.first.last %>
     <h1 class="homepage-title">
-      <span class="homepage-title-small">Harvard</span><br>
-      <span class="homepage-title-large">Digital Collections</span>
+      <span class="homepage-title-small">Digital</span><br>
+      <span class="homepage-title-large">Collections</span>
     </h1>
+    
     <div class="search-field-input-wrapper">
-      <label for="q" class="sr-only"><%= t('blacklight.search.form.search.label') %></label>
+      <label for="q" class="sr-only">
+        <%= t('blacklight.search.form.search.label') %>
+      </label>
       <%= text_field_tag :q, params[:q], placeholder: t('blacklight.search.form.search.placeholder'), class: "search_q q form-control searchbar__text", id: "q", autofocus: should_autofocus_on_search_box?, data: { autocomplete_enabled: autocomplete_enabled?, autocomplete_path: blacklight.suggest_index_path }  %>
-    </div>
-    <div class="advanced-search-wrapper">
-      <button type="submit" class="search-btn sr-only" id="search"></button>
+      <button type="submit" class="search-btn" id="search">
+        <span class="fa fa-search" aria-hidden="true"></span>
+        <span class="sr-only">
+          <%= t('blacklight.search.form.submit') %>
+        </span>
+      </button>
+    </div>      
+    <div class="search-constraints">
+      <% if query_has_constraints? %>
+        <%= render_constraints(params) %>
+        <div class="facets__clearall">
+          <%=link_to 'Clear All', start_over_path, :class => "", :id=>"startOverLink" %>
+        </div>
+      <% end %>
     </div>
     <div class="home-photo-credit">
       <div class="photo-credit">

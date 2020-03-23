@@ -21,6 +21,18 @@
   &:before { content: $fa-icon; }
 }
 
+
+@mixin remove-icon() {
+  color: $white;
+  background: #6C6C6C;
+  width: 16px;
+  height: 16px;
+  text-align: center;
+  font-size: 10px;
+  line-height: 16px;
+  border-radius: 50%;
+}
+
 dl.audio {
   background-image: image-url('icons/Audio.svg')
 }

@@ -41,21 +41,23 @@
   @include fa-icon-content($fa-var-th);
 }
 
-span.constraint:nth-child(2) {
-  margin-left: 4px;
-}
-
 .constraint.query {
-  margin-left: 5px
+  margin-right: 5px
+  
 }
 
-.constraint .btn-sm {
-  border-style: dashed
-}
 
 .appliedFilter.constraint {
-  padding-bottom: 3px;
-  margin-right: 4px;
+  padding-bottom: 0px;
+  margin: 0 5px 4px 0;
+  border: 1px solid $border-gray;
+  border-radius: 4px;
+  background: $subtle-gray;
+
+  .btn-sm.btn-default {
+    border: none;
+    background: transparent;
+  }
 
   a.dropdown-toggle {
     -webkit-transition: all .28s ease-in;
@@ -68,6 +70,10 @@ span.constraint:nth-child(2) {
       color: $white;
       cursor: pointer;
     }
+
+    .fa-times {
+      @include remove-icon();
+    }
   }
 
   .btn-default:hover {
@@ -76,14 +82,14 @@ span.constraint:nth-child(2) {
   }
 }
 
-.constraint.filter, 
+.constraint.filter,
 .constraint.appliedFilter {
   white-space: nowrap;
-  font-size: rem-calc(14);
+  .btn-sm { 
+    font-size: 14px; 
+  }
 
   .filterName {
-    font-size: 12px;
-    font-family: $font-family-sans-serif;
 
     &:after {
       content: ": ";
@@ -164,8 +170,12 @@ span.constraint:nth-child(2) {
 }
 
 .row.search-header {
-    font-size: 14px;
-    font-family: $font-family-sans-serif-light;
+  font-size: 14px;
+  font-family: $font-family-sans-serif-light;
+
+  .page-entries {
+    font-size: 16px;
+  }
 }
 
 .view-type {
