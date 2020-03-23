@@ -150,7 +150,7 @@ module Blacklight::FacetsHelperBehavior
       content_tag(:span, facet_display_value(facet_field, item), class: "selected") +
       # remove link
       link_to(remove_href, class: "remove") do
-        content_tag(:span, '', class: "fa fa-check") +
+        content_tag(:span, '', class: "fa fa-times") +
         content_tag(:span, '[remove]', class: 'sr-only')
       end
     end + render_facet_count(item.hits, :classes => ["selected"])
@@ -242,6 +242,18 @@ module Blacklight::FacetsHelperBehavior
     else
       value
     end
+  end
+
+  
+  def get_resource_type_translation *args
+    puts args.inspect
+    translation_label = args[0].to_s().gsub(' ', '_').gsub(',', '_').gsub('-', '_').gsub('/', '_').gsub('__', '_')
+    puts translation_label
+    translation = t('blacklight.search.facets.values.' + translation_label)
+    if translation == ''
+      translation = args[0]
+    end
+    translation
   end
 
   def facet_field_id facet_field

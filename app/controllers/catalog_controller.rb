@@ -74,9 +74,10 @@ class CatalogController < ApplicationController
 
     # Facets
     config.add_facet_field 'originDate', label: 'Date Range', range: true, maxlength: 4
-    config.add_facet_field 'digitalFormat', label: 'Digital Format', single: true, limit: 10
+    config.add_facet_field 'resourceType', label: 'Type',  single: true, limit: 10, :helper_method => 'get_resource_type_translation'
     config.add_facet_field 'language', label: 'Languages',  single: true, limit: 10
     config.add_facet_field 'repository', label: 'Repository',  single: true, limit: 10
+    
     
     # Have BL send all facet field names to Solr, which has been the default
     # previously. Simply remove these lines if you'd rather use Solr request

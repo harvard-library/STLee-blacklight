@@ -2,13 +2,6 @@
 <div class="row search-header">
   <div class="col-lg-8 col-sm-6">
     <%= render :partial => "paginate_compact", :object => @response if show_pagination? %>
-
-    <% if query_has_constraints? %>
-
-        for <%= render_constraints(params) %>
-
-    <% end %>
-
   </div>
   <div class="col-lg-4 col-sm-6">
     <div id="sortAndPerPage" class="clearfix">

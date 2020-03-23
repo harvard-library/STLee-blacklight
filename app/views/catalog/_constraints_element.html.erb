@@ -5,6 +5,9 @@
 #   :remove => url for a remove constraint link
 #   :classes => array of classes to add to container span
 options ||= {}
+if label.blank?
+  label = t('blacklight.search.filters.search_term')
+end
 %>
 
 <span class="btn-group appliedFilter constraint <%= options[:classes].join(" ") if options[:classes] %>">

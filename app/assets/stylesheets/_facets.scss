@@ -6,12 +6,12 @@
 }
 
 h2.facets__heading {
-  color: $white;
+  color: $dark-gray;
   font-family: $font-family-sans-serif;
   font-weight: 700;
   font-size: 20px;
   line-height: 30px;
-  padding: 35px 0 5px 25px;
+  padding: 0px 0 20px 0px;
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 1.5px;
@@ -31,7 +31,7 @@ ul.facet-values {
 }
 
 ul.facet-values li {
-  margin-bottom: 6px;
+  margin-bottom: 0px;
   display: block;
   &:last-child {
     margin-bottom: 0;
@@ -41,37 +41,25 @@ ul.facet-values li {
 .facet_select,
 .selected,
 .facet-count {
-  font-size: rem-calc(14);
+  font-size: 16px;
   color: $jet;
 }
 
 .facet-label {
     .facet_select, .selected {
-        display: block;
-        padding: 0 0 0 55px;
+        display: inline-block;
+        padding: 0 0 0 0px;
         max-width: 90%;
         position: relative;
-
-        &:before {
-            display: block;
-            content: ' ';
-            position: absolute;
-            left: 18px;
-            top: 0;
-            background: white;
-            width: 20px;
-            height: 20px;
-            border-radius: 3px;
-        }
     }
 }
 .facets__container a.remove {
     width: 20px;
-    height: 20px;
-    display: block;
-    position: absolute;
-    left: 21px;
-    top: 12px;
+    height: 16px;
+    display: inline-block;
+    border-bottom: 0;
+    margin-left: 5px;
+    position: relative;
 }
 
 .glyphicon-remove {
@@ -91,58 +79,59 @@ ul.facet-values li {
 
 .toggle-wrapper {
     overflow: hidden;
-    border-bottom: 1px solid #444;
 }
 
 button.toggle-all-facets {
-    font-family: $font-family-sans-serif;
-    font-size: rem-calc(12);
-    border: none;
-    border-radius: 4px 4px 0 0;
-    color: white;
-    float: right;
-    padding: 6px 20px 6px 10px;
-    background: #444;
-    float: right;
-    margin: 0 20px 0 0;
-    position: relative;
-    letter-spacing: 0.5px;
+  font-family: $font-family-sans-serif;
+  font-size: 13px;
+  font-weight: 400;
+  border: none;
+  border-radius: 4px 4px 0 0;
+  color: $regular-plain-text-color;
+  float: right;
+  padding: 6px 40px 6px 20px;
+  background: $search-bg-gray;
+  float: right;
+  margin: 0 0px 0 0;
+  position: relative;
+  letter-spacing: 0.5px;
 
-    &:hover {
-        background: #444;
+  &:hover {
+    background: $border-gray;
+  }
+
+  > span {
+    min-width: 80px;
+
+    span {
+      &:before {
+        position: absolute;
+        right: 24px;
+        color: $red;
+        top: 8px;
+        font-size: 16px;
+      }
     }
 
-    > span {
-        min-width: 80px;
+  }
 
-        span {
-            &:before {
-                position: absolute;
-                right: 6px;
-                color: $red;
-                top: 8px;
-                font-size: rem-calc(16);
-            }
-        }
-    }
+  .expand-text {
+    display: inline-block;
+    font-weight: 300;
+  }
 
-    .expand-text {
-        display: inline-block;
-        font-weight: 300;
-    }
+  .collapse-text {
+    display: none;
+    font-weight: 300;
+  }
 
-    .collapse-text {
-        display: none;
-        font-weight: 300;
-    }
+  &[aria-expanded=true] .collapse-text {
+    display: inline-block;
+  }
 
-    &[aria-expanded=true] .collapse-text {
-        display: inline-block;
-    }
-
-    &[aria-expanded=true] .expand-text {
-        display: none;
-    }
+  &[aria-expanded=true] .expand-text {
+    display: none;
+  }
 }
 
 
@@ -153,7 +142,7 @@ a.facet__title {
 
     span.toggle {
         color: $red;
-        font-size: rem-calc(20);
+        font-size: 16px;
         position: relative;
         top: 2px;
         float: right;
@@ -176,137 +165,114 @@ a.facet__title {
 }
 
 .facets__container {
-    background-color: $dark-gray;
-    padding-bottom: 10px;
+  background-color: $search-bg-gray;
+  padding-bottom: 10px;
 
-    .accordion, dl.accordion {
+  .accordion, dl.accordion {
+    font-family: $font-family-sans-serif;
+
+    .accordion-navigation {
+      border-bottom: 1px solid $border-gray;
+      padding: 25px 0;
+      margin: 0 25px;
+
+
+      & > a {
         font-family: $font-family-sans-serif;
+        background: transparent;
+        color: $regular-plain-text-color;
+        text-transform: uppercase;
+        font-size: rem-calc(14);
+        letter-spacing: 2px;
+        padding: 25px 0 25px 0;
+      }
 
-        .accordion-navigation {
-            border-bottom: 1px solid #444;
-            padding: 25px 0;
-            margin: 0 25px;
+      & > .content {
+        padding: 25px 0 0 0;
+        background: transparent;
 
+        li {
+          padding: 6px 35px 6px 0px;
+          position: relative;
+          border-radius: 5px;
+          -webkit-transition: background 0.4s ease;
+          transition: background 0.4s ease;
 
-            & > a {
-                font-family: $font-family-sans-serif;
-                background: transparent;
-                color: #fff;
-                text-transform: uppercase;
-                font-size: rem-calc(14);
-                letter-spacing: 2px;
-                padding: 25px 0 25px 0;
+          .facet_select {
+            color: $jet;
+            text-decoration: none;
+            border-bottom: 2px solid transparent;
+
+            &:hover {
+              text-decoration: none;
+              border-bottom-color: #979797;
             }
+          }
 
-            & > .content.active {
-                padding: 25px 0 0 0;
-                background: transparent;
+          .facet-count {
+            color: #666;
+            position: absolute;
+            right: 18px;
+            top: 6px;
+            text-align: right;
+            width: auto !important;
+          }
 
-                li {
-                    background: $light-gray;
-                    padding: 12px 35px 12px 0px;
-                    position: relative;
-                    border-radius: 5px;
+          &.more_facets_link {
+            background: transparent;
+            padding-right: 0;
 
-                    a {
-                        color: $jet;
-                        text-decoration: none;
-                    }
-
-                    .facet-count {
-                        color: #666;
-                        position: absolute;
-                        right: 18px;
-                        top: 11px;
-                        text-align: right;
-                        width: auto !important;
-                    }
-
-                    &.more_facets_link {
-                        background: transparent;
-                        padding-right: 0;
-                        a.more_facets_link {
-                            color: $light-blue;
-                            float: right;
-                        }
-                    }
-                }
+            a.more_facets_link {
+              color: $breakthrough-blue;
+              float: right;
             }
-
-            & > .content {
-                padding: 25px 0 0 0;
-                background: transparent;
-
-                li {
-                    background: $light-gray;
-                    padding: 12px 35px 12px 0px;
-                    position: relative;
-                    border-radius: 5px;
-                    -webkit-transition: background 0.4s ease;
-                    transition: background 0.4s ease;
-
-                    a {
-                        color: $jet;
-                        text-decoration: none;
-                    }
-
-                    .facet-count {
-                        color: #666;
-                        position: absolute;
-                        right: 18px;
-                        top: 11px;
-                        text-align: right;
-                        width: auto !important;
-                    }
-
-                    &:hover {
-                        background-color: $silver;
-                    }
-
-                    &.more_facets_link {
-                        background: transparent;
-                        padding-right: 0;
-                        a.more_facets_link {
-                            color: $light-blue;
-                            float: right;
-                        }
-                    }
-                }
-            }
+          }
         }
-
-        &:last-child {
-            .accordion-navigation {
-                &:last-child {
-                    border-bottom: none;
-                }
-            }
-        }
+      }
     }
+
+    &:last-child {
+      .accordion-navigation {
+        border-bottom: 0;
+      }
+    }
+  }
 }
 
 form.range_limit {
-    .error {
-        color: $light-blue;
-        display: block;
-        font-style: italic;
-        line-height: 1.5;
-        padding-top: 20px;
-        -webkit-animation-duration: fadeIn 0.8s;
-        animation-duration: fadeIn 0.8s;
-        -webkit-animation-fill-mode: both;
-        animation-fill-mode: both;
+  color: $regular-plain-text-color;
+
+  .error {
+    color: $light-blue;
+    display: block;
+    font-style: italic;
+    line-height: 1.5;
+    padding-top: 20px;
+    -webkit-animation-duration: fadeIn 0.8s;
+    animation-duration: fadeIn 0.8s;
+    -webkit-animation-fill-mode: both;
+    animation-fill-mode: both;
+  }
+
+  @-webkit-keyframes fadeIn {
+    0% {
+      opacity: 0;
     }
 
-    @-webkit-keyframes fadeIn {
-        0% {opacity: 0;}
-        100% {opacity: 1;}
-     }
-     
-     @keyframes fadeIn {
-        0% {opacity: 0;}
-        100% {opacity: 1;}
-     }
+    100% {
+      opacity: 1;
+    }
+  }
+
+  @keyframes fadeIn {
+    0% {
+      opacity: 0;
+    }
+
+    100% {
+      opacity: 1;
+    }
+  }
 }
 
 #ajax-modal {
@@ -317,10 +283,14 @@ form.range_limit {
     font-family: $font-family-sans-serif;
     margin: 0 auto;
     overflow: hidden;
-    width: 600px;
+    width: 100%;
 
-    @media(max-width: 320px) {
-        width: 300px;
+    @media(min-width: 400px) {
+        width: 90%;
+    }
+
+    @media(min-width: 700px) {
+        width: 600px;
     }
 }
 
@@ -328,8 +298,10 @@ form.range_limit {
     background: $breakthrough-blue;
 }
 
-.content.active li a .fa-check {
-    color: $white;
+.content.active li a .fa-times {
+  @include remove-icon();
+  position: absolute;
+  top: 3px;
 }
 
 .reveal-modal {
@@ -421,32 +393,36 @@ form.range_limit {
     }
 }
 
-.limit_content.range_limit {  
+.limit_content.range_limit {
+
+  form {
+    margin: 0 0 10px;
+  }
+
+  input.range_begin, input.range_end {
+    padding: 21px 6px 22px 9px;
+    margin-top: -1px;
+    color: $jet;
+    width: 4.0em;
+  }
+
+  input[type="submit"] {
+    background-color: $medium-gray;
     color: $white;
+  }
 
-    form {
-        margin: 0 0 10px;
-    }
-    input.range_begin, input.range_end {
-        padding: 21px 6px 22px 9px;
-        margin-top: -1px;
-        color: $jet;
-        width: 4.0em;
-    }
-    input[type="submit"] {
-        background-color: #E0E0E0;
-    }
-    input.range_begin {
-        margin-right: 6px;
-    }
-    input.range_end {
-        margin-right: 7px;
-        margin-left: 6px;
-    }
+  input.range_begin {
+    margin-right: 6px;
+  }
 
-    .btn {
-        padding: 6px 9px;
-    }
+  input.range_end {
+    margin-right: 7px;
+    margin-left: 6px;
+  }
+
+  .btn {
+    padding: 6px 9px;
+  }
 }
 
 .btn-default.active, .btn-default.active:hover {
