@@ -10,7 +10,7 @@
 
 @media(max-width: 992px) {
   .search-header.search-header.search-header {
-    padding-top: 30px;    
+    padding-top: 30px;
   }
 }
 
@@ -43,7 +43,7 @@
 
 .constraint.query {
   margin-right: 5px
-  
+
 }
 
 
@@ -66,13 +66,17 @@
     padding-right: 10px;
 
     &:hover {
-      background-color: #d9534f;
+      // background-color: #d9534f;
       color: $white;
       cursor: pointer;
     }
 
     .fa-times {
       @include remove-icon();
+
+      &:hover {
+        background-color: #d9534f;
+      }
     }
   }
 
@@ -85,8 +89,8 @@
 .constraint.filter,
 .constraint.appliedFilter {
   white-space: nowrap;
-  .btn-sm { 
-    font-size: 14px; 
+  .btn-sm {
+    font-size: 14px;
   }
 
   .filterName {
