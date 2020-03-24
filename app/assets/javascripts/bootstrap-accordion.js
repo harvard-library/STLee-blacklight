@@ -2,8 +2,8 @@ $(document).on('turbolinks:load', function () {
   
   var windowWidth = $(window).width();
   if (windowWidth <= 992) { //for iPad & smaller devices
-    $('.panel-collapse').removeClass('in');
-    setToggleCollapsed();
+    $('#accordion .panel-collapse').collapse('hide');
+    $('#accordion .expand_caret').addClass('fa-rotate-180');
   } else {
     $('.toggle-all-facets .expand-text').hide();
     $('.toggle-all-facets .collapse-text').show();
