@@ -66,13 +66,17 @@
     padding-right: 10px;
 
     &:hover {
-      background-color: #d9534f;
+      //background-color: #d9534f;
       color: $white;
       cursor: pointer;
     }
 
     .fa-times {
       @include remove-icon();
+
+      &:hover {
+        background-color: #d9534f;
+      }
     }
   }
 
