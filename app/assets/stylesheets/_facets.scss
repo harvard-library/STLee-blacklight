@@ -368,6 +368,10 @@ form.range_limit {
   @include remove-icon();
   position: absolute;
   top: 3px;
+
+  &:hover {
+    background-color: #d9534f;
+  }
 }
 
 .reveal-modal {
@@ -396,7 +400,7 @@ form.range_limit {
     }
 }
 
-.modal-title {    
+.modal-title {
     font-weight: 700;
     letter-spacing: 1.4px;
     text-transform: uppercase;
@@ -498,7 +502,7 @@ form.range_limit {
     color: $white;
 }
 
-.facet_extended_list { 
+.facet_extended_list {
 
     .facet-label .facet_select {
         display: inline-block;
