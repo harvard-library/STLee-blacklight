@@ -1,8 +1,70 @@
 @import "settings";
 @import "icons";
 
+.facets__rail {
+  position: absolute;
+  left: 0;
+  transform: translateX(-100%);
+  width: 100%;
+  z-index: 3;
+  transition: all 0.7s ease;
+  background: $search-bg-gray;
+
+  &.open {
+    transform: none;
+  }
+
+  .btn-show-facets {
+    height: 300px;
+    width: 40px;
+    position: absolute;
+    right: -40px;
+    top: 0%;
+    background: $search-bg-gray;
+    border: none;
+
+    .btn-show-facets__label {
+      transform: rotate(270deg) translate(0,-130px);
+      font-family: $font-family-sans-serif;
+      text-transform: uppercase;
+      font-size: 18px;
+      font-weight: bold;
+      display: block;
+      width: 300px;
+      height: 40px;
+      text-align: right;
+      padding-right: 40px;
+    }
+
+    .fa {
+      position: absolute;
+      right: 16px;
+      top: 12px;
+      font-size: 14px;
+    }
+  }
+
+  .btn-hide-facets {
+    background: transparent;
+    border: none;
+    position: absolute;
+    right: 10px;
+    top: 6px;
+  }
+
+  @media (min-width: 768px) {
+    position: static;
+    background: transparent;
+    transform: none;
+
+    .btn-show-facets, .btn-hide-facets {
+      display: none;
+    }
+  }
+}
+
 #facets .panel-group {
-    margin-bottom: 0;
+  margin-bottom: 0;
 }
 
 h2.facets__heading {
@@ -11,10 +73,14 @@ h2.facets__heading {
   font-weight: 700;
   font-size: 20px;
   line-height: 30px;
-  padding: 0px 0 20px 0px;
+  padding: 10px 0 20px 25px;
   margin: 0;
   text-transform: uppercase;
   letter-spacing: 1.5px;
+
+  @media (min-width: 768px) {
+    padding: 0px 0 20px 0px;
+  }
 }
 
 .facets__container a {

@@ -1,16 +1,16 @@
 @import "icons";
 @import "settings";
 
-.search-header.search-header.search-header {
+.search-header {
   font-size: rem-calc(18);
   padding-bottom: 30px;
   border-bottom: 1px solid #D4D1D1;
   margin-bottom: 30px;
 }
 
-@media(max-width: 992px) {
-  .search-header.search-header.search-header {
-    padding-top: 30px;    
+@media(max-width: 768px) {
+  .search-header {
+    padding-top: 22px;    
   }
 }
 
@@ -97,6 +97,22 @@
   }
 }
 
+.results-summary {
+  text-align: center;
+
+  @media (min-width: 768px) {
+    text-align: left;
+  }
+}
+
+#sortAndPerPage {
+  display: none;
+
+  @media (min-width: 768px) {
+    display: block;
+  }
+}
+
 #per-page-dropdown {
   border: 1px solid $silver;
   border-radius: 4px;
@@ -109,8 +125,8 @@
     border-radius: 4px 4px 0 0;
 
     .dropdown-menu {
-        opacity: 1;
-      }
+      opacity: 1;
+    }
 
     span.caret {
       transform: scaleY(-1);
