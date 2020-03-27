@@ -60,6 +60,14 @@ $(document).on('turbolinks:load', function() {
         validateRangeLimits($(this).parents('form'));
     });
 
+    $('body').on('click', '.facets__rail .btn-show-facets', function (e) {
+      $('.facets__rail').addClass('open');
+    });
+
+    $('body').on('click', '.facets__rail .btn-hide-facets', function (e) {
+      $('.facets__rail').removeClass('open');
+    });
+
     $('form.range_limit input.form-control').attr('placeholder', 'YYYY');
 
 });
