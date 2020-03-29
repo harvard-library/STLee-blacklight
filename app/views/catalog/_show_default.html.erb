@@ -4,12 +4,20 @@
 <div class="row">
 <%=generate_tour_modal_link document[:delivery_service]%>
   <div class="col-lg-8">
-    <div id="details" class="content active record-details">
+    <div id="details" class="content active record-details ">
       <dl class="row">
-        <% document_show_fields(document).each do |field_name, field| -%>
+        <%
+          field_index = 1
+          document_show_fields(document).each do |field_name, field| -%>
           <% if should_render_show_field? document, field %>
-            <dt class="blacklight-<%= field_name.parameterize %>"><%= render_document_show_field_label document, field: field_name %></dt>
-            <dd class="blacklight-<%= field_name.parameterize %>"><%=raw CGI.unescapeHTML doc_presenter.field_value field_name %></dd>
+            <dt class="blacklight-<%= field_name.parameterize %>">
+              <span class="field-heading"><%= render_document_show_field_label document, field: field_name %></span>
+              <% if field_index > 1 %>
+                <button class="field-toggle" type="button" data-toggle="collapse" data-target="#field-<%= field_name.parameterize %>"><%= field.label %><span class="fa fa-plus" aria-hidden="true"></span></button>
+              <% end -%>
+            </dt>
+            <dd id="field-<%= field_name.parameterize %>" class="blacklight-<%= field_name.parameterize %> <%=field_index > 1 ? "collapse" : ""%>"><%=raw CGI.unescapeHTML doc_presenter.field_value field_name %></dd>
+            <% field_index += 1%>
           <% end -%>
         <% end -%>
       </dl>

@@ -200,10 +200,6 @@ body.blacklight-catalog-show #document h1 {
   }
 }
 
-dl.row {
-  margin-left: 0;
-}
-
 #take-a-tour {
   margin: -40px 0 40px;
 
@@ -453,33 +449,104 @@ dl.row {
 @media (max-width: 992px) {
   #details dl {
     display: block;
+    border-bottom: 1px solid #d8d8d8;
+    padding-bottom: 20px;
+    margin-bottom: 40px;
 
     dt {
+      border-top: 1px solid #d8d8d8;
       border-bottom: none;
       display: block;
       padding-bottom: 5px;
       width: 100%;
+      padding-top: 25px;
+      margin-top: 20px;
+
+      &:first-child {
+        border-top: 0;
+        padding-top: 0px;
+        margin-top: 0px;
+      }
+
+      &:after {
+        display: none;
+      }
+
+      .field-heading {
+        display: none;
+      }
+
+      .field-toggle {
+        border: none;
+        background: transparent;
+        padding: 0 20px 0 0;
+
+        .fa {
+          font-size: 12px;
+          display: inline;
+          position: relative;
+          padding-left: 10px;
+
+          &:before {
+            position: absolute;
+            top: 0;
+          }
+        }
+      }
     }
 
     dd {
+      border-bottom: none;
       display: block;
-      padding-top: 5px;
+      padding: 5px 0;
       width: 100%;
+
+      &.collapse {
+        display: none;
+
+        &.in {
+          display: block;
+        }
+      }
     }
   }
-
+  
   #document .col-lg-4 {
-    padding-right: 0;
     width: 100%;
   }
 
-  #tools {
+  #tools, #feedback {
     margin-left: -15px;
     margin-right: -15px;
+    width: auto;
   }
 
   #tools dl {
     width: 100%;
+  }
+
+}
+
+
+@media (min-width: 993px) {
+  #details dl {
+    &.row {
+      margin-left: 0;
+    }
+
+    dt {
+      .field-toggle {
+        display: none;
+      }
+    }
+
+    dd {
+      &.collapse {
+        display: block;
+        height: auto !important;
+        visibility: visible;
+      }
+    }
   }
 }
 
