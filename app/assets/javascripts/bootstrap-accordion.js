@@ -33,6 +33,12 @@ $(document).on('turbolinks:load', function () {
       setToggleCollapsed();
     }
   });
+  $('#details dd.collapse').on('show.bs.collapse', function () {
+    $(this).prev().find('.field-toggle .fa').removeClass('fa-plus').addClass('fa-minus');
+  });
+  $('#details dd.collapse').on('hide.bs.collapse', function () {
+    $(this).prev().find('.field-toggle .fa').removeClass('fa-minus').addClass('fa-plus');
+  });
 });
 
 function setToggleCollapsed() {
