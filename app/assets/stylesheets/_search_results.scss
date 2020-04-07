@@ -141,7 +141,8 @@
     }
 }
 
-.masonry.document .caption {
+.masonry.document {
+  .caption {
     line-height: 17px;
     background-color: rgba(255, 255, 255, 0.8);
     color: $jet;
@@ -149,11 +150,18 @@
     text-align: left;
 
     a {
-        color: $jet;
-        font-weight: 400;
-        text-decoration: none;
-        text-shadow: none;
+      color: $jet;
+      font-weight: 400;
+      text-decoration: none;
+      text-shadow: none;
     }
+  }
+
+  a:focus {
+    + .caption {
+      display: block;
+    }
+  }
 }
 
 .dl-horizontal dd:before, 
