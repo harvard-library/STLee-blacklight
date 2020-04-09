@@ -34,5 +34,5 @@ en:
         title: '%{document_title} - %{application_name}'
         label: '%{label}'  
         field_show_more: 'More %{field_name}'
-        field_show_less: 'Less %{field_name}'
+        field_show_less: 'Fewer %{field_name}'
     back_to_search: '« Back to Search Results'
