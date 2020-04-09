@@ -13,10 +13,18 @@
             <dt class="blacklight-<%= field_name.parameterize %>">
               <span class="field-heading"><%= render_document_show_field_label document, field: field_name %></span>
               <% if field_index > 1 %>
-                <button class="field-toggle" type="button" data-toggle="collapse" data-target="#field-<%= field_name.parameterize %>"><%= field.label %><span class="fa fa-plus" aria-hidden="true"></span></button>
+                <button class="field-toggle" type="button" data-toggle="collapse" data-target="#field-<%= field_name.parameterize %>"><span class="fa fa-caret-down" aria-hidden="true"></span><%= field.label %></button>
               <% end -%>
             </dt>
-            <dd id="field-<%= field_name.parameterize %>" class="blacklight-<%= field_name.parameterize %> <%=field_index > 1 ? "collapse" : ""%>"><%=raw CGI.unescapeHTML doc_presenter.field_value field_name %></dd>
+            <dd id="field-<%= field_name.parameterize %>" class="blacklight-<%= field_name.parameterize %> <%=field_index > 1 ? "collapse" : ""%>"><%
+                if field_name == "subjects" || field_name == "notes"
+                %><div class="minimize-field"><%
+                end
+              %><%=raw CGI.unescapeHTML doc_presenter.field_value field_name %><%
+                if field_name == "subjects" || field_name == "notes"
+                %></div><button type="button" class="toggle-minimize-field" aria-expanded="false"><span class="more-text"><%=t('blacklight.search.show.field_show_more', :field_name => field_name)%></span><span class="less-text"><%=t('blacklight.search.show.field_show_less', :field_name => field_name)%></span><span class="fa fa-caret-down"></span></button><%
+                end
+              %></dd>
             <% field_index += 1%>
           <% end -%>
         <% end -%>

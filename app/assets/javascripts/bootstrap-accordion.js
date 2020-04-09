@@ -34,10 +34,10 @@ $(document).on('turbolinks:load', function () {
     }
   });
   $('#details dd.collapse').on('show.bs.collapse', function () {
-    $(this).prev().find('.field-toggle .fa').removeClass('fa-plus').addClass('fa-minus');
+    $(this).prev().find('.field-toggle .fa').removeClass('fa-caret-down').addClass('fa-caret-up');
   });
   $('#details dd.collapse').on('hide.bs.collapse', function () {
-    $(this).prev().find('.field-toggle .fa').removeClass('fa-minus').addClass('fa-plus');
+    $(this).prev().find('.field-toggle .fa').removeClass('fa-caret-up').addClass('fa-caret-down');
   });
 });
 
