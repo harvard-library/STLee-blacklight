@@ -165,17 +165,6 @@ body.blacklight-catalog-show #document h1 {
       position: relative;
       text-transform: uppercase;
       width: 240px;
-
-      /* may the developer gods forgive me,
-         but I had no other choice... -ED */
-
-      &:after {
-        content:":";
-        color: $white;
-        position: absolute;
-        transform: translate(-100%, 0);
-        -webkit-text-stroke: 2px $white;
-      }
     }
 
     dd {
@@ -476,20 +465,27 @@ body.blacklight-catalog-show #document h1 {
         display: none;
       }
 
+      &:first-child {
+        .field-heading {
+          display: block;
+        }
+      }
+
       .field-toggle {
         border: none;
         background: transparent;
-        padding: 0 20px 0 0;
+        padding: 0 0px 0 0px;
 
         .fa {
-          font-size: 12px;
+          font-size: 16px;
           display: inline;
           position: relative;
-          padding-left: 10px;
+          padding-left: 20px;
 
           &:before {
             position: absolute;
             top: 0;
+            left: 0;
           }
         }
       }
