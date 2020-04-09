@@ -68,6 +68,18 @@ $(document).on('turbolinks:load', function() {
       $('.facets__rail').removeClass('open');
     });
 
+    $('body').on('click', '.toggle-minimize-field', function (e) {
+      if ($(this).attr('aria-expanded') == 'true') {
+        $(this).prev().removeClass('expanded');
+        $(this).attr('aria-expanded', 'false');
+        $(this).children('.fa').removeClass('fa-caret-up').addClass('fa-caret-down');
+      } else {
+        $(this).prev().addClass('expanded');
+        $(this).attr('aria-expanded', 'true');
+        $(this).children('.fa').removeClass('fa-caret-down').addClass('fa-caret-up');
+      }
+    });
+
     $('form.range_limit input.form-control').attr('placeholder', 'YYYY');
 
 });

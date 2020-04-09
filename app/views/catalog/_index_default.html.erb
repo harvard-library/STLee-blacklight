@@ -9,7 +9,16 @@
   <% index_fields(document).each do |field_name, field| -%>
     <% if should_render_index_field? document, field %>
       <dt><%= field.label %></dt>
-	    <dd class="blacklight-<%= field_name.parameterize %>"><%=raw CGI.unescapeHTML doc_presenter.field_value field_name %></dd>
+	    <dd class="blacklight-<%= field_name.parameterize %>"><%
+        if field_name == "subjects"
+          %><div class="minimize-wrapper"><% 
+        end %>TEST! <%=field_name%>
+      <%=raw CGI.unescapeHTML doc_presenter.field_value field_name %><%
+        if field_name == "subjects"
+          %></div><% 
+        end 
+      %></dd>
+      
     <% end -%>
   <% end -%>
 
