@@ -219,7 +219,7 @@ body.blacklight-catalog-show #document h1 {
   font-size: 15px;
   line-height: 28px;
   margin: 0;
-  padding: 40px 40px 0;
+  padding: 40px;
   display: block;
   width: 100%;
 
@@ -427,15 +427,11 @@ body.blacklight-catalog-show #document h1 {
 
 }
 
-#tools .dl-iiif.dl-more-details.clearfix {
-  padding-bottom: 40px;
-}
-
 #feedback {
   margin-top: 40px;
 
   p {
-    padding: 20px 0 30px;
+    padding: 20px 0 0px;
   }
 
 }
