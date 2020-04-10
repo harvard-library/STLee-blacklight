@@ -113,6 +113,7 @@ input.searchbar__text[type=text] {
       transition: $link-fade;
       &:hover {
         border-bottom: 3px solid rgba(5,121,184,0.3);
+        text-decoration: none;
       }
     }
   }

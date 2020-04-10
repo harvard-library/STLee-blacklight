@@ -562,7 +562,7 @@ body.blacklight-catalog-show #document h1 {
         display: inline-block;
         background: transparent;
         border: none;
-        color: $breakthrough-blue;
+        color: $oil;
         text-transform: uppercase;
         font-family: $font-family-sans-serif;
         font-size: 14px;
@@ -572,6 +572,7 @@ body.blacklight-catalog-show #document h1 {
         letter-spacing: 1px;
 
         .fa {
+          color: $red;
           position: absolute;
           right: 0;
           top: 6px;

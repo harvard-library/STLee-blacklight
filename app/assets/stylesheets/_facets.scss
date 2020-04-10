@@ -160,8 +160,8 @@ button.toggle-all-facets {
   float: right;
   margin: 0 0px 0 0;
   position: relative;
-  -webkit-transition: background 0.2s ease;
-  transition: background 0.2s ease;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
 
   &:hover {
     background: $border-gray;
