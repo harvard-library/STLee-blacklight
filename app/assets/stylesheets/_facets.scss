@@ -160,10 +160,12 @@ button.toggle-all-facets {
   float: right;
   margin: 0 0px 0 0;
   position: relative;
-  letter-spacing: 0.5px;
+  -webkit-transition: all 0.2s ease;
+  transition: all 0.2s ease;
 
   &:hover {
     background: $border-gray;
+    color: $white;
   }
 
   > span {
@@ -251,6 +253,7 @@ a.facet__title {
         font-size: rem-calc(14);
         letter-spacing: 2px;
         padding: 25px 0 25px 0;
+        font-weight: 700;
       }
 
       & > .content {
@@ -258,11 +261,8 @@ a.facet__title {
         background: transparent;
 
         li {
-          padding: 6px 35px 6px 0px;
+          padding: 6px 50px 6px 0px;
           position: relative;
-          border-radius: 5px;
-          -webkit-transition: background 0.4s ease;
-          transition: background 0.4s ease;
 
           .facet_select {
             color: $jet;
@@ -272,13 +272,15 @@ a.facet__title {
             &:hover {
               text-decoration: none;
               border-bottom-color: #979797;
+              -webkit-transition: $link-fade;
+              transition: $link-fade;
             }
           }
 
           .facet-count {
-            color: #666;
+            color: $medium-gray;
             position: absolute;
-            right: 18px;
+            right: 0px;
             top: 6px;
             text-align: right;
             width: auto !important;
@@ -291,6 +293,13 @@ a.facet__title {
             a.more_facets_link {
               color: $breakthrough-blue;
               float: right;
+
+              &:hover {
+                text-decoration: none;
+                border-bottom-color: $breakthrough-blue;
+                -webkit-transition: $link-fade;
+                transition: $link-fade;
+              }
             }
           }
         }
