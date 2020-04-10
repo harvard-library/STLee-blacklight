@@ -122,8 +122,10 @@
   border-radius: 4px;
   cursor: pointer;
   display: inline-block;
-  padding: 3px 10px 4px;
+  padding: 5px 10px 4px;
   width: 121px;
+  height: 29px;
+  line-height: 17px;
 
   &.open {
     border-radius: 4px 4px 0 0;

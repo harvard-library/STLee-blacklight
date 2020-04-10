@@ -219,7 +219,7 @@ body.blacklight-catalog-show #document h1 {
   font-size: 15px;
   line-height: 28px;
   margin: 0;
-  padding: 40px 40px 0;
+  padding: 40px;
   display: block;
   width: 100%;
 
@@ -248,12 +248,12 @@ body.blacklight-catalog-show #document h1 {
     font-size: 14px;
     letter-spacing: 1.5px;
     margin: 0;
-    padding: 40px 0 20px;
+    padding: 30px 0 20px;
     text-transform: uppercase;
   }
 
   dd:last-child {
-    padding-bottom: 40px;
+    padding-bottom: 0px;
   }
 
   a, .checkbox.toggle_bookmark label span {
@@ -293,7 +293,7 @@ body.blacklight-catalog-show #document h1 {
 
     .caret {
       margin-left: 6px;
-      margin-top: -2px;
+      margin-top: -7px;
       -webkit-transition: transform .28s ease-out;
       transition: transform .28s ease-out;
     }
@@ -373,6 +373,7 @@ body.blacklight-catalog-show #document h1 {
 
   .dl-appears-in, .dl-more-details {
     padding-bottom: 0;
+    margin-top: 30px;
 
     dd {
       margin-bottom: 18px;
@@ -407,12 +408,12 @@ body.blacklight-catalog-show #document h1 {
 
   .permalink {
     clear: both;
-    padding: 20px 0 0;
+    padding: 20px 0 0px;
   }
 
   .fulltext {
     clear: both;
-    padding: 20px 0 40px;
+    padding: 20px 0 0px;
 
     span.fa {
       padding: 0 8px 0 1px;
@@ -430,7 +431,7 @@ body.blacklight-catalog-show #document h1 {
   margin-top: 40px;
 
   p {
-    padding: 20px 0 30px;
+    padding: 20px 0 0px;
   }
 
 }
@@ -448,8 +449,8 @@ body.blacklight-catalog-show #document h1 {
       display: block;
       padding-bottom: 5px;
       width: 100%;
-      padding-top: 25px;
-      margin-top: 20px;
+      padding-top: 20px;
+      margin-top: 15px;
 
       &:first-child {
         border-top: 0;
@@ -475,8 +476,11 @@ body.blacklight-catalog-show #document h1 {
         border: none;
         background: transparent;
         padding: 0 0px 0 0px;
+        text-transform: uppercase;
+        font-size: 16px;
 
         .fa {
+          color: $medium-gray;
           font-size: 16px;
           display: inline;
           position: relative;
@@ -495,6 +499,7 @@ body.blacklight-catalog-show #document h1 {
       border-bottom: none;
       display: block;
       padding: 5px 0;
+      margin-left: 20px;
       width: 100%;
 
       &.collapse {
@@ -503,6 +508,11 @@ body.blacklight-catalog-show #document h1 {
         &.in {
           display: block;
         }
+
+      }
+
+      &.blacklight-title_extended {
+        margin-left: 0px;
       }
 
       .toggle-minimize-field {
@@ -562,7 +572,7 @@ body.blacklight-catalog-show #document h1 {
         display: inline-block;
         background: transparent;
         border: none;
-        color: $breakthrough-blue;
+        color: $oil;
         text-transform: uppercase;
         font-family: $font-family-sans-serif;
         font-size: 14px;
@@ -572,6 +582,7 @@ body.blacklight-catalog-show #document h1 {
         letter-spacing: 1px;
 
         .fa {
+          color: $red;
           position: absolute;
           right: 0;
           top: 6px;
