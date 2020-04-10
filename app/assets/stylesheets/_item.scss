@@ -496,7 +496,7 @@ body.blacklight-catalog-show #document h1 {
       border-bottom: none;
       display: block;
       padding: 5px 0;
-      margin-left: 20px
+      margin-left: 20px;
       width: 100%;
 
       &.collapse {
@@ -505,6 +505,7 @@ body.blacklight-catalog-show #document h1 {
         &.in {
           display: block;
         }
+
       }
 
       &.blacklight-title_extended {
