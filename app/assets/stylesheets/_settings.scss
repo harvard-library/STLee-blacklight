@@ -165,6 +165,9 @@ $breakthrough-blue: #0579B8;
 // $shiny-edge-color: rgba($white, .5);
 // $shiny-edge-active-color: rgba($black, .2);
 
+// We use these to set transition animations.
+$link-fade: border 0.28s cubic-bezier(0.28,1.08,1,0.96);
+
 // d. Media Query Ranges
 // - - - - - - - - - - - - - - - - - - - - - - - - -
 

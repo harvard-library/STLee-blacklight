@@ -160,10 +160,12 @@ button.toggle-all-facets {
   float: right;
   margin: 0 0px 0 0;
   position: relative;
-  letter-spacing: 0.5px;
+  -webkit-transition: background 0.2s ease;
+  transition: background 0.2s ease;
 
   &:hover {
     background: $border-gray;
+    color: $white;
   }
 
   > span {
@@ -251,6 +253,7 @@ a.facet__title {
         font-size: rem-calc(14);
         letter-spacing: 2px;
         padding: 25px 0 25px 0;
+        font-weight: 700;
       }
 
       & > .content {
@@ -272,6 +275,8 @@ a.facet__title {
             &:hover {
               text-decoration: none;
               border-bottom-color: #979797;
+              -webkit-transition: $link-fade;
+              transition: $link-fade;
             }
           }
 

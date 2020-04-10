@@ -31,6 +31,8 @@
   font-size: 10px;
   line-height: 16px;
   border-radius: 50%;
+  -webkit-transition: background 0.2s ease;
+  transition: background 0.2s ease;
 }
 
 dl.audio {
