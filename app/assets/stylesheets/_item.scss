@@ -475,6 +475,7 @@ body.blacklight-catalog-show #document h1 {
         border: none;
         background: transparent;
         padding: 0 0px 0 0px;
+        text-transform: uppercase;
 
         .fa {
           font-size: 16px;
@@ -495,6 +496,7 @@ body.blacklight-catalog-show #document h1 {
       border-bottom: none;
       display: block;
       padding: 5px 0;
+      margin-left: 20px
       width: 100%;
 
       &.collapse {
@@ -503,6 +505,10 @@ body.blacklight-catalog-show #document h1 {
         &.in {
           display: block;
         }
+      }
+
+      &.blacklight-title_extended {
+        margin-left: 0px;
       }
 
       .toggle-minimize-field {

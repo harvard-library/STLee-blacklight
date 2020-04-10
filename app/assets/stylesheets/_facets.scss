@@ -261,11 +261,8 @@ a.facet__title {
         background: transparent;
 
         li {
-          padding: 6px 35px 6px 0px;
+          padding: 6px 50px 6px 0px;
           position: relative;
-          border-radius: 5px;
-          -webkit-transition: background 0.4s ease;
-          transition: background 0.4s ease;
 
           .facet_select {
             color: $jet;
@@ -281,9 +278,9 @@ a.facet__title {
           }
 
           .facet-count {
-            color: #666;
+            color: $medium-gray;
             position: absolute;
-            right: 18px;
+            right: 0px;
             top: 6px;
             text-align: right;
             width: auto !important;
@@ -296,6 +293,13 @@ a.facet__title {
             a.more_facets_link {
               color: $breakthrough-blue;
               float: right;
+
+              &:hover {
+                text-decoration: none;
+                border-bottom-color: $breakthrough-blue;
+                -webkit-transition: $link-fade;
+                transition: $link-fade;
+              }
             }
           }
         }
