@@ -74,8 +74,8 @@ class CatalogController < ApplicationController
 
     # Facets
     config.add_facet_field 'originDate', label: 'Date Range', range: true, maxlength: 4
-    config.add_facet_field 'resourceType', label: 'Type',  single: true, limit: 10, :helper_method => 'get_resource_type_translation'
-    config.add_facet_field 'language', label: 'Languages',  single: true, limit: 10
+    config.add_facet_field 'resourceType', label: 'Type',  single: true, limit: 10, :helper_method => 'get_facet_value_translation_for_type'
+    config.add_facet_field 'language', label: 'Languages',  single: true, limit: 10, :helper_method => 'get_facet_value_translation_for_languages'
     config.add_facet_field 'repository', label: 'Repository',  single: true, limit: 10
     
     
