@@ -1,3 +1,21 @@
+6.20.0-lts-4 PP/MC/ED
+-- Updated placeholder and masonry icons
+-- Truncate Subjects metadata after 3 lines
+-- Item thumbnails focus indicator on hover (Accessibility)
+-- Mobile view metadata of all of the sections collapsed on initial load
+-- Mobile view “tools and related links” section appears directly below the view
+-- Updated design for filter rail
+-- Added search button next to search box
+-- Moved filters up to the right of the search box
+-- Moved Clear All next to search box
+-- Removed Digital Format filter
+-- Improve usability of "more" option
+-- Add a "Type" filter with values mapped from LibraryCloud
+-- Fixed dropdown carrot behavior
+-- Fixed filters expand/collapse button
+-- Title field displays the Item title, not the collection title
+-- Product title in site header changed to "DIGITAL Collections"
+
 6.20.0-lts-3 VC/PP
 --Added Raw Text download of documents
 --Known issues for Raw Text here: https://docs.google.com/document/d/11ydElAXWJ0h0dct2UWZdiGAL7qG6zGrfV8_r4qFTjDg/edit?usp=sharing
