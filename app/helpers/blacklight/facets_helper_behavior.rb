@@ -244,14 +244,21 @@ module Blacklight::FacetsHelperBehavior
     end
   end
 
+  def get_facet_value_translation_for_languages *args
+    get_facet_value_translation "languages", args[0]
+  end
+
+  def get_facet_value_translation_for_type *args
+    get_facet_value_translation "type", args[0]
+  end
   
-  def get_resource_type_translation *args
-    puts args.inspect
-    translation_label = args[0].to_s().gsub(' ', '_').gsub(',', '_').gsub('-', '_').gsub('/', '_').gsub('__', '_')
-    puts translation_label
-    translation = t('blacklight.search.facets.values.' + translation_label)
+  def get_facet_value_translation field_name, field_label
+    translation_label = field_label.to_s().downcase().gsub(/[ ,;\-\/]/, '_').gsub(/__/, '_')
+    #puts translation_label
+    translation = t('blacklight.search.facets.facet_values_' + field_name + '.' + translation_label, :default => '')
+    
     if translation == ''
-      translation = args[0]
+      translation = field_label
     end
     translation
   end

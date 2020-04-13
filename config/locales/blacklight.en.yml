@@ -13,15 +13,19 @@ en:
       facets:
         title: 'Limit Your Search'
         more_html: 'More <span class="sr-only">%{field_name}</span> <span class="fa fa-angle-right"></span>'
-        values:
+        facet_values_type:
           cartographic: 'Maps'
           mixed_material: 'Archival material'
           moving_image: 'Video'
+          notated_music: 'Notated music'
           software_multimedia: 'Multimedia'
           sound_recording_musical: 'Audio - music'
           sound_recording_nonmusical: 'Audio - non-music'
           still_image: 'Image'
+          text: 'Text'
           three_dimensional_object: '3D Object'
+        facet_values_languages:
+          no_linguistic_content_not_applicable: 'No language provided'
       filters:
         search_term: 'Search term'
       pagination_info:
