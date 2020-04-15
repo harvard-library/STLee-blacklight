@@ -133,18 +133,18 @@
 }
 
 .view-type-masonry {
-    .masonry-icon {
-        display: block;
-        background: url(/assets/icons/icon-masonry.svg);
-        height: 15px;
-        width: 14px;
-    }
+  .masonry-icon {
+    display: block;
+    background: url(<%= asset_path 'icons/icon-masonry.svg' %>);
+    height: 15px;
+    width: 14px;
+  }
 
-    &.active {
-        .masonry-icon {
-            background: url(/assets/icons/icon-masonry-white.svg);
-        }
+  &.active {
+    .masonry-icon {
+      background: url(icons/icon-masonry-white.svg);
     }
+  }
 }
 
 .masonry.document {
