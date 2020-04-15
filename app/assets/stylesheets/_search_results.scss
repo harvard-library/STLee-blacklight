@@ -135,14 +135,14 @@
 .view-type-masonry {
   .masonry-icon {
     display: block;
-    background: url(<%= asset_path 'icons/icon-masonry.svg' %>);
+    background-image: image-url('icons/icon-masonry.svg');
     height: 15px;
     width: 14px;
   }
 
   &.active {
     .masonry-icon {
-      background: url(icons/icon-masonry-white.svg);
+      background: image-url('icons/icon-masonry-white.svg');
     }
   }
 }
