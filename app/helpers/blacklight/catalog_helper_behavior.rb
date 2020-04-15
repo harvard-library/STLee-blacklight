@@ -232,7 +232,8 @@ module Blacklight::CatalogHelperBehavior
         placeholder_icon = "icon-video-placeholder.svg" 
       end
     
-      img_tag = '<img src="/assets/icons/' + placeholder_icon + '" class="placeholder" alt="No thumbnail available" />'
+      img_tag = image_tag("icons/"+placeholder_icon, class: "placeholder", alt: "No thumbnail available")
+      
       link_to_document document, img_tag, url_options
     end
   end
