@@ -302,3 +302,31 @@
     </div>
   </div>
 </div>
+
+<%if !@related_documents.nil? -%>
+  <%
+  related_doc_counter = @start
+  %>
+  <div class="related-items row">
+    <h2>More From Your Search</h2>
+    <%@related_documents.each do |related_doc| -%>
+      <%if related_doc[:id] != document[:id] -%>
+        <div class="document col-xs-12 col-md-3">
+          <div class="thumbnail">
+            <%=render_thumbnail_tag(related_doc, {}, :counter => document_counter_with_offset(related_doc_counter)) %>
+            <div class="caption">
+              <div class="documentHeader">
+                <h3 class="index_title document-title-heading">
+                  <%= link_to_document(related_doc, document_show_link_field(related_doc), counter: document_counter_with_offset(related_doc_counter), truncate: 50)%> 
+                </h3>
+              </div>
+            </div>
+          </div>
+        </div>
+        <%
+        related_doc_counter += 1
+        %>
+      <%end -%>
+    <%end -%>
+  </div>
+<%end -%>
