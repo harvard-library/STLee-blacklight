@@ -232,7 +232,7 @@ module Blacklight::CatalogHelperBehavior
         placeholder_icon = "icon-video-placeholder.svg" 
       end
     
-      img_tag = image_tag("icons/"+placeholder_icon, class: "placeholder", alt: "No thumbnail available")
+      img_tag = image_tag("icons/"+placeholder_icon, class: "placeholder", alt: "")
       
       link_to_document document, img_tag, url_options
     end
@@ -260,7 +260,7 @@ def image_tag_wout_alt(source, options = {})
   end
 
   if options[:alt] == nil 
-    options[:alt] = ' '
+    options[:alt] = ''
   end
 
   options[:width], options[:height] = extract_dimensions(options.delete(:size)) if options[:size]
