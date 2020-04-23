@@ -18,15 +18,15 @@
           <%= t('blacklight.search.form.submit') %>
         </span>
       </button>
-    </div>      
-    <div class="search-constraints">
-      <% if query_has_constraints? %>
-        <%= render_constraints(params) %>
-        <div class="facets__clearall">
-          <%=link_to 'Clear All', start_over_path, :class => "", :id=>"startOverLink" %>
-        </div>
-      <% end %>
     </div>
+    <% if query_has_constraints? %>      
+      <div class="search-constraints">
+          <%= render_constraints(params) %>
+          <div class="facets__clearall">
+            <%=link_to 'Clear All', start_over_path, :class => "", :id=>"startOverLink" %>
+          </div>
+      </div>
+    <% end %>      
     <div class="home-photo-credit">
       <div class="photo-credit">
         <div class="image-credit-icon">
