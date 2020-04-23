@@ -30,7 +30,13 @@
   </head>
   <body class="<%= render_body_class %>">
   <%= render 'shared/tagmanager_noscript' %>
-
+  <%if render_body_class.include? "blacklight-catalog-index" -%>
+    <a href="#content" class="skip-link" data-turbolinks="false">Skip to search results</a>
+  <%elsif render_body_class.include? "blacklight-catalog-show" -%>
+    <a href="#details" class="skip-link" data-turbolinks="false">Skip to item metadata</a>
+  <%else -%>
+    <a href="#main-container" class="skip-link" data-turbolinks="false">Skip to content</a>
+  <%end -%>
   <%= render :partial => 'shared/header_navbar' %>
 
   <%= render partial: 'shared/ajax_modal' %>
