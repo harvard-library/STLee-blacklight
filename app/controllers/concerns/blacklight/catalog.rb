@@ -45,15 +45,17 @@ module Blacklight::Catalog
     # to add responses for formats other than html or json see _Blacklight::Document::Export_
     def show
       @response, @document = fetch params[:id]
+      @number_of_related_items = 4
+      setup_next_and_previous_documents
       if search_session['counter'] and current_search_session
         index = search_session['counter'].to_i - 1
         total_items = search_session['total'].to_i
-        number_of_related_items = 4
-        (@start, @related_documents) = get_related_items_for_search(index, total_items, number_of_related_items)
+        
+        (@start, @related_documents) = get_related_items_for_search(index, total_items, @number_of_related_items)
         @counter = @start
       end
       respond_to do |format|
-        format.html { setup_next_and_previous_documents }
+        format.html { }
         format.json { render json: { response: { document: @document } } }
         additional_export_formats(@document, format)
       end

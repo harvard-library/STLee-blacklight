@@ -616,6 +616,8 @@ body.blacklight-catalog-show #document h1 {
 
   .thumbnail {
     border: none;
+    max-width: 500px;
+    margin: 0 auto;
   }
 
   h3 {
