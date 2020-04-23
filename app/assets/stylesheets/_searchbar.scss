@@ -7,6 +7,35 @@
   margin-bottom: 0;
   background-color: $search-bg-gray;
   font-family: $font-family-sans-serif-light;
+  position: relative;
+
+  .account-link {
+    position: absolute;
+    right: 5%;
+    color: $breakthrough-blue;
+    font-size: 15px;
+    font-weight: bold;
+    top: 35px;
+
+    .fa {
+      font-size: 18px;
+      color: $medium-gray;
+    }
+
+    .account-link__text {
+      display: none;
+    }
+
+    @media (min-width: 768px) {
+      right: 10%;
+      top: 30px;
+
+      .account-link__text {
+        padding-left: 5px;
+        display: inline-block;
+      }
+    }
+  }
 }
 
 .searchbar__wrapper .row {
@@ -47,7 +76,7 @@ input.searchbar__text[type=text] {
   border-radius: 4px 0 0 4px;
   -webkit-border-radius: 4px 0 0 4px;
   display: block;
-  width: calc(100% - 45px);
+  width: 75%;
 
   @media screen and (min-width: 768px) {
     height: 44px;

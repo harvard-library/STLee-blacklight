@@ -219,3 +219,24 @@ span.hl__topHeaderTitle__collections {
         padding-right: 0;
     }
 }
+
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: 0;
+  display: inline-block;
+  font-family: $font-family-sans-serif$font-family-sans-serif;
+  background: white;
+  border: $breakthrough-blue;
+  overflow: hidden;
+  clip: rect(0,0,0,0);
+  width: 1px;
+  height: 1px;
+
+  &:focus {
+    width: auto;
+    height: auto;
+    clip: auto;
+    padding: 4px;
+  }
+}
